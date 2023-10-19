@@ -1,0 +1,249 @@
+{
+    "user": [
+        {
+            "id": "20231019111825040699",
+            "userName": "duythai",
+            "password": "gAAAAABlMK4Qc2G7kv6SrqdVTwf5flHEmthPEX3Cd6SOyfKhVXCWJxra7e3DL_En-7wPKoZoQe3tZf6A6tc6QRlx7w5gdbiq8A==",
+            "product": [
+                {
+                    "id": "20231019111825040699coca",
+                    "sold": 2
+                },
+                {
+                    "id": "20231019111825040699coca",
+                    "sold": 0
+                }
+            ]
+        }
+    ],
+    "product": [
+        {
+            "name": "coca",
+            "price": "15000",
+            "id": "20231019111825040699coca",
+            "idUser": "20231019111825040699",
+            "quantity": 8,
+            "type": [
+                {
+                    "type_name": "blue",
+                    "image": "static/blue20231019111825040699coca.jpg"
+                },
+                {
+                    "type_name": " black",
+                    "image": "static/black20231019111825040699coca.jpg"
+                },
+                {
+                    "type_name": " green",
+                    "image": "static/green20231019111825040699coca.jpg"
+                }
+            ]
+        },
+        {
+            "name": "coca",
+            "price": "15000",
+            "id": "20231019111825040699coca",
+            "idUser": "20231019111825040699",
+            "quantity": 10,
+            "type": [
+                {
+                    "type_name": "blue",
+                    "image": "static/blue20231019111825040699coca.jpg"
+                },
+                {
+                    "type_name": " black",
+                    "image": "static/black20231019111825040699coca.jpg"
+                },
+                {
+                    "type_name": " green",
+                    "image": "static/green20231019111825040699coca.jpg"
+                }
+            ]
+        }
+    ],
+    "purchase": [
+        {
+            "id": "something",
+            "data": {
+                "1": [
+                    {
+                        "type": "som",
+                        "quantity": 123
+                    }
+                ]
+            }
+        },
+        {
+            "id": "20231019111825040699coca",
+            "data": {
+                "1": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "2": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "3": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "4": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "5": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "6": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "7": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "8": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "9": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "10": [
+                    {
+                        "type": "blue",
+                        "quantity": 2
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "11": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ],
+                "12": [
+                    {
+                        "type": "blue",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " black",
+                        "quantity": 0
+                    },
+                    {
+                        "type": " green",
+                        "quantity": 0
+                    }
+                ]
+            }
+        }
+    ]
+}

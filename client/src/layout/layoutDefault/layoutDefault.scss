@@ -1,0 +1,205 @@
+.container {
+  margin: auto;
+}
+.header {
+  background-color: #f2fce7;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  &--logo img {
+    width: auto;
+    max-width: 70px;
+    margin-left: 100%;
+  }
+&--main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+&--main1 {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-top: -10px;
+  &__chung {
+    margin-right: 70px;
+
+  }
+  &__chung a {
+    text-decoration: none;
+    color: black;
+  }
+  &__home {
+    margin-left: 260px;
+  }
+}
+
+  &--search {
+    margin-left: 0px;
+    display: flex;
+    align-items: flex-center;
+
+    &__item {
+      // & .title {
+      //   font-size: 17px;
+      // }
+      display: flex;
+      align-items: flex-start;
+      margin-top: 0px;
+      & .img {
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
+        z-index: 100;
+        position: relative;
+      }
+      & .under{
+        & h3 {
+          font-size: 17px;
+          margin: 0px;
+          
+        }
+        & .p1 {
+          margin: 0px;
+          font-weight: bold;
+          color: red;
+        }
+        & .p2 {
+          margin: 0px;
+          font-weight: bold;
+        }
+        & .price {
+          display: flex;
+        }
+      }
+    }
+    &__input {
+      width: 500px!important;
+      height: 40px!important;
+     
+    }
+    &__input .ant-select-selector {
+       border-radius: 50px!important;
+    }
+
+    &__button {
+      background-color: greenyellow;
+    }
+  }
+  &--function {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    &__c {
+      margin: 10px 10px 0px 10px;
+    }
+    &__c img {
+      max-height: 50px;
+      width: auto;
+      text-align: center;
+      padding-left: 3px;
+    }
+
+    &__c p {
+      margin: 0px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    &__c a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+  @media (max-width: 575.9px) {
+  }
+  @media (min-width: 576px) and (max-width: 767.99px) {
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  }
+
+  @media (min-width: 992px) and (max-width: 1198.8px) {
+    &--logo img {
+      width: auto;
+      max-width: 70px;
+      margin-left: 0;
+    }
+    &--function {
+      display: flex;
+
+      align-items: center;
+
+      &__c img {
+        max-height: 40px;
+        width: auto;
+        text-align: center;
+      }
+
+      &__c p {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1399.8px) {
+  }
+  @media (min-width: 1400px) {
+  }
+}
+body {
+  background-color: #F8F8F8;
+}
+.content {
+ 
+  margin-top: 10px ;
+}
+
+.footer {
+    background-color: #f2fce7;
+  padding: 0px;
+  border: 1px black solid;
+  margin-top: 20px;
+  &--one {
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    padding: 20px 0px;
+  }
+  &--qc {
+   margin: 0px;
+  }
+  &--logo {
+    max-height: 100px;
+    width: auto;
+    margin-bottom: 20px;
+  }
+  &--chunginfor  {
+    display: flex;
+    align-items: center;
+
+    & p {
+      margin: 0px;
+    }
+  }
+
+  &--chunginfor img {
+    width: auto;
+    max-height: 35px;
+    margin-right: 5px;
+  }
+  &--network {
+    display: flex;
+    & img {
+      max-height: 50px;
+      width: auto;
+      padding: 5px;
+    }
+  }
+  &--cskh a {
+    color: black;
+  }
+}

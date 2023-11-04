@@ -1,0 +1,55 @@
+.register {
+    margin: 120px 480px;
+    padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    &--login {
+        text-align : center;
+        font-weight : bold;
+        font-size: 16px;
+        margin-top: 0px;
+        margin-bottom: 30px;
+    }
+&--heading {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 30px;
+    color: greenyellow;
+    margin-bottom: 10px;
+}
+&--group {
+    &__label {
+        font-size: 15px;
+        
+    }
+    &__control {
+        height: 20px;
+        width: 300px;
+        padding: 8px 10px 8px 8px;
+        border: 1px solid #b3b3b3;
+        border-radius: 3px;
+        outline: none;
+        font-size: 1rem;  
+        margin-top: 10px;
+        margin-bottom: 10px; 
+    }
+    &__message {
+        color: red;
+        font-size: 13px;
+    }
+}
+&--submit {
+    background-color: rgb(57, 204, 84);
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+&--submit:active {
+    background: orange;
+    transition: 0.2s;
+}
+}
+

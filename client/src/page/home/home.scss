@@ -1,0 +1,110 @@
+.home {
+    &--sider {
+   
+     max-width: 300px!important;
+     width: 300px!important;
+     min-width: 300px!important;
+     margin-right: 20px;
+    }
+    &--image {
+        width: 100%;
+        height: 320px;
+        margin-bottom: 20px;
+    }
+    &--discount {
+        margin: auto;
+        margin-bottom: 30px;
+        background-color: white;
+        &__header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background-color: greenyellow;
+            & img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        &__add {
+            position: absolute;
+            right: 10%;
+            bottom: 15%;
+           & button {
+            background-color: greenyellow;
+            color: white;
+            border: greenyellow;
+            padding: 6px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+           }
+           & button:active {
+            background-color: red;
+
+           }
+        }
+        &__content {
+            & .col {
+                --ant-display: block;
+                display: block;
+                display: var(--ant-display);
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+            & .item {
+               
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                min-height: 360px;
+            & .top  img {
+                width: 100%;
+              aspect-ratio: 4/4;
+            }
+            & .under {
+                padding: 10px 10px 10px 10px;
+                & h3 {
+                    margin: 0px;
+                    font-size: 17px;
+                    letter-spacing: 1.6;
+                    font-weight: 500;
+                    min-height:40px;
+                }
+            }
+            & .p1 {
+                margin: 0px;
+               }
+            & .p2 {
+                margin: 0px;
+                margin-right: 10px;
+                
+               }
+               & .price {
+                 display: flex;
+                  
+               }
+                
+            }
+        }
+        &__gachngang {
+            text-decoration: line-through;
+        }
+        &__footer {
+            text-align: center;
+            padding: 20px 0px;
+            & a {
+                border: none;
+            }
+        }
+        &__button {
+            padding: 10px 15px;
+            background-color: white;
+            color: rgb(238, 51, 111);
+            border-color: red;
+            border-radius: 40%;
+            cursor: pointer;
+        }
+        &__button:hover {
+            color: white;
+            background-color:rgb(238, 51, 111) ;
+        }
+    }
+   
+}

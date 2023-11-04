@@ -1,0 +1,208 @@
+.product {
+     &--main {
+       margin-top: 30px;
+       background-color: white;
+       display: flex;
+       
+     }
+     
+    &--left {
+        padding-left: 30px;
+        &__show {
+            padding: 20px 0px 10px 10px;
+        }
+        &__selected {
+            width: 570px!important;
+            height: 520px!important;
+           border: 10px red solid;
+            
+       
+        }
+        &__img {
+            display: inline-block;
+         margin-left: 10px;
+         margin-bottom: 20px;
+         overflow: hidden;
+        }
+        &__active{
+            width: 135px!important;
+            height: 120px!important;
+        }
+    }
+
+    &--right {
+        margin-left: 50px;
+        margin-top: 35px;
+        &__rate {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            & p {
+                margin: 0px;
+                margin-right: 10px;
+            }
+        }
+        &__title {
+            letter-spacing: 1.6px;
+            font-size: 30px;
+            margin: 0px;
+            margin-bottom: 10px;
+        }
+        &__center {
+            display: flex;
+            font-size: 20px;
+        }
+        &__p1 {
+            margin: 0px;
+        }
+         &__p2  {
+            margin: 0px;
+              margin-left: 30px;
+         }
+         &__price {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px 30px;
+            background-color: #F2FCE7;
+            & .p1 {
+                font-size: 35px;
+                margin: 0px;
+                color: red;
+                font-weight: bold;
+                
+            }
+            & .main {
+                display: flex;
+                align-items: center;
+                margin-left: 8px;
+               
+            }
+            & .p2 {
+                margin: 0px;
+                font-size: 18px;
+            }
+            & .discount {
+                padding: 0px 10px;
+                margin-left: 10px;
+                background-color: greenyellow;
+                color: white;
+            }
+            & .giagoc {
+                font-size: 35px;
+                margin: 0px;
+                color: red;
+                font-weight: bold;
+            }
+            & .giatk {
+                padding: 0px 10px 0px 0px; 
+                & .tk {
+                    margin: 0px;
+                    
+                }
+            }
+         }
+
+    }
+ &--button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    &__show {
+        display: flex;
+        align-items: center;
+        
+        width: 210px;
+        height: 70px;
+       
+        & span {
+            width: 40%;
+            text-align: center;
+            font-size: 25px;
+           padding-top: 15px;
+            height: 100%;
+            border-top: 0.5px solid rgb(218, 209, 209);
+            border-bottom: 0.5px solid rgb(218, 209, 209);
+        }
+    }
+    &__sl {
+        font-size: 22px;
+        margin: 0px;
+        margin-bottom: 13px;
+    }
+    &__s {
+        border: 0.5px solid rgb(218, 209, 209);
+        padding: 10px;
+       height: 100%;
+        background-color: white;
+        width: 30%;
+cursor: pointer;
+    }
+    &__s1 {
+        border-top-left-radius: 50% ;
+        border-bottom-left-radius: 50% ;
+        border-right: none;
+    }
+    &__s2 {
+        border-top-right-radius: 50% ;
+        border-bottom-right-radius: 50% ;
+        border-left: none;
+    }
+ }
+ &--addtocart{
+    & a{
+        width: 48%;
+        height: 100%;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    &__s {
+        height: 65px;
+        width: 100%;
+        cursor: pointer;
+
+    }
+    &__s1 {
+        background-color: white;
+        border-color: greenyellow;
+    }
+    &__s1:hover {
+        background-color: #F2FCE7;
+        transition: 0.4s;
+    }
+    &__s2 {
+        border: greenyellow;
+        background-color: rgb(97, 173, 188);
+        color: white;
+    }
+    &__s2:hover {
+        
+        background-color: rgb(146, 199, 209);
+        transition: 0.4s;
+    }
+    &__p2 {
+        font-size: 16px;
+    }
+    &__main {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 100%;
+        & img {
+            width: 50px;
+            height: 50px;
+        }
+        & p {
+            font-size: 16px;
+        }
+    }
+
+ }
+}
+.gachngang {
+    text-decoration: line-through;
+}
+

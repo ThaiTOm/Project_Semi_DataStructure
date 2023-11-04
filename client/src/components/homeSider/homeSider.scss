@@ -1,0 +1,94 @@
+.homesider {
+    border-radius: 10px;
+    padding-bottom: 25px;
+    position: sticky;
+    top: 100px;
+    left: 0;
+   
+   
+ &--category {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #c9eea3;
+ }
+ &--h1 {
+     margin: 0px;
+     padding: 10px;
+ }
+ &--icon {
+    font-size: 20px;
+ }
+ &--product {
+  &__menu img {
+   margin-left: 0px;
+
+  }
+  &__menu .ant-menu-submenu-title{
+    display: flex;
+    align-items: center;
+  }
+   
+    
+   
+    &__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right:10px;
+        margin-left: 10px;
+    }
+   
+ }
+ &--img {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+ }
+ &--hr {
+    opacity: 0.2;
+    width: 100%;
+    margin: 0px;
+ }
+ &--giaohang {
+    display: flex;
+    align-items: center;
+    
+    & img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    & p {
+        font-size: 15px;
+    }
+ }
+&--collection {
+    margin-bottom: 30px;
+}
+&--lienhe {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border: 2px dashed greenyellow;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 10px;
+    & img {
+        width: auto;
+        height: 55px;
+    }
+   &__phone {
+    font-size: 14px;
+    letter-spacing: 0.9;
+    & p {
+        margin : 0px;
+      
+    }
+   
+   }
+    
+}
+}

@@ -1,0 +1,24 @@
+.address {
+  padding: 20px 30px;
+ 
+  &--header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+      & h2 {
+        font-weight: 400;
+        font-size: 25px;
+      }
+     
+  } 
+  &--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+hr {
+  opacity: 0.3;
+}

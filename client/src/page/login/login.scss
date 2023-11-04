@@ -1,0 +1,69 @@
+.login {
+    margin: 82.3px 473px;
+     padding: 20px;
+     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+   
+    
+//  &--form{
+    
+//  }
+&--register {
+    text-align : center;
+    font-weight : bold;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+ &--heading {
+     margin-top: 0px;
+     text-align: center;
+     font-size: 30px;
+     color: greenyellow;
+     margin-bottom:10px;
+ }
+ &--group {
+     &__label {
+         font-size: 15px;
+         font-weight: bold;
+         
+ 
+     }
+     &__control {
+         height: 20px;
+         width: 300px;
+         padding: 8px 10px 8px 8px;
+         border: 1px solid #b3b3b3;
+         border-radius: 3px;
+         outline: none;
+         font-size: 1rem;  
+         margin-top: 10px;
+         
+     }
+    
+ }
+ &--submit {
+     background-color: rgb(57, 204, 84);
+     width: 95.5%;
+     padding: 10px 0px;
+     border-radius: 5px;
+     border: none;
+     font-size: 20px;
+     color: white;
+     margin-top: 5px;
+ }
+ &--submit:active {
+     background: orange;
+     transition: 0.2s;
+ }
+ }
+ 
+ .handleNotice {
+     display: none;
+ }
+ #notice {
+     color: red;
+         font-size: 13.5px;
+         margin-top: 0px;
+         font-weight: 400;
+ }
+ 

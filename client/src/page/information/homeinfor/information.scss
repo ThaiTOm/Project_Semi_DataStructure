@@ -1,0 +1,27 @@
+.infor {
+    &--sider {
+        max-width: 300px!important;
+        width: 300px!important;
+        min-width: 300px!important;
+    }
+    &--sidermain {
+        margin-left: 15px;
+        padding: 10px 0px 50px 0px;
+        & h2 {
+            margin: 0px;
+        }
+        & p {
+            margin-top: 8px;
+        }
+        
+    }
+    &--layout {
+        margin-top: 20px;
+       padding-bottom: 20px;
+    }
+    &--content {
+        background-color: white;
+        margin-left: 10px;
+    }
+   
+}

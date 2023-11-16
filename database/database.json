@@ -19,7 +19,7 @@
     {
       "id": 1,
       "title": "Apple Juice",
-      "description": "Freshly squeezed apple juice, 100% natural.",
+      "description": " Freshly squeezed apple juice, 100% natural. Sản phẩm là sự kết hợp hoàn hảo từ các trái táo tươi, được ép lấy nước, đảm bảo độ tươi ngon và an toàn cho sức khỏe. Không chứa chất bảo quản hay đường tăng cường. Đây là lựa chọn hoàn hảo cho những người yêu thích thức uống tự nhiên và lành mạnh.",
       "price": 37000,
       "discountPercentage": 0,
       "rating": 4.6,
@@ -1002,7 +1002,54 @@
   "cart": [
     {
       "userId": 1,
-      "product": [],
+      "product": [
+        {
+          "id": 6,
+          "infor": {
+            "id": 6,
+            "title": "Mango Passion Fruit Juice",
+            "description": "A delightful blend of mango and passion fruit for a tropical taste.",
+            "price": 40000,
+            "discountPercentage": 0,
+            "rating": 4.8,
+            "stock": 63,
+            "brand": "Tropical Oasis",
+            "category": "Fruit Juice",
+            "Quantity": 42,
+            "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
+            "images": [
+              "https://i.pinimg.com/236x/91/c7/0f/91c70fc63bd05d5f01f7a225ae109afe.jpg",
+              "https://i.pinimg.com/236x/c6/c3/a9/c6c3a946be26a9aa9d4ef2be346fc3ff.jpg",
+              "https://i.pinimg.com/236x/af/58/3e/af583ee2d087172398cebf93937e58cf.jpg",
+              "https://i.pinimg.com/236x/09/e6/14/09e6142e9858253f81c2deebc96ec0f2.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 7,
+          "infor": {
+            "id": 7,
+            "title": "Watermelon Juice",
+            "description": "Juicy and refreshing watermelon juice, perfect for a hot summer day.",
+            "price": 27000,
+            "discountPercentage": 0,
+            "rating": 4.6,
+            "stock": 50,
+            "brand": "Fruit Paradise",
+            "category": "Fruit Juice",
+            "Quantity": 15,
+            "thumbnail": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
+            "images": [
+              "https://i.pinimg.com/236x/8c/3d/46/8c3d46f6c64c5d0f3a7c864a8261b119.jpg",
+              "https://i.pinimg.com/236x/b0/96/14/b09614abfd53317129320e8071aee27e.jpg",
+              "https://i.pinimg.com/236x/ea/f4/73/eaf4730bb8f0e18581728378543c6894.jpg",
+              "https://i.pinimg.com/236x/7c/ff/dd/7cffdd161e9db0b4fac50b60e348c735.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
       "id": 1
     },
     {
@@ -1011,23 +1058,19 @@
       "id": 2
     }
   ],
-  "information": [
+  "information": [],
+  "shipping": [
     {
-      "name": "Sơn Thành",
-      "email": "sonthanh@gmail.com",
-      "phone": "0399038165",
-      "gender": "male",
-      "birthday": "2008-11-07T14:57:32.821Z",
       "userId": 1,
-      "id": 1
+      "delivery": [
+        {
+          "address": "23 Đinh Tiên Hoàng, Quận Hoàn Kiếm, Hà Nội",
+          "fullName": "Sonn Tha",
+          "phoneNumber": "0399038165",
+          "defaultAddress": true
+        }
+      ],
+      "id": 3
     }
-  ],
-  "shipping":[
-      {
-        "id": 1,
-        "delivery": [
-          
-        ]
-      }
   ]
 }

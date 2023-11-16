@@ -1,20 +1,25 @@
 import { Breadcrumb, Button, Checkbox, Col, Layout, Pagination, Row, Select, Slider } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content } from "antd/es/layout/layout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getProductdc, getProductsp } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
 import "./discount.scss"
+import { PlusOutlined  } from '@ant-design/icons';
 import { filterByArrange, taocate, taohsx } from "../../components/filter";
-
+import { useDispatch, useSelector } from "react-redux";
+import { add, up } from "../../actions/actCart";
+import { getCookie } from "../../components/takeCookies/takeCookies";
 const Discount = () => {
+
+  const [max, setMax] = useState(0)
   const [data, setData] = useState([]); //
   const cate = [];
   const [id, setId] = useState(1);
   const [data_4, setData_4] = useState([]);
   const [data_3, setData_3] = useState({
     phanloai: "",
-    distance: [1000, 1300000],
+    distance: [1000, 999999999],
     cate: "",
     hsx: "",
   });
@@ -24,12 +29,32 @@ const Discount = () => {
       price: "",
     },
   ];
+  const cookies = getCookie("token");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Số lượng phần tử trên mỗi trang
   
   const itemsPerPage = 12;
   // Trạng thái cho việc hiển thị trang hiện tại
 
   // Phân trang dữ liệu
+  const checkId = useSelector(state => state.cartStore);
+  const handleClick = (id, infor) => {
+    if(cookies) {
+        const check = checkId.some(item => {
+    return item.id === id;
+});
+if (check) {
+  dispatch(up(id));
+  }
+  else {
+  dispatch(add(id, infor));
+  }
+    }
+    else {
+      navigate("/register");
+    }
+  }
 
   let pageIndex = 0;
   // const taocate = () => {
@@ -177,6 +202,12 @@ console.log(giatriloc);
     if (!result) {
       console.log("coconcac");
     } else {
+      const maxValue = result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price);  
+      setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
+      setData_3({
+        ...data_3,
+        distance: [1000, maxValue]
+       })
       setData([...result]);
       setData_4(result);
     }
@@ -199,7 +230,7 @@ console.log(paginatedData)
 
   return (
     <>
-     <div className="discount" >
+     <div className="discount animate__animated animate__zoomIn animate__faster" >
      <div className="discount--bread">
          
           <Breadcrumb 
@@ -268,7 +299,7 @@ console.log(paginatedData)
                 onChange={handleChange_cate}
                 style={{ width: "100%" }}
               >
-                <Row>
+                <Row gutter={[0, 10]}>
                   {cate.map((x) => (
                     <Col span={24} key={x}>
                       <Checkbox value={x}>{x}</Checkbox>
@@ -296,7 +327,7 @@ console.log(paginatedData)
                     ? new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
-                      }).format(`${1300000}`)
+                      }).format(`${max}`)
                     : new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
@@ -304,22 +335,22 @@ console.log(paginatedData)
                 </span>
               </div>
               <Slider
-                range={{
-                 
-                }}
-                defaultValue={[1000, 1300000]}
-                max={1300000}
-                min={1000}
-                step={1000}
-                onAfterChange={handleChange_final}
-              />
+  range={{
+    draggableTrack: true,
+  }}
+  defaultValue={max ? [1000, max] : [1000, 999999999]} // Giá trị mặc định khi không có max hoặc max không đúng
+  max={max} // Sử dụng giá trị mặc định nếu không có max hoặc max không đúng
+  min={1000}
+  step={1000}
+  onAfterChange={handleChange_final}
+/>
             </div>
             <div className="discount--sider__hsx">
               <Checkbox.Group
                 onChange={handleChange_hsx}
                 style={{ width: "100%" }}
               >
-                <Row>
+                <Row gutter={[0, 10]}>
                   <h2>Hãng sản xuất</h2>
                   {mang.slice(0, itemsToShow).map((x) => (
                     <Col span={24} key={x}>
@@ -390,6 +421,11 @@ console.log(paginatedData)
                       </div>
                     </div>
                     </Link>
+                    <div className="discount--item__add">
+                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                  </Button>
+                </div>
                   </Col>
                 )))
                 : (<div class="discount--message">

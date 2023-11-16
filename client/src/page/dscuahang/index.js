@@ -21,7 +21,7 @@ function Dscuahang(){
             ]}
           />
         </div>
-        <Content className="dscuahang">
+        <Content className="dscuahang  animate__animated animate__slideInLeft animate__faster">
         <h1 className="dscuahang--title">
         DANH SÁCH CỬA HÀNG 3Tstore
         </h1>

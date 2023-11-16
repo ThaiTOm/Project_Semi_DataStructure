@@ -22,6 +22,7 @@ import Changepass from "../page/information/changepass/changepass";
 import Thongtinkh from "../page/information/thongtinkh/thongtinkh";
 import Yourorder from "../page/information/yourorder/yourorder";
 import Logout from "../page/information/logout/logout";
+import Thanhtoan from "../page/thanhtoan";
 
 
 
@@ -122,6 +123,10 @@ export const routes = [
          {
             path: "order",
             element: <Order />
+         },
+         {
+            path: "thanhtoan",
+            element: <Thanhtoan />
          },
          {
             path: "search",

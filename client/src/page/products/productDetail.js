@@ -1,38 +1,39 @@
-import { Breadcrumb, Image, Layout, Rate } from "antd";
+import { Breadcrumb, Col, Image, Layout, Rate, Row } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getProductdt } from "../../service/getcategory/getCategory";
+import { getProductcate, getProductdt } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
 import { Content } from "antd/es/layout/layout";
 import "./products.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
+import { addmt, addtt, upmt } from "../../actions/actCart";
 
 function Productdetail() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [data, setData] = useState([
+  const navigate = useNavigate();  // chuyển trang
+  const dispatch = useDispatch();  // chuyển dữ liệu
+  const [data, setData] = useState([   
     {
       images: [""],
     },
   ]);
-  
+  const [cate, setCate] = useState([])
+
   const params = useParams();
   const param = parseInt(params.id);
   const [currentImage, setCurrentImage] = useState(0);
-  console.log(param);
+  
   const selectImage = (index) => {
     setCurrentImage(index);
   };
   const cookies = getCookie("token");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const increaseCount = () => {
     setCount(count + 1);
   };
 
   const decreaseCount = () => {
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1);
     }
   };
@@ -44,10 +45,10 @@ function Productdetail() {
   return item.id === id;
 });
 if (check) {
-dispatch(up(id));
+dispatch(upmt(id, count));
 }
 else {
-dispatch(add(id, infor));
+dispatch(addmt(id, infor, count));
 }
   }
   else {
@@ -56,6 +57,21 @@ dispatch(add(id, infor));
   console.log(id)
   console.log(infor)
   }
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  // Sử dụng hàm để tạo số nguyên ngẫu nhiên trong phạm vi từ 1 đến 100:
+ 
+
+
+
+
+
+
 
   useEffect(() => {
     // lấy data gốc
@@ -68,10 +84,31 @@ dispatch(add(id, infor));
         console.log(result);
       }
     };
-    fetchApi(param);
-  }, []);
 
-  console.log(data[0].rating);
+    fetchApi(param);
+  }, [param]);
+
+  
+useEffect(() => {
+  const fetchcate = async (e) => {
+    const result = await getProductcate(e);
+    if (!result) {
+      console.log("coconcac");
+    } else {
+      setCate(result);
+      console.log(result);
+    }
+  }
+  fetchcate(data[0].category)
+},[data])
+
+if  (cate && cate.length > 5) {
+  var randomNumber = getRandomInt(0, cate.length - 5  );
+} 
+
+console.log(randomNumber)
+console.log(randomNumber + 5)
+
   return (
     <>
       <div className="product">
@@ -236,8 +273,8 @@ dispatch(add(id, infor));
                     </div>
                   </button>
                   </Link>
-                  <Link to={cookies.length == 20 ? ("/") : (`/register`)}>
-                    <button  className="product--addtocart__s  product--addtocart__s2">
+                  <Link to={cookies.length == 20 ? ("/thanhtoan") : (`/register`)}>
+                    <button onClick={() => dispatch(addtt(data, count))} className="product--addtocart__s  product--addtocart__s2">
                     <p className="product--addtocart__p2">Mua Ngay</p>
                   </button>
                   </Link>
@@ -247,6 +284,99 @@ dispatch(add(id, infor));
 
               </div>
             </div>
+
+
+
+            <div className="product--cungloai">
+           
+      <Link to={`/category/${data[0].category}`} >
+<div className="product--cungloai__header">
+         
+          <h2>
+             Sản Phẩm cùng loại
+          </h2>
+          </div>
+      </Link>
+          <div className="product--cungloai__content">
+          <Row gutter={[15, 10]}>
+                {cate.slice(randomNumber, randomNumber + 5).map((item) => (
+                  <Col className="col" key={item.id}>
+                    <Link to={"/product/" + item.id}>
+                      <div className="item">
+                        <div className="top">
+                          <img src={item.thumbnail} alt={item.title} />
+                        </div>
+                        <div className="under">
+                          <h3>
+                          
+                              {item.title}
+                            
+                          </h3>
+                          {item.discountPercentage !== 0 ? (
+                          <p className="p1">
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(
+                              `${
+                                item.price *
+                                ((100 - Math.floor(item.discountPercentage)) /
+                                  100)
+                              }`
+                            )}
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                            <div className="price">
+                          <p
+                            className={`p2 ${
+                              item.discountPercentage !== 0 ? "product--cungloai__gachngang" : ""
+                            }`}
+                          >
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(`${item.price}`)}
+                          </p>
+                          <div>
+                            {item.discountPercentage !== 0
+                              ? `-${item.discountPercentage}%`
+                              : ""}
+                          </div>
+                        </div>
+                          
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="product--cungloai__add">
+                  <button onClick={() => handleClick(item.id, item)}>
+                    +
+                  </button>
+                </div>
+                  </Col>
+                  
+                ))}
+                
+              </Row>
+          </div>
+          <div className="product--cungloai__footer">
+              <Link to={`/category/${data[0].category}`} >
+                <button className="product--cungloai__button">
+                  Xem tất cả 
+                </button>
+             </Link>
+          </div>
+      </div>
+          <div className="product--mota" >
+                 <h1>
+                 Chi tiết sản phẩm
+                 </h1>
+                 <hr />
+                 <p>
+                  {data[0].description}
+                 </p>
+          </div>
           </Content>
         </Layout>
       </div>

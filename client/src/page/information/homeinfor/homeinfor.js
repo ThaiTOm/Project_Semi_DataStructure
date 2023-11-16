@@ -42,7 +42,7 @@ function Infor () {
          />
        </div>
                <Layout className="infor--layout">
-                <Sider theme="light" className="infor--sider">
+                <Sider  theme="light" className="infor--sider  animate__animated animate__fadeInLeft animate__faster">
                 <div className="infor--sidermain" > 
                  <h2>
                         TRANG TÀI KHOẢN
@@ -79,7 +79,7 @@ function Infor () {
                     </div>
                   
                 </Sider>
-<Content className="infor--content">
+<Content className="infor--content animate__animated animate__fadeInRight animate__faster">
     <Outlet />
 </Content>
 

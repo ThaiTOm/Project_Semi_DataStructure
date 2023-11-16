@@ -1,0 +1,67 @@
+.thanhtoan {
+    padding-top: 20px;
+    &--address {
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        margin-bottom: 20px;
+        padding: 20px 20px;
+        & h2 {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 30px;
+            color: greenyellow;
+            & span {
+                font-size: 14px;
+                padding-left: 10px;
+            }
+        }
+        &__chung {
+            display: flex;
+               padding: 5px;
+               align-items: center;
+            & .p1 {
+                font-size: 18px;
+                margin-right: 15px;
+                font-weight: bold;
+            }
+            & p {
+                font-size: 18px;
+                margin: 0
+            }
+        }
+    }
+    &--page{
+        background-color: #F2FCE7;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        & .ant-table {
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+    }
+    &--tongtien {
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        padding: 25px 0px 10px 0px;
+        &__chung {
+            display: flex;
+           margin-left: 60%;
+            align-items: center;
+            margin-bottom: 15px;
+            
+            & .p2 {
+                margin: 0;
+                font-size: 17px;
+                margin-left: 20px;
+                
+            }
+            & .p1 {
+                margin: 0;
+                font-size: 17px;
+            }
+            & .ptt {
+                font-size: 30px;
+                color: red;
+            }
+        }
+        
+    }
+}

@@ -6,7 +6,8 @@ export const postCart = async (option) => {
 } 
 
 export const postShipping = async (option) => {
-    const result = await post("shipping/delivery", option);
+    console.log(option)
+    const result = await post("shipping", option);
     return result;
 } 
 

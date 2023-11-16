@@ -5,10 +5,16 @@ export const getCategory = async () => {       // lấy danh mục sản phẩm
    return result;
 };
 
-export const getUserstk = async (e) => {       // lấy id user dựa vào token
-   const result = await get(`users?token=${e}`);
-   return result;
-};
+export const getUserstk = async (e) => {
+   try {
+     const result = await get(`users?token=${e}`);
+     return result;
+   } catch (error) {
+     console.error('Error in getUserstk:', error);
+     throw error; // Rethrow the error to handle it in the calling code
+   }
+ };
+ 
 
 export const getProductdc = async () => {    // lấy hàng khuyến mãi
 
@@ -33,18 +39,18 @@ export const getProductcate = async (e) => {   // lấy từng sản phẩm theo
    return result;
 }
 
-export const getProductsearch = async (e) => {   // lấy từng sản phẩm theo từng category
+export const getProductsearch = async (e) => {   // thanh tìm kiếm
    const result = await get(`beverages?title_like=${e}`);
    console.log(result);
    return result;
 };
 
-export const getCart = async () => {       // lấy danh mục sản phẩm
+export const getCart = async () => {       // lấy ds giỏ hàng
    const result = await get("cart");
    return result;
 };
 
-export const getInforid = async (e) => {       // lấy danh mục sản phẩm
+export const getInforid = async (e) => {       // lấy thông tin người dùng kiểm tra dữ liệu có bị trùng không
    const result = await get(`information?userId=${e}`);
    return result;
 };
@@ -53,6 +59,14 @@ export const getInfor = async (e) => {       // lấy danh mục sản phẩm
    const result = await get("information");
    return result;
 };
+
+export const getShip = async (e) => {       // lấy dữ liệu địa chỉ có bị trùng không
+   const result = await get(`shipping?userId=${e}`);
+   return result;
+};
+
+
+
 // export const getProducthsx = async (e) => {
 //    const result = await get(`beverages?_page=${e}&_limit=12`);
 //    return result;

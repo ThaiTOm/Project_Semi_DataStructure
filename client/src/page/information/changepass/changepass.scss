@@ -1,0 +1,13 @@
+
+.pass {
+    padding: 20px;
+ & .span {
+   display: block;
+  position: relative;
+  bottom: 20px;
+ }
+}
+
+.handleNotice {
+    display: none;
+}

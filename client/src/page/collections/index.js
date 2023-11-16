@@ -13,10 +13,11 @@ import {
 
 } from "antd";
 
-
+import 'animate.css'
 import { Link, useNavigate } from "react-router-dom";
 import "./collections.scss";
 import Sider from "antd/es/layout/Sider";
+import { PlusOutlined  } from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
 import { useEffect, useState } from "react";
 import {
@@ -28,17 +29,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 function Collections() {
-  const [data, setData] = useState([]); //
-  const [id, setId] = useState(1); // lấy data của sản phẩm
+  const [max, setMax] = useState(0);
+  const [data, setData] = useState([]); // lấy data của sản phẩm
+  const [id, setId] = useState(1); // phân trang sản phẩm
   const [data_3, setData_3] = useState({
     hsx: "",
-    distance: [1000, 1300000],
+    distance: [1000, 9999999999],
     cate: "",
     phanloai: ""
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
- const [data_4, setData_4] = useState([]);
+ const [data_4, setData_4] = useState([]); // để kết hợp các hàm lọc và thay đổi chỉ dữ liệu của data_4 
   const mang = []; // tạo một mảng chứa các hãng sản xuất
   const cate = [];
   const paginatedData = [
@@ -73,28 +76,38 @@ const cookies = getCookie("token");
       if (!result) {
         console.log("coconcac");
       } else {
-        setData([...result]);
-        setData_4(result);
+        const maxValue = result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price);  
+      setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
+         setData_3({
+          ...data_3,
+          distance: [1000, maxValue]
+         })
+        setData([...result]);  // làm vậy để data ko thay đổi khi dữ liệu data_4 thay đổi
+        setData_4(result);   
       }
     };
     fetchApi();
     
   }, []);
 
+
+
+
   // tạo một dãy hãng sản xuất
   taohsx(data, mang);
-
+ 
   // tạo loại sản phẩm
   taocate(data, cate);
 
+// console.log(data)
+// console.log(data_4)
 
   // phân trang
-
   const handleChange = (e) => {
     setId(e);
   };
 
-  const checkId = useSelector(state => state.cartStore);
+  const checkId = useSelector(state => state.cartStore);  // lấy dữ liệu từ reducer
   
 const handleClick = (id, infor) => {
     if(cookies) {
@@ -111,8 +124,6 @@ if (check) {
     else {
       navigate("/register");
     }
-
-
   }
 
 
@@ -247,7 +258,7 @@ const handleSelect = (e) => {
   return (
     <>
     
-      <div className="collections">
+      <div className="collections animate__animated animate__zoomIn animate__faster">
         <div className="collections--bread">
           
           <Breadcrumb
@@ -263,6 +274,7 @@ const handleSelect = (e) => {
           />
         </div>
         <div className="collections--all">
+      
           <h1>Tất cả sản phẩm</h1>
           <div className="collections--arrange">
             <p className="collections--arrange__sx">
@@ -314,7 +326,7 @@ const handleSelect = (e) => {
                 onChange={handleChange_hsx}
                 style={{ width: "100%" }}
               >
-                <Row>
+                <Row gutter={[0, 10]}>
                   <h2>Hãng sản xuất</h2>
                   {mang.slice(0, itemsToShow).map((x) => (
                     <Col span={24} key={x}>
@@ -351,7 +363,7 @@ const handleSelect = (e) => {
                     ? new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
-                      }).format(`${1300000}`)
+                      }).format(`${max}`)
                     : new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
@@ -359,15 +371,15 @@ const handleSelect = (e) => {
                 </span>
               </div>
               <Slider
-                range={{
-                  draggableTrack: true,
-                }}
-                defaultValue={[1000, 1300000]}
-                max={1300000}
-                min={1000}
-                step={1000}
-                onAfterChange={handleChange_final}
-              />
+  range={{
+    draggableTrack: true,
+  }}
+  defaultValue={max ? [1000, max] : [1000, 999999999]} // Giá trị mặc định khi không có max hoặc max không đúng
+  max={max} // Sử dụng giá trị mặc định nếu không có max hoặc max không đúng
+  min={1000}
+  step={1000}
+  onAfterChange={handleChange_final}
+/>
             </div>
 
 
@@ -378,7 +390,7 @@ const handleSelect = (e) => {
                 onChange={handleChange_cate}
                 style={{ width: "100%" }}
               >
-                <Row>
+                <Row gutter={[0, 10]}>
                   {cate.map((x) => (
                     <Col span={24} key={x}>
                       <Checkbox value={x}>{x}</Checkbox>
@@ -393,18 +405,18 @@ const handleSelect = (e) => {
             {paginatedData.length > 0 &&  Array.isArray(paginatedData[id]) ? (
                 paginatedData[id].map((item) => (
                   
-                  <Col className="collections--col">
+                  <Col className="collections--col ">
                   <Link to={"/product/" + item.id} >
                     <div className="collections--item">
                       <div className="collections--item__top">
-                        <img src={item.thumbnail} />
+                        <img src={item.thumbnail} className="img" />
                       </div>
                       <div className="collections--item__under">
                         <h3>
                           <Link to="/" key={item.title}>
                             {item.title}
                           </Link>
-                        </h3>
+                        </h3>     
                         {item.discountPercentage !== 0 ? (
                           <p className="collections--item__p1">
                             {new Intl.NumberFormat("vi-VN", {
@@ -442,13 +454,13 @@ const handleSelect = (e) => {
                     </div>
                     </Link>
                     <div className="collections--item__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                  </Button>
                 </div>
                   </Col>
                   )))
-                : (<div class="discount--message">
+                : (<div class="collections--message">
   <h2>Sản phẩm không được tìm thấy!</h2>
   <p>Xin lỗi, không có sản phẩm phù hợp với yêu cầu của bạn.</p>
 </div>
@@ -457,7 +469,9 @@ const handleSelect = (e) => {
             </Row>
           </Content>
         </Layout>
-        <Pagination defaultCurrent={1} current={id} total={total} onChange={handleChange} />
+        <Pagination className="" defaultCurrent={1} current={id} total={total} onChange={handleChange} />
+
+  
       </div>
     </>
   );

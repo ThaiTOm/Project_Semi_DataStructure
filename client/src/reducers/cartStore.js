@@ -18,10 +18,20 @@ const cartStore = (state = initialState.product || [], action) => {
       console.log(newState);
       return newState;
 
+
     case "Up":
       newState = state.map(item => {
         if (item.id === action.id) {
           return { ...item, quanlity: item.quanlity + 1 };
+        }
+        return item;
+      });
+      return newState;
+
+    case "Upmt":
+      newState = state.map(item => {
+        if (item.id === action.id) {
+          return { ...item, quanlity: item.quanlity + action.slg };
         }
         return item;
       });

@@ -19,7 +19,7 @@ const [data, setData] = useState([]);
     
   };
   let pageIndex = 0;
-
+console.log(params)
   // Lấy dữ liệu cho trang hiện tại
   useEffect(() => {
     // Khởi tạo trang đầu tiên (id = 1) khi trang được tải lại

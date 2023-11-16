@@ -4,7 +4,7 @@ function Introduce () {
     
    return (
     <>
-    <div className="introduce" > <h1>Giới Thiệu</h1>
+    <div className="introduce animate__animated animate__fadeInDown animate__faster" > <h1>Giới Thiệu</h1>
 
         
         <br />

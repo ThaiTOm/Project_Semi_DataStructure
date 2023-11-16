@@ -17,6 +17,7 @@ function Home () {
  const navigate = useNavigate();
  const checkId = useSelector(state => state.cartStore);
  const dispatch = useDispatch();
+
 useEffect(()=> {
   const fetchApi = async () => {
     const result = await getProductsp();
@@ -123,9 +124,9 @@ const handleClick_soda = () => {
 
     return (
      <>
-           <Layout>
-            <Sider theme="light" className="home--sider"  ><Homesider /></Sider>
-        <Content className="home--content" >
+     <div className="home" >   <Layout>
+            <Sider theme="light" className="home--sider animate__animated animate__fadeInLeft animate__faster"  ><Homesider /></Sider>
+        <Content className="home--content  animate__animated animate__fadeInRight animate__faster" >
         <Carousel autoplay>
     <div>
       <img className="home--image" src={slide1}   alt="hinhnen"/>
@@ -180,7 +181,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -188,7 +189,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -260,7 +261,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -268,7 +269,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -338,7 +339,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -346,7 +347,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div  className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -417,7 +418,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -425,7 +426,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div  className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -495,7 +496,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -503,7 +504,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div  className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -573,7 +574,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" :"home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -581,7 +582,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div  className="dc">
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -651,7 +652,7 @@ const handleClick_soda = () => {
                             <div className="price">
                           <p
                             className={`p2 ${
-                              item.discountPercentage !== 0 ? "home--discount__gachngang" : ""
+                              item.discountPercentage !== 0 ? "home--discount__gachngang" : "home--discount__tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -659,7 +660,7 @@ const handleClick_soda = () => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div  className="dc"> 
                             {item.discountPercentage !== 0
                               ? `-${item.discountPercentage}%`
                               : ""}
@@ -688,7 +689,8 @@ const handleClick_soda = () => {
       </div>
         </Content>
        
-      </Layout>
+      </Layout></div>
+        
      </>
     )
  }

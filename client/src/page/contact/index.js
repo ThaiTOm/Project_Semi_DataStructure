@@ -33,7 +33,7 @@ function Contact() {
         <Row>
           <Col lg={12} sm={24}>
             <h1 className="contact--name">3Tstore</h1>
-            <div className="contact--qc">
+            <div className="contact--qc   animate__animated animate__fadeInLeft animate__faster">
               <div className="contact--address contact--chunginfor">
                 <img
                   src={position}
@@ -106,7 +106,7 @@ function Contact() {
             </div>
           </Col>
           <Col lg={12} sm={24}>
-            <div className="contact--map">
+            <div className="contact--map animate__animated animate__fadeInRight animate__faster">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0935222155426!2d106.67477847481852!3d10.804148889346346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d889986667%3A0xf67a8e4ed2b9989a!2zOTMgSOG7kyBWxINuIEH1w6osIFBoxrDhu51uZyA5LCBQaMO6IE5odeG6rW4sIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1698375221696!5m2!1svi!2s"
                 width="600"

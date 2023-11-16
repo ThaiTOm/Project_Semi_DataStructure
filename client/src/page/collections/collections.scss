@@ -1,4 +1,10 @@
 .collections {
+    &--message {
+        font-size: 25px;
+        text-align: center;
+       margin: auto;
+       
+      }
      &--all {
         display: flex;
         justify-content: space-between;
@@ -13,10 +19,19 @@
      }
 
     &--sider {
+        
         max-width: 300px!important;
         width: 300px!important;
         min-width: 300px!important;
         margin-right: 15px;
+         padding: 10px 20px;
+        &__hsx {
+            & h2 {
+                margin: 0;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+        }
         &__sp {
             border: 1px solid;
             padding: 5px;
@@ -45,6 +60,9 @@
             width: 100%;
           aspect-ratio: 4/4;
         }
+        // &__top img:hover {
+        //     top: calc(var(--img-top, 50%) - 12px);
+        // }
 
         &__under {
             padding: 10px 10px 10px 10px;
@@ -71,21 +89,19 @@
        &__add {
         position: absolute;
         right: 10%;
-        bottom: 15%;
-       & button {
-        background-color: greenyellow;
-        color: white;
-        border: greenyellow;
-        padding: 6px 10px;
-        border-radius: 50%;
-        cursor: pointer;
-       }
-       & button:active {
-        background-color: red;
-
-       }
+        bottom: 13%;
+    //    & button {
+    //     background-color: greenyellow;
+    //     color: white;
+    //     border: greenyellow;
+    //     padding: 6px 10px;
+    //     border-radius: 50%;
+    //     cursor: pointer;
+    //    }
+     
     }
     }
+   
 }
 .gachngang {
     text-decoration: line-through;

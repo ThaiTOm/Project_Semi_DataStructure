@@ -21,6 +21,14 @@
         max-width: 300px!important;
         width: 300px!important;
         min-width: 300px!important;
+        padding: 10px 20px;
+        &__hsx {
+            & h2 {
+                margin: 0;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+        }
         &__sp {
             border: 1px solid;
             padding: 5px;
@@ -71,6 +79,20 @@
          display: flex;
           
        }
+       &__add {
+        position: absolute;
+        right: 10%;
+        bottom: 13%;
+    //    & button {
+    //     background-color: greenyellow;
+    //     color: white;
+    //     border: greenyellow;
+    //     padding: 6px 10px;
+    //     border-radius: 50%;
+    //     cursor: pointer;
+    //    }
+     
+    }
     }
 }
 .gachngang {

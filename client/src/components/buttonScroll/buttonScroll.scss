@@ -1,0 +1,60 @@
+.button {
+ 
+  &--scroll {
+    display: none;
+    position: fixed;
+    bottom: 220px;
+    right: 25px;
+    background-color: #F2FCE7;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 10000;
+  }
+  &--scroll.visible {
+    display: block;
+    opacity: 1;
+  }
+  &--scroll:hover {
+    background-color: #dbe1d5;
+    transition: 0.8s;
+  }
+  &--phone {
+    position: fixed;
+    bottom: 160px;
+    right: 20px;
+    z-index: 10000;
+    &__bt {
+      background: none;
+       border: none;
+       cursor: pointer;
+    }
+    &__bt:hover {
+      opacity: 0.8;
+    }
+   
+  }
+  &--zalo {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 10000;
+    &__bt {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    &__bt:hover {
+      opacity: 0.8;
+     }
+  }
+  
+}
+
+
+  
+
+  

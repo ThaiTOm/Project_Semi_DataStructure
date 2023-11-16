@@ -10,12 +10,39 @@
         font-size: 25px;
       }
      
+  }
+  &--content {
+     & h1 {
+      margin-bottom: 20px;
+     }
   } 
   &--item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 20px;
+    &__macdinh{
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      & p {
+        margin: 0px;
+        color: rgb(56, 233, 151);
+        margin-left: 3px;
+      }
+    }
+  &__main {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    font-size: 16px;
+  }
+  &__p {
+    margin: 0px 12px 0px 0px;
+    
+  
+  }
   }
 }
 

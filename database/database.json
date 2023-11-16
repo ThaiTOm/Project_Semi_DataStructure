@@ -1048,8 +1048,6 @@
             ]
           },
           "quanlity": 1
-<<<<<<< Updated upstream
-=======
         },
         {
           "id": 1,
@@ -1119,7 +1117,6 @@
             ]
           },
           "quanlity": 1
->>>>>>> Stashed changes
         }
       ],
       "id": 1
@@ -1143,17 +1140,9 @@
         }
       ],
       "id": 3
-<<<<<<< Updated upstream
-=======
     }
   ],
   "purchase":[
-    {
-      "userId": 123,
-      "productId": 123,
-      "date": "2012-04-23T18:25:43.511Z",
-      "quantity": 123
->>>>>>> Stashed changes
-    }
+   
   ]
 }

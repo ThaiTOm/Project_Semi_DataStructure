@@ -178,11 +178,45 @@ function Cart() {
     },
   ];
 
+  function deleteAndAdjust(array, valueToDelete) {
+    // Tìm vị trí của phần tử cần xóa
+    const indexToDelete = array.indexOf(valueToDelete)
+  
+    if (indexToDelete !== -1) {
+      // Xóa phần tử tại vị trí indexToDelete
+      array.splice(indexToDelete, 1);
+  
+      // Cập nhật giá trị của các phần tử có giá trị lớn hơn phần tử bị xóa
+      for (let i = indexToDelete; i < array.length; i++) {
+        if (array[i] > valueToDelete) {
+          array[i] -= 1;
+        }
+      }
+    }
+  
+    return array;
+  }
   const handleXoa = (e) => {
-    
-      dispatch(xoa(e.id))
-  onSelectChange(selectedRowKeys.splice(e.key, 1));
-    console.log(selectedRowKeys)
+    const key = selectedRowKeys.some(x => {
+      return x === e.key
+    }) 
+    console.log(key)
+    if (key === false) {
+      for (let i = e.key; i < selectedRowKeys.length; i++) {
+        if (selectedRowKeys[i] > e.key) {
+          selectedRowKeys[i] -= 1;
+        }
+      }
+      onSelectChange(selectedRowKeys);
+    }
+    else {
+       
+    console.log(e.key)
+    const newArray = deleteAndAdjust(selectedRowKeys, e.key);
+   onSelectChange(newArray);
+    }
+   
+  dispatch(xoa(e.id))
   }
 
   useEffect(() => {
@@ -205,7 +239,7 @@ function Cart() {
   }, [products]);
 
   const onSelectChange = (selectedKeys) => {
-   
+   console.log(selectedKeys)
    const tong = selectedKeys.reduce((totals, item) => {
       return totals + (data_3[item].total)
    }, 0)
@@ -216,8 +250,8 @@ function Cart() {
   else {
     setChecked(false);
   }
-  
-    setSelectedRowKeys(selectedKeys);
+  console.log(selectedKeys)
+    setSelectedRowKeys([...selectedKeys]);
   };
 
   const rowSelection = {
@@ -309,7 +343,7 @@ const handleDelete = () => {
  }
 }
 
-
+console.log(rowSelection);
   return (
     <>
     <Layout>

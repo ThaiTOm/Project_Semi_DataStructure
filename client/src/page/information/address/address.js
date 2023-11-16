@@ -34,6 +34,7 @@ const Address = () => {
           address: "",
           fullName: "",
           phoneNumber: "",
+          defaultAddress: false
         },
       ],
     },
@@ -248,11 +249,12 @@ const handleDelete = async (e) => {
   const onFinish = (values) => {
     // hàm xử lí sau khi tạo mới
 
-    const valuesbool = ship.filter((item) => {
+    const valuesbool = ship && ship.filter((item) => {
       // lọc dữ liệu nào đang true
-      return item.delivery[0].defaultAddress == true;
+      console.log(item)
+      return item .delivery[0] && item.delivery[0].defaultAddress === true;
     });
-    if (values.defaultAddress == true && valuesbool.length > 0) {
+    if (values.defaultAddress === true && valuesbool.length > 0) {
       // nếu trong values mà người dùng nhập có defaultAddres là true thì chuyển những đ/c còn lại thành false
       patchbool({
         id: valuesbool[0].id,
@@ -319,9 +321,12 @@ const handleDelete = async (e) => {
       ...submit, ...values
     })
     if (shipid.id == 0 ) {
+      console.log(checkship)
+      console.log(soluongfalse)
       // vì nếu có true thì sẽ có 1 đứa bị trùng và điều đó là cấm kị
       if (soluongfalse == checkship.length){
       if (ship.length == 0) {
+        console.log("ok");
         postship({
           // gửi dữ liệu địa chỉ của người dùng
           userId: data[0].id,
@@ -429,7 +434,7 @@ const handleDelete = async (e) => {
   
   };
 
-  // console.log(shipid.delivery[0].length);
+  console.log(ship);
 
   return (
     <>
@@ -521,7 +526,7 @@ const handleDelete = async (e) => {
           <hr />
           <h1>Địa chỉ</h1>
 
-          {ship &&
+          {ship && ship[0] && ship[0].delivery && ship[0].delivery.length > 0 ? 
             ship.map((item) => (
               <div className="address--item">
                 <div className="address--item__infor">
@@ -587,7 +592,7 @@ const handleDelete = async (e) => {
                   </Row>
                 </div>
               </div>
-            ))}
+            )) : ("vui long nhap dia chi")}
         </div>
       </div>
     </>

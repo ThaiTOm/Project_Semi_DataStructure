@@ -25,7 +25,7 @@ console.log(cookies);
 const posttt = async (e) => {
   const result = postInfor(e);
   setData_1(result)
-  console.log(result)
+ 
 }
 const patchhh = async (e) => {
   const result = patchInfor(e);
@@ -42,7 +42,7 @@ setData_1(result)
   const fetchApick = async (e) => {
     const result = await getUserstk(e)  // lấy dữ liệu tài khoản của người đang đăng nhập 
    setData(result);
-   console.log(result);
+   fetchId(result[0].id);
   }
   fetchApick(cookies);
  },[])
@@ -80,22 +80,24 @@ setData_1(result)
 
   }}, [data_1]);
 
-  useEffect(() => {
-    const fetchId = async () => {
-      const result = await getInforid();
+  
+    const fetchId = async (e) => {
+      const result = await getInforid(e);
       setData_1(result);
-      console.log(data_1);
+     
     }
-    if(data && data[0] && data[0].id){
-       fetchId(data[0].id);
-    }
-
-   
-  },[editing])
+  
+   useEffect(() => {
+    if (data && data[0] && data[0].id)
+    fetchId(data[0].id);
+   },[editing])
+ console.log(data_1)
   
   useEffect(() => {
-    console.log(data_1);
-    if (data_1 && data_1[0] && data_1[0].length >  0) {
+   
+   
+    if ( data_1 !== undefined && data_1[0] ) {
+   
       form.setFieldsValue({   // cập nhật dữ liệu trên thanh input
         name: data_1[0].name,
         email: data_1[0].email,
@@ -104,7 +106,8 @@ setData_1(result)
         // Cập nhật các trường cần thiết
       });
     }
-    else if (data_1 == undefined) {
+    else if ( data_1 == undefined || data_1.length == 0 ) {
+      
       form.setFieldsValue({   // cập nhật dữ liệu trên thanh input
         name: '',
         email: '',
@@ -113,7 +116,7 @@ setData_1(result)
         // Cập nhật các trường cần thiết
       });
     }
-  }, [data_1, form]);
+  }, [data_1]);
 
 
   const layout = {   // style lay out
@@ -129,11 +132,11 @@ setData_1(result)
   const onFinish = (values) => {  // hàm submit
     // nếu trong dữ liệu data_2 chưa có thằng hiện tại thì check qua hết 
     // nếu có dữ liệu trong data_2 rồi thì bỏ nó qua một bên lướt mấy thằng còn lại
-    console.log("ok")
-    
+  console.log(data_1)
+
 if (data_1[0] == undefined) {
   
-
+console.log("fuckk")
 
   posttt({
     ...values,
@@ -149,7 +152,7 @@ else {
        const checkPost = filterPost.some(x => {
         return x.email == values.email && x.phone == values.phone
        })
-       console.log(checkPost);
+    
       console.log("Received values:", values);
   
 
@@ -214,7 +217,7 @@ else {
             <Form.Item
               label="Tên"
               name="name"
-             
+          
               rules={[
                 {
                   required: true,
@@ -226,7 +229,7 @@ else {
                 },
               ]}
             >
-             <Input  />
+             <Input   />
 
             </Form.Item>
 

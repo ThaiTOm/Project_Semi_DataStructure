@@ -154,26 +154,26 @@ const handleSubmit = (e) => {
                   // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
                 }
               };
-              const postship = async (e) => {
-                try {
-                  const result = await postShipping(e); // Gọi hàm patchCart với tham số là data
-                  console.log(result);
-                } catch (error) {
-                  console.error("Error while patching cart:", error);
-                  // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
-                }
-              };
+              // const postship = async (e) => {
+              //   try {
+              //     const result = await postShipping(e); // Gọi hàm patchCart với tham số là data
+              //     console.log(result);
+              //   } catch (error) {
+              //     console.error("Error while patching cart:", error);
+              //     // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
+              //   }
+              // };
 
               postApi({
                 ["userId"]: data.id,
               ["product"]: []
               });
 
-              postship({
-                ["userId"]: data.id,
-              ["delivery"]: []
-              });
-              console.log(data);
+              // postship({
+              //   ["userId"]: data.id,
+              // ["delivery"]: []
+              // });
+              // console.log(data);
             })
         
             Swal.fire({

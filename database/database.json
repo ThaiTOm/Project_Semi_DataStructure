@@ -13,6 +13,13 @@
       "password": "Sonthanh123",
       "token": "4ykApvw9lR5Cxy3MCDyU",
       "id": 2
+    },
+    {
+      "fullName": "ssss",
+      "username": "thaidepzai",
+      "password": "Thaidepzai@123",
+      "token": "EIovQGhCwannhaLlNN8m",
+      "id": 3
     }
   ],
   "beverages": [
@@ -1125,6 +1132,11 @@
       "userId": 2,
       "product": [],
       "id": 2
+    },
+    {
+      "userId": 3,
+      "product": [],
+      "id": 3
     }
   ],
   "information": [],
@@ -1134,15 +1146,37 @@
       "delivery": [
         {
           "address": "23 Đinh Tiên Hoàng, Quận Hoàn Kiếm, Hà Nội",
-          "fullName": "Sonn Tha",
+          "fullName": "trần nguyễn sơn thành",
+          "phoneNumber": "0399038165",
+          "defaultAddress": false
+        }
+      ],
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "delivery": [
+        {
+          "address": "93 Hồ Văn Huê, phường 9, phú nhuận",
+          "fullName": "sohnawf",
           "phoneNumber": "0399038165",
           "defaultAddress": true
         }
       ],
-      "id": 3
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "delivery": [
+        {
+          "address": " 144 Xuân Thủy, Cầu Giấy, Hà Nội",
+          "fullName": "trần nguyễn sơn thành",
+          "phoneNumber": "0399038165",
+          "defaultAddress": true
+        }
+      ],
+      "id": 4
     }
   ],
-  "purchase":[
- 
-  ]
+  "purchase": []
 }

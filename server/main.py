@@ -324,7 +324,7 @@ def thanhdaubuoi():
         product["date"] = endDate.strftime("%Y%m%d%H")
         product["message"] = formData["message"]
         push_json(pathJson, product, "notification")
-    return jsonify("yses")
+    return jsonify("yes")
 
 if __name__ == "__main__":
     app.run(debug=True)

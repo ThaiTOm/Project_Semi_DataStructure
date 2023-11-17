@@ -64,16 +64,21 @@
                 font-size: 17px;
                 letter-spacing: 1.6;
                 font-weight: 500;
-                min-height: 50px;
+                min-height: 45px;
             }
         }
        &__p1 {
+        font-size: 20px;
+        color: rgb(150, 235, 23);
         margin: 0px;
        }
        &__p2 {
         margin: 0px;
         margin-right: 10px;
         
+       }
+       & .dc {
+        color: red;
        }
        &__price {
          display: flex;
@@ -92,6 +97,11 @@
     //     cursor: pointer;
     //    }
      
+    }
+    &__tomau {
+        font-size: 20px;
+        color: rgb(150, 235, 23);
+            margin: 0px;
     }
     }
 }

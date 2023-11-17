@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
 function Cart() {
   const storedData = JSON.parse(localStorage.getItem(getCookie("token")));
-  console.log(storedData);
+
   const products = useSelector((state) => state.cartStore);
   const [data, setData] = useState([]);
   const [data_2, setData_2] = useState();
@@ -21,7 +21,7 @@ function Cart() {
   const [total, setTotal] = useState(0);
   const [checked, setChecked] = useState(false);
  const navigate = useNavigate();
- console.log(products);
+
   // cũ
   var tong = 0;
   for (let i = 0; i < products.length; i++) {
@@ -187,7 +187,7 @@ function Cart() {
       array.splice(indexToDelete, 1);
   
       // Cập nhật giá trị của các phần tử có giá trị lớn hơn phần tử bị xóa
-      for (let i = indexToDelete; i < array.length; i++) {
+      for (let i = 0; i < array.length; i++) {
         if (array[i] > valueToDelete) {
           array[i] -= 1;
         }
@@ -200,9 +200,9 @@ function Cart() {
     const key = selectedRowKeys.some(x => {
       return x === e.key
     }) 
-    console.log(key)
+ 
     if (key === false) {
-      for (let i = e.key; i < selectedRowKeys.length; i++) {
+      for (let i = 0; i < selectedRowKeys.length; i++) {
         if (selectedRowKeys[i] > e.key) {
           selectedRowKeys[i] -= 1;
         }
@@ -211,7 +211,7 @@ function Cart() {
     }
     else {
        
-    console.log(e.key)
+   
     const newArray = deleteAndAdjust(selectedRowKeys, e.key);
    onSelectChange(newArray);
     }
@@ -270,7 +270,8 @@ const handleDown = (values, e) => {
 
  }
  else {
-  dispatch(xoa(e.id))
+
+   handleXoa(e);
  }
 }
 

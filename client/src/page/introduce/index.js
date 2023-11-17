@@ -1,11 +1,27 @@
+import { Breadcrumb } from "antd";
 import "./introduce.scss"
+import { Link } from "react-router-dom";
 function Introduce () {
 
     
    return (
     <>
-    <div className="introduce animate__animated animate__fadeInDown animate__faster" > <h1>Giới Thiệu</h1>
+      <div className="introduce--bread">
+          
+          <Breadcrumb
+            items={[
+              {
+                title: <Link to="/">Trang chủ</Link>,
+              },
 
+              {
+                title: "Giới thiệu",
+              },
+            ]}
+          />
+        </div>
+    <div className="introduce animate__animated animate__fadeInDown animate__faster" > <h1>Giới Thiệu</h1>
+  
         
         <br />
 

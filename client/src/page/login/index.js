@@ -8,6 +8,7 @@ import { getCookie } from "../../components/takeCookies/takeCookies";
 import { Link } from "react-router-dom";
 import { patchCart } from "../../service/patch/patch";
 import { postCart, postShipping } from "../../service/post/post";
+import { Button, Input } from "antd";
 function Login(){
 
 const inputRef = useRef();
@@ -49,8 +50,10 @@ function isValidUsername(username) {
 // Sử dụng hàm kiểm tra
 
 useEffect(() => {
-  
-  inputRef.current.focus();
+  if (inputRef.current){
+     inputRef.current.focus();
+  }
+ 
 }, []);
 
 const [data, setData ] = useState(true)
@@ -227,7 +230,7 @@ const handleSubmit = (e) => {
 
     return (
         <>
-{cookie.length == "" ? ( <form action="" className="login--form"  onSubmit={handleSubmit}>
+{cookie.length == 0 ? ( <form action="" className="login--form"  onSubmit={handleSubmit}>
  <div className="container" >
        <div className="login">
         <h3 className="login--heading"> Đăng ký </h3>
@@ -235,7 +238,7 @@ const handleSubmit = (e) => {
         <div className="login--group">
           <label for="fullname" className="login--group__label">Tên đầy đủ</label>
           <br/>
-          <input ref = {inputRef}  onBlur={handleOnblur} onChange={handleChange}   id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng" className="login--group__control" required />
+          <Input ref = {inputRef}  onBlur={handleOnblur} onChange={handleChange}   id="fullname" name="fullname" placeholder="VD: Sơn Đặng" className="login--group__control" required />
           <span className={data ? 'handleNotice' : ''} id="notice">Tên sai định dạng. Vui lòng nhập lại!</span>
 
         </div>
@@ -243,19 +246,19 @@ const handleSubmit = (e) => {
         <div class="login--group">
           <label for="username" className="login--group__label">Username</label>
           <br/>
-          <input  onBlur={handleOnblur_1} onChange={handleChange_1}  id="username" name="username" type="text" placeholder="VD: sonthanhdepzai" class="login--group__control" required />
+          <Input  onBlur={handleOnblur_1} onChange={handleChange_1}  id="username" name="username" placeholder="VD: sonthanhdepzai" className="login--group__control" required />
           <span className={data_1 ? 'handleNotice' : ''} id="notice">Username sai định dạng. Vui lòng nhập lại!</span>
         </div>
 
         <div class="login--group">
           <label for="password" className="login--group__label">Mật khẩu</label>
           <br/>
-          <input   onBlur={handleOnblur_2} onChange={handleChange_2}   id="password" name="password" type="password" placeholder="Nhập mật khẩu" className="login--group__control" required />
+          <Input.Password   onBlur={handleOnblur_2} onChange={handleChange_2}   id="password" name="password" placeholder="Nhập mật khẩu" className="login--group__control" required />
           <span className={data_2 ? 'handleNotice' : ''} id="notice">Vui lòng nhập tối thiểu 8 kí tự, một chữ thường, 1 chữ hoa và 1 số </span>
         </div>
 
 
-        <button className="login--submit">Đăng ký</button>
+        <Button htmlType="submit" className="login--submit">Đăng ký</Button>
         </div></div>
       </form>) :  (
     

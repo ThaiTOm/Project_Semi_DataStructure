@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from cryptography.fernet import Fernet
 import datetime
-from method.utils import write_json, read_json, validateFormData, validateId
+from method.utils import write_json, read_json, validateFormData, validateId, push_json, change_json
 from werkzeug.utils import secure_filename
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
 
@@ -276,6 +277,36 @@ def purchase():
 def serve_image_from_static(filename):
     return send_from_directory("/", filename)
 
+
+@app.route("/notification", methods=["GET"])
+def thanhdaubuoi():
+    # if request.method == 'POST':
+        keys = ["idProduct", "percentSale", "hourEnd", "message"]
+        pathJson = "D:\Lập Trình ST\web\Dự_án_3Tstore\database\database.json"
+        formData = request.form
+        validateFormData(formData, keys)
+        data = read_json(pathJson)
+        data = data["beverages"]
+        product = {}
+        for temp in data:
+            if temp["id"] == formData["idProduct"]:
+                product["discountPercentage"] = formData["percentSale"]
+                product["title"] = data["title"]
+                product["idProduct"] = data["id"]
+                product["thumbnail"] = data["thumbnail"]
+                temp["discountPercentage"] = formData["percentSale"]
+                change_json(pathJson, )
+
+                break
+        if product is None:
+            return jsonify({"res": "Threre is no Product"})
+        
+        endDate = datetime.datetime.now() + timedelta(hours=formData["hourEnd"])
+        product["date"] = endDate.strftime("%Y-%m-%d %H:%M:%S")
+        product["message"] = formData["message"]
+        push_json(pathJson, product, "notification")
+        
+    # return  
 
 if __name__ == "__main__":
     app.run(debug=True)

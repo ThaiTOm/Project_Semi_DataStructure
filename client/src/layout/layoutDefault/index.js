@@ -2,7 +2,7 @@ import { Row, Button, Form, AutoComplete, Drawer, Avatar, Menu } from "antd";
 import "./responsiveContainer.scss";
 import "./layoutDefault.scss";
 import { Content, Footer } from "antd/es/layout/layout";
-import { AlignLeftOutlined, UserOutlined } from "@ant-design/icons";
+import { AlignLeftOutlined, UserOutlined, BellOutlined  } from "@ant-design/icons";
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
@@ -264,6 +264,9 @@ function LayoutDefault() {
               {/* header-search */}
 
               <div className="header--function">
+              <div className="header--function__c header--function__bell" >
+              <img width="100" height="100" src="https://img.icons8.com/plasticine/100/bell--v1.png" alt="bell--v1"/>
+              </div>
                 <div className="header--function__donhang header--function__c">
                   <NavLink to={cookies.length != 20 ? "/register" : "/order"}>
                     <img src={donhang} alt="don hang" />

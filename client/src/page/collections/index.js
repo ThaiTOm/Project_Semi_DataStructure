@@ -436,7 +436,7 @@ const handleSelect = (e) => {
                         <div className="collections--item__price">
                           <p
                             className={`collections--item__p2 ${
-                              item.discountPercentage !== 0 ? "gachngang" : ""
+                              item.discountPercentage !== 0 ? "gachngang" : "tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -444,7 +444,7 @@ const handleSelect = (e) => {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div className="dc">
                             {item.discountPercentage !== 0
                               ? `${item.discountPercentage}%`
                               : ""}

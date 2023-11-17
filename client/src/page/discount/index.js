@@ -404,7 +404,7 @@ console.log(paginatedData)
                         <div className="discount--item__price">
                           <p
                             className={`discount--item__p2 ${
-                              item.discountPercentage !== 0 ? "gachngang" : ""
+                              item.discountPercentage !== 0 ? "gachngang" : "tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -412,7 +412,7 @@ console.log(paginatedData)
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div className="dc">
                             {item.discountPercentage !== 0
                               ? `${item.discountPercentage}%`
                               : ""}

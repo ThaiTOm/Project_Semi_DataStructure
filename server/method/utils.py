@@ -24,6 +24,18 @@ def write_json(path: str, data):
         print("There is an error in write_json function")
         print(e)
 
+def change_json(path: str, data, keys):
+    dataJson  = read_json(path)
+    dataJson[keys] = data
+    write_json(dataJson)
+
+def push_json(path:str, data, keys):
+    try:
+        data = read_json(path)
+        data["keys"].append(data)
+        write_json(path, data)
+    except Exception as e:
+        print("There is an error in push Data Json ")
 
 def read_json(path: str):
     try:

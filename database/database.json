@@ -20,6 +20,20 @@
       "password": "Thaidepzai@123",
       "token": "EIovQGhCwannhaLlNN8m",
       "id": 3
+    },
+    {
+      "fullName": "Trần Nguyễn Sơn Thành",
+      "username": "trannguyensonthanh",
+      "password": "Sonthanh@0305",
+      "token": "admin0305",
+      "id": 4
+    },
+    {
+      "fullName": "Kim Ngan",
+      "username": "kimnganxinhdep",
+      "password": "Kimngan123",
+      "token": "cyG42g8ghsZoNUD3aH6D",
+      "id": 5
     }
   ],
   "beverages": [
@@ -1011,52 +1025,6 @@
       "userId": 1,
       "product": [
         {
-          "id": 6,
-          "infor": {
-            "id": 6,
-            "title": "Mango Passion Fruit Juice",
-            "description": "A delightful blend of mango and passion fruit for a tropical taste.",
-            "price": 40000,
-            "discountPercentage": 0,
-            "rating": 4.8,
-            "stock": 63,
-            "brand": "Tropical Oasis",
-            "category": "Fruit Juice",
-            "Quantity": 42,
-            "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/91/c7/0f/91c70fc63bd05d5f01f7a225ae109afe.jpg",
-              "https://i.pinimg.com/236x/c6/c3/a9/c6c3a946be26a9aa9d4ef2be346fc3ff.jpg",
-              "https://i.pinimg.com/236x/af/58/3e/af583ee2d087172398cebf93937e58cf.jpg",
-              "https://i.pinimg.com/236x/09/e6/14/09e6142e9858253f81c2deebc96ec0f2.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 7,
-          "infor": {
-            "id": 7,
-            "title": "Watermelon Juice",
-            "description": "Juicy and refreshing watermelon juice, perfect for a hot summer day.",
-            "price": 27000,
-            "discountPercentage": 0,
-            "rating": 4.6,
-            "stock": 50,
-            "brand": "Fruit Paradise",
-            "category": "Fruit Juice",
-            "Quantity": 15,
-            "thumbnail": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/8c/3d/46/8c3d46f6c64c5d0f3a7c864a8261b119.jpg",
-              "https://i.pinimg.com/236x/b0/96/14/b09614abfd53317129320e8071aee27e.jpg",
-              "https://i.pinimg.com/236x/ea/f4/73/eaf4730bb8f0e18581728378543c6894.jpg",
-              "https://i.pinimg.com/236x/7c/ff/dd/7cffdd161e9db0b4fac50b60e348c735.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
           "id": 1,
           "infor": {
             "id": 1,
@@ -1075,29 +1043,6 @@
               "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
               "https://i.pinimg.com/236x/55/55/7a/55557a017b3ac00f143823298c8ea599.jpg",
               "https://i.pinimg.com/236x/21/ff/7e/21ff7ef76f32d75208abd60ad024201b.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 2,
-          "infor": {
-            "id": 2,
-            "title": "Grape Juice",
-            "description": "Refreshing grape juice, made from the finest grapes.",
-            "price": 22000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "stock": 55,
-            "brand": "Vineyard Delights",
-            "category": "Fruit Juice",
-            "Quantity": 100,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-            "images": [
-              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
-              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
-              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
-              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
             ]
           },
           "quanlity": 1
@@ -1137,9 +1082,22 @@
       "userId": 3,
       "product": [],
       "id": 3
+    },
+    {
+      "userId": 5,
+      "product": [],
+      "id": 4
     }
   ],
-  "information": [],
+  "information": [
+    {
+      "name": "thailol",
+      "email": "thainguyen@gmail.com",
+      "phone": "0399038165",
+      "gender": "female",
+      "id": 1
+    }
+  ],
   "shipping": [
     {
       "userId": 1,
@@ -1148,7 +1106,7 @@
           "address": "23 Đinh Tiên Hoàng, Quận Hoàn Kiếm, Hà Nội",
           "fullName": "trần nguyễn sơn thành",
           "phoneNumber": "0399038165",
-          "defaultAddress": false
+          "defaultAddress": true
         }
       ],
       "id": 1
@@ -1160,7 +1118,7 @@
           "address": "93 Hồ Văn Huê, phường 9, phú nhuận",
           "fullName": "sohnawf",
           "phoneNumber": "0399038165",
-          "defaultAddress": true
+          "defaultAddress": false
         }
       ],
       "id": 2
@@ -1178,5 +1136,16 @@
       "id": 4
     }
   ],
-  "purchase": []
+  "purchase": [],
+  "notification":
+  [
+    {
+      "idProduct": 123, 
+      "date": 123, 
+      "thumbnail": 123,
+      "title": "7 Up",
+      "discountPercentage": 10,
+      "message": "Thanh dau buoi" 
+  }
+  ]
 }

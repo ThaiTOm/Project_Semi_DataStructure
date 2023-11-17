@@ -23,6 +23,7 @@ import Thongtinkh from "../page/information/thongtinkh/thongtinkh";
 import Yourorder from "../page/information/yourorder/yourorder";
 import Logout from "../page/information/logout/logout";
 import Thanhtoan from "../page/thanhtoan";
+import Adminlayout from "../pageadmin/adminlayout";
 
 
 
@@ -138,7 +139,10 @@ export const routes = [
                }
             ]
          }
-        ]
-        
+        ],
+    },
+    {
+      path: "/admin",
+      element: <Adminlayout />
     }
 ]

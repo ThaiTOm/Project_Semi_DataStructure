@@ -386,7 +386,7 @@ function Categorydetail() {
                           <div className="category--item__price">
                             <p
                               className={`category--item__p2 ${
-                                item.discountPercentage !== 0 ? "gachngang" : ""
+                                item.discountPercentage !== 0 ? "gachngang" : "tomau"
                               }`}
                             >
                               {new Intl.NumberFormat("vi-VN", {
@@ -394,7 +394,7 @@ function Categorydetail() {
                                 currency: "VND",
                               }).format(`${item.price}`)}
                             </p>
-                            <div>
+                            <div className="dc">
                               {item.discountPercentage !== 0
                                 ? `${item.discountPercentage}%`
                                 : ""}

@@ -71,16 +71,28 @@
                 font-size: 17px;
                 letter-spacing: 1.6;
                 font-weight: 500;
-                min-height:40px;
+                min-height:45px;
+            }
+            & .tomau {
+                font-size: 20px;
+                color: rgb(150, 235, 23);
+                    margin: 0px;
             }
         }
        &__p1 {
         margin: 0px;
+        font-size: 20px;
+        color: rgb(150, 235, 23);
+
        }
        &__p2 {
+        
         margin: 0px;
         margin-right: 10px;
         
+       }
+       & .dc {
+        color: red;
        }
        &__price {
          display: flex;

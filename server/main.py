@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from cryptography.fernet import Fernet
 import datetime
-from method.utils import write_json, read_json, validateFormData, validateId, push_json, change_json
+from method.utils import write_json, read_json, validateFormData, validateId, push_json, change_json, compareStrDate, \
+    delete_json
 from werkzeug.utils import secure_filename
 import os
 from datetime import timedelta
@@ -18,10 +19,15 @@ app.config["DATA"] = "storage.json"
 
 key = b'ZmDfcTF7_60GrrY167zsiPd67pEvs0aGOv2oasOM1Pg='
 cipher_suite = Fernet(key)
+pathJson = "database/database.json"
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    This function to handle login post request
+    :return:
+    """
     if request.method == "POST":
         keys = request.form.keys()
         formData = request.form
@@ -111,12 +117,26 @@ def signin():
 
 @app.route("/", methods=["GET"])
 def home():
-    data = read_json(path="storage.json")
-    data = data["product"]
-    return jsonify({
-        "res": "success",
-        "data": data
-    })
+    data = read_json(path=pathJson)
+    deleteData = []
+    now = datetime.datetime.now().strftime("%Y%m%d%H")
+
+    for i, temp in enumerate(data["notification"]):
+        if compareStrDate(temp['date'], now) == -1:
+            print(now, temp['date'])
+            deleteData.append(i)
+
+    for idx in deleteData:
+        for product_temp in data["beverages"]:
+            if product_temp["id"] == data["notification"][idx]["idProduct"]:
+                product_temp["discountPercentage"] = 0
+
+    change_json(pathJson, data["beverages"], "beverages")
+    delete_json(pathJson, deleteData, "notification")
+    return jsonify("yes")
+
+
+
 
 
 @app.route("/product/", methods=["GET"])
@@ -278,35 +298,33 @@ def serve_image_from_static(filename):
     return send_from_directory("/", filename)
 
 
-@app.route("/notification", methods=["GET"])
+
+@app.route("/notification", methods=["POST"])
 def thanhdaubuoi():
-    # if request.method == 'POST':
+    if request.method == 'POST':
         keys = ["idProduct", "percentSale", "hourEnd", "message"]
-        pathJson = "D:\Lập Trình ST\web\Dự_án_3Tstore\database\database.json"
         formData = request.form
         validateFormData(formData, keys)
         data = read_json(pathJson)
         data = data["beverages"]
         product = {}
         for temp in data:
-            if temp["id"] == formData["idProduct"]:
+            if temp["id"] == int(formData["idProduct"]):
                 product["discountPercentage"] = formData["percentSale"]
-                product["title"] = data["title"]
-                product["idProduct"] = data["id"]
-                product["thumbnail"] = data["thumbnail"]
-                temp["discountPercentage"] = formData["percentSale"]
-                change_json(pathJson, data, "beverages")
-
+                product["title"] = temp["title"]
+                product["idProduct"] = temp["id"]
+                product["thumbnail"] = temp["thumbnail"]
+                temp["discountPercentage"] = int(formData["percentSale"])
+                change_json(pathJson, data, 'beverages')
                 break
         if product is None:
-            return jsonify({"res": "Threre is no Product"})
+            return jsonify({"res": "There is no Product"})
         
-        endDate = datetime.datetime.now() + timedelta(hours=formData["hourEnd"])
-        product["date"] = endDate.strftime("%Y-%m-%d %H:%M:%S")
+        endDate = datetime.datetime.now() + timedelta(hours=int(formData["hourEnd"]))
+        product["date"] = endDate.strftime("%Y%m%d%H")
         product["message"] = formData["message"]
         push_json(pathJson, product, "notification")
-        
-    # return  
+    return jsonify("yes")
 
 if __name__ == "__main__":
     app.run(debug=True)

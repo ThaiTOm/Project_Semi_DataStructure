@@ -1,0 +1,17 @@
+.admindash {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .admindash{
+        justify-content:flex-start;
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px)
+{
+    .MainDash{
+        align-items: center;
+    }
+}

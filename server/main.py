@@ -295,7 +295,7 @@ def thanhdaubuoi():
                 product["idProduct"] = data["id"]
                 product["thumbnail"] = data["thumbnail"]
                 temp["discountPercentage"] = formData["percentSale"]
-                change_json(pathJson, )
+                change_json(pathJson, data, "beverages")
 
                 break
         if product is None:

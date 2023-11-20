@@ -7,7 +7,7 @@ import {
   Collapse,
   Card,
   Image,
-  QRCode,
+
 } from "antd";
 import React, { useEffect, useState } from "react";
 import "./thanhtoan.scss";
@@ -15,7 +15,8 @@ import { getCookie } from "../../components/takeCookies/takeCookies";
 import { getShip, getUserstk } from "../../service/getcategory/getCategory";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { postOrder } from "../../service/post/post";
+import { format, parse } from 'date-fns';
 const { TextArea } = Input;
 const { Panel } = Collapse;
 const columns = [
@@ -69,6 +70,8 @@ const columns = [
   },
 ];
 
+
+
 const Thanhtoan = () => {
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("cash");
@@ -81,11 +84,16 @@ const Thanhtoan = () => {
   const thanhtoan = useSelector((state) => state.ttStore);
   sessionStorage.setItem("thanhtoan", JSON.stringify(thanhtoan));
 
+  
+ let setFormattedTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+
+
   useEffect(() => {
     const fetchApick = async (e) => {
       try {
         const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
         setData(result);
+        
         fetchShip(result[0].id);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -108,6 +116,14 @@ const Thanhtoan = () => {
     }
   };
 
+const postorder = async (e) => {
+  try {
+    const result = await postOrder(e);
+  } catch (error) {
+    console.log("...", error);
+  }
+}
+
   const handlePayment = () => {
     if (selectedPaymentMethod === "cash") {
       setShowConfirmation(true);
@@ -118,11 +134,22 @@ const Thanhtoan = () => {
 
   const handleConfirm = () => {
     // Thực hiện xác nhận thanh toán bằng tiền mặt ở đây
+ 
+   
+     postorder({
+      "orderStep": 0,
+      "date": setFormattedTime,
+      "userId": data[0].id,
+      "thanhtoan": thanhtoan });
+  
+    
+
     Modal.success({
       title: "Thanh toán tiền mặt thành công",
       content: "Cảm ơn bạn đã thanh toán bằng tiền mặt!",
     });
     setShowConfirmation(false);
+    window.location.href = "/order";
   };
 
   useEffect(() => {
@@ -254,20 +281,18 @@ const Thanhtoan = () => {
             <p>số tài khoản: 0399038165</p>
             <p>Momo</p>
             <h3>Mã QR: </h3>
-            <QRCode
-              type="canvas"
-              value="www.google.com/"
-              style={{ width: 0 }}
-            />
+           
           </div>
         </Modal>
         <Modal
-          title="Xác nhận thanh toán bằng tiền mặt"
+          title="Xác nhận thanh toán bằng tiền mặt?"
           open={showConfirmation}
           onOk={handleConfirm}
           onCancel={() => setShowConfirmation(false)}
+          okText="Đặt hàng"  // Thay đổi văn bản của nút Xác nhận
+  cancelText="Hủy"   // Thay đổi văn bản của nút Hủy
         >
-          <p>Xác nhận thanh toán bằng tiền mặt?</p>
+          <p>Hãy kiểm tra kĩ đơn hàng trước khi bấm nút đặt hàng. Bạn không thể tiếp tục đặt hàng khi sản phảm chưa hoàn tất!</p>
         </Modal>
       </div>
     </>

@@ -28,7 +28,7 @@ const posttt = async (e) => {
  
 }
 const patchhh = async (e) => {
-  const result = patchInfor(e);
+  const result = patchInfor(e, data_1);
   setData_1(result);
 }
 
@@ -57,8 +57,8 @@ setData_1(result)
   
    setEditing(true);
     if (data_1[0] !== undefined){
+
        delUserId(data_1[0].id);
-     
     }
       else {
         Swal.fire({
@@ -94,7 +94,7 @@ setData_1(result)
  console.log(data_1)
   
   useEffect(() => {
-   
+  
    
     if ( data_1 !== undefined && data_1[0] ) {
    
@@ -140,14 +140,14 @@ console.log("fuckk")
 
   posttt({
     ...values,
-    id: data[0].id
+    userId: data[0].id
   })
   setEditing(true)
  
 }
 else {
   const filterPost = data_2.filter(item => {
-    return item.id != data_1[0].id  // item chỉ lướt qua những thằng đăng nhập thôi còn thằng khác thì vẫn lụm
+    return item.userId != data_1[0].userId  // item chỉ lướt qua những thằng đăng nhập thôi còn thằng khác thì vẫn lụm
   })
        const checkPost = filterPost.some(x => {
         return x.email == values.email && x.phone == values.phone
@@ -179,7 +179,7 @@ else {
 
       patchhh({
         ...values,
-        id: data[0].id
+        userId: data[0].id
       })
   
     }

@@ -1,0 +1,104 @@
+:root {
+  --yellow: linear-gradient(180deg, #F8D49A -146.42%, #FAD79D -46.42%);
+  --orange: #fca61f;
+  --black: #242d49;
+  --gray: #788097;
+  --purple: linear-gradient(180deg, #BB67FF 0%, #C484F3 100%);
+  --pink: #FF919D;
+  --glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #f799a354;
+}
+
+.admin {
+    /* padding: 0.5rem 3.5rem; */
+    color: var(--black);
+    background: linear-gradient(
+      106.37deg,
+      #d4edd9 29.63%,  /* Màu xanh lá cây nhẹ */
+      #a8c8b4 51.55%,  /* Màu xanh lá cây trung bình */
+      #5f827c 90.85%   /* Màu xanh lá cây đậm */
+    );
+    
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+
+    &--glass {
+      
+        height: 97%;
+        width: 97%;
+        background: rgba(255, 255, 255, 0.54);
+        border-radius: 2rem;
+       
+       
+        overflow: auto;
+    }
+
+    &--error{
+       &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+       }
+      &__image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+    
+      &__message {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    
+      &__description {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+    
+      }
+    
+      &--gobackbutton {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    
+        &:hover {
+          background-color: #2980b9;
+        }
+   
+    
+     
+    }
+    
+    @media screen and (max-width: 1200px) {
+        &--glass {
+          grid-template-columns: 10% 50% auto;
+          overflow-y: scroll;
+        } 
+      }
+      
+      @media screen and (max-width: 768px) {
+        &--glass {
+          grid-template-columns: 1fr;
+        } 
+      }
+  }
+  
+
+  

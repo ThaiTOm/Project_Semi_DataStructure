@@ -1,6 +1,3 @@
-import { Breadcrumb, Button, Checkbox, Col, Layout, Pagination, Row, Select, Slider } from "antd";
-import Sider from "antd/es/layout/Sider";
-import { Content } from "antd/es/layout/layout";
 import { Link, useNavigate } from "react-router-dom";
 import { getProductdc, getProductsp } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
@@ -10,6 +7,9 @@ import { filterByArrange, taocate, taohsx } from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
+import { Breadcrumb, Button, Checkbox, Col, Layout, Pagination, Row, Select, Slider } from "antd";
+const { Header, Content, Footer, Sider } = Layout;
+
 const Discount = () => {
 
   const [max, setMax] = useState(0)

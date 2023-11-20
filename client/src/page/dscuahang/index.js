@@ -1,8 +1,9 @@
-import { Breadcrumb, Col } from "antd";
-import { Content } from "antd/es/layout/layout";
+
 
 import { Link } from "react-router-dom";
 import "./dscuahang.scss"
+import { Breadcrumb, Col, Layout } from "antd";
+const { Header, Content, Footer, Sider } = Layout;
 function Dscuahang(){
 
     return (

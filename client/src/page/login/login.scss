@@ -1,68 +1,63 @@
 .login {
-    margin: 82.3px 473px;
-     padding: 20px;
-     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-   
-    
-//  &--form{
-    
-//  }
-&--register {
-    text-align : center;
-    font-weight : bold;
-    font-size: 16px;
+    margin: auto;
+   margin-top: 100px;
+   margin-bottom: 100px;
+    padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 30%;
+    background-color: white;
+    border-radius: 5px;
+    &--register {
+        text-align : center;
+        font-weight : bold;
+        font-size: 16px;
+        margin-top: 0px;
+        margin-bottom: 30px;
+    }
+&--heading {
     margin-top: 0px;
-    margin-bottom: 30px;
+    text-align: center;
+    font-size: 30px;
+    color: greenyellow;
+    margin-bottom: 10px;
 }
- &--heading {
-     margin-top: 0px;
-     text-align: center;
-     font-size: 30px;
-     color: greenyellow;
-     margin-bottom:10px;
- }
- &--group {
-     &__label {
-         font-size: 15px;
-         font-weight: bold;
-         
- 
-     }
-    // & #username {
-    //     height: 100%
-    //  }
-     &__control {
-         height: 40px;
-         width: 100%;
-         font-size: 16px;
-         margin-top: 10px;
-     }
- 
- }
- &--submit {
-     background-color: rgb(57, 204, 84);
-     width: 100%;
-   height: 40px;
-     border-radius: 5px;
-     border: none;
-     font-size: 20px;
-     color: white;
-     margin-top: 5px;
- }
- &--submit:active {
-     background: orange;
-     transition: 0.2s;
- }
- }
- 
- .handleNotice {
-     display: none;
- }
- #notice {
-     color: red;
-         font-size: 13.5px;
-         margin-top: 0px;
-         font-weight: 400;
-         
- }
- 
+&--group {
+    &__label {
+        font-size: 15px;
+        
+    }
+    &__control {
+        height: 40px;
+    
+      
+    
+       
+        outline: none;
+        font-size: 18px;
+    
+       
+    }
+    &__message {
+        color: red;
+        font-size: 13px;
+    }
+}
+&--submit {
+    background-color: rgb(57, 204, 84);
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: white;
+    
+}
+&--submit:active {
+    background: orange;
+    transition: 0.2s;
+}
+&--forgot {
+    margin: 0;
+    margin-top: -20px;
+}
+}

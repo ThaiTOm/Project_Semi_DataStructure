@@ -1,4 +1,4 @@
-import { Content, Footer } from "antd/es/layout/layout";
+
 import { useDispatch, useSelector } from "react-redux";
 import "./cart.scss";
 import { useEffect, useState } from "react";
@@ -9,6 +9,9 @@ import { patchCart } from "../../service/patch/patch";
 import { Button, Checkbox, Col, Image, InputNumber, Layout, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
+
+
+const { Header, Content, Footer, Sider } = Layout;
 function Cart() {
   const storedData = JSON.parse(localStorage.getItem(getCookie("token")));
 
@@ -344,7 +347,7 @@ const handleDelete = () => {
  }
 }
 
-console.log(rowSelection);
+console.log(data_3);
   return (
     <>
     <Layout>

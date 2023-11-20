@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Steps, Button, message, Table } from 'antd';
-import CurrentTime from '../../components/takeTime/takeTime';
+import { getOrder, getUserstk } from '../../service/getcategory/getCategory';
+import { getCookie } from '../../components/takeCookies/takeCookies';
+import "./order.scss"
 
 
 const { Step } = Steps;
@@ -23,12 +25,7 @@ const columns = [
     key: 'date',
   },
   {
-    title: 'Giá gốc',
-    dataIndex: 'originalPrice',
-    key: 'originalPrice',
-  },
-  {
-    title: 'Giá sau khuyến mãi',
+    title: 'Đơn giá',
     dataIndex: 'price',
     key: 'price',
   },
@@ -49,6 +46,10 @@ const columns = [
 
 const steps = [
   {
+    title: 'Chờ xác nhận',
+    content: 'Đã nhận được thông tin đơn hàng. ',
+  },
+  {
     title: 'Xuất kho',
     content: ' Đơn hàng đã được xuất kho',
   },
@@ -58,64 +59,78 @@ const steps = [
   },
   {
     title: 'Giao thành công',
-    content:  'Đơn hàng đã giao thành công',
+    content:  'Đơn hàng đã giao thành công. Cảm ơn quý khách!',
   },
 ];
 
 const Order = () => {
-  const paidProducts = [
-    {
-      id: 1,
-      image: 'link_to_image_1.jpg',
-      orderInfo: 'Sản phẩm A',
-      originalPrice: 120,
-      price: 100,
-      quantity: 2,
-      total: 200,
-      date: '2023-11-10', // Thêm thông tin ngày đặt hàng
-    },
-    {
-      id: 2,
-      image: 'link_to_image_2.jpg',
-      orderInfo: 'Sản phẩm B',
-      originalPrice: 150,
-      price: 120,
-      quantity: 1,
-      total: 120,
-      date: '2023-11-12', // Thêm thông tin ngày đặt hàng
-    },
-    // Thêm các sản phẩm khác nếu cần
-  ];
+const cookies = getCookie("token");
+const [orderId, setorderId] = useState({
+"orderStep" : 0
+}
   
+);
+useEffect(() => {
+  const fetchApick = async (e) => {
+    const result = await getUserstk(e)  // lấy dữ liệu tài khoản của người đang đăng nhập 
+    fetchorder(result[0].id);
+  }
+  fetchApick(cookies);
+ },[])
+
+
+
+const fetchorder = async (e) => {
+  const result = await getOrder(e);
+  const compareFunction = (obj) => obj.date;  
+
+  // Hàm trả về giá trị lớn nhất dựa trên so sánh của thuộc tính cụ thể
+  const findMaxValue = (result, compareFn) => { // compareFn = compareFunction
+    if (!result.length) {
+      return null; // Trả về giá trị mặc định nếu mảng trống
+    }
+    return result.reduce((maxObject, currentObject) => { // reduce là maxObject dữ liệu đầu tiên , currentObject là các dữ liệu của mảng cần ss
+      const max = compareFn(maxObject);
+      const current = compareFn(currentObject);
   
-
-  const [currentStep, setCurrentStep] = useState(0);
-
-  const next = () => {
-    setCurrentStep(currentStep + 1);
+      return current > max ? currentObject : maxObject;
+    });
   };
+  
+  const maxObject = findMaxValue(result, compareFunction); // gọi hàm và gán dữ liệu
+  
+setorderId(maxObject)
+  
+}
 
-  const prev = () => {
-    setCurrentStep(currentStep - 1);
-  };
 
-  const onFinish = () => {
-    message.success('Đơn hàng đã giao thành công!');
+const paidProducts = orderId && orderId.thanhtoan && orderId.thanhtoan.map((item, index) => {  // data
+  return {
+    id: index,
+    image: item.img,
+    orderInfo: item.title,
+    price: item.dongia,
+    quantity: item.soluong,
+    total: item.thanhtien,
+    date: orderId.date
   };
-console.log(currentStep)
+});
+
+
+
   return (
     <>
-    <div className='order'>
+    {orderId ? (  <div className='order'>
       <div className='order--top'>
    <h1>
     QUÁ TRÌNH GIAO HÀNG
-    <CurrentTime />
+    
    </h1>
       </div>
 
        <div className='order--bottom'>
-      <Steps current={currentStep} size="small" style={{ marginBottom: '16px' }}
-        progressDot
+      <Steps current={orderId.orderStep} size="small" style={{ marginBottom: '16px' }}
+       
       
       >
         {steps.map(item => (
@@ -123,20 +138,33 @@ console.log(currentStep)
         ))}
       </Steps>
       <div className="steps-content">
-        <h2>{steps[currentStep].title}</h2>
-        <p>{steps[currentStep].content}</p>
-        
+     
+     
+   
+     
         {/* Hiển thị thông tin sản phẩm đã thanh toán tại mỗi bước */}
-        {currentStep < steps.length - 1 && (
-          <Table
+        {orderId.orderStep < steps.length - 1 && (
+       <div> 
+       <h2>{steps[orderId.orderStep].title}</h2>
+        <p>{steps[orderId.orderStep].content}</p>
+         <Table
       columns={columns}
       dataSource={paidProducts}
       pagination={false} // Tắt phân trang nếu không cần
     />
+    
+    </div>
+
+       
         )}
       </div>
     </div>
-    </div>
+    </div>) : (<div class="order-status">
+  <h2>Bạn chưa đặt hàng trước đây?</h2>
+  <p>Vui lòng mua hàng để có thể theo dõi tiến độ đơn hàng.</p>
+</div>
+)}
+  
      
     </>
     

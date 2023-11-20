@@ -1,7 +1,7 @@
-import { Content } from "antd/es/layout/layout";
+
 import "./home.scss"
-import Sider from "antd/es/layout/Sider";
-import { Carousel, Col, Layout, Row } from "antd";
+
+import { Button, Carousel, Col, Layout, Row } from "antd";
 import Homesider from "../../components/homeSider/index.js"
 import slide1 from "../../image/slide1.png"
 import slide2 from "../../image/slide2.png"
@@ -11,7 +11,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies.js";
-
+import { PlusOutlined  } from '@ant-design/icons';
+const { Header, Content, Footer, Sider } = Layout;
 function Home () {
  const [data, setData] = useState([]);
  const navigate = useNavigate();
@@ -200,9 +201,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                   
@@ -280,9 +281,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                 ))}
@@ -358,9 +359,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                   
@@ -437,9 +438,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                 ))}
@@ -515,9 +516,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                 ))}
@@ -593,9 +594,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                 ))}
@@ -671,9 +672,9 @@ const handleClick_soda = () => {
                       </div>
                     </Link>
                     <div className="home--discount__add">
-                  <button onClick={() => handleClick(item.id, item)}>
-                    +
-                  </button>
+                    <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                 </Button>
                 </div>
                   </Col>
                 ))}

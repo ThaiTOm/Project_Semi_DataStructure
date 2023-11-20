@@ -51,7 +51,14 @@
       opacity: 0.8;
      }
   }
-  
+  &--backadmin {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 10000;
+    cursor: pointer;
+    
+  }
 }
 
 

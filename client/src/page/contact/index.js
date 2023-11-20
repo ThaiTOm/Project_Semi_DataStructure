@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Col, Form, Input, Row } from "antd";
-import { defaultConfig } from "antd/es/theme/context";
+
 import "./contact.scss";
 import { Link } from "react-router-dom";
 import position from "../../image/position.png"

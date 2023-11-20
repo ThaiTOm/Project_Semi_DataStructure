@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getProductsearch } from "../../service/getcategory/getCategory";
 import { Col, Layout, Pagination, Row } from "antd";
 import "./search.scss";
-import { Content } from "antd/es/layout/layout";
+const { Header, Content, Footer, Sider } = Layout;
 
 function Searchdetail () {
 const params = useParams();

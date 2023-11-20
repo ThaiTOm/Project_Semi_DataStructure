@@ -1,4 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { getProductcate } from "../../service/getcategory/getCategory";
+import { useDispatch, useSelector } from "react-redux";
+import { add, up } from "../../actions/actCart";
+import { getCookie } from "../../components/takeCookies/takeCookies";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Breadcrumb,
   Button,
@@ -11,12 +16,12 @@ import {
   Slider,
 } from "antd";
 
+import { PlusOutlined  } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import "./category.scss";
-import Sider from "antd/es/layout/Sider";
-import { Content } from "antd/es/layout/layout";
-import { useEffect, useRef, useState } from "react";
-import { getProductcate } from "../../service/getcategory/getCategory";
+const { Header, Content, Footer, Sider } = Layout;
+
+
 function Categorydetail() {
   const params = useParams();
   console.log(params.cate);
@@ -30,7 +35,7 @@ function Categorydetail() {
     phanloai: "",
   });
   const [data_4, setData_4] = useState([]);
-
+  const cookies = getCookie("token");
   const mang = []; // tạo một mảng chứa các hãng sản xuất
   const cate = [];
   const paginatedData = [
@@ -38,7 +43,8 @@ function Categorydetail() {
       price: "",
     },
   ];
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // Số lượng phần tử trên mỗi trang
 
   const itemsPerPage = 12;
@@ -123,6 +129,24 @@ function Categorydetail() {
     });
     setId(1);
   };
+  const checkId = useSelector(state => state.cartStore);  
+  const handleClick = (id, infor) => {
+    if(cookies) {
+        const check = checkId.some(item => {
+    return item.id === id;
+});
+if (check) {
+  dispatch(up(id));
+  }
+  else {
+  dispatch(add(id, infor));
+  }
+    }
+    else {
+      navigate("/register");
+    }
+  }
+
 
   // check xem thêm và rút gọn
   const [expanded, setExpanded] = useState(false);
@@ -403,6 +427,11 @@ function Categorydetail() {
                         </div>
                       </div>
                     </Link>
+                    <div className="category--item__add">
+                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                 
+                  </Button>
+                </div>
                   </Col>
                 ))
               ) : (

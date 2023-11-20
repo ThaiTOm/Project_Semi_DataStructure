@@ -14,12 +14,7 @@ const CurrentTime = () => {
 
   // Format thời gian theo chuẩn "yyyy-MM-dd HH:mm:ss"
   const formattedTime = format(currentTime, 'yyyy-MM-dd HH:mm:ss');
-console.log(formattedTime)
-  return (
-    <div>
-      <p>Thời gian hiện tại là: {formattedTime}</p>
-    </div>
-  );
+return formattedTime;
 };
 
 export default CurrentTime;

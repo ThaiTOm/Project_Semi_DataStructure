@@ -9,9 +9,9 @@ export const patchCart = async (options) => {
     }
   };
 
-export const patchInfor = async (options) => {
+export const patchInfor = async (options, a) => {
     try {
-      const result = await patch(`information/${options.id}`, options);
+      const result = await patch(`information/${a[0].id}`, options);
       return result;
     } catch (error) {
       throw new Error('Error in patchinfor:', error);
@@ -27,7 +27,7 @@ export const patchBool = async (options) => {   // set mặc định cho đơn h
     }
   };
 
-export const patchUser = async (options) => {   // set mặc định cho đơn hàng
+export const patchUser = async (options) => {   //cập nhật người dùng
     try {
       const result = await patch(`users/${options.id}`, options);
       return result;

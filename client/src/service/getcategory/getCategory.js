@@ -14,6 +14,16 @@ export const getUserstk = async (e) => {
      throw error; // Rethrow the error to handle it in the calling code
    }
  };
+
+export const getUser = async () => {
+   try {
+     const result = await get("users");
+     return result;
+   } catch (error) {
+     console.error('Error in getUserstk:', error);
+     throw error; // Rethrow the error to handle it in the calling code
+   }
+ };
  
 
 export const getProductdc = async () => {    // lấy hàng khuyến mãi
@@ -65,7 +75,10 @@ export const getShip = async (e) => {       // lấy dữ liệu địa chỉ c�
    return result;
 };
 
-
+export const getOrder = async (e) => {
+   const result = await get(`purchase?userId=${e}`);
+   return result;
+}
 
 // export const getProducthsx = async (e) => {
 //    const result = await get(`beverages?_page=${e}&_limit=12`);

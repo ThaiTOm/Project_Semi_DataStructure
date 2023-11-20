@@ -1,3 +1,14 @@
+import { PlusOutlined  } from '@ant-design/icons';
+
+import { useEffect, useState } from "react";
+import {
+  
+  getProductsp,
+} from "../../service/getcategory/getCategory";
+import { filterByArrange, taocate, taohsx } from "../../components/filter";
+import { useDispatch, useSelector } from "react-redux";
+import { add, up } from "../../actions/actCart";
+import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
   Breadcrumb,
   Button,
@@ -16,18 +27,8 @@ import {
 import 'animate.css'
 import { Link, useNavigate } from "react-router-dom";
 import "./collections.scss";
-import Sider from "antd/es/layout/Sider";
-import { PlusOutlined  } from '@ant-design/icons';
-import { Content } from "antd/es/layout/layout";
-import { useEffect, useState } from "react";
-import {
-  
-  getProductsp,
-} from "../../service/getcategory/getCategory";
-import { filterByArrange, taocate, taohsx } from "../../components/filter";
-import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
-import { getCookie } from "../../components/takeCookies/takeCookies";
+const { Header, Content, Footer, Sider } = Layout;
+
 function Collections() {
   const [max, setMax] = useState(0);
   const [data, setData] = useState([]); // lấy data của sản phẩm

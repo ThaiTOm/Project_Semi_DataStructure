@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./buttonScroll.scss"
+import { getCookie } from '../takeCookies/takeCookies';
+import { Link } from "react-router-dom";
+import {Tooltip} from  'antd';
+import { useLocation } from "react-router-dom";
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
-
+  var checkAdmin ;
+const cookies = getCookie("token");
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -25,9 +30,20 @@ const ScrollToTopButton = () => {
     });
   };
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  console.log("Đường dẫn hiện tại:", currentPath);
+
+  if (currentPath.includes("admin")) {
+    checkAdmin = false;
+  } else {
+   checkAdmin = true;
+  }
+console.log(checkAdmin)
   return (
     <> 
-    <div className='button' >
+{cookies !== 'admin0305'  ? (  <div className='button' >
           <div
       className={`button--scroll ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}
@@ -53,6 +69,15 @@ const ScrollToTopButton = () => {
     </div>
     
     </div>
+  )  :  checkAdmin === true ? (<div className='button--backadmin' >
+
+         <Link to="/admin/dash">
+         <Tooltip placement="top" title={'Quay về trang admin'} >
+         <img width="50" height="50" src="https://img.icons8.com/ios/50/circled-left--v1.png" alt="circled-left--v1"/>
+         </Tooltip></Link>
+        
+  
+  </div>) : ("") }
   
     </>
    

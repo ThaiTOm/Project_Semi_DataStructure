@@ -23,7 +23,14 @@ import Thongtinkh from "../page/information/thongtinkh/thongtinkh";
 import Yourorder from "../page/information/yourorder/yourorder";
 import Logout from "../page/information/logout/logout";
 import Thanhtoan from "../page/thanhtoan";
-import Adminlayout from "../pageadmin/adminlayout";
+import Admindash from "../pageadmin/admindash";
+import Admincustomer from "../pageadmin/admincustomer";
+import Adminproduct from "../pageadmin/adminproduct";
+import Admin from "../pageadmin/admin";
+import Adminorder from "../pageadmin/adminorder";
+import Information from "../pageadmin/admincustomer/customerInformation/information";
+import Account from "../pageadmin/admincustomer/customerAccount/account";
+
 
 
 
@@ -142,7 +149,35 @@ export const routes = [
         ],
     },
     {
-      path: "/admin",
-      element: <Adminlayout />
+      path: "/admin/",
+      element: <Admin />,
+      children: [
+         {
+            path: "dash",
+            element: <Admindash />
+         },
+         {
+            path: "customer",
+            element: <Admincustomer />,
+            children: [
+                {
+                  path: "information",
+                  element: <Information />
+                },
+                {
+                  path: "account",
+                  element: <Account />
+                }
+            ]
+         },
+         {
+            path: "orders",
+            element: <Adminorder />
+         },
+         {
+            path: "product",
+            element: <Adminproduct />
+         }
+      ]
     }
 ]

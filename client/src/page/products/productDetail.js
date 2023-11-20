@@ -2,12 +2,12 @@ import { Breadcrumb, Col, Image, Layout, Rate, Row } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getProductcate, getProductdt } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
-import { Content } from "antd/es/layout/layout";
+
 import "./products.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { useDispatch, useSelector } from "react-redux";
 import { addmt, addtt, upmt } from "../../actions/actCart";
-
+const { Header, Content, Footer, Sider } = Layout;
 function Productdetail() {
   const navigate = useNavigate();  // chuyển trang
   const dispatch = useDispatch();  // chuyển dữ liệu
@@ -27,7 +27,7 @@ function Productdetail() {
   };
   const cookies = getCookie("token");
   const [count, setCount] = useState(1);
-
+const [randomNumber, setrandomNumber] = useState(0);
   const increaseCount = () => {
     setCount(count + 1);
   };
@@ -84,7 +84,9 @@ dispatch(addmt(id, infor, count));
         console.log(result);
       }
     };
-
+    if  (cate && cate.length > 5) {
+      setrandomNumber(getRandomInt(0, cate.length - 5  ));
+    } 
     fetchApi(param);
   }, [param]);
 
@@ -102,12 +104,9 @@ useEffect(() => {
   fetchcate(data[0].category)
 },[data])
 
-if  (cate && cate.length > 5) {
-  var randomNumber = getRandomInt(0, cate.length - 5  );
-} 
 
-console.log(randomNumber)
-console.log(randomNumber + 5)
+
+
 
   return (
     <>

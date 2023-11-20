@@ -1,12 +1,25 @@
-import { Row, Button, Form, AutoComplete, Drawer, Avatar, Menu } from "antd";
+import {
+  Row,
+  Button,
+  Form,
+  AutoComplete,
+  Drawer,
+  Avatar,
+  Menu,
+  Dropdown,
+} from "antd";
 import "./responsiveContainer.scss";
 import "./layoutDefault.scss";
-import { Content, Footer } from "antd/es/layout/layout";
-import { AlignLeftOutlined, UserOutlined, BellOutlined  } from "@ant-design/icons";
+
+import {
+  AlignLeftOutlined,
+  UserOutlined,
+  BellOutlined,
+} from "@ant-design/icons";
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
-import logoheader from "../../image/logoheader.png";
+import Logo from "../../image/Logo.png";
 import donhang from "../../image/donhang.png";
 import position from "../../image/position.png";
 import person from "../../image/person.png";
@@ -14,8 +27,53 @@ import cart from "../../image/cart.png";
 import email from "../../image/email.png";
 import telephone from "../../image/telephone.png";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getCategory, getProductsearch } from "../../service/getcategory/getCategory";
+import {
+  getCategory,
+  getProductsearch,
+} from "../../service/getcategory/getCategory";
 import { get } from "../../tienich/request";
+import { Layout } from "antd";
+
+const { Header, Content, Footer, Sider } = Layout;
+const cookies = getCookie("token");
+console.log(cookies)
+const items = cookies.length === 0
+  ? [
+      {
+        key: "1",
+        label: <Link to="/login">Đăng Nhập</Link>,
+      },
+      {
+        key: "2",
+        label: <Link to="/register">Đăng Ký</Link>,
+      }
+    ]
+  : [
+      {
+        key: "1",
+        label: <Link to="/infor/thongtinkh">Thông Tin Khách Hàng</Link>,
+      },
+      {
+        key: "2",
+        label: <Link to="/infor/address">Địa Chỉ</Link>,
+      },
+      {
+        key: "3",
+        label: <Link to="/infor/changepass">Đổi Mật Khẩu</Link>,
+      },
+      {
+        key: "4",
+        label: <Link to="/infor/yourorder">Đơn Hàng Của Bạn</Link>,
+      },
+      {
+        key: "5",
+        label: <Link to="/infor/logout">Đăng Xuất</Link>,
+      }
+    ];
+
+
+
+
 function LayoutDefault() {
   const [options, setOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
@@ -32,8 +90,6 @@ function LayoutDefault() {
   const onClose = () => {
     setVisible(false);
   };
-
-
 
   const [data, setData] = useState([
     {
@@ -53,13 +109,12 @@ function LayoutDefault() {
         console.error("loi");
       } else {
         setData(res);
-       
       }
     };
 
     fetchapi();
   }, []);
-  
+
   const getProduct = async (e) => {
     const result = await get("beverages/?category=" + e);
     return result;
@@ -72,14 +127,12 @@ function LayoutDefault() {
         const result = await getProduct(item.cate);
         newData2.push(result);
       }
-      
+
       setData_1(newData2);
     };
 
     fetchData2();
   }, [data]);
-
-
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -89,7 +142,7 @@ function LayoutDefault() {
     };
   }, []);
 
-  const cookies = getCookie("token");
+ 
 
   const handleScroll = () => {
     setShowOptions(false);
@@ -113,16 +166,14 @@ function LayoutDefault() {
     }
   };
 
-
   const handleKeydown = (e) => {
-    console.log(e)
+    console.log(e);
     if (e.code == "Enter") {
       form.resetFields();
       setRender(!render);
-   if (e.target.value != ""){
-      navigate(`/search/${e.target.value}`);
-   }
-       
+      if (e.target.value != "") {
+        navigate(`/search/${e.target.value}`);
+      }
     }
   };
 
@@ -135,9 +186,6 @@ function LayoutDefault() {
   const onFinishFailed = (e) => {
     console.log(e);
   };
-
- 
-
 
   const fetchData = async (searchText) => {
     const results = await getProductsearch(searchText);
@@ -158,117 +206,125 @@ function LayoutDefault() {
         <header className="header">
           <div className="container">
             <div className="header--main">
-            <div className="header--3gach" >
-            <AlignLeftOutlined className="homesider--icon" onClick={showDrawer} />
-            </div>
+              <div className="header--3gach">
+                <AlignLeftOutlined
+                  className="homesider--icon"
+                  onClick={showDrawer}
+                />
+              </div>
               <div className="header--logo">
-                <img src={logoheader} alt="logo 3Tstore" />
+                <Link to="/">
+                  <img src={Logo} alt="logo 3Tstore" />
+                </Link>
               </div>
 
               {/* header-search */}
-           <div className="header--form" >
-             <Form  form={form}
-                className="header--search"
-                layout="inline"
-                
-                onFinish={handleFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-              >
-                <Form.Item name={"name-product"}>
-                  <AutoComplete
-                    size="large"
-                    className="header--search__input"
-                    autoFocus
-                    onKeyUp={handleKeydown} 
-                    options={
-                      showOptions && options.length > 0
-                        ? options.map((option) => ({
-                            label: (
-                              <Link to={`/product/` + option.id}>
-                                <div className="header--search__item">
-                                  <img
-                                    className="img"
-                                    src={option.thumbnail}
-                                    alt={option.title}
-                                  />
-                                  <div className="under">
-                                    <h3>{option.title}</h3>
-                                    {option.discountPercentage !== 0 ? (
-                                      <p className="p1">
-                                        {new Intl.NumberFormat("vi-VN", {
-                                          style: "currency",
-                                          currency: "VND",
-                                        }).format(
-                                          `${
-                                            option.price *
-                                            ((100 -
-                                              Math.floor(
-                                                option.discountPercentage
-                                              )) /
-                                              100)
-                                          }`
-                                        )}
-                                      </p>
-                                    ) : (
-                                      ""
-                                    )}
-                                    <div className="price">
-                                      <p
-                                        className={`p2 ${
-                                          option.discountPercentage !== 0
-                                            ? "home--discount__gachngang"
-                                            : ""
-                                        }`}
-                                      >
-                                        {new Intl.NumberFormat("vi-VN", {
-                                          style: "currency",
-                                          currency: "VND",
-                                        }).format(`${option.price}`)}
-                                      </p>
-                                      <div>
-                                        {option.discountPercentage !== 0
-                                          ? `${option.discountPercentage}%`
-                                          : ""}
+              <div className="header--form">
+                <Form
+                  form={form}
+                  className="header--search"
+                  layout="inline"
+                  onFinish={handleFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="off"
+                >
+                  <Form.Item name={"name-product"}>
+                    <AutoComplete
+                      size="large"
+                      className="header--search__input"
+                      autoFocus
+                      onKeyUp={handleKeydown}
+                      options={
+                        showOptions && options.length > 0
+                          ? options.map((option) => ({
+                              label: (
+                                <Link to={`/product/` + option.id}>
+                                  <div className="header--search__item">
+                                    <img
+                                      className="img"
+                                      src={option.thumbnail}
+                                      alt={option.title}
+                                    />
+                                    <div className="under">
+                                      <h3>{option.title}</h3>
+                                      {option.discountPercentage !== 0 ? (
+                                        <p className="p1">
+                                          {new Intl.NumberFormat("vi-VN", {
+                                            style: "currency",
+                                            currency: "VND",
+                                          }).format(
+                                            `${
+                                              option.price *
+                                              ((100 -
+                                                Math.floor(
+                                                  option.discountPercentage
+                                                )) /
+                                                100)
+                                            }`
+                                          )}
+                                        </p>
+                                      ) : (
+                                        ""
+                                      )}
+                                      <div className="price">
+                                        <p
+                                          className={`p2 ${
+                                            option.discountPercentage !== 0
+                                              ? "home--discount__gachngang"
+                                              : ""
+                                          }`}
+                                        >
+                                          {new Intl.NumberFormat("vi-VN", {
+                                            style: "currency",
+                                            currency: "VND",
+                                          }).format(`${option.price}`)}
+                                        </p>
+                                        <div>
+                                          {option.discountPercentage !== 0
+                                            ? `${option.discountPercentage}%`
+                                            : ""}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </Link>
-                            ),
-                            value: option.title,
-                          }))
-                        : []
-                    }
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    onSearch={handleSearch}
-                    placeholder="Tìm kiếm"
-                  />
-                </Form.Item>
-                <Form.Item  >
-                  {" "}
-                  <Button
-                  
-                    className="header--search__button"
-                    type="primary"
-                    shape="circle"
-                    icon={<SearchOutlined />}
-                    htmlType="submit"
-                  />
-                </Form.Item>
-              </Form>
-           </div>
-             
+                                </Link>
+                              ),
+                              value: option.title,
+                            }))
+                          : []
+                      }
+                      onFocus={handleFocus}
+                      onBlur={handleBlur}
+                      onSearch={handleSearch}
+                      placeholder="Tìm kiếm"
+                    />
+                  </Form.Item>
+                  <Form.Item>
+                    {" "}
+                    <Button
+                      className="header--search__button"
+                      type="primary"
+                      shape="circle"
+                      icon={<SearchOutlined />}
+                      htmlType="submit"
+                    />
+                  </Form.Item>
+                </Form>
+              </div>
 
               {/* header-search */}
 
               <div className="header--function">
-              <div className="header--function__c header--function__bell" >
-              <img width="100" height="100" src="https://img.icons8.com/plasticine/100/bell--v1.png" alt="bell--v1"/>
-              </div>
+                <div className="header--function__c header--function__bell">
+                  <img
+                    width="100"
+                    height="100"
+                    src="https://img.icons8.com/plasticine/100/bell--v1.png"
+                    alt="bell--v1"
+                  />
+                </div>
                 <div className="header--function__donhang header--function__c">
-                  <NavLink to={cookies.length != 20 ? "/register" : "/order"}>
+                  <NavLink to={cookies.length === 0 ? "/login" : "/order"}>
                     <img src={donhang} alt="don hang" />
                     <p className="header--function__chung">Đơn hàng</p>
                   </NavLink>
@@ -281,18 +337,23 @@ function LayoutDefault() {
                 </div>
 
                 <div className="header--function__taikhoan header--function__c">
-                  <NavLink
-                    to={
-                      cookies.length != 20 ? "/register" : "/infor/thongtinkh"
-                    }
+                  <Dropdown
+                    placement="bottom"
+                    menu={{ items } }
                   >
-                    <img src={person} alt="tai khoan" />
-                    <p className="header--function__chung">Tài khoản </p>
-                  </NavLink>
+                    <NavLink
+                      to={
+                        cookies.length === 0 ? "/login" : "/infor/thongtinkh"
+                      }
+                    >
+                      <img src={person} alt="tai khoan" />
+                      <p className="header--function__chung">Tài khoản </p>
+                    </NavLink>
+                  </Dropdown>
                 </div>
 
                 <div className="header--function__giohang header--function__c">
-                  <NavLink to={cookies.length != 20 ? "/register" : "/cart"}>
+                  <NavLink to={cookies.length === 0 ? "/login" : "/cart"}>
                     <img src={cart} alt="gio hang" />
                     <p className="header--function__chung">Giỏ hàng</p>
                   </NavLink>
@@ -300,10 +361,10 @@ function LayoutDefault() {
               </div>
             </div>
             <div className="header--main0">
-            <Form  form={form}
+              <Form
+                form={form}
                 className="header--search"
                 layout="inline"
-                
                 onFinish={handleFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
@@ -313,7 +374,7 @@ function LayoutDefault() {
                     size="large"
                     className="header--search__input"
                     autoFocus
-                    onKeyUp={handleKeydown} 
+                    onKeyUp={handleKeydown}
                     options={
                       showOptions && options.length > 0
                         ? options.map((option) => ({
@@ -379,10 +440,9 @@ function LayoutDefault() {
                     placeholder="Tìm kiếm"
                   />
                 </Form.Item>
-                <Form.Item  >
+                <Form.Item>
                   {" "}
                   <Button
-                  
                     className="header--search__button"
                     type="primary"
                     shape="circle"
@@ -413,9 +473,7 @@ function LayoutDefault() {
         </header>
         <Content className="content">
           <div className="container">
-
-        
-            <Outlet  />
+            <Outlet />
           </div>
         </Content>
 
@@ -424,7 +482,7 @@ function LayoutDefault() {
             {" "}
             <div className="footer--one">
               <div className="footer--qc">
-                <img className="footer--logo" src={logoheader} alt="logo" />
+                <img className="footer--logo" src={Logo} alt="logo" />
                 <div className="footer--address footer--chunginfor">
                   <img src={position} alt="diachi" />
                   <p>
@@ -451,7 +509,7 @@ function LayoutDefault() {
                   <Link to={"/introduce"}>Giới thiệu</Link>
                 </p>
                 <p>
-                  <Link to={cookies ? "/" : "/register"}>Đăng Nhập</Link>
+                  <Link to={cookies ? "/" : "/login"}>Đăng Nhập</Link>
                 </p>
                 <p>
                   <Link to={cookies ? "/" : "/login"}>Đăng kí</Link>
@@ -461,23 +519,21 @@ function LayoutDefault() {
                 </p>
               </div>
               <div className="footer--tongdai">
-          
-               
-              <div className="footer--cskh__phu">
-                <h3>Hỗ trợ khách hàng</h3>
-                <p>
-                  <Link to={"/introduce"}>Giới thiệu</Link>
-                </p>
-                <p>
-                  <Link to={cookies ? "/" : "/register"}>Đăng Nhập</Link>
-                </p>
-                <p>
-                  <Link to={cookies ? "/" : "/login"}>Đăng kí</Link>
-                </p>
-                <p>
-                  <Link to={"/cart"}>Giỏ Hàng</Link>
-                </p>
-              </div>
+                <div className="footer--cskh__phu">
+                  <h3>Hỗ trợ khách hàng</h3>
+                  <p>
+                    <Link to={"/introduce"}>Giới thiệu</Link>
+                  </p>
+                  <p>
+                    <Link to={cookies ? "/" : "/login"}>Đăng Nhập</Link>
+                  </p>
+                  <p>
+                    <Link to={cookies ? "/" : "/register"}>Đăng kí</Link>
+                  </p>
+                  <p>
+                    <Link to={"/cart"}>Giỏ Hàng</Link>
+                  </p>
+                </div>
 
                 <h3 className="h3">Tổng đài hỗ trợ</h3>
                 <p>
@@ -517,7 +573,7 @@ function LayoutDefault() {
         </Footer>
 
         <Drawer
-        className="drawer"
+          className="drawer"
           placement="left"
           closable={false}
           onClose={onClose}
@@ -525,70 +581,84 @@ function LayoutDefault() {
         >
           {/* Hàng đầu là tài khoản */}
           <div className="drawer--user">
-          <NavLink
-                    to={
-                      cookies.length != 20 ? "/register" : "/infor/thongtinkh"
-                    }
-                    onClick={onClose} >
-                    <Avatar icon={<UserOutlined />} size={40} />
-            <div className="drawer--user__tk" >
-               <p className="tk">Tài khoản</p>
-               {cookies.length != 20 ? (<Link to="/register"><p>Đăng nhập</p></Link>) : (<Link to="/infor/logout"><p>Đăng xuất</p></Link>) }
-            </div>
-                  </NavLink>
-           
-           
+            <NavLink
+              to={cookies.length != 20 ? "/login" : "/infor/thongtinkh"}
+              onClick={onClose}
+            >
+              <Avatar icon={<UserOutlined />} size={40} />
+              <div className="drawer--user__tk">
+                <p className="tk">Tài khoản</p>
+                {cookies.length == 0 ? (
+                  <Link to="/login">
+                    <p>Đăng nhập</p>
+                  </Link>
+                ) : (
+                  <Link to="/infor/logout">
+                    <p>Đăng xuất</p>
+                  </Link>
+                )}
+              </div>
+            </NavLink>
+
             {/* Thêm các thông tin tài khoản khác nếu cần */}
           </div>
           <div className="drawer--function__donhang drawer--function__c">
-                  <NavLink to={cookies.length != 20 ? "/register" : "/order"} onClick={onClose}>
-                    <img src={donhang} alt="don hang" />
-                    <p className="drawer--function__chung">Đơn hàng</p>
-                  </NavLink>
-                </div>
-                <div className="drawer--function__cuahang drawer--function__c">
-                  <NavLink to="/dscuahang" onClick={onClose}>
-                    <img src={position} alt="cua hang" />
-                    <p className="drawer--function__chung">Cửa hàng</p>
-                  </NavLink>
-                </div>
+            <NavLink
+              to={cookies.length != 20 ? "/login" : "/order"}
+              onClick={onClose}
+            >
+              <img src={donhang} alt="don hang" />
+              <p className="drawer--function__chung">Đơn hàng</p>
+            </NavLink>
+          </div>
+          <div className="drawer--function__cuahang drawer--function__c">
+            <NavLink to="/dscuahang" onClick={onClose}>
+              <img src={position} alt="cua hang" />
+              <p className="drawer--function__chung">Cửa hàng</p>
+            </NavLink>
+          </div>
           {/* Các hàng còn lại là danh mục sản phẩm */}
           <div className="drawer--collection">
-          {data.map((item) => (
-            <div>
-            <Link to={'/category/' + item.cate} onClick={onClose}>
-              <div className="drawer--product" key={item.id}>
-                <Menu
-                  className="drawer--product__menu"
-                  mode="vertical"
-                  items={[
-                    {
-                      icon: (
-                        <img
-                          className="drawer--product__img"
-                          src={item.icon}
-                          alt="Icon"
-                        />
-                      ),
-                      label: item.cate,
+            {data.map((item) => (
+              <div>
+                <Link to={"/category/" + item.cate} onClick={onClose}>
+                  <div className="drawer--product" key={item.id}>
+                    <Menu
+                      className="drawer--product__menu"
+                      mode="vertical"
+                      items={[
+                        {
+                          icon: (
+                            <img
+                              className="drawer--product__img"
+                              src={item.icon}
+                              alt="Icon"
+                            />
+                          ),
+                          label: item.cate,
 
-                      children: Array.isArray(data_1[item.id - 1])
-                        ? data_1[item.id - 1].map((x) => (
-                          {
-                            label: <Link to={`/product/${x.id}`} key={x.title} onClick={onClose}>{x.title}</Link>,
-
-                          }
-                          ))
-                        : null,
-                    },
-                  ]}
-                />
+                          children: Array.isArray(data_1[item.id - 1])
+                            ? data_1[item.id - 1].map((x) => ({
+                                label: (
+                                  <Link
+                                    to={`/product/${x.id}`}
+                                    key={x.title}
+                                    onClick={onClose}
+                                  >
+                                    {x.title}
+                                  </Link>
+                                ),
+                              }))
+                            : null,
+                        },
+                      ]}
+                    />
+                  </div>
+                </Link>
+                <hr className="drawer--hr" />
               </div>
-              </Link>
-              <hr className="drawer--hr" />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </Drawer>
       </body>
     </>

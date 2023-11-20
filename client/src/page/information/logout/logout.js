@@ -3,6 +3,7 @@ import { deleteCookie, setCookie } from "../../../components/setTime/setTime";
 import Swal from "sweetalert2";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { Link, useNavigate } from "react-router-dom";
+import "./logout.scss"
 function Logout() {
 const navigate = useNavigate();
    

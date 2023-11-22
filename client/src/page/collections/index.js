@@ -54,13 +54,16 @@ function Collections() {
   // Số lượng phần tử trên mỗi trang
   
   const itemsPerPage = 12;
-  // Trạng thái cho việc hiển thị trang hiện tại
 
-  // Phân trang dữ liệu
+  
+
+
+  
 
   let pageIndex = 0;
 
-  // Lấy dữ liệu cho trang hiện tại
+
+  
 const cookies = getCookie("token");
 
   useEffect(() => {
@@ -100,8 +103,7 @@ const cookies = getCookie("token");
   // tạo loại sản phẩm
   taocate(data, cate);
 
-// console.log(data)
-// console.log(data_4)
+
 
   // phân trang
   const handleChange = (e) => {

@@ -52,6 +52,7 @@ function Infor () {
                 <Col span={24} >
                       <Link to="/infor/thongtinkh" >
                     Thông Tin Khách Hàng
+                    
                       </Link>
                 </Col>
                 <Col span={24} >

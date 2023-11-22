@@ -2,6 +2,7 @@ import Adminlayout from "../adminlayout";
 import "./admin.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { Link } from "react-router-dom";
+import { Button, Result } from "antd";
 function Admin() {
   const cookies = getCookie("token");
 
@@ -9,22 +10,16 @@ function Admin() {
     <>
       <div className="admin">
         <div className="admin--glass">
-          {cookies === "admin0305" ? (
+          {cookies.includes("admin0305") === true ? (
             <Adminlayout />
           ) : (
-            <div className="admin--error__container">
-            <img src="https://img.icons8.com/3d-fluency/94/cancel.png"  className="admin--error__image" alt="cancel"/>
-              <div className="admin--error__message">
-                Error: Unable to access admin page
-              </div>
-              <div className="admin--error__description">
-                It seems like you don't have the necessary permissions to access
-                the admin page. Please contact the administrator for assistance.
-              </div>
-              <Link to="/" className="admin--gobackbutton">
-                Go Back to Home
-              </Link>
-            </div>
+            <Result
+    status="403"
+    title="403"
+    subTitle="Xin lỗi, Bạn không có quyền truy cập trang này!."
+    extra={ <Link to="/" className="admin--gobackbutton"> Back Home
+  </Link>}
+  />
           )}
         </div>
       </div>

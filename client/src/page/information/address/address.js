@@ -9,6 +9,7 @@ import {
   AutoComplete,
   Checkbox,
   message,
+  Result,
 } from "antd";
 import "./address.scss";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
@@ -224,7 +225,7 @@ const handleDelete = async (e) => {
     //   .catch((error) => {
     //     console.error("Error fetching data:", error);
     //   });
-    const namesArray = [
+    const namesArray = [ // nếu tới khi kiểm tra thì mở cái này ra
       // address ví dụ
       "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
       " 144 Xuân Thủy, Cầu Giấy, Hà Nội",
@@ -592,7 +593,11 @@ const handleDelete = async (e) => {
                   </Row>
                 </div>
               </div>
-            )) : ("vui long nhap dia chi")}
+            )) : ( <Result
+    status="warning"
+    title="Vui Lòng Nhập Địa Chỉ Để Thanh Toán Đơn Hàng."
+   
+  />)}
         </div>
       </div>
     </>

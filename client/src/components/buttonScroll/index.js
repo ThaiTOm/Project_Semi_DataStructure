@@ -39,11 +39,15 @@ const cookies = getCookie("token");
     checkAdmin = false;
   } else {
    checkAdmin = true;
+   sessionStorage.removeItem('keyMenu');
   }
 console.log(checkAdmin)
+
+
+
   return (
     <> 
-{cookies !== 'admin0305'  ? (  <div className='button' >
+{cookies.includes('admin0305') !== true   ? (  <div className='button' >
           <div
       className={`button--scroll ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cards.css";
+import "./Cards.scss";
 
 import Card from "../Card/Card"
 import { cardsData } from "../../../Data/Data";

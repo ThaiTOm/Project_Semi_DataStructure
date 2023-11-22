@@ -1,17 +1,5 @@
 import { Link } from "react-router-dom";
 import "../pageadmin/components/adminSider/adminSider.scss"
-
-import {
- 
-  UilClipboardAlt,
- 
-} from "@iconscout/react-unicons";
-
-// Analytics Cards imports
-import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
-
-// Recent Card Imports
 import img1 from "../image/img1.png";
 import img2 from "../image/img2.png";
 import img3 from "../image/img3.png";
@@ -54,13 +42,13 @@ export const SidebarData = [
       key: 'userAccount',
       label: <div  className="account" >Account</div>,
       icon: <Link  to="/admin/customer/account"><img width="19" height="19" src="https://img.icons8.com/fluency/48/guest-male--v1.png" alt="guest-male--v1"/></Link>  // Replace with the appropriate icon
-      // Add any additional properties or styles as needed
+      
     },
     {
       key: 'userInformation',
       label: 'Information',
       icon:  <Link to="/admin/customer/information"><img width="19" height="19" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
-      // Add any additional properties or styles as needed
+    
     },
   ],
   },
@@ -97,7 +85,7 @@ export const SidebarData = [
 //   },
 
 // ];
-// Analytics Cards Data
+
 export const cardsData = [
   {
     title: "Sales",
@@ -107,7 +95,7 @@ export const cardsData = [
     },
     barValue: 70,
     value: "25,970",
-    png: UilUsdSquare,
+    png: <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/banknotes.png" alt="banknotes"/>,
    
   },
   {
@@ -118,7 +106,7 @@ export const cardsData = [
     },
     barValue: 80,
     value: "14,270",
-    png: UilMoneyWithdrawal,
+    png: <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/48/money-bag--v1.png" alt="money-bag--v1"/>,
    
   },
   {
@@ -130,7 +118,7 @@ export const cardsData = [
     },
     barValue: 60,
     value: "4,270",
-    png: UilClipboardAlt,
+    png: <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/purchase-order.png" alt="purchase-order"/>,
  
   },
   {
@@ -142,12 +130,12 @@ export const cardsData = [
     },
     barValue: 40,
     value: "43,270",
-    png: UilClipboardAlt,
+    png: <img width="30" height="30" src="https://img.icons8.com/ios/50/coins--v1.png" alt="coins--v1"/>,
  
   },
 ];
 
-// Recent Update Card Data
+
 export const UpdatesData = [
   {
     img: img1,

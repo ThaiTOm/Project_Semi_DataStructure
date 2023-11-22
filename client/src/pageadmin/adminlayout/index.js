@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
 
 
 import "./adminlayout.scss"
@@ -8,10 +8,8 @@ import "./adminlayout.scss"
 import Adminsider from '../components/adminSider';
 import Admincontent from '../components/adminContent';
 
-
-import Admindash from '../admindash';
 import Sider from 'antd/es/layout/Sider';
-const { Header, Content } = Layout;
+const {  Content } = Layout;
 
 const Adminlayout = () => {
   return (

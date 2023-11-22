@@ -45,16 +45,13 @@ function Categorydetail() {
   ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // Số lượng phần tử trên mỗi trang
+  
 
-  const itemsPerPage = 12;
-  // Trạng thái cho việc hiển thị trang hiện tại
-
-  // Phân trang dữ liệu
-
+  const itemsPerPage = 12;// Số lượng phần tử trên mỗi trang
+  
   let pageIndex = 0;
 
-  // Lấy dữ liệu cho trang hiện tại
+
 
   useEffect(() => {
     // Khởi tạo trang đầu tiên (id = 1) khi trang được tải lại
@@ -80,8 +77,7 @@ function Categorydetail() {
     };
 
     fetchApi(params.cate);
-    // phân trang với giá trị đầu tiên
-    // phanTrang(1);
+   
   }, []);
 
   console.log(data);

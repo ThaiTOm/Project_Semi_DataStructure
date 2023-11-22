@@ -36,3 +36,13 @@ export const patchUser = async (options) => {   //cập nhật người dùng
     }
   };
 
+export const patchPur = async (id ,options) => {   //cập nhật người dùng
+  const option = {orderStep: options}
+    try {
+      const result = await patch(`purchase/${id}`, option);
+      return result;
+    } catch (error) {
+      throw new Error('Error in patchinfor:', error);
+    }
+  };
+

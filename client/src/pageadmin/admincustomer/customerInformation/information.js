@@ -1,10 +1,15 @@
-function Information () {
-    return (
-        <>
-            <div className="information" >
-  csavawv
-            </div>
-        </>
-    )
-}
+
+
+
+
+const Information = () => {
+
+  
+  return (
+    <>
+     đ
+    </>
+  );
+};
+
 export default Information;

@@ -1,106 +1,248 @@
-import React from 'react';
-import { Table, Space, Image } from 'antd';
+import React, { useEffect, useState } from "react";
+import { Button, Table, Tag } from "antd";
 
-const columns = [
-    {
-      title: 'Order ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: 'User ID',
-      dataIndex: 'userId',
-      key: 'userId',
-    },
-    {
-        title: 'Product Image',
-        dataIndex: 'products',
-        key: 'products',
-        render: products => (
-          <Image src={products[0]?.img} alt={products[0]?.title} width={50} />
-        ),
-      },
-      {
-        title: 'Product Title',
-        dataIndex: 'products',
-        key: 'productTitle',
-        render: products => products.map(item => item?.title).join(', '), // Lấy hết dữ liệu và nối thành một chuỗi
-      },
-      {
-        title: 'Product Price',
-        dataIndex: 'products',
-        key: 'productPrice',
-        render: products => products.map(item => item?.dongia).join(', '), // Lấy hết dữ liệu và nối thành một chuỗi
-      },
-      {
-        title: 'Quantity',
-        dataIndex: 'products',
-        key: 'quantity',
-        render: products => products.map(item => item?.soluong).join(', '), // Lấy hết dữ liệu và nối thành một chuỗi
-      },
-      
-  ];
-  
-  const ordersData = [
-    {
-      id: 1,
-      date: '2023-11-17 16:06:30',
-      userId: 1,
-      products: [
-        {
-        "id": 8,
-        "img": 'https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg',
-        "title": "Mango Tango Juice",
-        "dongia": 36000,
-        "soluong": 1,
-        "thanhtien": 36000
-        },
-        {
-        "id": 7,
-        "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-        "title": "Watermelon Juice",
-        "dongia": 27000,
-        "soluong": 1,
-        "thanhtien": 27000
-        },
-        {
-        "id": 35,
-        "img": "https://i.pinimg.com/236x/b0/1d/d9/b01dd9eb8447ce651a4185d5104eb915.jpg",
-        "title": "Taro Milk Tea",
-        "dongia": 25000,
-        "soluong": 1,
-        "thanhtien": 25000
-        },
-        {
-        "id": 20,
-        "img": "https://i.pinimg.com/236x/4d/7a/6f/4d7a6fa6fabd931a57161c7b1bb8f725.jpg",
-        "title": "Caramel Macchiato",
-        "dongia": 46750,
-        "soluong": 1,
-        "thanhtien": 46750
-        }
-        ],
-    },
-    // ... more orders
-  ];
+import "./adminorder.scss"
+import { patchPur } from "../../service/patch/patch";
+import { getAllOrder } from "../../service/getcategory/getCategory";
+
+
+
 
 const Adminorder = () => {
-    return (
-        <div style={{ padding: '20px' }}>
-      <h1>Order Details</h1>
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [data, setData] = useState([]);
+  var  previousData = [{userId : "" , date: ""}] ;
+
+const patchpur = async (id, data) => {
+  const result = await patchPur(id, data)
+}
+
+
+  const handleOrderStepChange = (record, action) => {
+    const updatedData = data.map((item) => {
+      if (item.date === record.date && item.userId === record.userId) {
+        let newOrderStep;
+        if (action === "increase") {
+          newOrderStep = Math.min(item.orderStep + 1, 3);
+         
+        } else {
+          newOrderStep = Math.max(item.orderStep - 1, 0);
+         
+        }
+  
+        return {
+          ...item,
+          orderStep: newOrderStep,
+        };
+      }
+      return item;
+    });
+    
+    setData(updatedData);
+    const timkiem = updatedData.find(item => {
+      return item.date === record.date && item.userId === record.userId
+    })
+    console.log(timkiem.purchaseId)
+    patchpur(timkiem.purchaseId,  timkiem.orderStep)
+  };
+  
+  const getTagColor = (orderStep, record) => {
+   
+  };
+  
+  const getTagText = (orderStep, record) => {
+    return orderStep
+  };
+  
+  const columns = [
+    {
+      title: "UserId",
+      dataIndex: "userId",
+      sorter: (a, b) => a.userId - b.userId,
+    },
+    {
+      title: "Ngày đặt",
+      dataIndex: "date",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.date > b.date,
+    },
+    {
+      title: "Tên Sản Phẩm",
+      dataIndex: "title",
+    },
+    {
+      title: "Đơn Giá",
+      dataIndex: "dongia",
+    },
+    {
+      title: "Số Lượng",
+      dataIndex: "soluong",
+    },
+    {
+      title: "Thành Tiền",
+      dataIndex: "thanhtien",
+    },
+    {
+      title: "Hình Thức Thanh Toán",
+      dataIndex: "paymentMethod",
+    },
+    {
+      title: "Trạng Thái Thanh Toán",
+      dataIndex: "paymentStatus",
+      render: (_, record) => {
+        if (record.paymentMethod === "Tiền mặt") {
+          if (record.orderStep !== 3) {
+            return <Tag color="#f50">Chưa trả tiền</Tag>;
+          } else {
+            return <Tag color="#2db7f5">Đã trả tiền</Tag>;
+          }
+        } else {
+          return <Tag color="#2db7f5">Đã trả tiền</Tag>;
+        }
+      },
+    },
+    {
+      title: "Quá Trình Giao Hàng",
+      dataIndex: "orderStep",
+      render: (orderStep, record) => {
+            
+   const check = previousData.every(item => {
+   
+    return item.userId === record.userId && item.date === record.date
+   })
+
+if (check === false) {
+  previousData = ([{ userId: record.userId , date: record.date}])
+}
+
+
+        return (
+          <>
+           {check === false ? (  <>
+         
+          
+            <div className="adminorder" style={{ marginTop: 8 }}>
+              <Button
+                size="small"
+                onClick={() => handleOrderStepChange(record, "decrease")}
+                disabled={orderStep === 0}
+              >
+               <img width="15" height="15" src="https://img.icons8.com/android/24/minus.png" alt="minus"/>
+              </Button>
+              <Tag color={getTagColor(orderStep, record)}>
+              {getTagText(orderStep, record)}
+            </Tag>
+              <Button
+              className="admininfor--increase"
+                size="small"
+                onClick={() => handleOrderStepChange(record, "increase")}
+                disabled={orderStep === 3}
+                style={{ marginLeft: 8 }}
+              >
+               <img width="15" height="15" src="https://img.icons8.com/android/24/plus.png" alt="plus"/>
+              </Button>
+            </div>
+          </>) : ("")}
+          </>
+        );
+      },
+      filters: [
+        {
+          text: "Đã nhận được hàng",
+          value: 0,
+        },
+        {
+          text: "Đã xuất kho",
+          value: 1,
+        },
+        {
+          text: "Đang giao hàng",
+          value: 2,
+        },
+        {
+          text: "Giao hàng thành công",
+          value: 3,
+        },
+      ],
+      onFilter: (value, record) => {
+        return record.orderStep === value;
+      },
+      sorter: (a, b) => a.orderStep - b.orderStep,
+     
+    },
+    
+  ];
+
+
+  const fetchPur = async () => {
+    const result = await getAllOrder();
+    const updatedData = result.map((item) => {
+      const { orderStep, date, userId, thanhtoan, id, paymentMethod } = item;
+
+      // Thêm dữ liệu vào mỗi đối tượng trong mảng thanhtoan
+      const updatedThanhtoan = thanhtoan.map((product) => {
+        return {
+          ...product,
+          orderStep,
+          date,
+          userId,
+          paymentMethod,
+          purchaseId: id
+        };
+      });
+
+      // Trả về đối tượng được cập nhật
+      return {
+        ...updatedThanhtoan,
+      };
+    });
+    
+    const objects = [].concat(...updatedData.map((item) => Object.values(item)));
+    const newArray = objects.map((item, index) => {
+      return {
+        ...item,
+        key: index, 
+      };
+    });
+    setData(newArray);
+  };
+
+  useEffect(() => {
+    fetchPur();
+  }, []);
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    // lưu key trả về khi select thay đổi
+
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection = {
+    //các checkbox
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
+
+
+  
+  return (
+    <>
       <Table
-        dataSource={ordersData}
+        pagination={{
+          pageSize: 50,
+        }}
+        scroll={{
+          y: 500,
+        }}
+        rowSelection={rowSelection}
         columns={columns}
-        rowKey="id"
-        pagination={false}
+        dataSource={data}
+        bordered
       />
-    </div>
-      );
+    </>
+  );
 };
 
 export default Adminorder;
+

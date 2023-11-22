@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import "./thanhtoan.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { getShip, getUserstk } from "../../service/getcategory/getCategory";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
@@ -83,7 +83,7 @@ const Thanhtoan = () => {
   const cookies = getCookie("token");
   const thanhtoan = useSelector((state) => state.ttStore);
   sessionStorage.setItem("thanhtoan", JSON.stringify(thanhtoan));
-
+  const navigate = useNavigate();
   
  let setFormattedTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
@@ -132,25 +132,50 @@ const postorder = async (e) => {
     }
   };
 
+  const showNotification = () => {
+    Modal.warning({
+      title: "Thông báo",
+      content: "Bạn chưa có địa chỉ mặc định. Vui lòng thêm địa chỉ để thanh toán.",
+      okText: "Thêm địa chỉ", // Text for the OK button
+      onOk: () => {
+        navigate("/infor/address")
+        console.log("Redirecting to address page...");
+      },
+    });
+  };
   const handleConfirm = () => {
     // Thực hiện xác nhận thanh toán bằng tiền mặt ở đây
- 
-   
-     postorder({
+   console.log(data_1);
+     if (data_1 === undefined){
+      showNotification();
+     }
+     else {
+        postorder({
+      "paymentMethod": "Tiền mặt",
       "orderStep": 0,
       "date": setFormattedTime,
       "userId": data[0].id,
       "thanhtoan": thanhtoan });
-  
-    
-
     Modal.success({
+      onOk: handleChuyentrang, 
       title: "Thanh toán tiền mặt thành công",
       content: "Cảm ơn bạn đã thanh toán bằng tiền mặt!",
     });
-    setShowConfirmation(false);
-    window.location.href = "/order";
+    
+   
+     }
+  
+  
+     setShowConfirmation(false);
+
+  
+    
+  
   };
+
+const handleChuyentrang = () => {
+  navigate("/order");
+}
 
   useEffect(() => {
     const dataSource = thanhtoan.map((item, index) => ({

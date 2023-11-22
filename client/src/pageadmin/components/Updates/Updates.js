@@ -1,5 +1,5 @@
 import React from "react";
-import "./Updates.css";
+import "./Updates.scss";
 import { UpdatesData } from "../../../Data/Data";
 
 const Updates = () => {

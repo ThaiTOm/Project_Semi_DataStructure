@@ -21,6 +21,8 @@ const cookie = getCookie("token")
     //   return namePattern.test(name);
     // }
     
+
+
     function isValidPassword(password) {
       // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
       const lengthRequirement = password.length >= 8;

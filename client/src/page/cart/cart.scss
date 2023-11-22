@@ -14,7 +14,7 @@
     &--top {
         display: flex;
     justify-content: space-between;
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 5px 0px;
     align-items: center;
     background-color: white;
     padding: 10px 20px;
@@ -181,28 +181,16 @@ padding: 15px 12px;
 
 /* Styling for the cart empty message */
 .cart--empty {
-    text-align: center;
-    background-color: #f7f7f7;
-    border: 1px solid red;
-    padding: 100px;
-    margin: 80px auto;
-    width: 70%;
-    border-radius: 5px;
-    color: #333;
-    font-family: Arial, sans-serif;
+   background-color: white;
+    padding: 80px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .cart--empty p {
-    margin: 10px 0;
-    color: red;
+   
+    font-size: 20px;
+    font-weight: bold;
     
 }
 
-.cart--empty p:first-of-type {
-    font-size: 30px;
-    font-weight: bold;
-}
 
-.cart--empty p:last-of-type {
-    font-size: 16px;
-}

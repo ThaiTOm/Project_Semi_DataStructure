@@ -1,136 +1,86 @@
-import React, { useState, useRef } from 'react';
-import { Table, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import Highlighter from 'react-highlight-words';
-
+import React, { useState, useRef, useEffect } from "react";
+import { Table, Input } from "antd";
+import { getOrder, getUserstk } from "../../../service/getcategory/getCategory";
+import { getCookie } from "../../../components/takeCookies/takeCookies";
 const Yourorder = () => {
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
-  const searchInput = useRef();
+  const cookies = getCookie("token");
+  const [data, setData] = useState([]);  
 
-  const getColumnSearchProps = (dataIndex, placeholder) => {
-    let columnProps = {
-      render: dataIndex === 'image' ? (text) => <img src={text} alt="Order" style={{ width: 50, height: 50 }} /> : undefined,
-      title: dataIndex === 'image' ? 'Hình ảnh' : dataIndex === 'orderDate' ? 'Ngày đặt' : dataIndex === 'orderInfo' ? 'Thông tin đơn hàng' : dataIndex === 'productPrice' ? 'Đơn giá sản phẩm' : dataIndex === 'totalPayment' ? 'Tổng thanh toán' : undefined,
-      dataIndex,
-      key: dataIndex,
-    };
-
-    if (dataIndex !== 'productPrice' && dataIndex !== 'totalPayment') {
-      columnProps = {
-        ...columnProps,
-        ...{
-          filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-          onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-              setTimeout(() => searchInput.current?.select(), 100);
-            }
-          },
-          render: (text) =>
-            searchedColumn === dataIndex ? (
-              <Highlighter
-                highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-                searchWords={[searchText]}
-                autoEscape
-                textToHighlight={text ? text.toString() : ''}
-              />
-            ) : (
-              text
-            ),
-        },
-      };
-    }
-
-    if (dataIndex === 'productPrice' || dataIndex === 'totalPayment') {
-      columnProps = {
-        ...columnProps,
-        ...{
-          sorter: (a, b) => a[dataIndex] - b[dataIndex],
-        },
-      };
-    }
-
-    return columnProps;
+  const fetchPur = async (e) => {
+    const result = await getOrder(e);
+  if (result && result[0] && result[0].thanhtoan && result[0].orderStep === 3){
+    setData(result)
+  }
+   else {
+    setData([])
+   }
   };
 
- 
+  const fetchUsers = async (e) => {
+    const result = await getUserstk(e);
+   fetchPur(result[0].id)
+  }
 
+  useEffect(() => {
+  fetchUsers(cookies)
+  }, []);
   const columns = [
     {
-      title: 'Hình ảnh',
-      dataIndex: 'image',
-      key: 'image',
-      render: (text) => <img src={text} alt="Order" style={{ width: 50, height: 50 }} />,
+      title: "Hình ảnh",
+      dataIndex: "img",
+      key: "img",
+      render: (text) => (
+        <img src={text} alt="Order" style={{ width: 50, height: 50 }} />
+      ),
     },
     {
-        title: 'Thông tin đơn hàng',
-        dataIndex: 'orderInfo',
-        key: 'orderInfo',
-        ...getColumnSearchProps('orderInfo', 'order info'),
-      },
-    {
-        title: 'Ngày đặt',
-        dataIndex: 'orderDate',
-        key: 'orderDate',
-        ...getColumnSearchProps('orderDate', 'order date'),
-      },
-    {
-      title: 'Đơn giá sản phẩm',
-      dataIndex: 'productPrice',
-      key: 'productPrice',
-      ...getColumnSearchProps('productPrice', 'product price'),
+      title: "Thông tin đơn hàng",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: 'Tổng thanh toán',
-      dataIndex: 'totalPayment',
-      key: 'totalPayment',
-      ...getColumnSearchProps('totalPayment', 'total payment'),
+      title: "Ngày đặt",
+      key: "orderDate",
+      render: () => (<>
+        {data[0].date}
+      </>)
+    },
+    {
+      title: "Đơn giá sản phẩm",
+      dataIndex: "dongia",
+      key: "dongia",
+      render: (text) => (
+        <span>
+          {new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(`${text}`)}
+        </span>
+      ),
+    },
+    {
+      title: "Tổng thanh toán",
+      dataIndex: "thanhtien",
+      key: "thanhtien",
+      render: (text) => (
+        <span>
+          {new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(`${text}`)}
+        </span>
+      ),
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      image: 'https://cloud.githubusercontent.com/assets/29597/11913937/0d2dcd78-a629-11e5-83e7-6a17b6d765a5.png',
-      orderDate: '2023-11-05',
-      orderInfo: 'Thông tin đơn hàng 1',
-      productPrice: 50,
-      totalPayment: 200,
-    },
-    {
-      key: '2',
-      image: 'https://down-vn.img.susercontent.com/file/b48ff059f76b6992f82c488ab424c3eb_tn',
-      orderDate: '2023-11-10',
-      orderInfo: 'Thông tin đơn hàng 2',
-      productPrice: 30,
-      totalPayment: 120,
-    },
-    {
-      key: '3',
-      image: 'https://down-vn.img.susercontent.com/file/b48ff059f76b6992f82c488ab424c3eb_tn',
-      orderDate: '2023-11-10',
-      orderInfo: 'Thông tin đơn hàng 3',
-      productPrice: 30,
-      totalPayment: 120,
-    },
-    {
-      key: '4',
-      image: 'https://down-vn.img.susercontent.com/file/b48ff059f76b6992f82c488ab424c3eb_tn',
-      orderDate: '2023-11-10',
-      orderInfo: 'Thông tin đơn hàng 3',
-      productPrice: 30,
-      totalPayment: 120,
-    },
-    // Thêm thông tin đơn hàng khác tại đây...
-  ];
   const pagination = {
     pageSize: 5, // Số hàng mỗi trang
-    // Các tùy chọn khác của pagination như current, total, ...
   };
   return (
-    <Table columns={columns} dataSource={data} pagination={pagination}>
-      <Input ref={searchInput} />
-    </Table>
+    <>
+      
+      <Table columns={columns} dataSource={data[0].thanhtoan} pagination={pagination} />
+    </>
   );
 };
 

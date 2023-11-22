@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Card.scss";
 
-import "react-circular-progressbar/dist/styles.css";
-import { motion, AnimateSharedLayout } from "framer-motion";
+// import "react-circular-progressbar/dist/styles.css";
+
 
 import { Area } from "@ant-design/plots";
-import { Button, Modal, Progress } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { Modal, Progress } from "antd";
 
-// parent Card
+
+
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -71,7 +71,7 @@ const Card = (props) => {
             <span>{props.title}</span>
           </div>
           <div className="card--infor">
-            <props.png />
+            {props.png}
             <span className="card--infor__span1">${props.value}</span>
             <span className="card--infor__span2">Last 24 hours</span>
           </div>

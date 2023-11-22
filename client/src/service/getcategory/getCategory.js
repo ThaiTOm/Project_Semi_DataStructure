@@ -11,7 +11,7 @@ export const getUserstk = async (e) => {
      return result;
    } catch (error) {
      console.error('Error in getUserstk:', error);
-     throw error; // Rethrow the error to handle it in the calling code
+     throw error; 
    }
  };
 
@@ -21,7 +21,7 @@ export const getUser = async () => {
      return result;
    } catch (error) {
      console.error('Error in getUserstk:', error);
-     throw error; // Rethrow the error to handle it in the calling code
+     throw error; 
    }
  };
  
@@ -77,6 +77,11 @@ export const getShip = async (e) => {       // lấy dữ liệu địa chỉ c�
 
 export const getOrder = async (e) => {
    const result = await get(`purchase?userId=${e}`);
+   return result;
+}
+
+export const getAllOrder = async () => {
+   const result = await get("purchase");
    return result;
 }
 

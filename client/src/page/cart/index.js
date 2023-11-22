@@ -6,7 +6,7 @@ import { addcart, down, up, xoa, xoahet } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { getCart, getUserstk } from "../../service/getcategory/getCategory";
 import { patchCart } from "../../service/patch/patch";
-import { Button, Checkbox, Col, Image, InputNumber, Layout, Row, Space, Table } from "antd";
+import { Button, Checkbox, Col, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
 
@@ -263,9 +263,11 @@ function Cart() {
   };
   const pagination = {
     pageSize: 10, // Số hàng mỗi trang
-    // Các tùy chọn khác của pagination như current, total, ...
+   
   };
-  // Hàm xử lý xóa mỗi hàng
+
+
+ 
 
 const handleDown = (values, e) => {
  if (values > 1 ) {
@@ -382,16 +384,21 @@ console.log(data_3);
             pagination={pagination}
           />
           </div>
-        
+          
         </div>
         ) : (
-            <div class="cart--empty">
-              <p>Giỏ hàng của bạn hiện tại đang trống.</p>
-              <p>
+<div className="cart--empty" >  <Result
+    status="error"
+    title="Giỏ hàng của bạn hiện tại đang trống."
+    extra={
+      <p>
                 Hãy khám phá sản phẩm thức uống của chúng tôi và thêm những món
                 hàng mà bạn thích!!
               </p>
-            </div>
+    }
+  /></div>
+        
+            
           )}
 
       </Content>

@@ -16,7 +16,7 @@ console.log(e);
           e.username == data[i].username
         ) {
           newState = data[i].token;
-          if (data[i].token == "admin0305") {
+          if (data[i].token.includes("admin0305")) {
             Swal.fire({
               icon: "success", // Sử dụng icon "success" cho thông báo thành công
               title: "Đăng nhập vào trang Admin thành công",

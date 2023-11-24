@@ -4,7 +4,7 @@ import "./cart.scss";
 import { useEffect, useState } from "react";
 import { addcart, down, up, xoa, xoahet } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getCart, getUserstk } from "../../service/getcategory/getCategory";
+import { getCart, getOrder, getUserstk } from "../../service/getcategory/getCategory";
 import { patchCart } from "../../service/patch/patch";
 import { Button, Checkbox, Col, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -16,14 +16,20 @@ function Cart() {
   const storedData = JSON.parse(localStorage.getItem(getCookie("token")));
 
   const products = useSelector((state) => state.cartStore);
-  const [data, setData] = useState([]);
-  const [data_2, setData_2] = useState();
-  const [data_3, setData_3] = useState();
+  const [data, setData] = useState([]);   // lấy dữ liệu người dùng đang đăng nhập
+  const [data_2, setData_2] = useState(); // lấy dữ liệu và thay đổi một chút định dạng để cập nhật lên database
+  const [data_3, setData_3] = useState(); // lấy dữ liệu từ người dùng chọn sản phẩm 
   const dispatch = useDispatch();
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [checked, setChecked] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);  // lấy key mà người dùng pick trong table
+  const [total, setTotal] = useState(0);  // tính tổng tiền
+  const [checked, setChecked] = useState(false);  
  const navigate = useNavigate();
+
+const fetchPur = async (id) => {
+  const result = await getOrder(id);
+  console.log(result)
+return result;
+}
 
   // cũ
   var tong = 0;
@@ -203,7 +209,7 @@ function Cart() {
     const key = selectedRowKeys.some(x => {
       return x === e.key
     }) 
- 
+
     if (key === false) {
       for (let i = 0; i < selectedRowKeys.length; i++) {
         if (selectedRowKeys[i] > e.key) {
@@ -213,9 +219,7 @@ function Cart() {
       onSelectChange(selectedRowKeys);
     }
     else {
-       
-   
-    const newArray = deleteAndAdjust(selectedRowKeys, e.key);
+        const newArray = deleteAndAdjust(selectedRowKeys, e.key);
    onSelectChange(newArray);
     }
    
@@ -239,10 +243,11 @@ function Cart() {
         product.quanlity,
     }));
     setData_3(dataSource);
+  
   }, [products]);
 
   const onSelectChange = (selectedKeys) => {
-   console.log(selectedKeys)
+  
    const tong = selectedKeys.reduce((totals, item) => {
       return totals + (data_3[item].total)
    }, 0)
@@ -253,7 +258,7 @@ function Cart() {
   else {
     setChecked(false);
   }
-  console.log(selectedKeys)
+
     setSelectedRowKeys([...selectedKeys]);
   };
 
@@ -315,10 +320,27 @@ const dulieuselect = selectedRowKeys.map(x => {
   return result
 })
 
-const handleClick = (e) => {
+const handleClick = async (e) => {
+  const orderData = await fetchPur(data[0].id)
+  const newestOrder = orderData.reduce((maxDateItem, currentItem) => {
+    if (!maxDateItem || currentItem.date > maxDateItem.date) {
+      return currentItem;
+    } else {
+      return maxDateItem;
+    }
+  }, null);
   if (selectedRowKeys.length > 0){
-     dispatch(addcart(e))
+    if (newestOrder.orderStep !== 3) {
+      Modal.error({
+        title: 'Không thể mua hàng',
+        content: 'Đơn hàng của bạn vẫn chưa hoàn thành!'
+      });
+    }
+    else {
+       dispatch(addcart(e))
   navigate("/thanhtoan")
+    }
+    
   }
  else {
   Modal.error({
@@ -340,16 +362,16 @@ const handleDelete = () => {
   })
 
  const cc = findId.map (item => {
- 
+
     return dispatch(xoa(item.id));
  })
+
  if (cc.length > 0){
   setSelectedRowKeys([]);
   setTotal(0);
  }
 }
 
-console.log(data_3);
   return (
     <>
     <Layout>

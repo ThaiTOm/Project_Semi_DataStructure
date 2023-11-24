@@ -67,7 +67,7 @@ function Infor () {
                 </Col>
                 <Col span={24} >
                 <Link to="/infor/yourorder" >
-                        Đơn Hàng Của Bạn
+                       Lịch Sử Đơn Hàng
                         </Link>
                 </Col>
                 <Col span={24} >

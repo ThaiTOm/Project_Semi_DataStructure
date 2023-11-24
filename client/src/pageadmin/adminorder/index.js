@@ -11,6 +11,7 @@ import { getAllOrder } from "../../service/getcategory/getCategory";
 const Adminorder = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState([]);
+  const [checkDel, setcheckDel] = useState(false)
   var  previousData = [{userId : "" , date: ""}] ;
 
 const patchpur = async (id, data) => {
@@ -213,7 +214,7 @@ if (check === false) {
 
   const onSelectChange = (newSelectedRowKeys) => {
     // lưu key trả về khi select thay đổi
-
+  console.log(newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -223,12 +224,56 @@ if (check === false) {
     onChange: onSelectChange,
   };
 
-
-
+  const handleClick = () => {
+   
+    if(selectedRowKeys != []) {
+        const findDel = selectedRowKeys.map(item => {
+          const hi = data.filter(x => {
+          
+            return item != x.key
+           })
+           
+           return hi;
+        })
+   
+   const red =  findDel.reduce ((origin, item) => {   // origin là mảng đầu tiên
+    return origin.filter(obj1 =>
+     item.some(obj2 => obj2.key === obj1.key)  // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
+    );
+   },findDel[0].slice())
+   // giải thích :
+   // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
+   // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object 
+   // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
+   setData(red)
+   const groupedArrays = red.reduce((result, currentObject) => {
+    const existingGroup = result.find(group => group[0].purchaseId === currentObject.purchaseId);
+  console.log(existingGroup)
+  console.log(result);
+    if (existingGroup) {
+      existingGroup.push(currentObject);
+    } else {
+      result.push([currentObject]);
+    }
   
+    return result;
+  }, []);
+  
+  console.log(groupedArrays)
+    }
+    else { 
+      //
+    }
+  }
   return (
     <>
-      <Table
+    <div className="adminorder--table">
+    <div className="adminorder--control">
+        <h1>Đơn Hàng</h1>
+        <Button type="primary" onClick={handleClick} >Xóa</Button>
+    </div>
+    
+  <Table
         pagination={{
           pageSize: 50,
         }}
@@ -240,6 +285,8 @@ if (check === false) {
         dataSource={data}
         bordered
       />
+    </div>
+    
     </>
   );
 };

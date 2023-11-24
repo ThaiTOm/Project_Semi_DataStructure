@@ -52,7 +52,7 @@ dispatch(addmt(id, infor, count));
 }
   }
   else {
-    navigate("/register");
+    navigate("/login");
   }
   console.log(id)
   console.log(infor)
@@ -262,7 +262,7 @@ useEffect(() => {
 
 
                 <div className="product--addtocart">
-                <Link to={cookies.length != 20 && (`/register`)}>
+                <Link to={cookies.length != 20 && (`/login`)}>
                   <button onClick={() => handleClick(data[0].id, data[0])} className="product--addtocart__s  product--addtocart__s1" >
                     <div className="product--addtocart__main">
                     <img src="https://img.icons8.com/doodle/48/shopping-cart--v1.png" alt="shopping-cart--v1"/>
@@ -272,7 +272,7 @@ useEffect(() => {
                     </div>
                   </button>
                   </Link>
-                  <Link to={cookies.length == 20 ? ("/thanhtoan") : (`/register`)}>
+                  <Link to={cookies.length == 20 ? ("/thanhtoan") : (`/login`)}>
                     <button onClick={() => dispatch(addtt(data, count))} className="product--addtocart__s  product--addtocart__s2">
                     <p className="product--addtocart__p2">Mua Ngay</p>
                   </button>

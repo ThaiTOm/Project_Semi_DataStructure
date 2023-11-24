@@ -85,7 +85,7 @@ dispatch(add(id, infor));
 }
   }
   else {
-    navigate("/register");
+    navigate("/login");
   }
 
 

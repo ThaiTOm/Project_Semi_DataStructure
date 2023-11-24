@@ -5,15 +5,21 @@ import { getCookie } from "../../../components/takeCookies/takeCookies";
 const Yourorder = () => {
   const cookies = getCookie("token");
   const [data, setData] = useState([]);  
-
+  const [dataOrder, setDataorder] = useState([]);
   const fetchPur = async (e) => {
     const result = await getOrder(e);
-  if (result && result[0] && result[0].thanhtoan && result[0].orderStep === 3){
-    setData(result)
-  }
-   else {
-    setData([])
-   }
+    setDataorder(result);
+  const fillDatastep = result && result.filter(item => {
+    return item.orderStep === 3
+  })
+  const fillDatatt = fillDatastep.reduce((bandau, item) => {
+    const dulieu = item.thanhtoan.reduce ((origin, x) => {
+      return origin.concat([{...x, orderDate: item.date}])
+    },[])
+   return bandau.concat(dulieu)
+  },[])
+ setData(fillDatatt);
+ console.log(fillDatatt)
   };
 
   const fetchUsers = async (e) => {
@@ -40,10 +46,8 @@ const Yourorder = () => {
     },
     {
       title: "Ngày đặt",
+      dataIndex: "orderDate",
       key: "orderDate",
-      render: () => (<>
-        {data[0].date}
-      </>)
     },
     {
       title: "Đơn giá sản phẩm",
@@ -79,7 +83,7 @@ const Yourorder = () => {
   return (
     <>
       
-      <Table columns={columns} dataSource={data[0].thanhtoan} pagination={pagination} />
+      <Table columns={columns} dataSource={data} pagination={pagination} />
     </>
   );
 };

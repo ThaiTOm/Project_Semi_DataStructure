@@ -116,7 +116,8 @@ const paidProducts = orderId && orderId.thanhtoan && orderId.thanhtoan.map((item
   };
 });
 
-
+console.log(orderId.orderStep)
+console.log(steps.length)
 
   return (
     <>
@@ -143,7 +144,7 @@ const paidProducts = orderId && orderId.thanhtoan && orderId.thanhtoan.map((item
    
      
         {/* Hiển thị thông tin sản phẩm đã thanh toán tại mỗi bước */}
-        {orderId.orderStep < steps.length - 1 && (
+        {orderId.orderStep <= steps.length - 1 && (
        <div> 
        <h2>{steps[orderId.orderStep].title}</h2>
         <p>{steps[orderId.orderStep].content}</p>

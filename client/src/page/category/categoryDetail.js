@@ -139,7 +139,7 @@ if (check) {
   }
     }
     else {
-      navigate("/register");
+      navigate("/login");
     }
   }
 

@@ -30,6 +30,9 @@ import Admin from "../pageadmin/admin";
 import Adminorder from "../pageadmin/adminorder";
 import Information from "../pageadmin/admincustomer/customerInformation/information";
 import Account from "../pageadmin/admincustomer/customerAccount/account";
+import Productlist from "../pageadmin/components/productList/productList";
+import Categorylist from "../pageadmin/components/categoryList/cateList";
+import Adproductdetail from "../pageadmin/components/adproductDetail/adproductDetail";
 
 
 
@@ -176,7 +179,21 @@ export const routes = [
          },
          {
             path: "product",
-            element: <Adminproduct />
+            element: <Adminproduct />,
+            children: [
+               {
+                  path: "productlist",
+                  element: <Productlist />
+               },
+               {
+                  path: "categorylist",
+                  element: <Categorylist />
+               },
+               {
+                  path: ":id",
+                  element: <Adproductdetail />
+               }
+            ]
          }
       ]
     }

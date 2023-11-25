@@ -13,17 +13,8 @@ function Register(){
  
 const inputRef = useRef();
 const cookie = getCookie("token")
-    console.log(cookie);
-    // function isVietnameseNameValid(name) {
-    //   // Biểu thức chính quy kiểm tra định dạng tên người Việt
-    //   // Cho phép chữ cái và khoảng trắng, và có thể chứa dấu (ví dụ: Nguyễn, Đỗ)
-    //   const namePattern = /^[\p{L}\s']+$/u; // Yêu cầu JavaScript hỗ trợ Unicode (u flag)
-    //   return namePattern.test(name);
-    // }
-    
-
-
-    function isValidPassword(password) {
+  
+    function isValidPassword(password) {  // hàm check pass đúng định dạng
       // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
       const lengthRequirement = password.length >= 8;
       const uppercaseRegex = /[A-Z]/;
@@ -38,8 +29,8 @@ const cookie = getCookie("token")
     }
     
 
-function isValidUsername(username) {
-  // Yêu cầu ít nhất 8 ký tự
+function isValidUsername(username) {   // hàm check username
+  // Yêu cầu ít nhất 8 ký tự 
   const minLength = 8;
   const hasValidLength = username.length >= minLength;
   
@@ -53,17 +44,16 @@ function isValidUsername(username) {
 
 useEffect(() => {
   if (inputRef.current){
-     inputRef.current.focus();
+     inputRef.current.focus();  // focus tự động khi truy cập trang
   }
  
 }, []);
 
-const [data_1, setData_1 ] = useState(true)
-const [data_2, setData_2 ] = useState(true)
+const [data_1, setData_1 ] = useState(true)  // check để báo hiệu của username
+const [data_2, setData_2 ] = useState(true)  // check để báo hiệu của pass
 
 
-// hàm bấm ra ngoài thì giá trị đó hay sai?
-
+// hàm bấm ra ngoài thì check giá trị đó đúng hay chưa
 const handleOnblur_1 = (e) => {
  
   if (isValidUsername(e.target.value) == false  ){
@@ -84,7 +74,7 @@ const handleOnblur_2 = (e) => {
 // hàm bấm ra ngoài thì giá trị đó hay sai?
 
 // hàm string ngẫu nhiên
-function generateRandomString(length) {
+function generateRandomString(length) {  // hàm tạo số ngẫu nhiên để đưa vào token
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   const charactersLength = characters.length;
@@ -96,13 +86,10 @@ function generateRandomString(length) {
   
   return result;
 }
-// hàm string ngẫu nhiên
 
 
 
-
-// hàm check tổng thể sai hay đúng khi submit
-const onFinish = (e) => {
+const onFinish = (e) => {   // check và xác nhận sau khi bấm bút 
    
      console.log(e);
      if( isValidUsername(e.username) == true && isValidPassword(e.password) == true) {
@@ -148,7 +135,7 @@ const onFinish = (e) => {
                   // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
                 }
               };
-              // const postship = async (e) => {   không sử dụng
+              // const postship = async (e) => {   không sử dụng nhma giữ lại để cần thì mở
               //   try {
               //     const result = await postShipping(e); // Gọi hàm patchCart với tham số là data
               //     console.log(result);
@@ -163,7 +150,7 @@ const onFinish = (e) => {
               ["product"]: []
               });
 
-              // postship({  không sử dụng
+              // postship({  không sử dụng nhma giữ lại để cần thì mở
               //   ["userId"]: data.id,
               // ["delivery"]: []
               // });
@@ -195,9 +182,9 @@ const onFinish = (e) => {
     });
   }
     }
-// hàm check tổng thể sai hay đúng khi submit
 
-const onFinishFailed = (e) => {
+
+const onFinishFailed = (e) => {  // khi sai điều kiện
   console.log(e)
   if (e.values.password !== e.values.confirmPassword) {
     // Thông báo lỗi nếu mật khẩu và xác nhận mật khẩu không khớp

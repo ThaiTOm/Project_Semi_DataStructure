@@ -63,6 +63,29 @@ export const patch = async (path, options) => {
   }
 };
 
+export const put = async (path, options) => {
+  try {
+    const res = await fetch(API_DOMAIN + path, {
+      method: "PUT",  
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(options),
+    });
+    if (!res.ok) {
+      throw new Error(
+        "Mạng bị lỗi hoặc cập nhật không thành công."
+      );
+    }
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    throw new Error("Lỗi trong quá trình thực hiện phương thức PUT:", error);
+  }
+};
+
+
 export const del = async (path) => {
   console.log(path);
   try {

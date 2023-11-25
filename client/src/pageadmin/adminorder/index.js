@@ -4,6 +4,8 @@ import { Button, Table, Tag } from "antd";
 import "./adminorder.scss"
 import { patchPur } from "../../service/patch/patch";
 import { getAllOrder } from "../../service/getcategory/getCategory";
+import { putPur } from "../../service/put/put";
+import { delPur } from "../../service/delete/delete";
 
 
 
@@ -14,11 +16,17 @@ const Adminorder = () => {
   const [checkDel, setcheckDel] = useState(false)
   var  previousData = [{userId : "" , date: ""}] ;
 
-const patchpur = async (id, data) => {
-  const result = await patchPur(id, data)
+const patchpur = async (id, dulieu) => {
+  const result = await patchPur(id, dulieu)
 }
 
+const putpur = async (dulieu) => {
+  const result = await putPur(dulieu);
+}
 
+const delpur = async (id) => {
+  const result = await delPur(id);
+}
   const handleOrderStepChange = (record, action) => {
     const updatedData = data.map((item) => {
       if (item.date === record.date && item.userId === record.userId) {
@@ -43,12 +51,12 @@ const patchpur = async (id, data) => {
     const timkiem = updatedData.find(item => {
       return item.date === record.date && item.userId === record.userId
     })
-    console.log(timkiem.purchaseId)
+   
     patchpur(timkiem.purchaseId,  timkiem.orderStep)
   };
   
   const getTagColor = (orderStep, record) => {
-   
+   //
   };
   
   const getTagText = (orderStep, record) => {
@@ -64,7 +72,7 @@ const patchpur = async (id, data) => {
     {
       title: "Ngày đặt",
       dataIndex: "date",
-      defaultSortOrder: "descend",
+     
       sorter: (a, b) => a.date > b.date,
     },
     {
@@ -214,7 +222,7 @@ if (check === false) {
 
   const onSelectChange = (newSelectedRowKeys) => {
     // lưu key trả về khi select thay đổi
-  console.log(newSelectedRowKeys)
+ 
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -225,12 +233,12 @@ if (check === false) {
   };
 
   const handleClick = () => {
-   
+   console.log(data);
     if(selectedRowKeys != []) {
-        const findDel = selectedRowKeys.map(item => {
+        const findDel = selectedRowKeys.map(item => {   // map là chạy vào từng object xong xét nên mình phải có cách để hợp nhất nó
           const hi = data.filter(x => {
           
-            return item != x.key
+            return item !== x.key
            })
            
            return hi;
@@ -246,20 +254,71 @@ if (check === false) {
    // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object 
    // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
    setData(red)
-   const groupedArrays = red.reduce((result, currentObject) => {
-    const existingGroup = result.find(group => group[0].purchaseId === currentObject.purchaseId);
-  console.log(existingGroup)
-  console.log(result);
-    if (existingGroup) {
-      existingGroup.push(currentObject);
+
+  const transformedArray = red.reduce((result, currentObject) => {
+    const existingOrder = result.find(order => order.id === currentObject.purchaseId);
+    if (existingOrder) {
+      existingOrder.thanhtoan.push({
+        id: currentObject.id,
+        img: currentObject.img,
+        title: currentObject.title,
+        dongia: currentObject.dongia,
+        soluong: currentObject.soluong,
+        thanhtien: currentObject.dongia * currentObject.soluong,
+      });
     } else {
-      result.push([currentObject]);
+
+      result.push({
+        paymentMethod:  currentObject.paymentMethod,
+        orderStep: currentObject.orderStep,
+        date: currentObject.date,
+        userId: currentObject.userId,
+        thanhtoan: [
+          {
+            id: currentObject.id,
+            img: currentObject.img,
+            title: currentObject.title,
+            dongia: currentObject.dongia,
+            soluong: currentObject.soluong,
+            thanhtien: currentObject.thanhtien,
+          },
+        ],
+        id: currentObject.purchaseId,
+      });
     }
-  
     return result;
   }, []);
-  
-  console.log(groupedArrays)
+
+
+
+  const findUserId = selectedRowKeys.map(item => {
+    return data.filter(x => {
+      return x.key == item;
+     })
+  })
+
+const purId = findUserId.map(item => {
+    return item[0].purchaseId;
+})
+
+const uniqueArray = purId.filter((value, index, self) => self.indexOf(value) === index);
+const dataPut = uniqueArray.map(item => {
+ const loc = transformedArray.filter (x => {
+    return x.id == item;
+  })
+  return loc;
+})
+if (dataPut[dataPut.length - 1].length === 0) {
+    delpur(uniqueArray[dataPut.length - 1]);
+}
+
+else {
+  for (let i = 0 ; i < dataPut.length ; i++) {
+ putpur(uniqueArray[i],dataPut[i])
+}
+}
+
+
     }
     else { 
       //

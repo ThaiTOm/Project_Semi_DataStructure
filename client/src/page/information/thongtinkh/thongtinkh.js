@@ -49,7 +49,7 @@ setData_1(result)
 
 
   const handleClick = () => {
-    setEditing(false);
+    setEditing(!editing);
   // sau khi click nút chỉnh sửa thì form tự động mở 
   };
   
@@ -297,7 +297,7 @@ else {
           <Row>
             <Col span={16}>
                <Button className="thongtin--chinhsua" onClick={handleClick} type="primary">
-              Chỉnh sửa
+             {editing === true ? 'Chỉnh sửa' : 'Đóng'} 
              </Button>
             </Col>
             <Col span={8} >

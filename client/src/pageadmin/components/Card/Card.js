@@ -61,6 +61,7 @@ const Card = (props) => {
         >
           <div className="card--radialBar">
             <Progress
+            status="active"
               type="circle"
               percent={props.barValue}
               style={{ color: "white" }}

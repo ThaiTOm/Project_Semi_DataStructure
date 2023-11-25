@@ -11,7 +11,7 @@ function Changepass () {
     const [data, setData] = useState([]);
     const [data_2, setData_2 ] = useState(true)
     function isValidPassword(password) {
-        // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
+        // yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
         const lengthRequirement = password.length >= 8;
         const uppercaseRegex = /[A-Z]/;
         const lowercaseRegex = /[a-z]/;

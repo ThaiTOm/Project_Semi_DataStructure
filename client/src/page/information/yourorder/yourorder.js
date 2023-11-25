@@ -78,7 +78,7 @@ const Yourorder = () => {
   ];
 
   const pagination = {
-    pageSize: 5, // Số hàng mỗi trang
+    pageSize: 5, // số hàng mỗi trang
   };
   return (
     <>

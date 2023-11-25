@@ -9,6 +9,15 @@ export const patchCart = async (options) => {
     }
   };
 
+export const patchCate = async (options) => {
+    try {
+      const result = await patch(`category/${options.id}`, options);
+      return result;
+    } catch (error) {
+      throw new Error('Error in patchCate:', error);
+    }
+  };
+
 export const patchInfor = async (options, a) => {
     try {
       const result = await patch(`information/${a[0].id}`, options);
@@ -36,7 +45,7 @@ export const patchUser = async (options) => {   //cập nhật người dùng
     }
   };
 
-export const patchPur = async (id ,options) => {   //cập nhật người dùng
+export const patchPur = async (id ,options) => {   
   const option = {orderStep: options}
     try {
       const result = await patch(`purchase/${id}`, option);

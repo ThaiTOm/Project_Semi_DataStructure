@@ -65,14 +65,20 @@ function Categorydetail() {
       if (!result) {
         console.log("coconcac");
       } else {
-        const maxValue = result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price);  
-        setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
-        setData_3({
-          ...data_3,
-          distance: [1000, maxValue]
-         })
-        setData([...result]);
-        setData_4(result);
+     
+        if (result && result.length > 0){
+         
+           const maxValue =  result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price)
+           setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
+           setData_3({
+             ...data_3,
+             distance: [1000, maxValue]
+            })
+           setData([...result]);
+           setData_4(result);
+        }
+       
+       
       }
     };
 

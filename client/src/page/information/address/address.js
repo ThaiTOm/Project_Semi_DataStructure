@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Form,
@@ -35,21 +35,21 @@ const Address = () => {
           address: "",
           fullName: "",
           phoneNumber: "",
-          defaultAddress: false
+          defaultAddress: false,
         },
       ],
     },
   ]); // lấy tất cả dữ liệu địa chỉ của userId đang đăng nhập
   const [data, setData] = useState([]); // dữ liệu của người đang đăng nhập
   const cookies = getCookie("token"); // lấy token từ cookie
-
+  const [checkaddress, setCheckaddress] = useState("block");
+  const [checkphone, setCheckphone] = useState("block");
   const postship = async (e) => {
     // hàm đưa dữ liệu lên data shipping
     const result = await postShipping(e);
     if (data && data[0]) {
       getship(data[0].id); // sau khi nhập thì render lại trang với giá trị ship mới
     }
-    console.log(result);
   };
 
   const getship = async (e) => {
@@ -66,22 +66,90 @@ const Address = () => {
     }
   };
 
-  const del = async  (e) => {
+  const del = async (e) => {
     const result = await delShip(e);
     if (data && data[0]) {
       getship(data[0].id); // sau khi nhập thì render lại trang với giá trị ship mới
     }
-  }
+  };
   //  if(data && data[0]){
   //   getship(data[0].id);
   // }
+
+  const checkAddress = (value) => {
+    const minLength = 5;
+    const forbiddenCharacters = /[\\"'?\^*%]/;
+
+    if (!value || value.length < minLength) {
+      return "Địa chỉ phải có ít nhất 5 ký tự!";
+    }
+
+    if (!/[a-zA-Z]/.test(value)) {
+      return "Địa chỉ phải chứa ít nhất một ký tự chữ cái!";
+    }
+
+    if (forbiddenCharacters.test(value)) {
+      return "Địa chỉ không được chứa các ký tự \\ ' \" ? ^ * %!";
+    }
+
+    return "block"; // hợp lệ
+  };
+
+  const checkVietnamesePhoneNumber = (phoneNumber) => {
+    // biểu thức chính quy kiểm tra số điện thoại Việt Nam
+    const vietnamesePhoneNumberPattern = /^(0[0-9]{9})$/;
+
+    // danh sách đầu số điện thoại hợp lệ
+    const validAreaCodes = [
+      "096",
+      "097",
+      "098",
+      "032",
+      "033",
+      "034",
+      "035",
+      "036",
+      "037",
+      "038",
+      "039", // Viettel
+      "091",
+      "094",
+      "088",
+      "083",
+      "084",
+      "085",
+      "081",
+      "082", // VinaPhone
+      "090",
+      "093",
+      "089",
+      "070",
+      "079",
+      "077",
+      "076",
+      "078", // MobiFone
+    ];
+
+    // kiểm tra đầu số và độ dài của số điện thoại
+    if (vietnamesePhoneNumberPattern.test(phoneNumber)) {
+      const areaCode = phoneNumber.substring(0, 3);
+
+      if (validAreaCodes.includes(areaCode)) {
+        return "block"; // hợp lệ
+      } else {
+        return "Số điện thoại không hợp lệ!";
+      }
+    } else {
+      return "Số điện thoại không hợp lệ!";
+    }
+  };
 
   useEffect(() => {
     const fetchApick = async (e) => {
       try {
         const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
         setData(result);
-        console.log(result);
+
         getship(result[0].id); // lấy dữ liệu shipping của userId khi mới đăng nhập
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -127,25 +195,23 @@ const Address = () => {
     });
   };
 
-const handleDelete = async (e) => {
-  const xoa = ship.find (item => {
-    return item.id == e
-  })
-  if (xoa.delivery[0].defaultAddress == false){
-    await  del(e)
-  }
-   else {
-    message.error({
-      content: "Đây là địa chỉ mặc định. Không thể xóa !",
-      className: "custom-class",
-      style: {
-        marginTop: "5vh",
-        padding: "2vh",
-      },
+  const handleDelete = async (e) => {
+    const xoa = ship.find((item) => {
+      return item.id == e;
     });
-
-   }
-}
+    if (xoa.delivery[0].defaultAddress == false) {
+      await del(e);
+    } else {
+      message.error({
+        content: "Đây là địa chỉ mặc định. Không thể xóa !",
+        className: "custom-class",
+        style: {
+          marginTop: "5vh",
+          padding: "2vh",
+        },
+      });
+    }
+  };
 
   const handleClick_1 = (x) => {
     setOpen(true);
@@ -153,7 +219,7 @@ const handleDelete = async (e) => {
     const search = ship.find((item) => {
       return item.id == x.id;
     });
-    console.log(search);
+
     form.setFieldsValue({
       fullName: search.delivery[0].fullName,
       phoneNumber: search.delivery[0].phoneNumber,
@@ -165,8 +231,6 @@ const handleDelete = async (e) => {
 
   const handleClick = async (a, b) => {
     // hàm chuyển đổi thiết lập mặc định
-    console.log(a);
-    console.log(b);
 
     try {
       // thử lỗi
@@ -224,8 +288,9 @@ const handleDelete = async (e) => {
     //   })
     //   .catch((error) => {
     //     console.error("Error fetching data:", error);
-    //   });
-    const namesArray = [ // nếu tới khi kiểm tra thì mở cái này ra
+    //   });            // quan trọng vô cùng nên không được xóa // nếu tới khi kiểm tra thì mở cái này ra
+    const namesArray = [
+     
       // address ví dụ
       "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
       " 144 Xuân Thủy, Cầu Giấy, Hà Nội",
@@ -249,193 +314,174 @@ const handleDelete = async (e) => {
 
   const onFinish = (values) => {
     // hàm xử lí sau khi tạo mới
-
-    const valuesbool = ship && ship.filter((item) => {
-      // lọc dữ liệu nào đang true
-      console.log(item)
-      return item .delivery[0] && item.delivery[0].defaultAddress === true;
-    });
-    if (values.defaultAddress === true && valuesbool.length > 0) {
-      // nếu trong values mà người dùng nhập có defaultAddres là true thì chuyển những đ/c còn lại thành false
-      patchbool({
-        id: valuesbool[0].id,
-        delivery: [
-          {
-            ...valuesbool[0].delivery[0],
-            defaultAddress: false,
-          },
-        ],
-      });
-    }
-    // khi bấm tạo mới
-
-    setConfirmLoading(true); // xoay load
-    setTimeout(() => {
-      setConfirmLoading(false);
-      setOpen(false);
-      setShow(false);
-    }, 2000); // Giả định xử lý dữ liệu mất 2 giây
-    setSubmit({
-      // thêm dữ liệu vào submit
-      ...submit,
-      ...values,
-    });
-
-    const checkship = ship.map((item) => {
-      // check qua từng đứa trong dữ liệu userId
-      const result = item.delivery.some((x) => {
-        // kiểm tra dữ liệu đúng hay sai để cho phép tạo mới hay không
-
-        return (
-          x.address == { ...submit, ...values }.address &&
-          x.fullName == { ...submit, ...values }.fullName &&
-          x.phoneNumber == { ...submit, ...values }.phoneNumber
-        );
-        // chỉ cần 1 thằng khác biệt thì sẽ trả về false => được cho phép tạo mới khi không có dữ liệu nào trùng
-        // và ngược lại nếu đúng hết toàn bộ thì sẽ trả về là true => không cho phép tạo mới vì đã có địa chỉ giống
-      });
-      return result;
-    });
-    let soluongfalse = 0;
-
-    for (let item of checkship) {
-      if (item == false) {
-        soluongfalse++; // kiểm tra số lượng false
-      }
-    }
-    const updatetrung = ship.find((item) => {
-      const result = item.delivery.find((x) => {
-        return (
-          x.address == { ...submit, ...values }.address &&
-          x.fullName == { ...submit, ...values }.fullName &&
-          x.phoneNumber == { ...submit, ...values }.phoneNumber
-        );
-      });
-      return result;
-    });
-    console.log(updatetrung);
-    console.log(soluongfalse);
-    console.log(checkship.length);
-    console.log(shipid.id)
-    console.log(ship)
-    console.log({
-      ...submit, ...values
-    })
-    if (shipid.id == 0 ) {
-      console.log(checkship)
-      console.log(soluongfalse)
-      // vì nếu có true thì sẽ có 1 đứa bị trùng và điều đó là cấm kị
-      if (soluongfalse == checkship.length){
-      if (ship.length == 0) {
-        console.log("ok");
-        postship({
-          // gửi dữ liệu địa chỉ của người dùng
-          userId: data[0].id,
+    setCheckaddress(checkAddress(values.address));
+    setCheckphone(checkVietnamesePhoneNumber(values.phoneNumber));
+    if (
+      checkAddress(values.address) === "block" &&
+      checkVietnamesePhoneNumber(values.phoneNumber) === "block"
+    ) {
+      const valuesbool =
+        ship &&
+        ship.filter((item) => {
+          // lọc dữ liệu nào đang true
+          return item.delivery[0] && item.delivery[0].defaultAddress === true;
+        });
+      if (values.defaultAddress === true && valuesbool.length > 0) {
+        // nếu trong values mà người dùng nhập có defaultAddres là true thì chuyển những đ/c còn lại thành false
+        patchbool({
+          id: valuesbool[0].id,
           delivery: [
             {
-              ...submit,
-              ...values,
-              defaultAddress: true, // nếu là giá trị đầu tiện trong shipping thì sẽ là địa chỉ mặc định
+              ...valuesbool[0].delivery[0],
+              defaultAddress: false,
             },
           ],
         });
-      
+      }
+      // khi bấm tạo mới
 
-      } else {
-        postship({
-          // ngược lại thì không cần xét
-          // gửi dữ liệu địa chỉ của người dùng
-          userId: data[0].id,
-          delivery: [
-            {
-              ...submit,
-              ...values,
-            },
-          ],
-        });
-      
-
-      }
-    }
-    
-    else if (soluongfalse != checkship.length) {
-      if (updatetrung.delivery[0].defaultAddress == false ) {
-        if (values.defaultAddress == true){
-           handleClick(updatetrung.id, updatetrung.delivery[0])  
-        
-  
-        }
-        else {
-          // thong bao
-        }
-      }
-      
-      else if (updatetrung.delivery[0].defaultAddress == true) {
-        if (values.defaultAddress == true ){
-          patchbool({
-          id:  updatetrung.id ,
-          delivery: [
-            {
-              ...submit,
-              ...values,
-            },
-          ],
-        });
-      
-
-        }
-        else {
-          // thoong bao loi
-        }
-        
-      }
-    }
-  }
-    else if (shipid.id !== 0 ){
-      if (updatetrung) {
-      if (updatetrung.id == shipid.id && updatetrung.delivery[0].defaultAddress == false && values.defaultAddress == true ){
-               handleClick(updatetrung.id, updatetrung.delivery[0])
-              
-             
-      }
-    }
-  
-   else if (soluongfalse == checkship.length){
-    if (shipid.delivery[0].defaultAddress == true) {
-     
-         patchbool({
-        id:  shipid.id ,
-        delivery: [
-          {
-            ...submit,
-            ...values,
-            defaultAddress: true
-          },
-        ],
+      setConfirmLoading(true); // xoay load
+      setTimeout(() => {
+        setConfirmLoading(false);
+        setOpen(false);
+        setShow(false);
+      }, 2000); // Giả định xử lý dữ liệu mất 2 giây
+      setSubmit({
+        // thêm dữ liệu vào submit
+        ...submit,
+        ...values,
       });
-     
 
-    }
-   else {
-   
-    patchbool({
-      id:  shipid.id ,
-      delivery: [
-        {
-          ...submit,
-          ...values,
-        },
-      ],
-    });
-    
+      const checkship = ship.map((item) => {
+        // check qua từng đứa trong dữ liệu userId
+        const result = item.delivery.some((x) => {
+          // kiểm tra dữ liệu đúng hay sai để cho phép tạo mới hay không
 
-   }
+          return (
+            x.address == { ...submit, ...values }.address &&
+            x.fullName == { ...submit, ...values }.fullName &&
+            x.phoneNumber == { ...submit, ...values }.phoneNumber
+          );
+          // chỉ cần 1 thằng khác biệt thì sẽ trả về false => được cho phép tạo mới khi không có dữ liệu nào trùng
+          // và ngược lại nếu đúng hết toàn bộ thì sẽ trả về là true => không cho phép tạo mới vì đã có địa chỉ giống
+        });
+        return result;
+      });
+      let soluongfalse = 0;
+
+      for (let item of checkship) {
+        if (item == false) {
+          soluongfalse++; // kiểm tra số lượng false
+        }
+      }
+      const updatetrung = ship.find((item) => {
+        const result = item.delivery.find((x) => {
+          return (
+            x.address == { ...submit, ...values }.address &&
+            x.fullName == { ...submit, ...values }.fullName &&
+            x.phoneNumber == { ...submit, ...values }.phoneNumber
+          );
+        });
+        return result;
+      });
+
+      if (shipid.id == 0) {
+        // vì nếu có true thì sẽ có 1 đứa bị trùng và điều đó là cấm kị
+        if (soluongfalse == checkship.length) {
+          if (ship.length == 0) {
+            postship({
+              // gửi dữ liệu địa chỉ của người dùng
+              userId: data[0].id,
+              delivery: [
+                {
+                  ...submit,
+                  ...values,
+                  defaultAddress: true, // nếu là giá trị đầu tiện trong shipping thì sẽ là địa chỉ mặc định
+                },
+              ],
+            });
+          } else {
+            postship({
+              // ngược lại thì không cần xét
+              // gửi dữ liệu địa chỉ của người dùng
+              userId: data[0].id,
+              delivery: [
+                {
+                  ...submit,
+                  ...values,
+                },
+              ],
+            });
+          }
+        } else if (soluongfalse != checkship.length) {
+          if (updatetrung.delivery[0].defaultAddress == false) {
+            if (values.defaultAddress == true) {
+              handleClick(updatetrung.id, updatetrung.delivery[0]);
+            } else {
+              // thong bao
+            }
+          } else if (updatetrung.delivery[0].defaultAddress == true) {
+            if (values.defaultAddress == true) {
+              patchbool({
+                id: updatetrung.id,
+                delivery: [
+                  {
+                    ...submit,
+                    ...values,
+                  },
+                ],
+              });
+            } else {
+              //
+            } // đánh dấu có gì thì sửa =>
+          }
+        }
+      } else if (shipid.id !== 0) {
+        if (updatetrung) {
+          if (
+            updatetrung.id == shipid.id &&
+            updatetrung.delivery[0].defaultAddress == false &&
+            values.defaultAddress == true
+          ) {
+            handleClick(updatetrung.id, updatetrung.delivery[0]);
+          }
+        } else if (soluongfalse == checkship.length) {
+          if (shipid.delivery[0].defaultAddress == true) {
+            patchbool({
+              id: shipid.id,
+              delivery: [
+                {
+                  ...submit,
+                  ...values,
+                  defaultAddress: true,
+                },
+              ],
+            });
+          } else {
+            patchbool({
+              id: shipid.id,
+              delivery: [
+                {
+                  ...submit,
+                  ...values,
+                },
+              ],
+            });
+          }
+        }
+      }
+    } else {
+      //
     }
-  }
-  
   };
 
-  console.log(ship);
+  const handleChange = () => {
+    setCheckaddress("block");
+  };
+
+  const handleChange_1 = () => {
+    setCheckphone("block");
+  };
 
   return (
     <>
@@ -493,11 +539,23 @@ const handleDelete = async (e) => {
                   { required: true, message: "Vui lòng nhập số điện thoại!" },
                 ]}
               >
-                <Input placeholder="Mời bạn nhập số điện thoại" />
+                <Input
+                  onChange={handleChange_1}
+                  placeholder="Mời bạn nhập số điện thoại"
+                />
               </Form.Item>
-
+              <>
+                <div
+                  className={
+                    checkphone === "block" ? "address--block" : "address--check"
+                  }
+                >
+                  {checkphone}
+                </div>
+              </>
               <Form.Item label="Địa chỉ" name="address">
                 <AutoComplete
+                  onChange={handleChange}
                   onSelect={handleSelect_1}
                   options={addresses.map((item) => ({
                     label: item,
@@ -507,6 +565,17 @@ const handleDelete = async (e) => {
                   onSearch={onAddressSearch}
                 ></AutoComplete>
               </Form.Item>
+              <>
+                <div
+                  className={
+                    checkaddress === "block"
+                      ? "address--block"
+                      : "address--check"
+                  }
+                >
+                  {checkaddress}
+                </div>
+              </>
               {(shipid &&
                 shipid.delivery &&
                 shipid.delivery[0] &&
@@ -527,7 +596,10 @@ const handleDelete = async (e) => {
           <hr />
           <h1>Địa chỉ</h1>
 
-          {ship && ship[0] && ship[0].delivery && ship[0].delivery.length > 0 ? 
+          {ship &&
+          ship[0] &&
+          ship[0].delivery &&
+          ship[0].delivery.length > 0 ? (
             ship.map((item) => (
               <div className="address--item">
                 <div className="address--item__infor">
@@ -574,9 +646,9 @@ const handleDelete = async (e) => {
                     </Col>
                     <Col span={12}>
                       <Button
-                      type="primary"
-                      block
-                      onClick={() => handleDelete(item.id)}
+                        type="primary"
+                        block
+                        onClick={() => handleDelete(item.id)}
                       >
                         Xóa
                       </Button>
@@ -593,11 +665,13 @@ const handleDelete = async (e) => {
                   </Row>
                 </div>
               </div>
-            )) : ( <Result
-    status="warning"
-    title="Vui Lòng Nhập Địa Chỉ Để Thanh Toán Đơn Hàng."
-   
-  />)}
+            ))
+          ) : (
+            <Result
+              status="warning"
+              title="Vui Lòng Nhập Địa Chỉ Để Thanh Toán Đơn Hàng."
+            />
+          )}
         </div>
       </div>
     </>

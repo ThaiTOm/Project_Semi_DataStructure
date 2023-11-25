@@ -326,5 +326,8 @@ def thanhdaubuoi():
         push_json(pathJson, product, "notification")
     return jsonify("yes")
 
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

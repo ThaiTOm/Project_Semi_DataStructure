@@ -168,42 +168,6 @@ if (check) {
     setId(1);
   };
 
-  // const filterByArrange = (e) => {
-   
-    
-  // const filterByArrange = (ploai) => {
-  //   // tên A -> Z
-  //   if (data_3.phanloai === 'tentang') {
-  //     return ploai.sort((a, b) => a.title.localeCompare(b.title));
-  //   } 
-  //   // tên từ Z -> A
-  //   else if (data_3.phanloai === 'tengiam') {
-  //     return ploai.sort((a, b) => b.title.localeCompare(a.title));
-  //   } 
-  //   // giá tăng dần
-  //   else if (data_3.phanloai === 'giatang') {
-  //     return ploai.sort((a, b) =>  a.price *
-  //     ((100 - Math.floor(a.discountPercentage)) /
-  //       100) -  b.price *
-  //       ((100 - Math.floor(b.discountPercentage)) /
-  //         100));
-  //   } 
-  //   // giá giảm dần
-  //   else if
-  //    (data_3.phanloai === 'giagiam') {
-  //     return ploai.sort((a, b) =>  b.price *
-  //     ((100 - Math.floor(b.discountPercentage)) /
-  //       100) -  a.price *
-  //       ((100 - Math.floor(a.discountPercentage)) /
-  //         100));
-  //   } 
-  //   // trở về trạng thái ban đầu
-  //   else if (data_3.phanloai === 'original'){
-  //     return data;
-  //   }
-  //   // không có điều kiện nào thì trả về dữ liệu cũ
-  //   return ploai;
-  // };
   
   
   const filterData = () => {

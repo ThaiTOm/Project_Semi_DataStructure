@@ -9,4 +9,9 @@
         margin: 0px!important;
         padding: 0px;
     }
+    &--control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }

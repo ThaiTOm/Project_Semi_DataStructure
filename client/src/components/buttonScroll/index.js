@@ -33,7 +33,7 @@ const cookies = getCookie("token");
   const location = useLocation();
   const currentPath = location.pathname;
 
-  console.log("Đường dẫn hiện tại:", currentPath);
+
 
   if (currentPath.includes("admin")) {
     checkAdmin = false;
@@ -41,7 +41,6 @@ const cookies = getCookie("token");
    checkAdmin = true;
    sessionStorage.removeItem('keyMenu');
   }
-console.log(checkAdmin)
 
 
 

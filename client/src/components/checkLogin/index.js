@@ -18,22 +18,22 @@ console.log(e);
           newState = data[i].token;
           if (data[i].token.includes("admin0305")) {
             Swal.fire({
-              icon: "success", // Sử dụng icon "success" cho thông báo thành công
+              icon: "success", // sử dụng icon "success" cho thông báo thành công
               title: "Đăng nhập vào trang Admin thành công",
               text: "Chào mừng chủ cửa hàng 3Tstore đã đăng nhập!",
             }).then((result) => {
-              // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
+              // đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
               if (result.isConfirmed) {
                 window.location.href = "/admin/dash";
               }
             });
           } else {
             Swal.fire({
-              icon: "success", // Sử dụng icon "success" cho thông báo thành công
+              icon: "success", // sử dụng icon "success" cho thông báo thành công
               title: "Đăng nhập thành công",
               text: "Chào mừng bạn đã đăng nhập!",
             }).then((result) => {
-              // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
+              // đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
               if (result.isConfirmed) {
                 window.location.href = "/";
               }

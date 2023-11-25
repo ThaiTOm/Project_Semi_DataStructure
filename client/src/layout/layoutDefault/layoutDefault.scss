@@ -102,12 +102,13 @@ flex-wrap: nowrap;
     cursor: pointer;
     &__c {
       margin: 10px 10px 0px 10px;
+     
     }
     &__c img {
       max-height: 50px;
       width: auto;
       text-align: center;
-      padding-left: 3px;
+     
     }
 
     &__c p {
@@ -119,6 +120,10 @@ flex-wrap: nowrap;
     &__c a {
       text-decoration: none;
       color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
  

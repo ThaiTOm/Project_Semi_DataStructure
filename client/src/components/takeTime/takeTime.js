@@ -12,7 +12,7 @@ const CurrentTime = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Format thời gian theo chuẩn "yyyy-MM-dd HH:mm:ss"
+  // format thời gian theo chuẩn "yyyy-MM-dd HH:mm:ss"
   const formattedTime = format(currentTime, 'yyyy-MM-dd HH:mm:ss');
 return formattedTime;
 };

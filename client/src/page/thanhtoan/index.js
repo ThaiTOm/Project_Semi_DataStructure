@@ -136,7 +136,7 @@ const postorder = async (e) => {
     Modal.warning({
       title: "Thông báo",
       content: "Bạn chưa có địa chỉ mặc định. Vui lòng thêm địa chỉ để thanh toán.",
-      okText: "Thêm địa chỉ", // Text for the OK button
+      okText: "Thêm địa chỉ",
       onOk: () => {
         navigate("/infor/address")
         console.log("Redirecting to address page...");

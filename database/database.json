@@ -11,25 +11,29 @@
       "username": "trannguyensonthanh",
       "password": "Sonthanh@0305",
       "token": "admin0305",
-      "id": 2
+      "id": 2,
+      "key": 2
     },
     {
       "username": "nguyenduythai",
       "password": "Duythai@123",
       "token": "admin0305_1",
-      "id": 3
+      "id": 3,
+      "key": 3
     },
     {
       "username": "caoduythai",
       "password": "Thaicao@123",
       "token": "admin0305_2",
-      "id": 4
+      "id": 4,
+      "key": 4
     },
     {
       "username": "sonthanhdeptrai",
       "password": "Sonthanh@123",
       "token": "qVLDV3ZMKjtXmVpxgum3",
-      "id": 5
+      "id": 5,
+      "key": 5
     }
   ],
   "beverages": [
@@ -40,7 +44,6 @@
       "price": 37000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 65,
       "brand": "Nature's Best",
       "category": "Fruit Juice",
       "Quantity": 22,
@@ -59,7 +62,6 @@
       "price": 22000,
       "discountPercentage": 0,
       "rating": 4.7,
-      "stock": 55,
       "brand": "Vineyard Delights",
       "category": "Fruit Juice",
       "Quantity": 100,
@@ -78,7 +80,6 @@
       "price": 45000,
       "discountPercentage": 10,
       "rating": 4.8,
-      "stock": 70,
       "brand": "Citrus Delights",
       "category": "Fruit Juice",
       "Quantity": 221,
@@ -97,7 +98,6 @@
       "price": 30000,
       "discountPercentage": 0,
       "rating": 4.7,
-      "stock": 60,
       "brand": "Tropical Paradise",
       "category": "Fruit Juice",
       "Quantity": 54,
@@ -116,7 +116,6 @@
       "price": 22000,
       "discountPercentage": 0,
       "rating": 4.7,
-      "stock": 48,
       "brand": "Tropical Delights",
       "category": "Fruit Juice",
       "Quantity": 90,
@@ -135,7 +134,6 @@
       "price": 40000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 63,
       "brand": "Tropical Oasis",
       "category": "Fruit Juice",
       "Quantity": 42,
@@ -154,7 +152,6 @@
       "price": 27000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 50,
       "brand": "Fruit Paradise",
       "category": "Fruit Juice",
       "Quantity": 15,
@@ -173,7 +170,6 @@
       "price": 36000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 70,
       "brand": "Tropical Delights",
       "category": "Fruit Juice",
       "Quantity": 289,
@@ -192,7 +188,6 @@
       "price": 47000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 55,
       "brand": "Sunshine Juicery",
       "category": "Fruit Juice",
       "Quantity": 62,
@@ -211,7 +206,6 @@
       "price": 50000,
       "discountPercentage": 20,
       "rating": 4.8,
-      "stock": 55,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 38,
@@ -230,7 +224,6 @@
       "price": 45000,
       "discountPercentage": 0,
       "rating": 4.7,
-      "stock": 62,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 124,
@@ -249,7 +242,6 @@
       "price": 70000,
       "discountPercentage": 20,
       "rating": 4.9,
-      "stock": 48,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 78,
@@ -268,7 +260,6 @@
       "price": 30000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 39,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 43,
@@ -287,7 +278,6 @@
       "price": 42000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 55,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 3,
@@ -306,7 +296,6 @@
       "price": 110000,
       "discountPercentage": 10,
       "rating": 4.7,
-      "stock": 48,
       "brand": "Smoothie Sensations",
       "category": "Fruit Smoothie",
       "Quantity": 32,
@@ -325,7 +314,6 @@
       "price": 65000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 50,
       "brand": "Smoothie Delights",
       "category": "Fruit Smoothie",
       "Quantity": 12,
@@ -344,7 +332,6 @@
       "price": 80000,
       "discountPercentage": 20,
       "rating": 4.6,
-      "stock": 40,
       "brand": "Tropical Treats",
       "category": "Fruit Smoothie",
       "Quantity": 30,
@@ -363,7 +350,6 @@
       "price": 35000,
       "discountPercentage": 0,
       "rating": 4.7,
-      "stock": 50,
       "brand": "FreshBlends",
       "category": "Fruit Smoothie",
       "Quantity": 62,
@@ -382,7 +368,6 @@
       "price": 40000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 45,
       "brand": "FreshBlends",
       "category": "Fruit Smoothie",
       "Quantity": 9,
@@ -401,7 +386,6 @@
       "price": 55000,
       "discountPercentage": 15,
       "rating": 4.7,
-      "stock": 65,
       "brand": "Coffee Delights",
       "category": "Coffee Beverages",
       "Quantity": 92,
@@ -420,7 +404,6 @@
       "price": 35000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 45,
       "brand": "Café Delights",
       "category": "Coffee Beverages",
       "Quantity": 502,
@@ -439,7 +422,6 @@
       "price": 120000,
       "discountPercentage": 30,
       "rating": 4.6,
-      "stock": 57,
       "brand": "Café Elegance",
       "category": "Coffee Beverages",
       "Quantity": 223,
@@ -458,7 +440,6 @@
       "price": 90000,
       "discountPercentage": 10,
       "rating": 4.9,
-      "stock": 70,
       "brand": "Espresso Delight",
       "category": "Coffee Beverages",
       "Quantity": 7,
@@ -477,7 +458,6 @@
       "price": 79000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 65,
       "brand": "Latte Delights",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -496,7 +476,6 @@
       "price": 45000,
       "discountPercentage": 0,
       "rating": 4.5,
-      "stock": 55,
       "brand": "Americano Elegance",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -515,7 +494,6 @@
       "price": 30000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 65,
       "brand": "CoffeeCraft",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -534,7 +512,6 @@
       "price": 70000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 50,
       "brand": "CoffeeCraft",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -553,7 +530,6 @@
       "price": 45000,
       "discountPercentage": 0,
       "rating": 4.5,
-      "stock": 60,
       "brand": "CoffeeCraft",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -572,7 +548,6 @@
       "price": 67000,
       "discountPercentage": 10,
       "rating": 4.8,
-      "stock": 50,
       "brand": "Saigon Coffee Co.",
       "category": "Coffee Beverages",
       "Quantity": 22,
@@ -591,7 +566,6 @@
       "price": 22000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 60,
       "brand": "Tea Delights",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -610,7 +584,6 @@
       "price": 20000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 45,
       "brand": "Tea Haven",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -629,7 +602,6 @@
       "price": 30000,
       "discountPercentage": 15,
       "rating": 4.9,
-      "stock": 25,
       "brand": "Zen Tea",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -648,7 +620,6 @@
       "price": 39000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 30,
       "brand": "Sweetea Delights",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -667,7 +638,6 @@
       "price": 43000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 25,
       "brand": "Tea Elegance",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -686,7 +656,6 @@
       "price": 50000,
       "discountPercentage": 50,
       "rating": 4.8,
-      "stock": 30,
       "brand": "Tea Delights",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -705,7 +674,6 @@
       "price": 55000,
       "discountPercentage": 0,
       "rating": 4.9,
-      "stock": 25,
       "brand": "Tea Delights",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -724,7 +692,6 @@
       "price": 42000,
       "discountPercentage": 0,
       "rating": 4.8,
-      "stock": 30,
       "brand": "Tea Delights",
       "category": "Milk Tea",
       "Quantity": 22,
@@ -743,7 +710,6 @@
       "price": 420000,
       "discountPercentage": 20,
       "rating": 4.9,
-      "stock": 25,
       "brand": "Vineyard Elegance",
       "category": "Wine",
       "Quantity": 22,
@@ -762,7 +728,6 @@
       "price": 690000,
       "discountPercentage": 30,
       "rating": 4.8,
-      "stock": 30,
       "brand": "Golden Vineyards",
       "category": "Wine",
       "Quantity": 22,
@@ -781,7 +746,6 @@
       "price": 840000,
       "discountPercentage": 20,
       "rating": 4.8,
-      "stock": 18,
       "brand": "Vineyard Select",
       "category": "Wine",
       "Quantity": 22,
@@ -800,7 +764,6 @@
       "price": 1230000,
       "discountPercentage": 30,
       "rating": 4.9,
-      "stock": 12,
       "brand": "Château de Champagne",
       "category": "Wine",
       "Quantity": 22,
@@ -819,7 +782,6 @@
       "price": 450000,
       "discountPercentage": 15,
       "rating": 4.2,
-      "stock": 25,
       "brand": "Vineyard Delights",
       "category": "Wine",
       "Quantity": 22,
@@ -838,7 +800,6 @@
       "price": 25000,
       "discountPercentage": 0,
       "rating": 4.5,
-      "stock": 60,
       "brand": "Fizzy Delights",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -857,7 +818,6 @@
       "price": 20000,
       "discountPercentage": 10,
       "rating": 4.2,
-      "stock": 45,
       "brand": "Fizzy Delights",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -876,7 +836,6 @@
       "price": 15000,
       "discountPercentage": 5,
       "rating": 4.8,
-      "stock": 120,
       "brand": "Coca Cola Company",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -895,7 +854,6 @@
       "price": 9000,
       "discountPercentage": 0,
       "rating": 4.5,
-      "stock": 100,
       "brand": "The Coca-Cola Company",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -914,7 +872,6 @@
       "price": 8000,
       "discountPercentage": 0,
       "rating": 4.4,
-      "stock": 90,
       "brand": "PepsiCo",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -933,7 +890,6 @@
       "price": 8000,
       "discountPercentage": 0,
       "rating": 4.6,
-      "stock": 85,
       "brand": "PepsiCo",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -952,7 +908,6 @@
       "price": 8000,
       "discountPercentage": 0,
       "rating": 4.5,
-      "stock": 78,
       "brand": "Dr Pepper Snapple Group",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -971,7 +926,6 @@
       "price": 12000,
       "discountPercentage": 0,
       "rating": 4.4,
-      "stock": 65,
       "brand": "The Coca-Cola Company",
       "category": "Soft Drinks",
       "Quantity": 22,
@@ -988,108 +942,114 @@
     {
       "id": 1,
       "cate": "Fruit Juice",
-      "icon": "https://i.pinimg.com/236x/4b/75/17/4b7517e674a877ae336161d8abc1515f.jpg"
+      "icon": "https://i.pinimg.com/236x/4b/75/17/4b7517e674a877ae336161d8abc1515f.jpg",
+      "key": 1
     },
     {
       "id": 2,
       "cate": "Fruit Smoothie",
-      "icon": "https://i.pinimg.com/236x/c3/c3/3a/c3c33a806a97cdfbb5d961b369daa45a.jpg"
+      "icon": "https://i.pinimg.com/236x/c3/c3/3a/c3c33a806a97cdfbb5d961b369daa45a.jpg",
+      "key": 2
     },
     {
       "id": 3,
       "cate": "Coffee Beverages",
-      "icon": "https://i.pinimg.com/236x/68/cc/2e/68cc2e285303d7ec54487587ea5bd12e.jpg"
+      "icon": "https://i.pinimg.com/236x/68/cc/2e/68cc2e285303d7ec54487587ea5bd12e.jpg",
+      "key": 3
     },
     {
       "id": 4,
       "cate": "Milk Tea",
-      "icon": "https://i.pinimg.com/236x/54/5a/25/545a25506e51d79ff763fdbc76cc44a9.jpg"
+      "icon": "https://i.pinimg.com/236x/54/5a/25/545a25506e51d79ff763fdbc76cc44a9.jpg",
+      "key": 4
     },
     {
       "id": 5,
       "cate": "Wine",
-      "icon": "https://i.pinimg.com/236x/aa/e9/7d/aae97d012303e32a26e1743a61eed61e.jpg"
+      "icon": "https://i.pinimg.com/236x/aa/e9/7d/aae97d012303e32a26e1743a61eed61e.jpg",
+      "key": 5
     },
     {
       "id": 6,
       "cate": "Soft Drinks",
-      "icon": "https://i.pinimg.com/236x/79/6c/34/796c34906c9111f02f41a319298a261b.jpg"
+      "icon": "https://i.pinimg.com/236x/79/6c/34/796c34906c9111f02f41a319298a261b.jpg",
+      "key": 6
     }
   ],
   "cart": [
     {
       "userId": 1,
-      "product": [],
+      "product": [
+        {
+          "id": 3,
+          "infor": {
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "images": [
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
       "id": 1
     },
     {
       "userId": 2,
       "product": [
         {
-          "id": 1,
+          "id": 3,
           "infor": {
-            "id": 1,
-            "title": "Apple Juice",
-            "description": " Freshly squeezed apple juice, 100% natural. Sản phẩm là sự kết hợp hoàn hảo từ các trái táo tươi, được ép lấy nước, đảm bảo độ tươi ngon và an toàn cho sức khỏe. Không chứa chất bảo quản hay đường tăng cường. Đây là lựa chọn hoàn hảo cho những người yêu thích thức uống tự nhiên và lành mạnh.",
-            "price": 37000,
-            "discountPercentage": 0,
-            "rating": 4.6,
-            "stock": 65,
-            "brand": "Nature's Best",
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "stock": 70,
+            "brand": "Citrus Delights",
             "category": "Fruit Juice",
-            "Quantity": 22,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
             "images": [
-              "https://i.pinimg.com/236x/cd/f6/3c/cdf63c34f8768539fb1d30f133f585dd.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/55/55/7a/55557a017b3ac00f143823298c8ea599.jpg",
-              "https://i.pinimg.com/236x/21/ff/7e/21ff7ef76f32d75208abd60ad024201b.jpg"
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
             ]
           },
-          "quanlity": 2
+          "quanlity": 3
         },
         {
-          "id": 2,
+          "id": 4,
           "infor": {
-            "id": 2,
-            "title": "Grape Juice",
-            "description": "Refreshing grape juice, made from the finest grapes.",
-            "price": 22000,
+            "id": 4,
+            "title": "Mango Juice",
+            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
+            "price": 30000,
             "discountPercentage": 0,
             "rating": 4.7,
-            "stock": 55,
-            "brand": "Vineyard Delights",
+            "stock": 60,
+            "brand": "Tropical Paradise",
             "category": "Fruit Juice",
-            "Quantity": 100,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+            "Quantity": 54,
+            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
             "images": [
-              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
-              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
-              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
-              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 5,
-          "infor": {
-            "id": 5,
-            "title": "Pineapple Juice",
-            "description": "Tropical pineapple juice with a burst of tropical flavor.",
-            "price": 22000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "stock": 48,
-            "brand": "Tropical Delights",
-            "category": "Fruit Juice",
-            "Quantity": 90,
-            "thumbnail": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/d2/f5/0e/d2f50e5c76c2449ab0d4b4ee4c6cc2b4.jpg",
-              "https://i.pinimg.com/236x/b4/53/81/b4538182ae4ebbd10948437a48ae4e5d.jpg",
-              "https://i.pinimg.com/236x/3a/73/73/3a737303356c480d591c0fb27856511b.jpg",
-              "https://i.pinimg.com/236x/86/48/d7/8648d72e3dd343876913204abc95ef3d.jpg"
+              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
+              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
+              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
+              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
             ]
           },
           "quanlity": 1
@@ -1137,7 +1097,7 @@
       "delivery": [
         {
           "address": "93 Hồ Văn Huê, phường 9, phú nhuận",
-          "fullName": "sohnawf",
+          "fullName": "jhk",
           "phoneNumber": "0399038165",
           "defaultAddress": true
         }
@@ -1155,119 +1115,24 @@
         }
       ],
       "id": 3
+    },
+    {
+      "userId": 1,
+      "delivery": [
+        {
+          "address": "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
+          "fullName": "trần nguyễn sơn thành",
+          "phoneNumber": "0374444944",
+          "defaultAddress": false
+        }
+      ],
+      "id": 4
     }
   ],
   "purchase": [
     {
       "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
-      "date": "2023-11-17 16:06:30",
-      "userId": 1,
-      "thanhtoan": [
-        {
-          "id": 8,
-          "img": "https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg",
-          "title": "Mango Tango Juice",
-          "dongia": 36000,
-          "soluong": 1,
-          "thanhtien": 36000
-        },
-        {
-          "id": 7,
-          "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-          "title": "Watermelon Juice",
-          "dongia": 27000,
-          "soluong": 1,
-          "thanhtien": 27000
-        },
-        {
-          "id": 35,
-          "img": "https://i.pinimg.com/236x/b0/1d/d9/b01dd9eb8447ce651a4185d5104eb915.jpg",
-          "title": "Taro Milk Tea",
-          "dongia": 25000,
-          "soluong": 1,
-          "thanhtien": 25000
-        },
-        {
-          "id": 20,
-          "img": "https://i.pinimg.com/236x/4d/7a/6f/4d7a6fa6fabd931a57161c7b1bb8f725.jpg",
-          "title": "Caramel Macchiato",
-          "dongia": 46750,
-          "soluong": 1,
-          "thanhtien": 46750
-        }
-      ],
-      "id": 1
-    },
-    {
-      "paymentMethod": "Tiền mặt",
       "orderStep": 3,
-      "date": "2023-11-21 23:27:00",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 1,
-          "thanhtien": 37000
-        },
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
-        {
-          "id": 3,
-          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-          "title": "Orange Juice",
-          "dongia": 40500,
-          "soluong": 1,
-          "thanhtien": 40500
-        }
-      ],
-      "id": 2
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-11-22 18:19:29",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 2,
-          "thanhtien": 74000
-        },
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
-        {
-          "id": 5,
-          "img": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
-          "title": "Pineapple Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        }
-      ],
-      "id": 3
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
       "date": "2023-11-22 18:41:27",
       "userId": 2,
       "thanhtoan": [
@@ -1297,16 +1162,112 @@
         }
       ],
       "id": 4
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 0,
+      "date": "2023-11-24 21:40:14",
+      "userId": 1,
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 3,
+          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+          "title": "Orange Juice",
+          "dongia": 40500,
+          "soluong": 2,
+          "thanhtien": 81000
+        },
+        {
+          "id": 4,
+          "img": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
+          "title": "Mango Juice",
+          "dongia": 30000,
+          "soluong": 1,
+          "thanhtien": 30000
+        },
+        {
+          "id": 7,
+          "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
+          "title": "Watermelon Juice",
+          "dongia": 27000,
+          "soluong": 1,
+          "thanhtien": 27000
+        },
+        {
+          "id": 8,
+          "img": "https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg",
+          "title": "Mango Tango Juice",
+          "dongia": 36000,
+          "soluong": 1,
+          "thanhtien": 36000
+        },
+        {
+          "id": 6,
+          "img": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
+          "title": "Mango Passion Fruit Juice",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 5,
+          "img": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
+          "title": "Pineapple Juice",
+          "dongia": 22000,
+          "soluong": 1,
+          "thanhtien": 22000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 11,
+          "img": "https://i.pinimg.com/236x/9f/8e/5f/9f8e5f9bdf4f3bca73ce2afe5f2ff90c.jpg",
+          "title": "Tropical Sunrise Smoothie",
+          "dongia": 45000,
+          "soluong": 1,
+          "thanhtien": 45000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 9,
+          "img": "https://i.pinimg.com/236x/f9/16/79/f9167999f6b50b8b5faf170a0c5840f3.jpg",
+          "title": "Citrus Burst",
+          "dongia": 47000,
+          "soluong": 1,
+          "thanhtien": 47000
+        },
+        {
+          "id": 1,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+          "title": "Apple Juice",
+          "dongia": 37000,
+          "soluong": 1,
+          "thanhtien": 37000
+        }
+      ],
+      "id": 5
     }
   ],
-  "notification": [
-    {
-      "idProduct": 123,
-      "date": 123,
-      "thumbnail": 123,
-      "title": "7 Up",
-      "discountPercentage": 10,
-      "message": "Thanh dau buoi"
-    }
-  ]
+  "notification": []
 }

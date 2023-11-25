@@ -78,7 +78,7 @@ dispatch(addmt(id, infor, count));
     const fetchApi = async (e) => {
       const result = await getProductdt(e);
       if (!result) {
-        console.log("coconcac");
+       //
       } else {
         setData(result);
         console.log(result);

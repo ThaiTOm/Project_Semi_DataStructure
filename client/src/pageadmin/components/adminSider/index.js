@@ -7,7 +7,7 @@ import "./adminSider.scss"
 import { Link, useLocation } from "react-router-dom";
 const Adminsider = () => {
   const sessionKey = JSON.parse(sessionStorage.getItem('keyMenu'));
-console.log(sessionKey)
+
     const sidebarVariants = {
       true: {
         left : '0'
@@ -31,7 +31,7 @@ console.log(sessionKey)
     const currentPath = location.pathname;
 
 useEffect(() => {
-  console.log(currentPath)
+
    if (currentPath.includes('admin') === false){
     sessionStorage.removeItem('keyMenu');
    }
@@ -64,7 +64,7 @@ useEffect(() => {
   }}
 >
    <Menu
-         defaultOpenKeys={['customers']}
+         defaultOpenKeys={['customers', 'products']}
         style={{backgroundColor: 'initial', border: 'none'}}
         mode="inline"
         selectedKeys={[selectedKey]}

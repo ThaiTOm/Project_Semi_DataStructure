@@ -10,6 +10,11 @@ export const postUser = async (option) => {
     return result;
 } 
 
+export const postCate = async (option) => {
+    const result = await post("category", option);
+    return result;
+} 
+
 export const postShipping = async (option) => {
     console.log(option)
     const result = await post("shipping", option);
@@ -23,9 +28,12 @@ export const postInfor = async (option) => {
 
 export const postOrder = async (option) => {
     const result = await post("purchase", option);
-    return result
+    return result;
 }
 
-// export const postCart = async (option) => {
-//    const result = await post ("")
-// }
+export const postProduct = async (option) => {
+    const result = await post("beverages", option);
+    return result;
+}
+
+

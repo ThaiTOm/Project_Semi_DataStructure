@@ -11,15 +11,14 @@ const navigate = useNavigate();
 
     const handleClick = ()  => {
         Swal.fire({
-          title: 'Do you want to log out?',
+          title: 'Bạn Có Chắc Chắn Muốn Đăng Xuất Không?',
          
           showCancelButton: true,
           confirmButtonText: 'Yes',
           
         }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            Swal.fire('Logged out!', '', 'success')
+            Swal.fire('Đã Đăng Xuất!', '', 'success')
             .then((result) => {
               if (result.isConfirmed){
                 // const removeCookie = getCookie("token");

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Steps, Button, message, Table } from 'antd';
+import { Steps, Button, message, Table, Empty } from 'antd';
 import { getOrder, getUserstk } from '../../service/getcategory/getCategory';
 import { getCookie } from '../../components/takeCookies/takeCookies';
 import "./order.scss"
+import { useNavigate } from 'react-router-dom';
 
 
 const { Step } = Steps;
@@ -70,10 +71,14 @@ const [orderId, setorderId] = useState({
 }
   
 );
+const navigate = useNavigate();
 useEffect(() => {
   const fetchApick = async (e) => {
     const result = await getUserstk(e)  // lấy dữ liệu tài khoản của người đang đăng nhập 
-    fetchorder(result[0].id);
+    if(result && result[0] && result[0].id) {
+        fetchorder(result[0].id);
+    }
+  
   }
   fetchApick(cookies);
  },[])
@@ -116,9 +121,11 @@ const paidProducts = orderId && orderId.thanhtoan && orderId.thanhtoan.map((item
   };
 });
 
-console.log(orderId.orderStep)
-console.log(steps.length)
 
+
+const handleAddsp = () => {
+  navigate("/collections")
+}
   return (
     <>
     {orderId ? (  <div className='order'>
@@ -161,8 +168,26 @@ console.log(steps.length)
       </div>
     </div>
     </div>) : (<div class="order-status">
-  <h2>Bạn chưa đặt hàng trước đây?</h2>
-  <p>Vui lòng mua hàng để có thể theo dõi tiến độ đơn hàng.</p>
+    <Empty
+    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+    imageStyle={{
+      height: 60,
+    }}
+    description={
+      <>
+         <p>
+Hiện Tại Đơn Hàng Đang Trống
+      </p>
+      <p>
+                Hãy khám phá sản phẩm thức uống của chúng tôi và đặt những món
+                hàng mà bạn yêu thích!!
+              </p> 
+      </>
+    
+    }
+  >
+    <Button onClick={handleAddsp} type="primary">Thêm sản phẩm</Button>
+  </Empty>
 </div>
 )}
   

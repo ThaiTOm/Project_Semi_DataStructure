@@ -3,11 +3,11 @@ import "../pageadmin/components/adminSider/adminSider.scss"
 import img1 from "../image/img1.png";
 import img2 from "../image/img2.png";
 import img3 from "../image/img3.png";
-
+import "./data.scss"
 export const SidebarData = [
   {
     key: 'dashboard',
-    icon: <Link to="/admin/dash"><img width="19" height="19" src="https://img.icons8.com/wired/64/dashboard.png" alt="dashboard" /></Link>,
+    icon: <Link to="/admin/dash"><img className="siderbar--icon" src="https://img.icons8.com/dusk/64/dashboard.png" alt="dashboard"/></Link>,
     label: "Dashboard",
     style: {
        marginTop: '20px',
@@ -18,7 +18,7 @@ export const SidebarData = [
   },
   {
     key: 'orders',
-    icon: <Link to="/admin/orders"><img width="19" height="19" src="https://img.icons8.com/ios/50/order-completed--v2.png" alt="order-completed--v2" /></Link>,
+    icon: <Link to="/admin/orders"><img className="siderbar--icon" src="https://img.icons8.com/color/48/order-completed.png" alt="order-completed"/></Link>,
     label: "Orders",
     style: {
       marginTop: '20px',
@@ -29,63 +29,53 @@ export const SidebarData = [
   },
   {
     key: 'customers',
-    icon: <img width="19" height="19" src="https://img.icons8.com/windows/32/gender-neutral-user.png" alt="gender-neutral-user" />,
+    icon: <img className="siderbar--icon" src="https://img.icons8.com/windows/32/gender-neutral-user.png" alt="gender-neutral-user" />,
     label: "Customers",
     style: {
       marginTop: '20px',
       marginBottom: '20px',
-      
       fontSize: '17px'
    },
    children: [
     {
       key: 'userAccount',
       label: <div  className="account" >Account</div>,
-      icon: <Link  to="/admin/customer/account"><img width="19" height="19" src="https://img.icons8.com/fluency/48/guest-male--v1.png" alt="guest-male--v1"/></Link>  // Replace with the appropriate icon
+      icon: <Link  to="/admin/customer/account"><img className="siderbar--icon" src="https://img.icons8.com/fluency/48/guest-male--v1.png" alt="guest-male--v1"/></Link>  // Replace with the appropriate icon
       
     },
     {
       key: 'userInformation',
       label: 'Information',
-      icon:  <Link to="/admin/customer/information"><img width="19" height="19" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
+      icon:  <Link to="/admin/customer/information"><img className="siderbar--icon" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
     
     },
   ],
   },
   {
     key: 'products',
-    icon: <Link to="/admin/product"><img width="19" height="19" src="https://img.icons8.com/material-outlined/24/product.png" alt="product" /></Link>,
+    icon: <img className="siderbar--icon" src="https://img.icons8.com/material-outlined/24/product.png" alt="product" />,
     label: "Products",
     style: {
       marginTop: '20px',
       marginBottom: '20px',
       fontSize: '17px'
-   }
+   },
+   children : [
+    {
+      key: 'productlist',
+      label: 'Product List',
+      icon: <Link className="siderbar--link" to="/admin/product/productlist"><img className="siderbar--icon" src="https://img.icons8.com/color/48/holding-box.png" alt="holding-box"/></Link>
+    },
+    {
+      key: 'categorylist',
+      label: 'Category List',
+      icon: <Link className="siderbar--link" to="/admin/product/categorylist"><img className="siderbar--icon" src="https://img.icons8.com/pulsar-color/48/diversity.png" alt="diversity"/></Link>
+    }
+   ]
   },
 ];
 
   
-
-// export const SidebarData = [
-//   {
-//     icon:  <Link to="/admin"  ><img  width="14" height="14" src="https://img.icons8.com/wired/64/dashboard.png" alt="dashboard"/></Link>,
-//     heading: "Dashboard",
-//   },
-//   {
-//     icon: <Link to="/admin/customer" ><img width="14" height="14" src="https://img.icons8.com/ios/50/order-completed--v2.png" alt="order-completed--v2"/></Link>,
-//     heading: "Orders",
-//   },
-//   {
-//     icon: <Link to="/admin/customer" ><img width="14" height="14" src="https://img.icons8.com/windows/32/gender-neutral-user.png" alt="gender-neutral-user"/></Link>,
-//     heading: "Customers",
-//   },
-//   {
-//     icon: <Link to="/admin/product"><img width="14" height="14" src="https://img.icons8.com/material-outlined/24/product.png" alt="product"/></Link>,
-//     heading: 'Products'
-//   },
-
-// ];
-
 export const cardsData = [
   {
     title: "Sales",

@@ -1,12 +1,10 @@
-import Categorylist from "../components/categoryList/cateList";
-import Productlist from "../components/productList/productList";
+import { Outlet } from "react-router-dom";
 
 function Adminproduct () {
     return (
         <>
             <div className="adminproduct" >
-             <Productlist />
-           <Categorylist />
+         <Outlet />
             </div>
         </>
     )

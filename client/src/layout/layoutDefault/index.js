@@ -7,6 +7,7 @@ import {
   Avatar,
   Menu,
   Dropdown,
+  Badge,
 } from "antd";
 import "./responsiveContainer.scss";
 import "./layoutDefault.scss";
@@ -33,46 +34,45 @@ import {
 } from "../../service/getcategory/getCategory";
 import { get } from "../../tienich/request";
 import { Layout } from "antd";
+import { useSelector } from "react-redux";
 
 const { Header, Content, Footer, Sider } = Layout;
 const cookies = getCookie("token");
-console.log(cookies)
-const items = cookies.length === 0
-  ? [
-      {
-        key: "1",
-        label: <Link to="/login">Đăng Nhập</Link>,
-      },
-      {
-        key: "2",
-        label: <Link to="/register">Đăng Ký</Link>,
-      }
-    ]
-  : [
-      {
-        key: "1",
-        label: <Link to="/infor/thongtinkh">Thông Tin Khách Hàng</Link>,
-      },
-      {
-        key: "2",
-        label: <Link to="/infor/address">Địa Chỉ</Link>,
-      },
-      {
-        key: "3",
-        label: <Link to="/infor/changepass">Đổi Mật Khẩu</Link>,
-      },
-      {
-        key: "4",
-        label: <Link to="/infor/yourorder">Đơn Hàng Của Bạn</Link>,
-      },
-      {
-        key: "5",
-        label: <Link to="/infor/logout">Đăng Xuất</Link>,
-      }
-    ];
 
-
-
+const items =
+  cookies.length === 0
+    ? [
+        {
+          key: "1",
+          label: <Link to="/login">Đăng Nhập</Link>,
+        },
+        {
+          key: "2",
+          label: <Link to="/register">Đăng Ký</Link>,
+        },
+      ]
+    : [
+        {
+          key: "1",
+          label: <Link to="/infor/thongtinkh">Thông Tin Khách Hàng</Link>,
+        },
+        {
+          key: "2",
+          label: <Link to="/infor/address">Địa Chỉ</Link>,
+        },
+        {
+          key: "3",
+          label: <Link to="/infor/changepass">Đổi Mật Khẩu</Link>,
+        },
+        {
+          key: "4",
+          label: <Link to="/infor/yourorder">Lịch Sử Đơn Hàng</Link>,
+        },
+        {
+          key: "5",
+          label: <Link to="/infor/logout">Đăng Xuất</Link>,
+        },
+      ];
 
 function LayoutDefault() {
   const [options, setOptions] = useState([]);
@@ -82,15 +82,7 @@ function LayoutDefault() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
-
+ 
   const [data, setData] = useState([
     {
       id: "",
@@ -101,12 +93,11 @@ function LayoutDefault() {
       title: "",
     },
   ]);
-
+  const soluong = useSelector((state) => state.cartStore);
   useEffect(() => {
     const fetchapi = async () => {
       const res = await getCategory();
       if (!res) {
-        console.error("loi");
       } else {
         setData(res);
       }
@@ -142,7 +133,13 @@ function LayoutDefault() {
     };
   }, []);
 
- 
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   const handleScroll = () => {
     setShowOptions(false);
@@ -160,14 +157,12 @@ function LayoutDefault() {
     setSearchText(value);
     setShowOptions(true);
 
-    console.log(value);
     if (value.length == 0) {
       setShowOptions(false);
     }
   };
 
   const handleKeydown = (e) => {
-    console.log(e);
     if (e.code == "Enter") {
       form.resetFields();
       setRender(!render);
@@ -178,22 +173,19 @@ function LayoutDefault() {
   };
 
   const handleFinish = (e) => {
-    console.log(e);
     setRender(!render);
     navigate(`/search/${e["name-product"]}`);
     form.resetFields();
   };
-  const onFinishFailed = (e) => {
-    console.log(e);
-  };
+  const onFinishFailed = (e) => {};
 
   const fetchData = async (searchText) => {
     const results = await getProductsearch(searchText);
-    // Cập nhật options với kết quả từ tìm kiếm
+  
     setOptions(results);
   };
 
-  // Sử dụng useEffect để gọi fetchData khi searchText thay đổi
+  // sử dụng useEffect để gọi fetchData khi searchText thay đổi
   useEffect(() => {
     if (searchText) {
       fetchData(searchText);
@@ -325,28 +317,32 @@ function LayoutDefault() {
                 </div>
                 <div className="header--function__donhang header--function__c">
                   <NavLink to={cookies.length === 0 ? "/login" : "/order"}>
-                    <img src={donhang} alt="don hang" />
+                    <img
+                      src="https://img.icons8.com/fluency/48/purchase-order.png"
+                      alt="purchase-order"
+                    />
                     <p className="header--function__chung">Đơn hàng</p>
                   </NavLink>
                 </div>
                 <div className="header--function__cuahang header--function__c">
                   <NavLink to="/dscuahang">
-                    <img src={position} alt="cua hang" />
+                    <img
+                      src="https://img.icons8.com/color/48/place-marker--v1.png"
+                      alt="place-marker--v1"
+                    />
                     <p className="header--function__chung">Cửa hàng</p>
                   </NavLink>
                 </div>
 
                 <div className="header--function__taikhoan header--function__c">
-                  <Dropdown
-                    placement="bottom"
-                    menu={{ items } }
-                  >
+                  <Dropdown placement="bottom" menu={{ items }}>
                     <NavLink
-                      to={
-                        cookies.length === 0 ? "/login" : "/infor/thongtinkh"
-                      }
+                      to={cookies.length === 0 ? "/login" : "/infor/thongtinkh"}
                     >
-                      <img src={person} alt="tai khoan" />
+                      <img
+                        src="https://img.icons8.com/color/48/person-male.png"
+                        alt="person-male"
+                      />
                       <p className="header--function__chung">Tài khoản </p>
                     </NavLink>
                   </Dropdown>
@@ -354,7 +350,18 @@ function LayoutDefault() {
 
                 <div className="header--function__giohang header--function__c">
                   <NavLink to={cookies.length === 0 ? "/login" : "/cart"}>
-                    <img src={cart} alt="gio hang" />
+                    <Badge
+                      count={
+                        soluong ? soluong.length : ""
+                      }
+                      overflowCount={99}
+                    >
+                      <img
+                        src="https://img.icons8.com/fluency/48/shopping-cart.png"
+                        alt="shopping-cart"
+                      />
+                    </Badge>
+
                     <p className="header--function__chung">Giỏ hàng</p>
                   </NavLink>
                 </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu } from "antd";
 import { AlignLeftOutlined } from "@ant-design/icons";
 import { getCategory } from "../../service/getcategory/getCategory";
-import cart from "../../image/cart.png";
 import { Await, Link } from "react-router-dom";
 import { get } from "../../tienich/request";
 function Homesider() {

@@ -44,6 +44,18 @@
   
   }
   }
+  &--check {
+    color: red;
+    margin-left: 25%;
+    margin-top: -23px;
+    padding-bottom: 5px;
+  }
+  &--block {
+    margin-left: 25%;
+    margin-top: -20px;
+    padding-bottom: 2px;
+    visibility: hidden;
+  }
 }
 
 hr {

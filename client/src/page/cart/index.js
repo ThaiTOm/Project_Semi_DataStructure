@@ -6,14 +6,14 @@ import { addcart, down, up, xoa, xoahet } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { getCart, getOrder, getUserstk } from "../../service/getcategory/getCategory";
 import { patchCart } from "../../service/patch/patch";
-import { Button, Checkbox, Col, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
+import { Button, Checkbox, Col, Empty, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
 
 
 const { Header, Content, Footer, Sider } = Layout;
 function Cart() {
-  const storedData = JSON.parse(localStorage.getItem(getCookie("token")));
+  // const storedData = JSON.parse(localStorage.getItem(getCookie("token")));
 
   const products = useSelector((state) => state.cartStore);
   const [data, setData] = useState([]);   // lấy dữ liệu người dùng đang đăng nhập
@@ -46,7 +46,7 @@ return result;
     const fetchApi = async (e) => {
       try {
         const result = await getUserstk(e);
-        // Xử lý dữ liệu ở đây sau khi nhận được kết quả từ getUserstk
+        // xử lý dữ liệu ở đây sau khi nhận được kết quả từ getUserstk
         setData(result);
       } catch (error) {
         console.error("Error in fetchhApi:", error);
@@ -69,15 +69,15 @@ return result;
     if (data_2 && Object.keys(data_2).length > 0) {
       const patchApi = async (data) => {
         try {
-          const result = await patchCart(data); // Gọi hàm patchCart với tham số là data
+          const result = await patchCart(data); // gọi hàm patchCart với tham số là data
           
         } catch (error) {
           console.error("Error while patching cart:", error);
-          // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
+          // xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
         }
       
       };
-      patchApi(data_2); // Gọi hàm patchApi với tham số là data_2
+      patchApi(data_2); // gọi hàm patchApi với tham số là data_2
       localStorage.setItem(cookies, JSON.stringify(data_2));
     }
   }, [data_2]);
@@ -85,7 +85,7 @@ return result;
 
   const [selectedProductsCount, setSelectedProductsCount] = useState(0);
   useEffect(() => {
-    // Sử dụng dữ liệu trong selectedRowKeys để tính toán tổng thanh toán
+    // sử dụng dữ liệu trong selectedRowKeys để tính toán tổng thanh toán
     // và số lượng sản phẩm được chọn
     
     const total = selectedRowKeys.reduce((total, item) => {
@@ -97,9 +97,11 @@ return result;
       }
     }, 0);
   
-    setTotal(total); // Cập nhật state tổng thanh toán
-    setSelectedProductsCount(selectedRowKeys.length); // Cập nhật state số lượng sản phẩm
-    
+    setTotal(total); // cập nhật state tổng thanh toán
+    setSelectedProductsCount(selectedRowKeys.length); // cập nhật state số lượng sản phẩm
+    if (total == 0) {
+      setSelectedProductsCount(0);
+    }
   }, [selectedRowKeys, data_3]);
 
   const columns = [
@@ -188,14 +190,14 @@ return result;
   ];
 
   function deleteAndAdjust(array, valueToDelete) {
-    // Tìm vị trí của phần tử cần xóa
+    // tìm vị trí của phần tử cần xóa
     const indexToDelete = array.indexOf(valueToDelete)
   
     if (indexToDelete !== -1) {
-      // Xóa phần tử tại vị trí indexToDelete
+      // xóa phần tử tại vị trí indexToDelete
       array.splice(indexToDelete, 1);
   
-      // Cập nhật giá trị của các phần tử có giá trị lớn hơn phần tử bị xóa
+      // cập nhật giá trị của các phần tử có giá trị lớn hơn phần tử bị xóa
       for (let i = 0; i < array.length; i++) {
         if (array[i] > valueToDelete) {
           array[i] -= 1;
@@ -267,20 +269,15 @@ return result;
     onChange: onSelectChange,
   };
   const pagination = {
-    pageSize: 10, // Số hàng mỗi trang
+    pageSize: 10, // số hàng mỗi trang
    
   };
-
-
- 
 
 const handleDown = (values, e) => {
  if (values > 1 ) {
   dispatch(down(e.id))
-
  }
  else {
-
    handleXoa(e);
  }
 }
@@ -312,11 +309,9 @@ const handleSelectAll = (e) => {
 
 
 const dulieuselect = selectedRowKeys.map(x => {
-  
   const result = data_3.find(item => {
     return x == item.key
   })
-
   return result
 })
 
@@ -330,7 +325,7 @@ const handleClick = async (e) => {
     }
   }, null);
   if (selectedRowKeys.length > 0){
-    if (newestOrder.orderStep !== 3) {
+    if (newestOrder && newestOrder.orderStep !== 3) {
       Modal.error({
         title: 'Không thể mua hàng',
         content: 'Đơn hàng của bạn vẫn chưa hoàn thành!'
@@ -351,36 +346,42 @@ const handleClick = async (e) => {
 }
 
 const handleDelete = () => {
-
   const findId = selectedRowKeys.map(x => {
- 
     const result = data_3.find(item => {
       return x == item.key
     })
-   
     return result
   })
 
- const cc = findId.map (item => {
-
-    return dispatch(xoa(item.id));
+ const timkiem = findId.map (item => {
+  if (item && item.id) {
+     return dispatch(xoa(item.id));
+  }
+   
  })
 
- if (cc.length > 0){
+ if (timkiem.length > 0){
   setSelectedRowKeys([]);
   setTotal(0);
  }
 }
 
+const handleAddsp = () => {
+  navigate("/collections")
+}
+
+const handleXoahet = () => {
+
+  dispatch(xoahet(-1))
+}
   return (
     <>
     <Layout>
        <Content className="cart--content  animate__animated animate__zoomIn animate__faster">
         <div className="cart--top">
           <h2>DANH SÁCH GIỎ HÀNG</h2>
-          <button className="cart--button" onClick={() => dispatch(xoahet(-1))}>
-            {" "}
-            Xóa tất cả{" "}
+          <button className="cart--button" onClick={handleXoahet}>
+            Xóa tất cả
           </button>
         </div>
         {data_2 && data_2.product && data_2.product.length > 0 ? (
@@ -409,16 +410,26 @@ const handleDelete = () => {
           
         </div>
         ) : (
-<div className="cart--empty" >  <Result
-    status="error"
-    title="Giỏ hàng của bạn hiện tại đang trống."
-    extra={
+<div className="cart--empty" >  <Empty
+    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+    imageStyle={{
+      height: 60,
+    }}
+    description={
+      <>
+         <p>
+Hiện Tại Giỏ Hàng Trống
+      </p>
       <p>
                 Hãy khám phá sản phẩm thức uống của chúng tôi và thêm những món
                 hàng mà bạn thích!!
-              </p>
+              </p> 
+      </>
+    
     }
-  /></div>
+  >
+    <Button onClick={handleAddsp} type="primary">Thêm sản phẩm</Button>
+  </Empty></div>
         
             
           )}

@@ -212,12 +212,13 @@ cursor: pointer;
         display: flex;
         align-items: center;
         background-color: greenyellow;
-     
+       padding-left: 10px;
+       font-weight: bold;
     }
     &__add {
         position: absolute;
         right: 10%;
-        bottom: 15%;
+        bottom: 12%;
        & button {
         background-color: greenyellow;
         color: white;
@@ -230,6 +231,12 @@ cursor: pointer;
         background-color: red;
 
        }
+      
+    }
+    &__tomau {
+        font-size: 20px;
+        color: rgb(150, 235, 23);
+            margin: 0px;
     }
     &__content {
         & .col {
@@ -242,10 +249,10 @@ cursor: pointer;
         & .item {
            
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-            min-height: 360px;
+            min-height: 370px;
         & .top  img {
             width: 100%;
-          aspect-ratio: 5/4;
+          aspect-ratio: 4/4;
         }
         & .under {
             padding: 10px 10px 10px 10px;
@@ -254,16 +261,21 @@ cursor: pointer;
                 font-size: 17px;
                 letter-spacing: 1.6;
                 font-weight: 500;
-                min-height:40px;
+                min-height:35px;
             }
         }
         & .p1 {
+            font-size: 20px;
+            color: rgb(150, 235, 23);
             margin: 0px;
            }
         & .p2 {
             margin: 0px;
             margin-right: 10px;
             
+           }
+           & .dc {
+            color: red;
            }
            & .price {
              display: flex;

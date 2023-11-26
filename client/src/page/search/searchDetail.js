@@ -99,7 +99,7 @@ while (pageIndex < data.length) {
                         <div className="search--item__price">
                           <p
                             className={`search--item__p2 ${
-                              item.discountPercentage !== 0 ? "gachngang" : ""
+                              item.discountPercentage !== 0 ? "gachngang" : "tomau"
                             }`}
                           >
                             {new Intl.NumberFormat("vi-VN", {
@@ -107,7 +107,7 @@ while (pageIndex < data.length) {
                               currency: "VND",
                             }).format(`${item.price}`)}
                           </p>
-                          <div>
+                          <div className="dc">
                             {item.discountPercentage !== 0
                               ? `${item.discountPercentage}%`
                               : ""}

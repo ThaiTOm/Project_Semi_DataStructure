@@ -10,6 +10,7 @@ import {
   Checkbox,
   Col,
   Layout,
+  Modal,
   Pagination,
   Row,
   Select,
@@ -132,22 +133,35 @@ function Categorydetail() {
     setId(1);
   };
   const checkId = useSelector(state => state.cartStore);  
+
   const handleClick = (id, infor) => {
-    if(cookies) {
-        const check = checkId.some(item => {
-    return item.id === id;
-});
-if (check) {
-  dispatch(up(id));
-  }
-  else {
-  dispatch(add(id, infor));
-  }
-    }
-    else {
+    if (cookies) {
+      const check = checkId.some((item) => {
+        return item.id === id;
+      });
+
+      if (check) {
+        const productSlg = checkId.find((item) => {
+          return item.id === id;
+        });
+    
+
+        if (infor.Quantity > productSlg.quanlity) {
+          dispatch(up(id));
+        } else {
+          Modal.error({
+            title: "Không Thể Thêm Sản Phẩm",
+            content:
+              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+          });
+        }
+      } else {
+        dispatch(add(id, infor));
+      }
+    } else {
       navigate("/login");
     }
-  }
+  };
 
 
   // check xem thêm và rút gọn
@@ -374,6 +388,9 @@ if (check) {
   min={1000}
   step={1000}
   onAfterChange={handleChange_final}
+  tooltip={{
+      open: false,
+    }}
 />
             </div>
           </Sider>

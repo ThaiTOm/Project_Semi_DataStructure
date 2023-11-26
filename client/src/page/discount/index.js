@@ -7,7 +7,7 @@ import { filterByArrange, taocate, taohsx } from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { Breadcrumb, Button, Checkbox, Col, Layout, Pagination, Row, Select, Slider } from "antd";
+import { Breadcrumb, Button, Checkbox, Col, Layout, Modal, Pagination, Row, Select, Slider } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
 
 const Discount = () => {
@@ -40,21 +40,33 @@ const Discount = () => {
   // phân trang dữ liệu
   const checkId = useSelector(state => state.cartStore);
   const handleClick = (id, infor) => {
-    if(cookies) {
-        const check = checkId.some(item => {
-    return item.id === id;
-});
-if (check) {
-  dispatch(up(id));
-  }
-  else {
-  dispatch(add(id, infor));
-  }
-    }
-    else {
+    if (cookies) {
+      const check = checkId.some((item) => {
+        return item.id === id;
+      });
+
+      if (check) {
+        const productSlg = checkId.find((item) => {
+          return item.id === id;
+        });
+      
+
+        if (infor.Quantity > productSlg.quanlity) {
+          dispatch(up(id));
+        } else {
+          Modal.error({
+            title: "Không Thể Thêm Sản Phẩm",
+            content:
+              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+          });
+        }
+      } else {
+        dispatch(add(id, infor));
+      }
+    } else {
       navigate("/login");
     }
-  }
+  };
 
   let pageIndex = 0;
  
@@ -286,6 +298,9 @@ console.log(paginatedData)
   min={1000}
   step={1000}
   onAfterChange={handleChange_final}
+  tooltip={{
+      open: false,
+    }}
 />
             </div>
             <div className="discount--sider__hsx">

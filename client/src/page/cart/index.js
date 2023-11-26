@@ -4,7 +4,7 @@ import "./cart.scss";
 import { useEffect, useState } from "react";
 import { addcart, down, up, xoa, xoahet } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getCart, getOrder, getUserstk } from "../../service/getcategory/getCategory";
+import { getCart, getOrder, getProductsp, getUserstk } from "../../service/getcategory/getCategory";
 import { patchCart } from "../../service/patch/patch";
 import { Button, Checkbox, Col, Empty, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -23,13 +23,18 @@ function Cart() {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);  // lấy key mà người dùng pick trong table
   const [total, setTotal] = useState(0);  // tính tổng tiền
   const [checked, setChecked] = useState(false);  
+  const [product, setProduct] = useState([]);
  const navigate = useNavigate();
 
 const fetchPur = async (id) => {
   const result = await getOrder(id);
-  console.log(result)
 return result;
 }
+
+ const fetchsp = async () => {
+  const result = await getProductsp();
+    setProduct(result);
+ }
 
   // cũ
   var tong = 0;
@@ -54,6 +59,7 @@ return result;
       }
     };
     fetchApi(cookies);
+    fetchsp();
   }, []);
   useEffect(() => {
     if (data && data.length > 0) {
@@ -158,7 +164,7 @@ return result;
   </Col>
 
   <Col span={4} className="col-2">
-    <Button className="cart--control__b2" onClick={() => dispatch(up(record.id))}><img width="12" height="12" src="https://img.icons8.com/android/24/1A1A1A/plus.png" alt="plus"/></Button>
+    <Button className="cart--control__b2" onClick={() => handleUp(text, record)}><img width="12" height="12" src="https://img.icons8.com/android/24/1A1A1A/plus.png" alt="plus"/></Button>
   </Col>
 </Row>
         </div>
@@ -282,6 +288,20 @@ const handleDown = (values, e) => {
  }
 }
 
+const handleUp = (soluong, values) => {
+ const findsolgsp = product.find(item => {
+  return item.id == values.id;
+ })
+if (findsolgsp.Quantity > soluong){
+  dispatch(up(values.id))
+}
+else {
+  Modal.error({
+    title: 'Không Thể Thêm Sản Phẩm',
+    content: 'Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ',
+  });
+}
+}
 
 
 

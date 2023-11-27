@@ -2,7 +2,12 @@ import { PlusOutlined } from "@ant-design/icons";
 
 import { useEffect, useState } from "react";
 import { getProductsp } from "../../service/getcategory/getCategory";
-import { filterByArrange, taocate, taohsx } from "../../components/filter";
+import {
+  filterByArrange,
+  handleClick,
+  taocate,
+  taohsx,
+} from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
@@ -22,36 +27,34 @@ import {
 import "animate.css";
 import { Link, useNavigate } from "react-router-dom";
 import "./collections.scss";
+import filterData from "../../components/handleLogic/handlelogic";
 const { Header, Content, Footer, Sider } = Layout;
 
 function Collections() {
   const [max, setMax] = useState(0);
   const [data, setData] = useState([]); // lấy data của sản phẩm
-  const [id, setId] = useState(1); // phân trang sản phẩm
-  const [data_3, setData_3] = useState({
+  const [id, setId] = useState(1); // xét phân trang 
+  const [data_3, setData_3] = useState({  // lấy data để lọc
     hsx: "",
     distance: [1000, 9999999999],
     cate: "",
     phanloai: "",
   });
-
+  const [expanded, setExpanded] = useState(false);  // xét phần thu gọn mở rộng
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data_4, setData_4] = useState([]); // để kết hợp các hàm lọc và thay đổi chỉ dữ liệu của data_4
   const mang = []; // tạo một mảng chứa các hãng sản xuất
-  const cate = [];
-  const paginatedData = [
+  const cate = []; // tạo category
+  const paginatedData = [  // tạo data sp cho từng trang 
     {
       price: "",
     },
   ];
-
-  // Số lượng phần tử trên mỗi trang
-
-  const itemsPerPage = 12;
-
-  let pageIndex = 0;
-
+  const checkId = useSelector((state) => state.cartStore); // lấy dữ liệu từ reducer
+ 
+  const itemsPerPage = 12; // Số lượng phần tử trên mỗi trang
+  let pageIndex = 0; // xác định mỗi phân trang có thể ít hơn 12 trang mặc định
   const cookies = getCookie("token");
 
   useEffect(() => {
@@ -88,42 +91,46 @@ function Collections() {
   // tạo loại sản phẩm
   taocate(data, cate);
 
-  // phân trang
+  // check xem thêm và rút gọn
+  const itemsToShow = expanded ? mang.length : 5;
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
+  // const handleClick = (id, infor) => {
+  //   if (cookies) {
+  //     const check = checkId.some((item) => {
+  //       return item.id === id;
+  //     });
+
+  //     if (check) {
+  //       const productSlg = checkId.find((item) => {
+  //         return item.id === id;
+  //       });
+
+  //       if (infor.Quantity > productSlg.quanlity) {
+  //         dispatch(up(id));
+  //       } else {
+  //         Modal.error({
+  //           title: "Không Thể Thêm Sản Phẩm",
+  //           content:
+  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+  //         });
+  //       }
+  //     } else {
+  //       dispatch(add(id, infor));
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
+
   const handleChange = (e) => {
+    // thay đổi phân trang thì set id theo đúng chỗ
     setId(e);
   };
 
-  const checkId = useSelector((state) => state.cartStore); // lấy dữ liệu từ reducer
-
-  const handleClick = (id, infor) => {
-    if (cookies) {
-      const check = checkId.some((item) => {
-        return item.id === id;
-      });
-
-      if (check) {
-        const productSlg = checkId.find((item) => {
-          return item.id === id;
-        });
-
-        if (infor.Quantity > productSlg.quanlity) {
-          dispatch(up(id));
-        } else {
-          Modal.error({
-            title: "Không Thể Thêm Sản Phẩm",
-            content:
-              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-          });
-        }
-      } else {
-        dispatch(add(id, infor));
-      }
-    } else {
-      navigate("/login");
-    }
-  };
-
-  // đưa dữ liệu thay đổi vào data_3
+  // lọc theo hãng sản xuất
   const handleChange_hsx = (e) => {
     console.log(e);
     setData_3({
@@ -131,14 +138,6 @@ function Collections() {
       hsx: e,
     });
     setId(1);
-  };
-
-  // check xem thêm và rút gọn
-  const [expanded, setExpanded] = useState(false);
-  const itemsToShow = expanded ? mang.length : 5;
-
-  const toggleExpanded = () => {
-    setExpanded(!expanded);
   };
 
   // check khoảng giá và đưa dữ liệu thao tác vào data_3
@@ -160,29 +159,40 @@ function Collections() {
     setId(1);
   };
 
-  const filterData = () => {
-    const arrangedData = filterByArrange(data_3, data_4, data);
-    const filteredData = arrangedData.filter((item) => {
-      // Lọc theo hãng sản xuất
-      const filterByBrand =
-        data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
-      // Lọc theo khoảng giá
-      const filterByPrice =
-        item.price * ((100 - item.discountPercentage) / 100) >=
-          data_3.distance[0] &&
-        item.price * ((100 - item.discountPercentage) / 100) <=
-          data_3.distance[1];
-      // Lọc theo loại sản phẩm
-      const filterByCategory =
-        data_3.cate.length === 0 || data_3.cate.includes(item.category);
-
-      return filterByBrand && filterByPrice && filterByCategory;
+  // lọc sắp xếp
+  const handleSelect = (e) => {
+    setData_3({
+      ...data_3,
+      phanloai: e,
     });
-
-    return filteredData;
+    setId(1);
+    console.log(e);
   };
+
+  // const filterData = () => {
+  //   const arrangedData = filterByArrange(data_3, data_4, data);
+  //   const filteredData = arrangedData.filter((item) => {
+  //     // Lọc theo hãng sản xuất
+  //     const filterByBrand =
+  //       data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
+  //     // Lọc theo khoảng giá
+  //     const filterByPrice =
+  //       item.price * ((100 - item.discountPercentage) / 100) >=
+  //         data_3.distance[0] &&
+  //       item.price * ((100 - item.discountPercentage) / 100) <=
+  //         data_3.distance[1];
+  //     // Lọc theo loại sản phẩm
+  //     const filterByCategory =
+  //       data_3.cate.length === 0 || data_3.cate.includes(item.category);
+
+  //     return filterByBrand && filterByPrice && filterByCategory;
+  //   });
+  //   return filteredData;
+  // };
+
   // gán giá trị
-  const giatriloc = filterData();
+
+  const giatriloc = filterData(data_3, data_4, data);
 
   // tạo phân trang đẩy vào mảng theo từng mảng
   while (pageIndex < giatriloc.length) {
@@ -194,17 +204,6 @@ function Collections() {
   const total = Math.ceil(
     (((giatriloc.length / 12).toFixed(1) * 10) / 10) * 10
   );
-
-  // xuất giá trị
-
-  const handleSelect = (e) => {
-    setData_3({
-      ...data_3,
-      phanloai: e,
-    });
-    setId(1);
-    console.log(e);
-  };
 
   return (
     <>
@@ -412,7 +411,16 @@ function Collections() {
                         shape="circle"
                         type="primary"
                         icon={<PlusOutlined />}
-                        onClick={() => handleClick(item.id, item)}
+                        onClick={() =>
+                          handleClick(
+                            item.id,
+                            item,
+                            checkId,
+                            cookies,
+                            dispatch,
+                            navigate
+                          )
+                        }
                       ></Button>
                     </div>
                   </Col>

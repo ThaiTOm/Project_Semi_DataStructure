@@ -981,92 +981,26 @@
       "userId": 1,
       "product": [
         {
-          "id": 1,
+          "id": 10,
           "infor": {
-            "id": 1,
-            "title": "Apple Juice",
-            "description": " Freshly squeezed apple juice, 100% natural. Sản phẩm là sự kết hợp hoàn hảo từ các trái táo tươi, được ép lấy nước, đảm bảo độ tươi ngon và an toàn cho sức khỏe. Không chứa chất bảo quản hay đường tăng cường. Đây là lựa chọn hoàn hảo cho những người yêu thích thức uống tự nhiên và lành mạnh.",
-            "price": 37000,
-            "discountPercentage": 0,
-            "rating": 4.6,
-            "brand": "Nature's Best",
-            "category": "Fruit Juice",
-            "Quantity": 22,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-            "images": [
-              "https://i.pinimg.com/236x/cd/f6/3c/cdf63c34f8768539fb1d30f133f585dd.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/55/55/7a/55557a017b3ac00f143823298c8ea599.jpg",
-              "https://i.pinimg.com/236x/21/ff/7e/21ff7ef76f32d75208abd60ad024201b.jpg"
-            ]
-          },
-          "quanlity": 22
-        },
-        {
-          "id": 3,
-          "infor": {
-            "id": 3,
-            "title": "Orange Juice",
-            "description": "Freshly squeezed orange juice, packed with vitamin C.",
-            "price": 45000,
-            "discountPercentage": 10,
+            "id": 10,
+            "title": "Berry Blast Smoothie",
+            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
+            "price": 50000,
+            "discountPercentage": 20,
             "rating": 4.8,
-            "brand": "Citrus Delights",
-            "category": "Fruit Juice",
-            "Quantity": 221,
-            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 38,
+            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
             "images": [
-              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
-              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
-              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
-              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
-            ]
-          },
-          "quanlity": 4
-        },
-        {
-          "id": 4,
-          "infor": {
-            "id": 4,
-            "title": "Mango Juice",
-            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
-            "price": 30000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Tropical Paradise",
-            "category": "Fruit Juice",
-            "Quantity": 54,
-            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
-              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
-              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
-              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
+              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
+              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
+              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
+              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
             ]
           },
           "quanlity": 1
-        },
-        {
-          "id": 17,
-          "infor": {
-            "id": 17,
-            "title": "Durian Smoothie",
-            "description": "A rich and creamy durian smoothie made from the finest durian fruit.",
-            "price": 80000,
-            "discountPercentage": 20,
-            "rating": 4.6,
-            "brand": "Tropical Treats",
-            "category": "Fruit Smoothie",
-            "Quantity": 30,
-            "thumbnail": "https://i.pinimg.com/236x/a9/69/18/a9691800f51252178f516c278b5083a4.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/a9/69/18/a9691800f51252178f516c278b5083a4.jpg",
-              "https://i.pinimg.com/236x/11/69/25/116925f1f2bc1ccb263d9e6220d951d1.jpg",
-              "https://i.pinimg.com/236x/7d/c7/df/7dc7dfe06cdc68817ca870abccf29963.jpg",
-              "https://i.pinimg.com/736x/ed/56/12/ed56120c04400ba8ef0e28a56749ec97.jpg"
-            ]
-          },
-          "quanlity": 30
         }
       ],
       "id": 1
@@ -1368,8 +1302,8 @@
     },
     {
       "paymentMethod": "Tiền mặt",
-      "orderStep": 1,
-      "date": "2023-11-26 00:58:12",
+      "orderStep": 3,
+      "date": "2023-11-27 14:30:05",
       "userId": 2,
       "thanhtoan": [
         {
@@ -1397,7 +1331,7 @@
           "thanhtien": 40500
         }
       ],
-      "id": 6
+      "id": 7
     }
   ],
   "notification": []

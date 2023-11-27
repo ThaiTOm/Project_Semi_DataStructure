@@ -34,25 +34,34 @@ function Productdetail() {
   const [count, setCount] = useState(1);
   const [randomNumber, setrandomNumber] = useState(0);
 
-  const increaseCount = () => {
-       const productSlg = products.find(item => {
+  const increaseCount = () => {  // tăng số lượng
+    const productSlg = products.find((item) => {  // tìm id sản phẩm trong giỏ hàng
       return item.id === param;
-    })
-    if(data[0].Quantity - productSlg.quanlity > count){
-      setCount(count + 1);
+    });
+    if (productSlg === undefined) {  // nếu không có
+      if (data[0].Quantity > count) {  // thì so với số lượng tồn kho
+        setCount(count + 1);
+      } else {
+        Modal.error({
+          title: "Không Thể Thêm Sản Phẩm",
+          content:
+            "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+        });
+      }
+    } else { // nếu có
+      if (data[0].Quantity - productSlg.quanlity > count) { // thì so với số lượng tồn kho và trong giỏ hàng
+        setCount(count + 1);
+      } else {
+        Modal.error({
+          title: "Không Thể Thêm Sản Phẩm",
+          content:
+            "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+        });
+      }
     }
-    else {
-      Modal.error({
-        title: 'Không Thể Thêm Sản Phẩm',
-        content: 'Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ',
-      });
-    }
- 
-   
-   
   };
 
-  const decreaseCount = () => {
+  const decreaseCount = () => {  // giảm số lượng không được nhỏ hơn 1
     if (count > 1) {
       setCount(count - 1);
     }
@@ -60,6 +69,7 @@ function Productdetail() {
 
   const checkId = useSelector((state) => state.cartStore);
   const handleClick = (id, infor) => {
+    // nút thêm
     if (cookies) {
       const check = checkId.some((item) => {
         return item.id === id;
@@ -72,19 +82,17 @@ function Productdetail() {
     } else {
       navigate("/login");
     }
-  
   };
 
   function getRandomInt(min, max) {
+    // hàm xét min max và random trong khoảng đó
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  // Sử dụng hàm để tạo số nguyên ngẫu nhiên trong phạm vi từ 1 đến 100:
-
   useEffect(() => {
-    // lấy data gốc
+    // lấy data gốc của sản phẩm theo id
     const fetchApi = async (e) => {
       const result = await getProductdt(e);
       if (!result) {
@@ -100,6 +108,7 @@ function Productdetail() {
   }, [param]);
 
   useEffect(() => {
+    // lấy sản phẩm theo cate để làm sản phẩm cùng loại
     const fetchcate = async (e) => {
       const result = await getProductcate(e);
       if (!result) {
@@ -269,7 +278,7 @@ function Productdetail() {
                 </div>
 
                 <div className="product--addtocart">
-                  <Link to={cookies.length === 0 ? `/login` : ''}>
+                  <Link to={cookies.length === 0 ? `/login` : ""}>
                     <button
                       onClick={() => handleClick(data[0].id, data[0])}
                       className="product--addtocart__s  product--addtocart__s1"

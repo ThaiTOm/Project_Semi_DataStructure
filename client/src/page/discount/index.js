@@ -3,84 +3,102 @@ import { getProductdc, getProductsp } from "../../service/getcategory/getCategor
 import { useEffect, useState } from "react";
 import "./discount.scss"
 import { PlusOutlined  } from '@ant-design/icons';
-import { filterByArrange, taocate, taohsx } from "../../components/filter";
+import { filterByArrange, handleClick, taocate, taohsx } from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { Breadcrumb, Button, Checkbox, Col, Layout, Modal, Pagination, Row, Select, Slider } from "antd";
+import filterData from "../../components/handleLogic/handlelogic";
 const { Header, Content, Footer, Sider } = Layout;
 
 const Discount = () => {
 
-  const [max, setMax] = useState(0)
-  const [data, setData] = useState([]); // dữ liệu cate
-  const cate = [];
-  const [id, setId] = useState(1);
-  const [data_4, setData_4] = useState([]);
-  const [data_3, setData_3] = useState({
+  const [max, setMax] = useState(0) 
+  const [data, setData] = useState([]); // dữ liệu data sp gốc
+  const cate = [];  
+  const [id, setId] = useState(1);  // mã số phân trang
+  const [data_4, setData_4] = useState([]);  // tạo data sản phẩm có thể thay đổi 
+  const [data_3, setData_3] = useState({ // tạo data lọc
     phanloai: "",
     distance: [1000, 999999999],
     cate: "",
     hsx: "",
   });
   const mang = []; // tạo một mảng chứa các hãng sản xuất
-  const paginatedData = [
+  const paginatedData = [  // data theo phân trang
     {
       price: "",
     },
   ];
-  const cookies = getCookie("token");
+  const cookies = getCookie("token"); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // số lượng phần tử trên mỗi trang
-  
-  const itemsPerPage = 12;
-  // trạng thái cho việc hiển thị trang hiện tại
-
-  // phân trang dữ liệu
   const checkId = useSelector(state => state.cartStore);
-  const handleClick = (id, infor) => {
-    if (cookies) {
-      const check = checkId.some((item) => {
-        return item.id === id;
-      });
+  let pageIndex = 0;  // số sản phẩm có thể nhỏ hơn số lượng mặc định
+  const itemsPerPage = 12; // số lượng phần tử trên mỗi trang
+  const [expanded, setExpanded] = useState(false);  // check xem thêm và rút gọn
 
-      if (check) {
-        const productSlg = checkId.find((item) => {
-          return item.id === id;
-        });
+  // const handleClick = (id, infor) => {
+  //   if (cookies) {
+  //     const check = checkId.some((item) => {
+  //       return item.id === id;
+  //     });
+
+  //     if (check) {
+  //       const productSlg = checkId.find((item) => {
+  //         return item.id === id;
+  //       });
       
 
-        if (infor.Quantity > productSlg.quanlity) {
-          dispatch(up(id));
-        } else {
-          Modal.error({
-            title: "Không Thể Thêm Sản Phẩm",
-            content:
-              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-          });
-        }
-      } else {
-        dispatch(add(id, infor));
-      }
-    } else {
-      navigate("/login");
-    }
-  };
+  //       if (infor.Quantity > productSlg.quanlity) {
+  //         dispatch(up(id));
+  //       } else {
+  //         Modal.error({
+  //           title: "Không Thể Thêm Sản Phẩm",
+  //           content:
+  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+  //         });
+  //       }
+  //     } else {
+  //       dispatch(add(id, infor));
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };  // ẩn nó đi để lỡ lỗi thì có cái mở
 
-  let pageIndex = 0;
- 
   
+  useEffect(() => {
+    // lấy data gốc
+    const fetchApi = async () => {
+      const result = await getProductdc();
+      if (!result) {
+     //
+      } else {
+        const maxValue = result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price);  
+        setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
+        setData_3({
+          ...data_3,
+          distance: [1000, maxValue]
+         })
+        setData([...result]);
+        setData_4(result);
+      }
+    };
+    fetchApi();
+    
+  }, []);
+  // tao cate
   taocate(data, cate);
  
+ // tạo logic thu gọn xem thêm
   taohsx(data, mang);
-  const [expanded, setExpanded] = useState(false);
   const itemsToShow = expanded ? mang.length : 5;
-
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
 
+  // lọc theo category
   const handleChange_cate = (e) => {
     setData_3({
       ...data_3,
@@ -88,29 +106,32 @@ const Discount = () => {
     });
     setId(1);
   };
+
+  // lọc theo khoảng giá
   const handleChange_final = (e) => {
     setData_3({
       ...data_3,
       distance: e,
     });
     setId(1);
-    console.log(e);
-  };
-  const handleChange = (e) => {
-    setId(e);
-    console.log(e);
   };
 
+  // lọc theo phân trang
+  const handleChange = (e) => {
+    setId(e);
+  };
+
+  // lọc theo sắp xếp
   const handleSelect = (e) => {
     setData_3({
       ...data_3,
       phanloai: e,
     });
     setId(1);
-    console.log(e);
   }
+
+  // lọc theo hãng sx
   const handleChange_hsx = (e) => {
-    console.log(e);
     setData_3({
       ...data_3,
       hsx: e,
@@ -120,68 +141,46 @@ const Discount = () => {
 
   
   
-  const filterData = () => {
-    const arrangedData = filterByArrange(data_3,data_4, data);
-    const filteredData = arrangedData.filter((item) => {
+  // const filterData = () => {
+  //   const arrangedData = filterByArrange(data_3,data_4, data);
+  //   const filteredData = arrangedData.filter((item) => {
     
        
-      // Lọc theo hãng sản xuất
-      const filterByBrand =
-        data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
-      // Lọc theo khoảng giá
-      const filterByPrice =
-        item.price * ((100 - item.discountPercentage) / 100) >=
-          data_3.distance[0] &&
-        item.price * ((100 - item.discountPercentage) / 100) <=
-          data_3.distance[1];
-      // Lọc theo loại sản phẩm
-      const filterByCategory =
-        data_3.cate.length === 0 || data_3.cate.includes(item.category);
+  //     // Lọc theo hãng sản xuất
+  //     const filterByBrand =
+  //       data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
+  //     // Lọc theo khoảng giá
+  //     const filterByPrice =
+  //       item.price * ((100 - item.discountPercentage) / 100) >=
+  //         data_3.distance[0] &&
+  //       item.price * ((100 - item.discountPercentage) / 100) <=
+  //         data_3.distance[1];
+  //     // Lọc theo loại sản phẩm
+  //     const filterByCategory =
+  //       data_3.cate.length === 0 || data_3.cate.includes(item.category);
 
-      return filterByBrand && filterByPrice && filterByCategory;
+  //     return filterByBrand && filterByPrice && filterByCategory;
 
 
-    });
+  //   });
 
  
 
-    return filteredData;
-  };
+  //   return filteredData;
+  // };
 // gán giá trị 
-  const giatriloc = filterData();
-console.log(giatriloc);
- useEffect(() => {
-  // lấy data gốc
-  const fetchApi = async () => {
-    const result = await getProductdc();
-    if (!result) {
-      console.log("coconcac");
-    } else {
-      const maxValue = result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price);  
-      setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
-      setData_3({
-        ...data_3,
-        distance: [1000, maxValue]
-       })
-      setData([...result]);
-      setData_4(result);
-    }
-  };
-  fetchApi();
   
-}, []);
+const giatriloc = filterData(data_3,data_4, data);  // giá trị lọc cuối cùng
 
-console.log(cate);
 
-while (pageIndex < giatriloc.length) {
+while (pageIndex < giatriloc.length) {   // xử lí phân trang
   paginatedData.push(giatriloc.slice(pageIndex, pageIndex + itemsPerPage));
   pageIndex += itemsPerPage;
 }
 
 // tạo tổng số phân trang để phân
 const total = Math.ceil((((giatriloc.length / 12).toFixed(1) * 10) / 10) * 10);
-console.log(total)
-console.log(paginatedData)
+
 
   return (
     <>
@@ -380,7 +379,7 @@ console.log(paginatedData)
                     </div>
                     </Link>
                     <div className="discount--item__add">
-                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
+                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}>
                  
                   </Button>
                 </div>

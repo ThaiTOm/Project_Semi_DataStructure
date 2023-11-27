@@ -1,5 +1,4 @@
 import "./home.scss";
-
 import { Button, Carousel, Col, Layout, Modal, Row } from "antd";
 import Homesider from "../../components/homeSider/index.js";
 import slide1 from "../../image/slide1.png";
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies.js";
 import { PlusOutlined } from "@ant-design/icons";
+import { handleClick } from "../../components/filter/index.js";
 const { Header, Content, Footer, Sider } = Layout;
 function Home() {
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ function Home() {
   const checkId = useSelector((state) => state.cartStore);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => {  // lấy hết dữ liệu sản phẩm
     const fetchApi = async () => {
       const result = await getProductsp();
 
@@ -61,33 +61,33 @@ function Home() {
     return item.category == "Soft Drinks";
   });
 
-  const handleClick = (id, infor) => {
-    if (cookies) {
-      const check = checkId.some((item) => {
-        return item.id === id;
-      });
+  // const handleClick = (id, infor) => {
+  //   if (cookies) {
+  //     const check = checkId.some((item) => {
+  //       return item.id === id;
+  //     });
 
-      if (check) {
-        const productSlg = checkId.find((item) => {
-          return item.id === id;
-        });
+  //     if (check) {
+  //       const productSlg = checkId.find((item) => {
+  //         return item.id === id;
+  //       });
 
-        if (infor.Quantity > productSlg.quanlity) {
-          dispatch(up(id));
-        } else {
-          Modal.error({
-            title: "Không Thể Thêm Sản Phẩm",
-            content:
-              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-          });
-        }
-      } else {
-        dispatch(add(id, infor));
-      }
-    } else {
-      navigate("/login");
-    }
-  };
+  //       if (infor.Quantity > productSlg.quanlity) {
+  //         dispatch(up(id));
+  //       } else {
+  //         Modal.error({
+  //           title: "Không Thể Thêm Sản Phẩm",
+  //           content:
+  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+  //         });
+  //       }
+  //     } else {
+  //       dispatch(add(id, infor));
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
 
   const handleClick_trs = () => {
     navigate(`/category/${milktea[1].category}`);
@@ -194,7 +194,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -271,7 +271,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -354,7 +354,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -437,7 +437,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() =>  handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -517,7 +517,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -600,7 +600,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -687,7 +687,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>

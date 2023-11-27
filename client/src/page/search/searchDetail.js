@@ -16,10 +16,8 @@ const [data, setData] = useState([]);
   // Phân trang dữ liệu
   const handleChange = (e) => {
     setId(e);
-    
   };
   let pageIndex = 0;
-console.log(params)
   // Lấy dữ liệu cho trang hiện tại
   useEffect(() => {
     // Khởi tạo trang đầu tiên (id = 1) khi trang được tải lại
@@ -34,7 +32,7 @@ useEffect(() => {
     console.log(result);
     }
     else {
-        console.log("coconcac");
+      //
     }
  }
  fetchApi(params.name);

@@ -17,28 +17,27 @@ import {
   Slider,
 } from "antd";
 
-import { PlusOutlined  } from '@ant-design/icons';
+import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./category.scss";
+import { filterByArrange, handleClick, taocate, taohsx } from "../../components/filter";
 const { Header, Content, Footer, Sider } = Layout;
-
 
 function Categorydetail() {
   const params = useParams();
-  console.log(params.cate);
-  const [max, setMax] = useState(0);
-  const [data, setData] = useState([]); //
-  const [id, setId] = useState(1); // lấy data của sản phẩm
-  const [data_3, setData_3] = useState({
+  const [max, setMax] = useState(0);  
+  const [data, setData] = useState([]); // lấy sản phẩm theo cate
+  const [id, setId] = useState(1); // lấy data của sản phẩm theo phân trang
+  const [data_3, setData_3] = useState({ // xét tổng hợp giá trị cần lọc
     hsx: "",
     distance: [1000, 1300000],
-
     phanloai: "",
   });
-  const [data_4, setData_4] = useState([]);
-  const cookies = getCookie("token");
+  const [expanded, setExpanded] = useState(false);  // xét thu gọn và xem thêm
+  const [data_4, setData_4] = useState([]); // một data của sản phẩm theo cate phụ và có thể thay đổi để phục vụ logic
+  const cookies = getCookie("token");   // lấy cookies người dùng
   const mang = []; // tạo một mảng chứa các hãng sản xuất
-  const cate = [];
+  const cate = []; // tạo category
   const paginatedData = [
     {
       price: "",
@@ -46,177 +45,169 @@ function Categorydetail() {
   ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-
-  const itemsPerPage = 12;// Số lượng phần tử trên mỗi trang
-  
+  const checkId = useSelector((state) => state.cartStore);
+  const itemsPerPage = 12; // Số lượng phần tử trên mỗi trang
   let pageIndex = 0;
 
-
-
-  useEffect(() => {
-    // Khởi tạo trang đầu tiên (id = 1) khi trang được tải lại
+  useEffect(() => {// Khởi tạo trang đầu tiên (id = 1) khi trang được tải lại
     setId(1);
   }, []); // [] nghĩa là useEffect chỉ chạy một lần khi component được render lần đầu
 
-  useEffect(() => {
-    // lấy data gốc
+  useEffect(() => { // lấy data gốc
     const fetchApi = async (e) => {
       const result = await getProductcate(e);
       if (!result) {
-        console.log("coconcac");
+        //
       } else {
-     
-        if (result && result.length > 0){
-         
-           const maxValue =  result.reduce((max, obj) => (obj.price > max ? obj.price : max), result[0].price)
-           setMax(maxValue) // hàm lấy dữ liệu giá cao nhât
-           setData_3({
-             ...data_3,
-             distance: [1000, maxValue]
-            })
-           setData([...result]);
-           setData_4(result);
+        if (result && result.length > 0) {
+          const maxValue = result.reduce(
+            (max, obj) => (obj.price > max ? obj.price : max),
+            result[0].price
+          );
+          setMax(maxValue); // hàm lấy dữ liệu giá cao nhât
+          setData_3({
+            ...data_3,
+            distance: [1000, maxValue],
+          });
+          setData([...result]);
+          setData_4(result);
         }
-       
-       
       }
     };
 
     fetchApi(params.cate);
-   
   }, []);
 
-  console.log(data);
-  // tạo một dãy hãng sản xuất
-  const taohsx = () => {
-    data.map((item) => {
-      const check = mang.some((x) => {
-        return item.brand == x;
-      });
-      if (check == false) {
-        mang.push(item.brand);
-      }
-    });
-  };
+  
+  // const taohsx = () => {
+  //   data.map((item) => {
+  //     const check = mang.some((x) => {
+  //       return item.brand == x;
+  //     });
+  //     if (check == false) {
+  //       mang.push(item.brand);
+  //     }
+  //   });
+  // };
 
-  taohsx();
+  // taohsx();
 
-  const taocate = () => {
-    data.map((item) => {
-      const check_1 = cate.some((x) => {
-        return item.category == x;
-      });
-      if (check_1 == false) {
-        cate.push(item.category);
-      }
-    });
-  };
+  // const taocate = () => {
+  //   data.map((item) => {
+  //     const check_1 = cate.some((x) => {
+  //       return item.category == x;
+  //     });
+  //     if (check_1 == false) {
+  //       cate.push(item.category);
+  //     }
+  //   });
+  // };
 
-  taocate();
-  console.log(cate);
+  // taocate();
 
   // phân trang
 
-  const handleChange = (e) => {
-    setId(e);
-    console.log(e);
+  // tạo một dãy hãng sản xuất
+  taohsx(data, mang);// tạo một dãy hãng sản xuất
+
+  
+  taocate(data, cate);// tạo loại sản phẩm
+  
+
+  const itemsToShow = expanded ? mang.length : 5;// check xem thêm và rút gọn
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
   };
 
-  // đưa dữ liệu thay đổi vào data_3
-  const handleChange_hsx = (e) => {
-    console.log(e);
+  const handleChange = (e) => { // thay đổi khi phân trang
+    setId(e);
+  };
+
+ 
+  const handleChange_hsx = (e) => { // đưa dữ liệu thay đổi hãng sản xuất vào data_3 ( data lọc )
     setData_3({
       ...data_3,
       hsx: e,
     });
     setId(1);
   };
-  const checkId = useSelector(state => state.cartStore);  
 
-  const handleClick = (id, infor) => {
-    if (cookies) {
-      const check = checkId.some((item) => {
-        return item.id === id;
-      });
+  // const handleClick = (id, infor) => {
+  //   if (cookies) {
+  //     const check = checkId.some((item) => {
+  //       return item.id === id;
+  //     });
 
-      if (check) {
-        const productSlg = checkId.find((item) => {
-          return item.id === id;
-        });
-    
+  //     if (check) {
+  //       const productSlg = checkId.find((item) => {
+  //         return item.id === id;
+  //       });
 
-        if (infor.Quantity > productSlg.quanlity) {
-          dispatch(up(id));
-        } else {
-          Modal.error({
-            title: "Không Thể Thêm Sản Phẩm",
-            content:
-              "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-          });
-        }
-      } else {
-        dispatch(add(id, infor));
-      }
-    } else {
-      navigate("/login");
-    }
-  };
+  //       if (infor.Quantity > productSlg.quanlity) {
+  //         dispatch(up(id));
+  //       } else {
+  //         Modal.error({
+  //           title: "Không Thể Thêm Sản Phẩm",
+  //           content:
+  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+  //         });
+  //       }
+  //     } else {
+  //       dispatch(add(id, infor));
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
 
 
-  // check xem thêm và rút gọn
-  const [expanded, setExpanded] = useState(false);
-  const itemsToShow = expanded ? mang.length : 5;
-
-  const toggleExpanded = () => {
-    setExpanded(!expanded);
-  };
 
   // check khoảng giá và đưa dữ liệu thao tác vào data_3
-  const handleChange_final = (e) => {
+  
+  
+  const handleChange_final = (e) => { // lọc khoảng giá
     setData_3({
       ...data_3,
       distance: e,
     });
     setId(1);
-    console.log(e);
   };
 
-  const filterByArrange = (ploai) => {
-    // tên A -> Z
-    if (data_3.phanloai === "tentang") {
-      return ploai.sort((a, b) => a.title.localeCompare(b.title));
-    }
-    // tên từ Z -> A
-    else if (data_3.phanloai === "tengiam") {
-      return ploai.sort((a, b) => b.title.localeCompare(a.title));
-    }
-    // giá tăng dần
-    else if (data_3.phanloai === "giatang") {
-      return ploai.sort(
-        (a, b) =>
-          a.price * ((100 - Math.floor(a.discountPercentage)) / 100) -
-          b.price * ((100 - Math.floor(b.discountPercentage)) / 100)
-      );
-    }
-    // giá giảm dần
-    else if (data_3.phanloai === "giagiam") {
-      return ploai.sort(
-        (a, b) =>
-          b.price * ((100 - Math.floor(b.discountPercentage)) / 100) -
-          a.price * ((100 - Math.floor(a.discountPercentage)) / 100)
-      );
-    }
-    // trở về trạng thái ban đầu
-    else if (data_3.phanloai === "original") {
-      return data;
-    }
-    // không có điều kiện nào thì trả về dữ liệu cũ
-    return ploai;
-  };
+  // const filterByArrange = (ploai) => {
+  //   // tên A -> Z
+  //   if (data_3.phanloai === "tentang") {
+  //     return ploai.sort((a, b) => a.title.localeCompare(b.title));
+  //   }
+  //   // tên từ Z -> A
+  //   else if (data_3.phanloai === "tengiam") {
+  //     return ploai.sort((a, b) => b.title.localeCompare(a.title));
+  //   }
+  //   // giá tăng dần
+  //   else if (data_3.phanloai === "giatang") {
+  //     return ploai.sort(
+  //       (a, b) =>
+  //         a.price * ((100 - Math.floor(a.discountPercentage)) / 100) -
+  //         b.price * ((100 - Math.floor(b.discountPercentage)) / 100)
+  //     );
+  //   }
+  //   // giá giảm dần
+  //   else if (data_3.phanloai === "giagiam") {
+  //     return ploai.sort(
+  //       (a, b) =>
+  //         b.price * ((100 - Math.floor(b.discountPercentage)) / 100) -
+  //         a.price * ((100 - Math.floor(a.discountPercentage)) / 100)
+  //     );
+  //   }
+  //   // trở về trạng thái ban đầu
+  //   else if (data_3.phanloai === "original") {
+  //     return data;
+  //   }
+  //   // không có điều kiện nào thì trả về dữ liệu cũ
+  //   return ploai;
+  // };
 
   const filterData = () => {
-    const arrangedData = filterByArrange(data_4);
+    const arrangedData = filterByArrange(data_3, data_4, data);
     const filteredData = arrangedData.filter((item) => {
       // Lọc theo hãng sản xuất
       const filterByBrand =
@@ -233,7 +224,8 @@ function Categorydetail() {
 
     return filteredData;
   };
-  // gán giá trị
+
+  // gán giá trị lọc cuối cùng
   const giatriloc = filterData();
 
   // tạo phân trang đẩy vào mảng theo từng mảng
@@ -246,21 +238,14 @@ function Categorydetail() {
   const total = Math.ceil(
     (((giatriloc.length / 12).toFixed(1) * 10) / 10) * 10
   );
-  console.log(total);
-  console.log(giatriloc.length);
-  // xuất giá trị
 
-  const handleSelect = (e) => {
+  const handleSelect = (e) => {  // lọc sắp xếp
     setData_3({
       ...data_3,
       phanloai: e,
     });
     setId(1);
-    console.log(e);
   };
-
-  console.log(data);
-  console.log(data_4);
 
   return (
     <>
@@ -380,18 +365,18 @@ function Categorydetail() {
                 </span>
               </div>
               <Slider
-  range={{
-    draggableTrack: true,
-  }}
-  defaultValue={max ? [1000, max] : [1000, 999999999]} // Giá trị mặc định khi không có max hoặc max không đúng
-  max={max} // Sử dụng giá trị mặc định nếu không có max hoặc max không đúng
-  min={1000}
-  step={1000}
-  onAfterChange={handleChange_final}
-  tooltip={{
-      open: false,
-    }}
-/>
+                range={{
+                  draggableTrack: true,
+                }}
+                defaultValue={max ? [1000, max] : [1000, 999999999]} // Giá trị mặc định khi không có max hoặc max không đúng
+                max={max} // Sử dụng giá trị mặc định nếu không có max hoặc max không đúng
+                min={1000}
+                step={1000}
+                onAfterChange={handleChange_final}
+                tooltip={{
+                  open: false,
+                }}
+              />
             </div>
           </Sider>
           <Content>
@@ -429,7 +414,9 @@ function Categorydetail() {
                           <div className="category--item__price">
                             <p
                               className={`category--item__p2 ${
-                                item.discountPercentage !== 0 ? "gachngang" : "tomau"
+                                item.discountPercentage !== 0
+                                  ? "gachngang"
+                                  : "tomau"
                               }`}
                             >
                               {new Intl.NumberFormat("vi-VN", {
@@ -447,10 +434,13 @@ function Categorydetail() {
                       </div>
                     </Link>
                     <div className="category--item__add">
-                  <Button shape="circle" type="primary" icon={<PlusOutlined />} onClick={() => handleClick(item.id, item)}>
-                 
-                  </Button>
-                </div>
+                      <Button
+                        shape="circle"
+                        type="primary"
+                        icon={<PlusOutlined />}
+                        onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                      ></Button>
+                    </div>
                   </Col>
                 ))
               ) : (

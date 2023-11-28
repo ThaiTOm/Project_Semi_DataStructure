@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-
+import "./adminproduct.scss"
 function Adminproduct () {
     return (
         <>

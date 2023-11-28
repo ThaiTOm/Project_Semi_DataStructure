@@ -1,0 +1,28 @@
+.categorylist {
+    &--top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &__bt1{
+            margin-left: 25px;
+            margin-bottom: 20px;
+            font-weight: bold;
+
+        }
+        &__bt2{
+            margin-right: 25px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            background-color: #77070B;
+        }
+        &__h1 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 0px;
+            color: rgb(14, 98, 129)
+        }
+    }
+    &--table {
+        margin-left: 10px;
+    }
+}

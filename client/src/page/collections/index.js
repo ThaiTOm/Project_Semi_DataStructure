@@ -210,6 +210,8 @@ function Collections() {
     (((giatriloc.length / 12).toFixed(1) * 10) / 10) * 10
   );
 
+  console.log(data);
+  console.log(giatriloc);
   return (
     <>
       <div className="collections animate__animated animate__zoomIn animate__faster">

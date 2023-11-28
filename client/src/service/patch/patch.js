@@ -32,7 +32,7 @@ export const patchBool = async (options) => {   // set mặc định cho đơn h
       const result = await patch(`shipping/${options.id}`, options);
       return result;
     } catch (error) {
-      throw new Error('Error in patchinfor:', error);
+      throw new Error('Error in patchBool:', error);
     }
   };
 
@@ -41,7 +41,7 @@ export const patchUser = async (options) => {   //cập nhật người dùng
       const result = await patch(`users/${options.id}`, options);
       return result;
     } catch (error) {
-      throw new Error('Error in patchinfor:', error);
+      throw new Error('Error in patchUser:', error);
     }
   };
 
@@ -51,7 +51,16 @@ export const patchPur = async (id ,options) => {
       const result = await patch(`purchase/${id}`, option);
       return result;
     } catch (error) {
-      throw new Error('Error in patchinfor:', error);
+      throw new Error('Error in patchPur:', error);
+    }
+  };
+
+export const patchProduct = async (id ,options) => {   
+    try {
+      const result = await patch(`beverages/${id}`, options);
+      return result;
+    } catch (error) {
+      throw new Error('Error in patchProduct:', error);
     }
   };
 

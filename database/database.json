@@ -40,7 +40,7 @@
     {
       "id": 1,
       "title": "Apple Juice",
-      "description": " Freshly squeezed apple juice, 100% natural. Sản phẩm là sự kết hợp hoàn hảo từ các trái táo tươi, được ép lấy nước, đảm bảo độ tươi ngon và an toàn cho sức khỏe. Không chứa chất bảo quản hay đường tăng cường. Đây là lựa chọn hoàn hảo cho những người yêu thích thức uống tự nhiên và lành mạnh.",
+      "description": "\nApple Juice là một đồ uống tươi ngon và bổ dưỡng được chế biến từ nước ép trái táo tươi. Sản phẩm không chứa chất bảo quản và được sản xuất với công nghệ hiện đại để giữ lại hương vị tự nhiên và chất dinh dưỡng của trái táo.\n",
       "price": 37000,
       "discountPercentage": 0,
       "rating": 4.6,
@@ -1071,6 +1071,28 @@
               "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
               "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
             ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 52,
+          "infor": {
+            "title": "aefesseg",
+            "rating": 4,
+            "price": 634673,
+            "discountPercentage": 34,
+            "Quantity": 34636,
+            "category": "Wine",
+            "description": "ege4ge4",
+            "brand": "The Coca-Cola Companywwvwq",
+            "thumbnail": "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
+            "images": [
+              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
+              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
+              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
+              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg"
+            ],
+            "id": 52
           },
           "quanlity": 1
         }

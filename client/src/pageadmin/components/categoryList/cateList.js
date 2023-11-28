@@ -10,6 +10,7 @@ import {
   InputNumber,
   Typography,
   Popconfirm,
+  Modal,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
@@ -214,7 +215,8 @@ const postcate = async (values) => {   // thêm cate
             return x.id !== item;
         })
     }) 
-    // vì sử dụng map nên nó cứ lặp thằng đầu rồi filter rồi lặp thằng sau r filter => tạo ra rất nhiều mảng với dữ liệu không được hợp nhất
+    if (dataFilter.length !== 0 ){
+        // vì sử dụng map nên nó cứ lặp thằng đầu rồi filter rồi lặp thằng sau r filter => tạo ra rất nhiều mảng với dữ liệu không được hợp nhất
     const dataAfterDel =  dataFilter.reduce ((origin, item) => {   // => hợp nhất (origin là mảng đầu tiên)
         return origin.filter(obj1 =>
          item.some(obj2 => obj2.key === obj1.key)  // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
@@ -230,13 +232,27 @@ const postcate = async (values) => {   // thêm cate
        }
 
 // setReload(!reload);  //  có thể thay thế cho hàm dataFilter nhma sẽ không được tối ưu
+    }
+    else {
+      Modal.error({
+        title: 'Không Thể Xóa',
+        content: 'Vui lòng lựa chọn Category cần xóa'
+      })
+    }
+  
 
 }
 
 const handleDelitem = (e) => {
     // xóa từng item
+if (e.id === undefined){
+  setReload(!reload);
+}
+else {
     delcate(e.id)
     setReload(!reload);
+}
+  
   };
 
 
@@ -252,7 +268,7 @@ const handleDelitem = (e) => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  
+
   const columns = [
     {
       title: "Id",
@@ -274,7 +290,7 @@ const handleDelitem = (e) => {
       key: "icon",
       editable: true,
       render: (text) => {
-        console.log(text);
+      
         return (<>
            {text === undefined ? '' : (<img src={text} alt="Icon" style={{ width: 30, height: 30 }} />)} 
         </>)
@@ -290,7 +306,14 @@ const handleDelitem = (e) => {
           <>
             <Space size="middle">
               <Tooltip title="Xóa" color="#085820" key="2">
-                <Button
+              <Popconfirm 
+     title="Xóa"
+    description="Admin có chắc là xóa chứ?"
+    onConfirm={() => handleDelitem(record)}
+    okText="Chắc chắn rồi!"
+    cancelText="Để suy nghĩ lại!"
+  >
+<Button
                   type="primary"
                   icon={
                     <img
@@ -301,8 +324,12 @@ const handleDelitem = (e) => {
                     />
                   }
                   className="productlist--delitem"
-                  onClick={() => handleDelitem(record)}
-                ></Button>
+                  danger
+                />
+
+  </Popconfirm>
+                
+
               </Tooltip>
               {editable ? (  // nếu bấm vô edit thì hiện ra
               <span>
@@ -362,15 +389,18 @@ const handleDelitem = (e) => {
   return (
     <>
       <div className="categorylist">
-        <h1>Danh sách Category</h1>
-        <Button type="primary" onClick={handleXoa}>
+        <h1 className="categorylist--top__h1">Danh sách Category</h1>
+        <div className="categorylist--top">
+          <Button className="categorylist--top__bt1" type="primary" onClick={handleXoa}>
             Xóa
         </Button>
-        <Button type="primary" onClick={() => save(-1)} danger>
+        <Button className="categorylist--top__bt2" type="primary" onClick={() => save(-1)}>
        Thêm Category
     </Button>
+        </div>
+        
         <Form form={form} component={false}>
-          <Table
+          <Table className="categorylist--table"
             components={{
               body: {
                 cell: EditableCell,

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import "./Items.scss"
 function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, handleClick }) {
+  
   return (
     <>
       <Content>

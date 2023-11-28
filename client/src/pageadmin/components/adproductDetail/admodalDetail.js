@@ -13,10 +13,10 @@ import {
 } from "antd";
 import { getCategory } from "../../../service/getcategory/getCategory";
 
-const { Option } = Select;
-const { Option: AutoCompleteOption } = AutoComplete;
+// const { Option } = Select;
+// const { Option: AutoCompleteOption } = AutoComplete;
 
-const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => {
+const Admodaldetail = ({ reload, show, setShow, onPatchProduct , data}) => {
   const [form] = Form.useForm();
   const [categories, setCategories] = useState([]);
 
@@ -32,6 +32,19 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
     setCategories(option);
   };
 
+const onCancel = () => {
+  form.setFieldsValue({
+    ...data[0],
+    images_1: data[0].images[0],
+    images_2: data[0].images[1],
+    images_3: data[0].images[2],
+    images_4: data[0].images[3],
+
+    });
+  setShow(false);
+ 
+}
+
   useEffect(() => {
     fetchCate();
   }, [reload]);
@@ -42,21 +55,32 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
 
   const handleFinish = () => {
     form.validateFields().then((values) => {
- 
-      onAddProduct(values);
+     
+      onPatchProduct(values);
       form.resetFields();
       onCancel();
     });
   };
 
   const handleFinishFail = () => {
-    console.log("sai roai");
+ 
   };
+  useEffect(() => {
+    // Kiểm tra xem có dữ liệu trong 'data' hay không
+    if (data && data.length > 0) {
+      // Sử dụng setFieldsValue để đặt giá trị cho trường 'title'
+      form.setFieldsValue({
+        ...data[0],
+        images_1: data[0].images[0],
+        images_2: data[0].images[1],
+        images_3: data[0].images[2],
+        images_4: data[0].images[3],
+    
+        });
+    }
+  }, [data]);
 
-  const onCancel = () => {
-    form.resetFields();
-    setShow(false);
-  }
+console.log(data);
 
   return (
     <Modal
@@ -65,7 +89,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
       onCancel={onCancel}
       footer={[
         <Button key="back" onClick={onCancel}>
-          Cancel
+          Hủy bỏ
         </Button>,
         <Button
           htmlType="submit"
@@ -73,7 +97,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
           type="primary"
           onClick={handleAddProduct}
         >
-          Add Product
+          Cập nhật
         </Button>,
       ]}
     >
@@ -83,6 +107,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
         name="addProductForm"
         onFinish={handleFinish}
         onFinishFailed={handleFinishFail}
+   
       >
         <Row gutter={16}>
           <Col span={18}>
@@ -115,7 +140,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="discountPercentage" label="Discount Percentage"   rules={[{ required: true, message: "Vui lòng nhập discount" }]}>
+            <Form.Item name="discountPercentage" label="Discount Percentage">
               <InputNumber style={{ width: "100%" }} />
             </Form.Item>
           </Col>
@@ -170,13 +195,13 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
           </Col>
         </Row>
         <Row gutter={16}>
-        <Col span={24}>
+          <Col span={24}>
             <Form.Item
               name="images_1"
               label="Images"
               rules={[{ required: true, message: "Vui lòng image URL" }]}
             >
-              <Input placeholder="Nhập image URL ( mỗi URL phải cách nhau một dấu phẩy và dấu cách )"/>
+              <Input placeholder="Nhập image URL 1"/>
                 
               
             </Form.Item>
@@ -187,7 +212,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
               label="Images"
               rules={[{ required: true, message: "Vui lòng image URL" }]}
             >
-              <Input placeholder="Nhập image URL ( mỗi URL phải cách nhau một dấu phẩy và dấu cách )"/>
+              <Input placeholder="Nhập image URL 2"/>
                 
               
             </Form.Item>
@@ -198,7 +223,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
               label="Images"
               rules={[{ required: true, message: "Vui lòng image URL" }]}
             >
-              <Input placeholder="Nhập image URL ( mỗi URL phải cách nhau một dấu phẩy và dấu cách )"/>
+              <Input placeholder="Nhập image URL 3"/>
                 
               
             </Form.Item>
@@ -209,7 +234,7 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
               label="Images"
               rules={[{ required: true, message: "Vui lòng image URL" }]}
             >
-              <Input placeholder="Nhập image URL ( mỗi URL phải cách nhau một dấu phẩy và dấu cách )"/>
+              <Input placeholder="Nhập image URL 4"/>
                 
               
             </Form.Item>
@@ -220,4 +245,4 @@ const AddProductModal = ({ reload, show, setShow, onAddProduct, setReload }) => 
   );
 };
 
-export default AddProductModal;
+export default Admodaldetail;

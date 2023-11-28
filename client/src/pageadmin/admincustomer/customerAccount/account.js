@@ -18,7 +18,7 @@ import { getUser } from "../../../service/getcategory/getCategory";
 import { patchUser } from "../../../service/patch/patch";
 import { postCart, postUser } from "../../../service/post/post";
 import { delUser } from "../../../service/delete/delete";
-
+import "./customerAccount.scss"
 const EditableCell = ({
   editing,
   dataIndex,
@@ -68,7 +68,7 @@ const Account = () => {
 
   const fetchUser = async () => {
     const result = await getUser();
-    console.log(result);
+   
     const dataWithKeys = result.map((item, index) => ({
       ...item,
       key: index + 1,
@@ -91,7 +91,7 @@ const Account = () => {
     const postApi = async (e) => {
       try {
         const ketqua = await postCart(e); // Gọi hàm patchCart với tham số là data
-        console.log(ketqua);
+       
       } catch (error) {
         console.error("Error while patching cart:", error);
         // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
@@ -109,7 +109,7 @@ const Account = () => {
   }, []);
 
   const edit = (record) => {
-    console.log(record);
+
     form.setFieldsValue({
       id: "",
       username: "",
@@ -127,9 +127,6 @@ const Account = () => {
       const row = await form.validateFields();
       const newData = [...data];
       const index = newData.findIndex((item) => id === item.id);
-      console.log(row);
-      console.log(index);
-      console.log(newData);
       const isDuplicate = newData.some(
         (item) =>
           (item.username === row.username || item.token === row.token) &&
@@ -316,12 +313,16 @@ const Account = () => {
         const editable = isEditing(record);
         return (
           <>
-            <Space size="middle">
+            <Space className="account--del" size="middle">
               <Popconfirm
-                title="Sure to delete?"
+                  title="Xóa"
+    description="Admin có chắc là xóa chứ?"
+   
+    okText="Chắc chắn rồi!"
+    cancelText="Để suy nghĩ lại!"
                 onConfirm={() => handleDelete(record.id)}
               >
-                <Button type="danger" icon={<DeleteOutlined />} />
+                <Button icon={<DeleteOutlined />} danger />
               </Popconfirm>
             </Space>
             {editable ? (
@@ -395,8 +396,6 @@ const Account = () => {
   };
 
   const handleFinish = (e) => {
-    console.log(Array.isArray(data));
-    console.log(e);
     if (Array.isArray(data)) {
       const isAdd =
         data &&
@@ -420,9 +419,9 @@ const Account = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (e) => {
-    console.log(data)
+  
     setSelectedRowKeys(e);
-    console.log(e)
+    
   };
 
   const rowSelection = {
@@ -431,25 +430,65 @@ const Account = () => {
   };
 
 
+  const handleXoa = () => {
+    // chức năng xóa khi select
 
+    const dataFilter = selectedRowKeys.map((item) => {
+      return data.filter((x) => {
+        return x.id !== item;
+      });
+    });
+    if (dataFilter.length !== 0) {
+      const dataAfterDel = dataFilter.reduce((origin, item) => {
+        // origin là mảng đầu tiên
+        return origin.filter(
+          (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
+        );
+      }, dataFilter[0].slice());
+      // giải thích :
+      // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
+      // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object
+      // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
+      setData(dataAfterDel);
+      for (let i = 0; i < selectedRowKeys.length; i++) {
+        deleteCus(selectedRowKeys[i]);
+      }
+    } else {
+      Modal.error({
+        title: "Không Thể Xóa",
+        content: "Vui lòng lựa chọn sản phẩm cần xóa",
+      });
+    }
+  };
   
   return (
     <>
       {" "}
-      <div>
-        <h1>Account Users</h1>
-        <Space style={{ marginBottom: 16 }}>
-          <Button
+      <div className="account">
+        <h1 className="account--top__h1">Account Users</h1>
+        <div className="account--top">
+          
+          <Button className="account--top__bt1"
+            onClick={handleXoa}
+            type="primary"
+           
+          >
+          Xóa
+          </Button>
+          <Button className="account--top__bt2"
             onClick={handleClick}
             type="primary"
-            style={{ marginBottom: 16 }}
+           
           >
-            Add User
+            Thêm User
           </Button>
-        </Space>
+        </div>
+        
+   
 
         <Form form={form} component={false}>
           <Table
+          className="account--table"
             rowSelection={
         
               rowSelection
@@ -478,10 +517,10 @@ const Account = () => {
           onCancel={handleCancel}
           footer={[
             <Button key="cancel" onClick={handleCancel}>
-              Cancel
+             Hủy bỏ
             </Button>,
             <Button key="submit" type="primary" onClick={handleOk}>
-              Submit
+              Thêm
             </Button>,
           ]}
         >
@@ -498,7 +537,7 @@ const Account = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input the username!",
+                  message: "Vui lòng nhập username!",
                 },
               ]}
             >
@@ -510,7 +549,7 @@ const Account = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input the password!",
+                  message: "Vui lòng nhập password!",
                 },
               ]}
             >
@@ -522,7 +561,7 @@ const Account = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input the token!",
+                  message: "Vui lòng nhập token!",
                 },
               ]}
             >

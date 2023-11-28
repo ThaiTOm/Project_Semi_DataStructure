@@ -1,0 +1,25 @@
+.siderLane {
+    &--sider {
+        max-width: 300px!important;
+        width: 300px!important;
+        min-width: 300px!important;
+        padding: 10px 20px;
+      
+        &__hsx {
+            & h2 {
+                margin: 0;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+        }
+        &__sp {
+            border: 1px solid;
+            padding: 5px;
+            margin-left: 40px;
+           
+        }
+        &__distance {
+            margin-bottom: 40px;
+        }
+    }
+}

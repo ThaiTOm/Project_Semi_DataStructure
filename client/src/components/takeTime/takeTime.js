@@ -6,10 +6,10 @@ const CurrentTime = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentTime(new Date());
+      setCurrentTime(new Date()); // cứ mỗi giây thì cập nhật date
     }, 1000);
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId); 
   }, []);
 
   // format thời gian theo chuẩn "yyyy-MM-dd HH:mm:ss"

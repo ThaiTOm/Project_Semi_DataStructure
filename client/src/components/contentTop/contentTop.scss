@@ -1,0 +1,14 @@
+.contentTop {
+    &--all {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+     }
+     &--arrange {
+        display: flex;
+        align-items: center;
+        &__pl {
+            margin: 0px 20px;
+        }
+     }
+}

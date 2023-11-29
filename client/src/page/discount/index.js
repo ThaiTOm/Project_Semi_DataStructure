@@ -1,37 +1,24 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   getProductdc,
-  getProductsp,
 } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
 import "./discount.scss";
-import { PlusOutlined } from "@ant-design/icons";
 import {
-  filterByArrange,
-  handleClick,
+  AddtoCart,
   taocate,
   taohsx,
 } from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
-  Breadcrumb,
-  Button,
-  Checkbox,
-  Col,
   Layout,
-  Modal,
   Pagination,
-  Row,
-  Select,
-  Slider,
 } from "antd";
 import filterData from "../../components/handleLogic/handlelogic";
 import Contenttop from "../../components/contentTop";
 import Siderlane from "../../components/sider";
 import Items from "../../components/Items";
-const { Header, Content, Footer, Sider } = Layout;
 
 const Discount = () => {
   const [max, setMax] = useState(0);
@@ -206,7 +193,7 @@ const Discount = () => {
    <Contenttop handleSelect={handleSelect} title={"Sản phẩm khuyến mãi"}  />
         <Layout className="discount--layout">
        <Siderlane mang={mang} itemsToShow={itemsToShow} data={data} toggleExpanded={toggleExpanded} expanded={expanded} data_3={data_3} max={max} handleChange_final={handleChange_final} handleChange_cate={handleChange_cate} handleChange_hsx={handleChange_hsx} cate={cate} showcate={true} />
-       <Items paginatedData={paginatedData} checkId={checkId} cookies={cookies} dispatch={dispatch} navigate={navigate} id={id} handleClick={handleClick} />
+       <Items paginatedData={paginatedData} checkId={checkId} cookies={cookies} dispatch={dispatch} navigate={navigate} id={id} AddtoCart={AddtoCart} />
         </Layout>
         <Pagination
           defaultCurrent={1}

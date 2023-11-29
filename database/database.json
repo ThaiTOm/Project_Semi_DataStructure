@@ -1009,26 +1009,26 @@
       "userId": 2,
       "product": [
         {
-          "id": 1,
+          "id": 7,
           "infor": {
-            "id": 1,
-            "title": "Apple Juice",
-            "description": " Freshly squeezed apple juice, 100% natural. Sản phẩm là sự kết hợp hoàn hảo từ các trái táo tươi, được ép lấy nước, đảm bảo độ tươi ngon và an toàn cho sức khỏe. Không chứa chất bảo quản hay đường tăng cường. Đây là lựa chọn hoàn hảo cho những người yêu thích thức uống tự nhiên và lành mạnh.",
-            "price": 37000,
+            "id": 7,
+            "title": "Watermelon Juice",
+            "description": "Juicy and refreshing watermelon juice, perfect for a hot summer day.",
+            "price": 27000,
             "discountPercentage": 0,
             "rating": 4.6,
-            "brand": "Nature's Best",
+            "brand": "Fruit Paradise",
             "category": "Fruit Juice",
-            "Quantity": 22,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+            "Quantity": 15,
+            "thumbnail": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
             "images": [
-              "https://i.pinimg.com/236x/cd/f6/3c/cdf63c34f8768539fb1d30f133f585dd.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/55/55/7a/55557a017b3ac00f143823298c8ea599.jpg",
-              "https://i.pinimg.com/236x/21/ff/7e/21ff7ef76f32d75208abd60ad024201b.jpg"
+              "https://i.pinimg.com/236x/8c/3d/46/8c3d46f6c64c5d0f3a7c864a8261b119.jpg",
+              "https://i.pinimg.com/236x/b0/96/14/b09614abfd53317129320e8071aee27e.jpg",
+              "https://i.pinimg.com/236x/ea/f4/73/eaf4730bb8f0e18581728378543c6894.jpg",
+              "https://i.pinimg.com/236x/7c/ff/dd/7cffdd161e9db0b4fac50b60e348c735.jpg"
             ]
           },
-          "quanlity": 1
+          "quanlity": 15
         },
         {
           "id": 2,
@@ -1053,46 +1053,68 @@
           "quanlity": 1
         },
         {
-          "id": 3,
+          "id": 4,
           "infor": {
-            "id": 3,
-            "title": "Orange Juice",
-            "description": "Freshly squeezed orange juice, packed with vitamin C.",
-            "price": 45000,
-            "discountPercentage": 10,
-            "rating": 4.8,
-            "brand": "Citrus Delights",
+            "id": 4,
+            "title": "Mango Juice",
+            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
+            "price": 30000,
+            "discountPercentage": 0,
+            "rating": 4.7,
+            "brand": "Tropical Paradise",
             "category": "Fruit Juice",
-            "Quantity": 221,
-            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "Quantity": 54,
+            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
             "images": [
-              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
-              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
-              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
-              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
+              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
+              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
+              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
             ]
           },
           "quanlity": 1
         },
         {
-          "id": 52,
+          "id": 12,
           "infor": {
-            "title": "aefesseg",
-            "rating": 4,
-            "price": 634673,
-            "discountPercentage": 34,
-            "Quantity": 34636,
-            "category": "Wine",
-            "description": "ege4ge4",
-            "brand": "The Coca-Cola Companywwvwq",
-            "thumbnail": "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
+            "id": 12,
+            "title": "Mango Tango Smoothie",
+            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
+            "price": 70000,
+            "discountPercentage": 20,
+            "rating": 4.9,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 78,
+            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
             "images": [
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
-              "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg"
-            ],
-            "id": 52
+              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
+              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
+              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
+              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 15,
+          "infor": {
+            "id": 15,
+            "title": "Tropical Delight Smoothie",
+            "description": "A tropical paradise in a cup, featuring pineapple, mango, and coconut.",
+            "price": 110000,
+            "discountPercentage": 10,
+            "rating": 4.7,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 32,
+            "thumbnail": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+            "images": [
+              "https://i.pinimg.com/236x/9f/03/41/9f034105c17e75fe0dd3617ce33dd264.jpg",
+              "https://i.pinimg.com/236x/27/2f/81/272f8132b54f8cd406897df4498825a5.jpg",
+              "https://i.pinimg.com/236x/8a/15/a9/8a15a96d918d5aea2e58325e635de9ef.jpg",
+              "https://i.pinimg.com/236x/80/cc/73/80cc732f00bd85e6842271850bd9ef78.jpg"
+            ]
           },
           "quanlity": 1
         }
@@ -1354,6 +1376,73 @@
         }
       ],
       "id": 7
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 3,
+      "date": "2023-11-29 12:04:22",
+      "userId": 2,
+      "thanhtoan": [
+        {
+          "id": 1,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+          "title": "Apple Juice",
+          "dongia": 37000,
+          "soluong": 22,
+          "thanhtien": 814000
+        }
+      ],
+      "id": 8
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 3,
+      "date": "2023-11-29 15:13:07",
+      "userId": 2,
+      "thanhtoan": [
+        {
+          "id": 1,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+          "title": "Apple Juice",
+          "dongia": 37000,
+          "soluong": 22,
+          "thanhtien": 814000
+        }
+      ],
+      "id": 9
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 0,
+      "date": "2023-11-29 15:31:15",
+      "userId": 2,
+      "thanhtoan": [
+        {
+          "id": 7,
+          "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
+          "title": "Watermelon Juice",
+          "dongia": 27000,
+          "soluong": 5,
+          "thanhtien": 135000
+        },
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 1,
+          "thanhtien": 22000
+        },
+        {
+          "id": 4,
+          "img": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
+          "title": "Mango Juice",
+          "dongia": 30000,
+          "soluong": 1,
+          "thanhtien": 30000
+        }
+      ],
+      "id": 10
     }
   ],
   "notification": []

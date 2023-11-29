@@ -1,10 +1,10 @@
-import { PlusOutlined } from "@ant-design/icons";
+
 
 import { useEffect, useState } from "react";
 import { getProductsp } from "../../service/getcategory/getCategory";
 import {
+  AddtoCart,
   filterByArrange,
-  handleClick,
   taocate,
   taohsx,
 } from "../../components/filter";
@@ -12,16 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
-  Breadcrumb,
-  Button,
-  Checkbox,
-  Col,
+
   Layout,
   Modal,
   Pagination,
-  Row,
-  Select,
-  Slider,
+
 } from "antd";
 
 import "animate.css";
@@ -238,7 +233,7 @@ function Collections() {
             dispatch={dispatch}
             navigate={navigate}
             id={id}
-            handleClick={handleClick}
+            AddtoCart={AddtoCart}
           />
         </Layout>
         <Pagination

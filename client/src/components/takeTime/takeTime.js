@@ -9,7 +9,7 @@ const CurrentTime = () => {
       setCurrentTime(new Date()); // cứ mỗi giây thì cập nhật date
     }, 1000);
 
-    return () => clearInterval(intervalId); 
+    return () => clearInterval(intervalId); //dọn dẹp sau mỗi lần lặp
   }, []);
 
   // format thời gian theo chuẩn "yyyy-MM-dd HH:mm:ss"

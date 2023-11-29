@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Col, Image, Layout, Modal, Rate, Row } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   getProductcate,
   getProductdt,
@@ -10,10 +10,11 @@ import "./products.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { useDispatch, useSelector } from "react-redux";
 import { addmt, addtt, upmt } from "../../actions/actCart";
+import { AddtoCart } from "../../components/filter";
 const { Header, Content, Footer, Sider } = Layout;
 
 function Productdetail() {
-  const products = useSelector((state) => state.cartStore);
+  const checkId = useSelector((state) => state.cartStore);
   const navigate = useNavigate(); // chuyển trang
   const dispatch = useDispatch(); // chuyển dữ liệu
   const [data, setData] = useState([
@@ -22,7 +23,7 @@ function Productdetail() {
     },
   ]);
   const [cate, setCate] = useState([]);
-
+  const { pathname } = useLocation();
   const params = useParams();
   const param = parseInt(params.id);
   const [currentImage, setCurrentImage] = useState(0);
@@ -33,12 +34,16 @@ function Productdetail() {
   const cookies = getCookie("token");
   const [count, setCount] = useState(1);
   const [randomNumber, setrandomNumber] = useState(0);
+  
+useEffect(() => {   // path thay đổi thì biến đếm count quay về 1
+  setCount(1);   
+},[pathname])
 
   const increaseCount = () => {  // tăng số lượng
-    const productSlg = products.find((item) => {  // tìm id sản phẩm trong giỏ hàng
+    const productSlg = checkId.find((item) => {  // tìm id sản phẩm trong giỏ hàng
       return item.id === param;
     });
-    if (productSlg === undefined) {  // nếu không có
+     // nếu không có
       if (data[0].Quantity > count) {  // thì so với số lượng tồn kho
         setCount(count + 1);
       } else {
@@ -47,18 +52,9 @@ function Productdetail() {
           content:
             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
         });
+      
       }
-    } else { // nếu có
-      if (data[0].Quantity - productSlg.quanlity > count) { // thì so với số lượng tồn kho và trong giỏ hàng
-        setCount(count + 1);
-      } else {
-        Modal.error({
-          title: "Không Thể Thêm Sản Phẩm",
-          content:
-            "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-        });
-      }
-    }
+    
   };
 
   const decreaseCount = () => {  // giảm số lượng không được nhỏ hơn 1
@@ -67,15 +63,25 @@ function Productdetail() {
     }
   };
 
-  const checkId = useSelector((state) => state.cartStore);
+  
+
   const handleClick = (id, infor) => {
     // nút thêm
     if (cookies) {
-      const check = checkId.some((item) => {
+      const check = checkId.find((item) => {
         return item.id === id;
       });
-      if (check) {
-        dispatch(upmt(id, count));
+      if (check !== undefined) {
+        if (check.quanlity + count <= data[0].Quantity){
+            dispatch(upmt(id, count));
+        }
+      else {
+        Modal.error({
+          title: "Không Thể Thêm Sản Phẩm",
+          content:
+            "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
+        });
+      }
       } else {
         dispatch(addmt(id, infor, count));
       }
@@ -365,7 +371,7 @@ function Productdetail() {
                       <div className="product--cungloai__add">
                         <Button
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>

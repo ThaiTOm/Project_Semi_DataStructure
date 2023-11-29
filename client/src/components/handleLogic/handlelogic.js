@@ -1,17 +1,18 @@
 import { filterByArrange } from "../filter";
 
       const filterData = (data_3, data_4, data) => {
+        console.log(data_3);
         if (data_3.cate.length === 0 && data_3.hsx === "" && data_3.phanloai === ""){
+          console.log("if")
           return data;
         }
         else {
-      
            const arrangedData = filterByArrange(data_3, data_4, data);
            
             const filteredData = arrangedData.filter((item) => {
               // Lọc theo hãng sản xuất
               const filterByBrand =
-                data_3.hsx === "" || data_3.hsx.includes(item.brand);
+                data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
               // Lọc theo khoảng giá
               const filterByPrice =
                 item.price * ((100 - item.discountPercentage) / 100) >=

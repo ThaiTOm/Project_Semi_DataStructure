@@ -113,7 +113,13 @@ console.log(data);
                 </div>
               </div>
               <div className="adproduct--right">
+              <div className="adproduct--right__top" >
                 <h1 className="adproduct--right__title">{data[0].title}</h1>
+                <Image  src={data[0].thumbnail} className="adproduct--right__img" />
+              </div>
+                
+
+
                 <div className="adproduct--right__rate">
                   {data[0].rating != undefined ? (
                     <Rate disabled allowHalf defaultValue={data[0].rating} />

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies.js";
 import { PlusOutlined } from "@ant-design/icons";
-import { handleClick } from "../../components/filter/index.js";
+import { AddtoCart } from "../../components/filter/index.js";
 const { Header, Content, Footer, Sider } = Layout;
 function Home() {
   const [data, setData] = useState([]);
@@ -194,7 +194,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -271,7 +271,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -354,7 +354,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -437,7 +437,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() =>  handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -517,7 +517,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -600,7 +600,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>
@@ -687,7 +687,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => handleClick(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
                         ></Button>
                       </div>
                     </Col>

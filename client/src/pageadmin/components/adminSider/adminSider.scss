@@ -39,10 +39,15 @@
         gap: 2rem;
       }
       .menuItem {
-        position: absolute;
-        bottom: 1rem;
-        width: 100%;
-       left: 2rem;
+        position: fixed;
+        top: 2rem;
+     
+    left: 90rem;
+    z-index: 9999;
+    & img {
+      width: 24px;
+      height: 24px;
+    }
       }
       
       .menuItem:hover {

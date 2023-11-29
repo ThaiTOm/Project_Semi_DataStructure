@@ -3,7 +3,7 @@ import { Content } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import "./Items.scss"
-function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, handleClick }) {
+function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, AddtoCart }) {
   
   return (
     <>
@@ -67,7 +67,7 @@ function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, handle
                     type="primary"
                     icon={<PlusOutlined />}
                     onClick={() =>
-                      handleClick(
+                      AddtoCart(
                         item.id,
                         item,
                         checkId,

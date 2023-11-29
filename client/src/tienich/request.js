@@ -17,8 +17,7 @@ export const get = async (path) => {
 };
 
 export const post = async (path, options) => {
-  console.log(path);
-  console.log(options);
+  
   try {
     const res = await fetch(API_DOMAIN + path, {
       method: "POST",
@@ -87,7 +86,7 @@ export const put = async (path, options) => {
 
 
 export const del = async (path) => {
-  console.log(path);
+  
   try {
     const res = await fetch(API_DOMAIN + path, {
       method: "DELETE",

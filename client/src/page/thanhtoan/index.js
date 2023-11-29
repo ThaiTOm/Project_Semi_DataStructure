@@ -14,9 +14,10 @@ import "./thanhtoan.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { getShip, getUserstk } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
+import { load } from "../../actions/actCart";
 const { TextArea } = Input;
 const { Panel } = Collapse;
 const columns = [
@@ -84,7 +85,8 @@ const Thanhtoan = () => {
   const thanhtoan = useSelector((state) => state.ttStore);
   sessionStorage.setItem("thanhtoan", JSON.stringify(thanhtoan));
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+  const [reload, setReload] = useState(true);
  let setFormattedTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
 
@@ -150,6 +152,7 @@ const postorder = async (e) => {
       showNotification();
      }
      else {
+      dispatch(load(!reload));
         postorder({
       "paymentMethod": "Tiền mặt",
       "orderStep": 0,

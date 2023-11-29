@@ -68,3 +68,10 @@ export const addcart = ( infor) => {
     }
 }
 
+export const load = (render) => {
+    return {
+        type: "Load",
+        render: render,
+    }
+}
+

@@ -20,7 +20,7 @@ import {
 import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./category.scss";
-import { filterByArrange, handleClick, taocate, taohsx } from "../../components/filter";
+import { AddtoCart, filterByArrange, taocate, taohsx } from "../../components/filter";
 import Contenttop from "../../components/contentTop";
 import Siderlane from "../../components/sider";
 import Items from "../../components/Items";
@@ -259,7 +259,7 @@ function Categorydetail() {
         <Siderlane mang={mang} itemsToShow={itemsToShow} data={data} toggleExpanded={toggleExpanded} expanded={expanded} data_3={data_3} max={max} handleChange_final={handleChange_final} handleChange_hsx={handleChange_hsx} cate={cate} showcate={false} />
       
 
-        <Items paginatedData={paginatedData} checkId={checkId} cookies={cookies} dispatch={dispatch} navigate={navigate} id={id} handleClick={handleClick} />
+        <Items paginatedData={paginatedData} checkId={checkId} cookies={cookies} dispatch={dispatch} navigate={navigate} id={id} AddtoCart={AddtoCart} />
         
         </Layout>
         <Pagination

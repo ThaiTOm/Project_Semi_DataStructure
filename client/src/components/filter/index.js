@@ -62,7 +62,7 @@ export const taohsx = (data, mang) => {
 
 
   // xử lí logic add sản phẩm 
- export const handleClick = (id, infor, checkId, cookies, dispatch, navigate) => {
+ export const AddtoCart = (id, infor, checkId, cookies, dispatch, navigate) => {
 
     if (cookies) {
       const check = checkId.some((item) => {

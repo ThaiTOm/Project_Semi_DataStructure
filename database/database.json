@@ -5,42 +5,61 @@
       "password": "Sonthanh123",
       "token": "Nr5sikxU83AtdXAHpkdM",
       "id": 1,
-      "key": 1
+      "key": 1,
+      "delete": false,
+      "date": "2023-11-22 18:41:27"
     },
     {
       "username": "trannguyensonthanh",
       "password": "Sonthanh@0305",
       "token": "admin0305",
       "id": 2,
-      "key": 2
+      "key": 2,
+      "delete": false,
+      "date": "2023-11-24 21:40:14"
     },
     {
       "username": "nguyenduythai",
       "password": "Duythai@123",
       "token": "admin0305_1",
       "id": 3,
-      "key": 3
+      "key": 3,
+      "delete": false,
+      "date": "2023-11-27 14:30:05"
     },
     {
       "username": "caoduythai",
       "password": "Thaicao@123",
       "token": "admin0305_2",
       "id": 4,
-      "key": 4
+      "key": 4,
+      "delete": false,
+      "date": "2023-11-29 12:04:22"
     },
     {
       "username": "sonthanhdeptrai",
       "password": "Sonthanh@123",
       "token": "qVLDV3ZMKjtXmVpxgum3",
       "id": 5,
-      "key": 5
+      "key": 5,
+      "delete": false,
+      "date": "2023-11-29 15:31:15"
+    },
+    {
+      "username": "Sonthanhprocute1",
+      "password": "Sonthanh@0305",
+      "token": "enev4RlZv38xtlJ25yCh",
+      "delete": true,
+      "date": "2023-12-06 21:50:26",
+      "id": 6,
+      "key": 6
     }
   ],
   "beverages": [
     {
       "id": 1,
       "title": "Apple Juice",
-      "description": "\nApple Juice là một đồ uống tươi ngon và bổ dưỡng được chế biến từ nước ép trái táo tươi. Sản phẩm không chứa chất bảo quản và được sản xuất với công nghệ hiện đại để giữ lại hương vị tự nhiên và chất dinh dưỡng của trái táo.\n",
+      "description": "Apple Juice là một đồ uống tươi ngon và bổ dưỡng được chế biến từ nước ép trái táo tươi. Sản phẩm không chứa chất bảo quản và được sản xuất với công nghệ hiện đại để giữ lại hương vị tự nhiên và chất dinh dưỡng của trái táo.",
       "price": 37000,
       "discountPercentage": 0,
       "rating": 4.6,
@@ -53,7 +72,8 @@
         "https://i.pinimg.com/236x/07/92/e8/0792e8216e85a2cb6ecc249f17a13bbc.jpg",
         "https://i.pinimg.com/236x/55/55/7a/55557a017b3ac00f143823298c8ea599.jpg",
         "https://i.pinimg.com/236x/21/ff/7e/21ff7ef76f32d75208abd60ad024201b.jpg"
-      ]
+      ],
+      "delete": false
     },
     {
       "id": 2,
@@ -71,7 +91,8 @@
         "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
         "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
         "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
-      ]
+      ],
+      "delete": false
     },
     {
       "id": 3,
@@ -84,6 +105,7 @@
       "category": "Fruit Juice",
       "Quantity": 221,
       "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+      "delete": true,
       "images": [
         "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
         "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
@@ -102,6 +124,7 @@
       "category": "Fruit Juice",
       "Quantity": 54,
       "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
         "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
@@ -120,6 +143,7 @@
       "category": "Fruit Juice",
       "Quantity": 90,
       "thumbnail": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/d2/f5/0e/d2f50e5c76c2449ab0d4b4ee4c6cc2b4.jpg",
         "https://i.pinimg.com/236x/b4/53/81/b4538182ae4ebbd10948437a48ae4e5d.jpg",
@@ -138,6 +162,7 @@
       "category": "Fruit Juice",
       "Quantity": 42,
       "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
+      "delete": true,
       "images": [
         "https://i.pinimg.com/236x/91/c7/0f/91c70fc63bd05d5f01f7a225ae109afe.jpg",
         "https://i.pinimg.com/236x/c6/c3/a9/c6c3a946be26a9aa9d4ef2be346fc3ff.jpg",
@@ -156,6 +181,7 @@
       "category": "Fruit Juice",
       "Quantity": 15,
       "thumbnail": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/8c/3d/46/8c3d46f6c64c5d0f3a7c864a8261b119.jpg",
         "https://i.pinimg.com/236x/b0/96/14/b09614abfd53317129320e8071aee27e.jpg",
@@ -174,6 +200,7 @@
       "category": "Fruit Juice",
       "Quantity": 289,
       "thumbnail": "https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/14/64/b0/1464b0443b8f40acb7228fc535d423a1.jpg",
         "https://i.pinimg.com/236x/9a/3c/cb/9a3ccb8f6b01ba52d9af4e1e3f9f8dd6.jpg",
@@ -192,6 +219,7 @@
       "category": "Fruit Juice",
       "Quantity": 62,
       "thumbnail": "https://i.pinimg.com/236x/f9/16/79/f9167999f6b50b8b5faf170a0c5840f3.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/474x/35/e7/92/35e7926a1cf4bd507e90590a801c2877.jpg",
         "https://i.pinimg.com/236x/a0/a0/1b/a0a01b5b53cdc4241a6f2436833c4d65.jpg",
@@ -210,6 +238,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 38,
       "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
         "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
@@ -228,6 +257,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 124,
       "thumbnail": "https://i.pinimg.com/236x/9f/8e/5f/9f8e5f9bdf4f3bca73ce2afe5f2ff90c.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/aa/1e/c9/aa1ec9ba25292ce39876a237f78dbc69.jpg",
         "https://i.pinimg.com/236x/6f/26/7b/6f267bc33ac635534e278ab4845c3e55.jpg",
@@ -246,6 +276,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 78,
       "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
         "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
@@ -264,6 +295,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 43,
       "thumbnail": "https://i.pinimg.com/236x/51/16/4b/51164b6b902a79577c6ff93ac894edb1.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/51/16/4b/51164b6b902a79577c6ff93ac894edb1.jpg",
         "https://i.pinimg.com/236x/41/c1/ec/41c1ec598ef027463894f25336989946.jpg",
@@ -282,6 +314,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 3,
       "thumbnail": "https://i.pinimg.com/236x/ad/b2/13/adb213642d3ae2549375cc0a273afb59.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/76/d6/8a/76d68a53e324ef466c1750bd3c7dfe3b.jpg",
         "https://i.pinimg.com/236x/b2/e5/63/b2e563a664c4fb995f00809da794b830.jpg",
@@ -300,6 +333,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 32,
       "thumbnail": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/9f/03/41/9f034105c17e75fe0dd3617ce33dd264.jpg",
         "https://i.pinimg.com/236x/27/2f/81/272f8132b54f8cd406897df4498825a5.jpg",
@@ -318,6 +352,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 12,
       "thumbnail": "https://i.pinimg.com/236x/61/17/99/6117996402ac81f5f53bd656fd188eb8.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/20/97/6b/20976bbe23bed058731982538f938ac4.jpg",
         "https://i.pinimg.com/236x/4e/9c/69/4e9c696f66a50a5434aafbc1896cb395.jpg",
@@ -336,6 +371,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 30,
       "thumbnail": "https://i.pinimg.com/236x/a9/69/18/a9691800f51252178f516c278b5083a4.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/a9/69/18/a9691800f51252178f516c278b5083a4.jpg",
         "https://i.pinimg.com/236x/11/69/25/116925f1f2bc1ccb263d9e6220d951d1.jpg",
@@ -354,6 +390,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 62,
       "thumbnail": "https://i.pinimg.com/236x/e9/3a/b6/e93ab6826b016319aad6feb5af0ac345.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/d4/1c/4e/d41c4ec3fef06f87e6c3bbcfa25392d1.jpg",
         "https://i.pinimg.com/236x/b1/50/70/b150708d7c81285d28235c124cc16cf9.jpg",
@@ -372,6 +409,7 @@
       "category": "Fruit Smoothie",
       "Quantity": 9,
       "thumbnail": "https://i.pinimg.com/236x/df/64/ee/df64eec85361ca3d8a5e046bb7e57a12.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/78/c7/bc/78c7bc2864ad3b62ee717f6e133b982b.jpg",
         "https://i.pinimg.com/236x/b1/53/98/b15398919c8ff873328adba3757b39e0.jpg",
@@ -390,6 +428,7 @@
       "category": "Coffee Beverages",
       "Quantity": 92,
       "thumbnail": "https://i.pinimg.com/236x/4d/7a/6f/4d7a6fa6fabd931a57161c7b1bb8f725.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/df/ee/0b/dfee0b9ae97c5bcc868ac2de9b5ca6cc.jpg",
         "https://i.pinimg.com/236x/7f/7c/0a/7f7c0a441577459d9a0a01ee28b59cc5.jpg",
@@ -408,6 +447,7 @@
       "category": "Coffee Beverages",
       "Quantity": 502,
       "thumbnail": "https://i.pinimg.com/236x/58/e2/ab/58e2ab68af739c3f4665d8d3250e2395.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/5c/e3/45/5ce345185f354ffe263150fcaadba94d.jpg",
         "https://i.pinimg.com/236x/58/a7/b6/58a7b6a4cdccfc9ee7629bdcf98e42ac.jpg",
@@ -426,6 +466,7 @@
       "category": "Coffee Beverages",
       "Quantity": 223,
       "thumbnail": "https://i.pinimg.com/236x/64/06/d6/6406d6ea581d7e87f22bff8f10a92944.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/b2/ec/99/b2ec998bc22d3d12d0a6bed7ac823020.jpg",
         "https://i.pinimg.com/236x/cb/b1/6c/cbb16ce1bd7df3c5a5c3e3e8e41fb2f3.jpg",
@@ -444,6 +485,7 @@
       "category": "Coffee Beverages",
       "Quantity": 7,
       "thumbnail": "https://i.pinimg.com/236x/8a/50/9e/8a509e80a255b25b54774a4437debf0e.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/6f/08/73/6f0873a70d373f4d3840275fa4b717f7.jpg",
         "https://i.pinimg.com/236x/d4/5e/7a/d45e7abc19d3a09ab4fab3c974ef77fd.jpg",
@@ -462,6 +504,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/dd/0f/b6/dd0fb6334c20698a855a4ca4926bcdeb.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/97/84/40/978440fe09d65d3d1c461e614bd150d5.jpg",
         "https://i.pinimg.com/236x/a1/d8/8c/a1d88cadc7f1b9fd65238f39ae295d1b.jpg",
@@ -480,6 +523,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/f5/8e/c2/f58ec2d7d6803eefb311551ed1b18f43.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/58/52/f3/5852f3a48cd187e632ea1eadcb4c2309.jpg",
         "https://i.pinimg.com/236x/1e/68/f4/1e68f43bdb92a8805f33cce4cd5a4364.jpg",
@@ -498,6 +542,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/07/e9/99/07e99903759795bc3d0de1c0e7612deb.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/73/c6/f1/73c6f1a3d69fff0247fe5db18fbe7f71.jpg",
         "https://i.pinimg.com/236x/a1/23/ae/a123ae57abbd86719a445512208ef97a.jpg",
@@ -516,6 +561,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/50/f1/7c/50f17c380525acf16c5ad8df185b1554.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/45/38/10/453810958154922d419b4afb3ffda0c5.jpg",
         "https://i.pinimg.com/236x/9d/88/b1/9d88b1aff2041fe5095d8fa1eea8977f.jpg",
@@ -534,6 +580,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/87/8d/60/878d60fd685d067312f52d4dfb585156.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/e5/32/53/e53253c80d97c3c0678ca5705c0eb8f4.jpg",
         "https://i.pinimg.com/236x/06/d7/93/06d79363d9fee6c2f6584a4d41b7253a.jpg",
@@ -552,6 +599,7 @@
       "category": "Coffee Beverages",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/ed/b8/96/edb89693448fd30a939a17755392d65e.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/a1/2b/b8/a12bb8b26233db2f5acca24282981a51.jpg",
         "https://i.pinimg.com/236x/4c/c7/5f/4cc75fbd849b11a6976de84caf5459be.jpg",
@@ -570,6 +618,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/564x/84/8c/40/848c40991566e2096c3cb442f9905be6.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/aa/f4/61/aaf461a868ea21c43024558d76b14268.jpg",
         "https://i.pinimg.com/236x/f5/a0/9c/f5a09c78fb6e461eb726fe1078d88e87.jpg",
@@ -588,6 +637,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/83/2a/3a/832a3a8335bdc33f5fffdad9283a4437.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/13/26/54/132654fa0f07188501202c29a83ae94e.jpg",
         "https://i.pinimg.com/236x/31/e4/b0/31e4b0612d2d8f0e83504cb6bdae1b20.jpg",
@@ -606,6 +656,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/13/72/98/1372984fa30b23c59157499167ea64d9.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/97/84/40/978440fe09d65d3d1c461e614bd150d5.jpg",
         "https://i.pinimg.com/236x/1c/0d/9a/1c0d9ab7f875564cc3121d8d9b083c93.jpg",
@@ -624,6 +675,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/a4/c2/c4/a4c2c4db2638c62a82289ec978101743.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/3d/e3/e3/3de3e3bcbba5f9342c202c7f542a7f10.jpg",
         "https://i.pinimg.com/236x/c7/73/15/c773159e1f5d239f554721c890a1b0df.jpg",
@@ -642,6 +694,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/41/47/e0/4147e0ba55b6c37b7ec4fed1eb73fec3.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/22/90/72/2290724cfed4b034a83310cdb0abbf9c.jpg",
         "https://i.pinimg.com/236x/a5/c9/94/a5c9947a9ef21c1374499114cc49c417.jpg",
@@ -660,6 +713,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/b0/1d/d9/b01dd9eb8447ce651a4185d5104eb915.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/65/f2/35/65f2354e9ec230e868a2f6fb60a2d431.jpg",
         "https://i.pinimg.com/236x/59/53/5d/59535d1cd185f46d6f1100c9ae929fb7.jpg",
@@ -678,6 +732,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/aa/f1/1b/aaf11bf77a8fb4cc9e110fa2f3d55f1b.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/51/d9/bf/51d9bf02b2a7739befd8f235d63ee364.jpg",
         "https://i.pinimg.com/236x/8b/91/9c/8b919c73ebf1485e75476eb3db04bac0.jpg",
@@ -696,6 +751,7 @@
       "category": "Milk Tea",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/c0/7f/60/c07f60bbd7accf7bae89a5167c636b21.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/c2/c9/1c/c2c91c4ca7238e6a8e491686c63cfb18.jpg",
         "https://i.pinimg.com/236x/dd/e2/1c/dde21c7b493a2b7444ec8f75f386ca0f.jpg",
@@ -714,6 +770,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/8e/3b/61/8e3b613b99c51127e465edd6f60662c9.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/75/ed/53/75ed5301277e4594a4c5fc448c634497.jpg",
         "https://i.pinimg.com/236x/8e/3b/61/8e3b613b99c51127e465edd6f60662c9.jpg",
@@ -732,6 +789,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/b5/dd/9c/b5dd9ce2a60f11e51a756371aaa4a647.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/46/ef/df/46efdfd9153eff27cca18e96782e65f6.jpg",
         "https://i.pinimg.com/236x/6e/e0/2d/6ee02dfa74f76646b6f0b40755e9390b.jpg",
@@ -750,6 +808,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/564x/40/96/4c/40964c1c0528a09da047cb16d7694b14.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/c2/75/37/c27537d70691b6b6f9d992c63f183556.jpg",
         "https://i.pinimg.com/236x/6a/45/2a/6a452ad8c07e4ecb1dc7f795cde870ba.jpg",
@@ -768,6 +827,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/d8/cb/86/d8cb86851dad4b86bbf7b2a9f8f14ca6.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/5b/56/1a/5b561ad1ecba9b090fdf4b1cabf7f980.jpg",
         "https://i.pinimg.com/236x/6f/f1/58/6ff158386fa6bd1835568864bc048aec.jpg",
@@ -786,6 +846,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/b8/6f/b8/b86fb80f1595ab2c107c0cb97f44172a.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/06/29/89/062989d8176d04877617980c0f825095.jpg",
         "https://i.pinimg.com/236x/3a/9e/b9/3a9eb91eb85f1aac71786e0a22f13258.jpg",
@@ -804,6 +865,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/6b/4d/f4/6b4df4db24f601c3e2281aeedb7ab1d7.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/c7/5d/cf/c75dcf5778cdc8cdfd20fc6c392a0da3.jpg",
         "https://i.pinimg.com/236x/34/1a/8a/341a8ad86a37daaf2c952b5c1659c095.jpg",
@@ -822,6 +884,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/3a/49/83/3a49833e1005692cf8b32b6472efd6ea.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/b0/65/fe/b065fe8f6aa24c3ee8540ecf0c0339a6.jpg",
         "https://i.pinimg.com/236x/34/1a/8a/341a8ad86a37daaf2c952b5c1659c095.jpg",
@@ -840,6 +903,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/3d/3a/43/3d3a432abbd2c5c834c413e56781692f.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/33/ab/fb/33abfb6553c67ea63e792039edd5d1f6.jpg",
         "https://i.pinimg.com/236x/b6/95/c3/b695c35d2feeba11ec91c563c9d353c4.jpg",
@@ -858,6 +922,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/da/29/54/da29549b7fd367669b7d8502d9d0028c.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/2c/04/0c/2c040c9d12bfe3dcc4b05e43637b2692.jpg",
         "https://i.pinimg.com/236x/72/01/c0/7201c08bb76d083783f16b0e03e80430.jpg",
@@ -876,6 +941,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/be/27/38/be273814928f6885a49504f6b80ec82f.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/36/9f/b1/369fb16d87c7a113d99b86a5b37c7f1f.jpg",
         "https://i.pinimg.com/236x/df/f5/ff/dff5ffd49e405b12e93abbbb0d7300cb.jpg",
@@ -894,6 +960,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/00/73/65/007365c45b8ce08f2d7a35943d138808.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/94/70/c0/9470c0a67553339f41c7424f9a456afd.jpg",
         "https://i.pinimg.com/236x/3e/eb/c8/3eebc81074805faf2ef147cb7648048c.jpg",
@@ -912,6 +979,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/ec/98/98/ec98980503e517b815298414f556fc56.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/ec/b7/3c/ecb73c61f1dd0a8938962ddc3ee01334.jpg",
         "https://i.pinimg.com/236x/91/05/d0/9105d02488420521a553dab44e612a07.jpg",
@@ -930,6 +998,7 @@
       "category": "Soft Drinks",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/3c/03/f0/3c03f00552dd07a4403ef2955a312968.jpg",
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/ab/bf/0f/abbf0f9dec925553bfaf6e10cfe0e821.jpg",
         "https://i.pinimg.com/236x/48/0f/2d/480f2d880687c882fc1096e8c11a14e9.jpg",
@@ -943,182 +1012,54 @@
       "id": 1,
       "cate": "Fruit Juice",
       "icon": "https://i.pinimg.com/236x/4b/75/17/4b7517e674a877ae336161d8abc1515f.jpg",
+      "delete": false,
       "key": 1
     },
     {
       "id": 2,
       "cate": "Fruit Smoothie",
       "icon": "https://i.pinimg.com/236x/c3/c3/3a/c3c33a806a97cdfbb5d961b369daa45a.jpg",
+      "delete": false,
       "key": 2
     },
     {
       "id": 3,
       "cate": "Coffee Beverages",
       "icon": "https://i.pinimg.com/236x/68/cc/2e/68cc2e285303d7ec54487587ea5bd12e.jpg",
+      "delete": false,
       "key": 3
     },
     {
       "id": 4,
       "cate": "Milk Tea",
       "icon": "https://i.pinimg.com/236x/54/5a/25/545a25506e51d79ff763fdbc76cc44a9.jpg",
+      "delete": false,
       "key": 4
     },
     {
       "id": 5,
       "cate": "Wine",
       "icon": "https://i.pinimg.com/236x/aa/e9/7d/aae97d012303e32a26e1743a61eed61e.jpg",
+      "delete": false,
       "key": 5
     },
     {
       "id": 6,
       "cate": "Soft Drinks",
       "icon": "https://i.pinimg.com/236x/79/6c/34/796c34906c9111f02f41a319298a261b.jpg",
+      "delete": false,
       "key": 6
     }
   ],
   "cart": [
     {
       "userId": 1,
-      "product": [
-        {
-          "id": 10,
-          "infor": {
-            "id": 10,
-            "title": "Berry Blast Smoothie",
-            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
-            "price": 50000,
-            "discountPercentage": 20,
-            "rating": 4.8,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 38,
-            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
-              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
-              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
-              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
-            ]
-          },
-          "quanlity": 1
-        }
-      ],
+      "product": [],
       "id": 1
     },
     {
       "userId": 2,
-      "product": [
-        {
-          "id": 7,
-          "infor": {
-            "id": 7,
-            "title": "Watermelon Juice",
-            "description": "Juicy and refreshing watermelon juice, perfect for a hot summer day.",
-            "price": 27000,
-            "discountPercentage": 0,
-            "rating": 4.6,
-            "brand": "Fruit Paradise",
-            "category": "Fruit Juice",
-            "Quantity": 15,
-            "thumbnail": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/8c/3d/46/8c3d46f6c64c5d0f3a7c864a8261b119.jpg",
-              "https://i.pinimg.com/236x/b0/96/14/b09614abfd53317129320e8071aee27e.jpg",
-              "https://i.pinimg.com/236x/ea/f4/73/eaf4730bb8f0e18581728378543c6894.jpg",
-              "https://i.pinimg.com/236x/7c/ff/dd/7cffdd161e9db0b4fac50b60e348c735.jpg"
-            ]
-          },
-          "quanlity": 15
-        },
-        {
-          "id": 2,
-          "infor": {
-            "id": 2,
-            "title": "Grape Juice",
-            "description": "Refreshing grape juice, made from the finest grapes.",
-            "price": 22000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Vineyard Delights",
-            "category": "Fruit Juice",
-            "Quantity": 100,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-            "images": [
-              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
-              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
-              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
-              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 4,
-          "infor": {
-            "id": 4,
-            "title": "Mango Juice",
-            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
-            "price": 30000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Tropical Paradise",
-            "category": "Fruit Juice",
-            "Quantity": 54,
-            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
-              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
-              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
-              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 12,
-          "infor": {
-            "id": 12,
-            "title": "Mango Tango Smoothie",
-            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
-            "price": 70000,
-            "discountPercentage": 20,
-            "rating": 4.9,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 78,
-            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
-              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
-              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
-              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 15,
-          "infor": {
-            "id": 15,
-            "title": "Tropical Delight Smoothie",
-            "description": "A tropical paradise in a cup, featuring pineapple, mango, and coconut.",
-            "price": 110000,
-            "discountPercentage": 10,
-            "rating": 4.7,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 32,
-            "thumbnail": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
-            "images": [
-              "https://i.pinimg.com/236x/9f/03/41/9f034105c17e75fe0dd3617ce33dd264.jpg",
-              "https://i.pinimg.com/236x/27/2f/81/272f8132b54f8cd406897df4498825a5.jpg",
-              "https://i.pinimg.com/236x/8a/15/a9/8a15a96d918d5aea2e58325e635de9ef.jpg",
-              "https://i.pinimg.com/236x/80/cc/73/80cc732f00bd85e6842271850bd9ef78.jpg"
-            ]
-          },
-          "quanlity": 1
-        }
-      ],
+      "product": [],
       "id": 2
     },
     {
@@ -1135,6 +1076,11 @@
       "userId": 5,
       "product": [],
       "id": 5
+    },
+    {
+      "userId": 6,
+      "product": [],
+      "id": 6
     }
   ],
   "information": [
@@ -1413,7 +1359,7 @@
     },
     {
       "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
+      "orderStep": 3,
       "date": "2023-11-29 15:31:15",
       "userId": 2,
       "thanhtoan": [
@@ -1443,6 +1389,23 @@
         }
       ],
       "id": 10
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 0,
+      "date": "2023-12-01 08:41:39",
+      "userId": 2,
+      "thanhtoan": [
+        {
+          "id": 16,
+          "img": "https://i.pinimg.com/236x/61/17/99/6117996402ac81f5f53bd656fd188eb8.jpg",
+          "title": "Strawberry Smoothie",
+          "dongia": 65000,
+          "soluong": 1,
+          "thanhtien": 65000
+        }
+      ],
+      "id": 11
     }
   ],
   "notification": []

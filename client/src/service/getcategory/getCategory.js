@@ -1,14 +1,20 @@
 import { get } from "../../tienich/request";
 
-export const getCategory = async () => {
+export const getadminCategory = async () => {
   // lấy danh mục sản phẩm
   const result = await get("category");
   return result;
 };
 
+export const getCategory = async () => {
+  // lấy danh mục sản phẩm
+  const result = await get("category?delete=false");
+  return result;
+};
+
 export const getUserstk = async (e) => {
   try {
-    const result = await get(`users?token=${e}`);
+    const result = await get(`users?token=${e}&delete=false`);
     return result;
   } catch (error) {
     console.error("Error in getUserstk:", error);
@@ -29,33 +35,39 @@ export const getUser = async () => {
 export const getProductdc = async () => {
   // lấy hàng khuyến mãi
 
-  const result = await get(`beverages?discountPercentage_ne=0`);
+  const result = await get(`beverages?discountPercentage_ne=0&delete=false`);
   return result;
 };
 
-export const getProductsp = async () => {
+export const getProductadminsp = async () => {
   // lấy sản phẩm
   const result = await get("beverages");
   return result;
 };
 
+export const getProductsp = async () => {
+  // lấy sản phẩm
+  const result = await get("beverages?delete=false");
+  return result;
+};
+
 export const getProductdt = async (e) => {
   // lấy từng sản phẩm theo từng id
-  const result = await get(`beverages?id=${e}`);
+  const result = await get(`beverages?id=${e}&delete=false`);
 
   return result;
 };
 
 export const getProductcate = async (e) => {
   // lấy từng sản phẩm theo từng category
-  const result = await get(`beverages?category=${e}`);
+  const result = await get(`beverages?category=${e}&delete=false`);
 
   return result;
 };
 
 export const getProductsearch = async (e) => {
   // thanh tìm kiếm
-  const result = await get(`beverages?title_like=${e}`);
+  const result = await get(`beverages?title_like=${e}&delete=false`);
   return result;
 };
 
@@ -72,7 +84,7 @@ export const getInforid = async (e) => {
 };
 
 export const getInfor = async (e) => {
-  // lấy danh mục sản phẩm
+ 
   const result = await get("information");
   return result;
 };

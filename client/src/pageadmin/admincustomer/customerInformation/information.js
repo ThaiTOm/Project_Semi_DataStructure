@@ -2,14 +2,14 @@
 
 
 
-const Information = () => {
+// const Information = () => {
 
   
-  return (
-    <>
-     đ
-    </>
-  );
-};
+//   return (
+//     <>
+//      đ
+//     </>
+//   );
+// };
 
-export default Information;
+// export default Information;

@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Card.scss";
-
-// import "react-circular-progressbar/dist/styles.css";
-
-
 import { Area } from "@ant-design/plots";
 import { Modal, Progress } from "antd";
-
-
-
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);

@@ -43,12 +43,12 @@ export const SidebarData = [
       icon: <Link  to="/admin/customer/account"><img className="siderbar--icon" src="https://img.icons8.com/fluency/48/guest-male--v1.png" alt="guest-male--v1"/></Link>  // Replace with the appropriate icon
       
     },
-    {
-      key: 'userInformation',
-      label: 'Information',
-      icon:  <Link to="/admin/customer/information"><img className="siderbar--icon" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
+    // {
+    //   key: 'userInformation',
+    //   label: 'Information',
+    //   icon:  <Link to="/admin/customer/information"><img className="siderbar--icon" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
     
-    },
+    // },
   ],
   },
   {

@@ -1,19 +1,22 @@
-import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import { getCookie } from "../takeCookies/takeCookies";
+
 export const checkLogin = (e) => {
-
-console.log(e);
-
   let newState = 0;
   fetch("http://localhost:3000/users")
     .then((res) => res.json())
     .then((data) => {
+   
+      const checkDelete = data.find((item) => {
+        return (
+          e.password === item.password && e.username === item.username
+        );
+      });
       for (let i = 0; i < data.length; i++) {
         if (
-          e.password == data[i].password &&
-          e.username == data[i].username
+          e.password === data[i].password &&
+          e.username === data[i].username && 
+          checkDelete && checkDelete.delete === false
         ) {
           newState = data[i].token;
           if (data[i].token.includes("admin0305")) {
@@ -46,17 +49,21 @@ console.log(e);
             .then((result) => {
               localStorage.setItem(data[i].token, JSON.stringify(result));
             });
-        } else {
-          continue;
+        } else if (checkDelete && checkDelete.delete === true) {
+          Swal.fire({
+            icon: "error",
+            title: "ĐĂNG NHẬP KHÔNG THÀNH CÔNG",
+            text: "TÀI KHOẢN CỦA BẠN ĐÃ BỊ KHÓA!",
+          });
+          newState = 1;
         }
       }
-      if (newState == 0) {
+      if (newState === 0) {
         Swal.fire({
           icon: "error",
           title: "ĐĂNG NHẬP KHÔNG THÀNH CÔNG",
           text: "MỜI BẠN ĐĂNG NHẬP LẠI",
         });
-      }
+      } 
     });
-  
 };

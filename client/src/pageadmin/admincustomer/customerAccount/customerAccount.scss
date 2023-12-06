@@ -1,6 +1,14 @@
 .account {
     &--del {
-        margin-right: 10px;
+        &__phu {
+            margin-right: 10px;
+        }
+        
+    }
+    &--restore {
+        border: 0px;
+        padding: 0px;
+        margin-top: 5px;
     }
     &--top {
         display: flex;

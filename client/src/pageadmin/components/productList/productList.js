@@ -4,7 +4,7 @@ import { SearchOutlined, RestOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import "./product.scss";
-import { getProductsp } from "../../../service/getcategory/getCategory";
+import { getProductadminsp, getProductsp } from "../../../service/getcategory/getCategory";
 import { delProduct } from "../../../service/delete/delete";
 import AddProductModal from "./modalList";
 import { postProduct } from "../../../service/post/post";
@@ -21,14 +21,13 @@ function Productlist() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const result = await getProductsp();
+      const result = await getProductadminsp();
       const resultAddkey = result.map((item) => {
         return [{ ...item, key: item.id }];
       });
       const hopnhat = resultAddkey.reduce((origin, item) => {
         return origin.concat(item);
       }, []);
-      console.log(hopnhat);
       setdataSource(hopnhat);
     };
 

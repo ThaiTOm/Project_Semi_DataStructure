@@ -11,6 +11,7 @@ import {
   message,
   Tag,
   Modal,
+  Tooltip,
 } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -18,7 +19,8 @@ import { getUser } from "../../../service/getcategory/getCategory";
 import { patchUser } from "../../../service/patch/patch";
 import { postCart, postUser } from "../../../service/post/post";
 import { delUser } from "../../../service/delete/delete";
-import "./customerAccount.scss"
+import "./customerAccount.scss";
+import { format } from 'date-fns';
 const EditableCell = ({
   editing,
   dataIndex,
@@ -55,20 +57,21 @@ const EditableCell = ({
 };
 
 const Account = () => {
-
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const [editingKey, setEditingKey] = useState("");
   const [show, setshow] = useState(false);
+  const [reload, setReload] = useState(true);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const isEditing = (record) => record.id === editingKey;
   const [form] = Form.useForm();
   const [form_1] = Form.useForm();
 
   const fetchUser = async () => {
     const result = await getUser();
-   
+
     const dataWithKeys = result.map((item, index) => ({
       ...item,
       key: index + 1,
@@ -79,6 +82,7 @@ const Account = () => {
 
   const patchCus = async (e) => {
     const result = await patchUser(e);
+    setReload(!reload);
   };
 
   const deleteCus = async (e) => {
@@ -88,10 +92,10 @@ const Account = () => {
   const postCus = async (e) => {
     const result = await postUser(e);
     setData([...data, result]);
+    setReload(!reload);
     const postApi = async (e) => {
       try {
         const ketqua = await postCart(e); // Gọi hàm patchCart với tham số là data
-       
       } catch (error) {
         console.error("Error while patching cart:", error);
         // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
@@ -106,10 +110,9 @@ const Account = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [reload]);
 
   const edit = (record) => {
-
     form.setFieldsValue({
       id: "",
       username: "",
@@ -271,6 +274,35 @@ const Account = () => {
       ...getColumnSearchProps("token"),
     },
     {
+      title: "Thời gian đăng kí",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "Trạng Thái",
+      dataIndex: "delete",
+      key: "delete",
+      render: (text, record) => {
+        if (text === true) {
+          return (
+            <>
+              <div className="account--trangthai__true">
+                <Tag color="#f50">Đã xóa</Tag>
+              </div>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <div className="account--trangthai__false">
+                <Tag color="#2db7f5">Chưa xóa</Tag>
+              </div>
+            </>
+          );
+        }
+      },
+    },
+    {
       title: "Type",
       key: "type",
       filters: [
@@ -311,41 +343,70 @@ const Account = () => {
       key: "action",
       render: (text, record) => {
         const editable = isEditing(record);
+        const checkDelete = record.delete;
+
         return (
           <>
-            <Space className="account--del" size="middle">
-              <Popconfirm
-                  title="Xóa"
-    description="Admin có chắc là xóa chứ?"
-   
-    okText="Chắc chắn rồi!"
-    cancelText="Để suy nghĩ lại!"
-                onConfirm={() => handleDelete(record.id)}
-              >
-                <Button icon={<DeleteOutlined />} danger />
-              </Popconfirm>
-            </Space>
-            {editable ? (
-              <span>
-                <Typography.Link
-                  onClick={() => save(record.id)}
-                  style={{
-                    marginRight: 8,
-                  }}
-                >
-                  Save
-                </Typography.Link>
-                <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                  <a>Cancel</a>
-                </Popconfirm>
-              </span>
+            {checkDelete === false ? (
+              <>
+                <Space className="account--del__phu" size="middle">
+                  <Popconfirm
+                    title="Xóa"
+                    description="Admin có chắc là xóa chứ?"
+                    okText="Chắc chắn rồi!"
+                    cancelText="Để suy nghĩ lại!"
+                    onConfirm={() => handleDelete_phu(record.id)}
+                  >
+                    <Tooltip title="Xóa"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+                  </Popconfirm>
+                </Space>
+                {editable ? (
+                  <span>
+                    <Typography.Link
+                      onClick={() => save(record.id)}
+                      style={{
+                        marginRight: 8,
+                      }}
+                    >
+                      Save
+                    </Typography.Link>
+                    <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+                      <a>Cancel</a>
+                    </Popconfirm>
+                  </span>
+                ) : (
+                  <Typography.Link
+                    disabled={editingKey !== ""}
+                    onClick={() => edit(record)}
+                  >
+                    Edit
+                  </Typography.Link>
+                )}
+              </>
             ) : (
-              <Typography.Link
-                disabled={editingKey !== ""}
-                onClick={() => edit(record)}
-              >
-                Edit
-              </Typography.Link>
+              <>
+                <Space className="account--del" size="middle" >
+                  <Popconfirm
+                    title="Xóa"
+                    description="Admin có chắc là xóa vĩnh viễn chứ?"
+                    okText="Chắc chắn rồi!"
+                    cancelText="Để suy nghĩ lại!"
+                    onConfirm={() => handleDelete(record.id)}
+                  >
+                    <Tooltip title="Xóa vĩnh viễn"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+                  </Popconfirm>
+                  <Popconfirm
+                    title="khôi phục?"
+                    description="Bạn có chắc là khôi phục chứ?"
+                    okText="Chắc chắn rồi!"
+                    cancelText="Để suy nghĩ lại!"
+                    onConfirm={() => handleRestore(record.id)}
+                  >
+                       <Tooltip title="Khôi phục"><Button className="account--restore" ><img width="32" height="32" src="https://img.icons8.com/windows/32/settings-backup-restore.png" alt="settings-backup-restore"/></Button></Tooltip>
+
+                  </Popconfirm>
+                </Space>
+              </>
             )}
           </>
         );
@@ -370,18 +431,12 @@ const Account = () => {
     };
   });
 
-  const handleDelete = (id) => {
-    const findAdmin = data.find((item) => {
-      return item.id === id;
+  const handleRestore = (id) => {
+    patchCus({
+      id: id,
+      delete: false,
     });
-    if (findAdmin.token.includes("admin0305")) {
-      message.error("không thể xóa admin");
-    } else {
-      deleteCus(id);
-      setData((prevData) => prevData.filter((user) => user.id !== id));
-    }
   };
-
   const handleClick = () => {
     setshow(true);
   };
@@ -408,7 +463,12 @@ const Account = () => {
           "Không thể cập nhật người dùng mới. Vui lòng kiểm tra lại."
         );
       } else {
-        postCus(e);
+        postCus({...e,
+          delete: false,
+          date: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+          });
+          
+       setshow(false);
       }
     } else {
       // Xử lý trường hợp data không phải là mảng
@@ -416,12 +476,8 @@ const Account = () => {
     }
   };
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
   const onSelectChange = (e) => {
-  
     setSelectedRowKeys(e);
-    
   };
 
   const rowSelection = {
@@ -429,30 +485,78 @@ const Account = () => {
     onChange: onSelectChange,
   };
 
+  // hàm xóa có thể khôi phục
+  const handleDelete_phu = (id) => {
+    const findAdmin = data.find((item) => {
+      return item.id === id;
+    });
+    if (findAdmin.token == "admin0305") {
+      message.error("không thể xóa admin chính");
+    } else {
+      patchCus({
+        id: id,
+        delete: true,
+      });
+    }
+  };
+  // end hàm xóa có thể khôi phục
 
+  // hàm xóa bình thường
+  const handleDelete = (id) => {
+    const findAdmin = data.find((item) => {
+      return item.id === id;
+    });
+      deleteCus(id);
+      setData((prevData) => prevData.filter((user) => user.id !== id));
+  };
+  // end hàm xóa bình thường
+
+  // chức năng xóa khi select
   const handleXoa = () => {
-    // chức năng xóa khi select
-
     const dataFilter = selectedRowKeys.map((item) => {
       return data.filter((x) => {
         return x.id !== item;
       });
     });
     if (dataFilter.length !== 0) {
-      const dataAfterDel = dataFilter.reduce((origin, item) => {
-        // origin là mảng đầu tiên
-        return origin.filter(
-          (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
-        );
-      }, dataFilter[0].slice());
-      // giải thích :
-      // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
-      // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object
-      // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
-      setData(dataAfterDel);
+      // const dataAfterDel = dataFilter.reduce((origin, item) => {
+      //   // origin là mảng đầu tiên
+      //   return origin.filter(
+      //     (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
+      //   );
+      // }, dataFilter[0].slice());
+      // // giải thích :
+      // // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
+      // // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object
+      // // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
+      
+      
+      // setData(dataAfterDel);
+      
+      setSelectedRowKeys([]);
       for (let i = 0; i < selectedRowKeys.length; i++) {
-        deleteCus(selectedRowKeys[i]);
+        if ( data && data[selectedRowKeys[i] - 1] &&  data[selectedRowKeys[i] - 1].token === "admin0305") {
+          
+          Modal.error({
+            title: "Không Thể Xóa Admin chính",
+            content: "Vui lòng không lựa chọn Admin chính",
+          });
+        }
+        else if (data[selectedRowKeys[i] - 1].delete === false)  {
+          patchCus({
+            id: selectedRowKeys[i],
+            delete: true,
+          });
+          
+        }
+        else if (data[selectedRowKeys[i] - 1].delete === true) {
+          deleteCus(selectedRowKeys[i]);
+        }
       }
+
+
+
+      setReload(!reload);
     } else {
       Modal.error({
         title: "Không Thể Xóa",
@@ -460,39 +564,34 @@ const Account = () => {
       });
     }
   };
-  
+  //end xóa khi select
+
   return (
     <>
       {" "}
       <div className="account">
         <h1 className="account--top__h1">Account Users</h1>
         <div className="account--top">
-          
-          <Button className="account--top__bt1"
+          <Button
+            className="account--top__bt1"
             onClick={handleXoa}
             type="primary"
-           
           >
-          Xóa
+            Xóa
           </Button>
-          <Button className="account--top__bt2"
+          <Button
+            className="account--top__bt2"
             onClick={handleClick}
             type="primary"
-           
           >
             Thêm User
           </Button>
         </div>
-        
-   
 
         <Form form={form} component={false}>
           <Table
-          className="account--table"
-            rowSelection={
-        
-              rowSelection
-            }
+            className="account--table"
+            rowSelection={rowSelection}
             components={{
               body: {
                 cell: EditableCell,
@@ -505,9 +604,6 @@ const Account = () => {
             pagination={{
               pageSize: 50,
             }}
-            scroll={{
-              y: 400,
-            }}
           />
         </Form>
         <Modal
@@ -517,7 +613,7 @@ const Account = () => {
           onCancel={handleCancel}
           footer={[
             <Button key="cancel" onClick={handleCancel}>
-             Hủy bỏ
+              Hủy bỏ
             </Button>,
             <Button key="submit" type="primary" onClick={handleOk}>
               Thêm

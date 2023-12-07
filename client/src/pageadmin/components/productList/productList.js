@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Input, Button, Space, Checkbox, Tooltip, Modal, Popconfirm } from "antd";
-import { SearchOutlined, RestOutlined } from "@ant-design/icons";
+import { Table, Input, Button, Space, Checkbox, Tooltip, Modal, Popconfirm, Tag } from "antd";
+import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import "./product.scss";
@@ -8,6 +8,7 @@ import { getProductadminsp, getProductsp } from "../../../service/getcategory/ge
 import { delProduct } from "../../../service/delete/delete";
 import AddProductModal from "./modalList";
 import { postProduct } from "../../../service/post/post";
+import { patchProduct } from "../../../service/patch/patch";
 
 function Productlist() {
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ function Productlist() {
   const postproduct = async (values) => {
     const result = await postProduct(values);
   };
+
+  const patchproduct = async (id, values) => {
+    const result = await patchProduct(id, values);
+  }
 
   // hàm tạo search của ant ds
   const getColumnSearchProps = (dataIndex) => ({
@@ -140,7 +145,6 @@ function Productlist() {
 
   const handleXoa = () => {
     // chức năng xóa khi select
-
     const dataFilter = selectedRowKeys.map((item) => {
       return dataSource.filter((x) => {
         return x.id !== item;
@@ -169,11 +173,22 @@ function Productlist() {
     }
   };
 
+const handleDelete = (id) => {
+     deleteProduct(id);
+}
+
+const handleRestore = (id) => {
+  patchproduct(id, {delete: false});
+  setReload(!reload);
+}
+
   const handleDelitem = (e) => {
     // xóa từng item
-    deleteProduct(e.id);
+ 
+    patchproduct(e.id, {delete: true});
     setReload(!reload);
   };
+
   const handleXem = (values) => {
     // xem chi tiết từng item
     navigate("/admin/product/" + values.id);
@@ -190,13 +205,11 @@ function Productlist() {
     delete e.images_2;
     delete e.images_3;
     delete e.images_4;
-    console.log({
-      ...e,
-      images: imageArray,
-    });
+
     const PostValues = {
       ...e,
       images: imageArray,
+      delete: false
     };
     postproduct(PostValues);
     setReload(!reload);
@@ -293,10 +306,33 @@ function Productlist() {
       ),
     },
     {
+      title: "Trạng thái sản phẩm",
+      dataIndex: "delete",
+      key: "delete",
+      render: (text, record) => {
+        if (text === true) {
+          return (<><div className="">
+           <Tag color="#B21016">
+             Đã xóa
+           </Tag>
+          </div> </>)
+        }
+        else {
+          return (<>
+            <div className="" >
+              <Tag color="#138535" >Chưa xóa</Tag>
+            </div>
+          </>)
+        }
+      }
+    },
+    {
       title: "Action",
       key: "action",
-      render: (text, record) => (
-        <Space size="middle">
+      render: (text, record) => {
+        const checkDelete = record.delete
+        return (
+          checkDelete === false ? ( <><Space size="middle">
           <Tooltip title="Xem chi tiết" color="#085820" key="1">
             {" "}
             <Button
@@ -337,8 +373,36 @@ function Productlist() {
             />
             </Popconfirm>
           </Tooltip>
-        </Space>
-      ),
+        </Space></>) : (
+ <>
+ <Space className="productlist--del" size="middle" >
+   <Popconfirm
+     title="Xóa"
+     description="Admin có chắc là xóa vĩnh viễn chứ?"
+     okText="Chắc chắn rồi!"
+     cancelText="Để suy nghĩ lại!"
+     onConfirm={() => handleDelete(record.id)}
+   >
+     <Tooltip title="Xóa vĩnh viễn"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+   </Popconfirm>
+   <Popconfirm
+     title="khôi phục?"
+     description="Bạn có chắc là khôi phục chứ?"
+     okText="Chắc chắn rồi!"
+     cancelText="Để suy nghĩ lại!"
+     onConfirm={() => handleRestore(record.id)}
+   >
+        <Tooltip title="Khôi phục"><Button className="productlist--restore" ><img width="32" height="32" src="https://img.icons8.com/windows/32/settings-backup-restore.png" alt="settings-backup-restore"/></Button></Tooltip>
+
+   </Popconfirm>
+ </Space>
+</>
+
+        )
+          
+        )
+      
+    },
     },
   ];
 

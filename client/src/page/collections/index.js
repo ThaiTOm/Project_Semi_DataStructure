@@ -205,7 +205,7 @@ function Collections() {
     (((giatriloc.length / 12).toFixed(1) * 10) / 10) * 10
   );
 
-  console.log(data);
+
   console.log(giatriloc);
   return (
     <>

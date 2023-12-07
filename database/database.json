@@ -49,7 +49,7 @@
       "username": "Sonthanhprocute1",
       "password": "Sonthanh@0305",
       "token": "enev4RlZv38xtlJ25yCh",
-      "delete": true,
+      "delete": false,
       "date": "2023-12-06 21:50:26",
       "id": 6,
       "key": 6
@@ -105,7 +105,7 @@
       "category": "Fruit Juice",
       "Quantity": 221,
       "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
         "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
@@ -1005,6 +1005,25 @@
         "https://i.pinimg.com/236x/ab/bf/0f/abbf0f9dec925553bfaf6e10cfe0e821.jpg",
         "https://i.pinimg.com/236x/48/0f/2d/480f2d880687c882fc1096e8c11a14e9.jpg"
       ]
+    },
+    {
+      "title": "gưeg",
+      "rating": 4,
+      "price": 10000000,
+      "discountPercentage": 23,
+      "Quantity": 2234,
+      "category": "Fruit Smoothie",
+      "description": "ưefwf23g23gggegegreg4g",
+      "brand": "egewg43g4",
+      "thumbnail": "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
+      "images": [
+        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
+        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
+        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
+        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg"
+      ],
+      "delete": false,
+      "id": 51
     }
   ],
   "category": [

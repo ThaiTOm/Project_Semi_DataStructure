@@ -1,10 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Input, Button, Space, Checkbox, Tooltip, Modal, Popconfirm, Tag } from "antd";
+import {
+  Table,
+  Input,
+  Button,
+  Space,
+  Checkbox,
+  Tooltip,
+  Modal,
+  Popconfirm,
+  Tag,
+} from "antd";
 import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import "./product.scss";
-import { getProductadminsp, getProductsp } from "../../../service/getcategory/getCategory";
+import {
+  getProductadminsp,
+  getProductsp,
+} from "../../../service/getcategory/getCategory";
 import { delProduct } from "../../../service/delete/delete";
 import AddProductModal from "./modalList";
 import { postProduct } from "../../../service/post/post";
@@ -34,19 +47,6 @@ function Productlist() {
 
     fetchProduct();
   }, [reload]);
-
-  const deleteProduct = async (e) => {
-    const result = await delProduct(e);
-    setReload(!reload);
-  };
-
-  const postproduct = async (values) => {
-    const result = await postProduct(values);
-  };
-
-  const patchproduct = async (id, values) => {
-    const result = await patchProduct(id, values);
-  }
 
   // hàm tạo search của ant ds
   const getColumnSearchProps = (dataIndex) => ({
@@ -117,6 +117,19 @@ function Productlist() {
   });
   // hàm tạo search của ant ds
 
+  const deleteProduct = async (e) => {
+    const result = await delProduct(e);
+    setReload(!reload);
+  };
+
+  const postproduct = async (values) => {
+    const result = await postProduct(values);
+  };
+
+  const patchproduct = async (id, values) => {
+    const result = await patchProduct(id, values);
+  };
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -143,27 +156,37 @@ function Productlist() {
     onChange: onSelectChange,
   };
 
-  const handleXoa = () => {
-    // chức năng xóa khi select
+  const handleXoa = () => { // chức năng xóa khi select
+   
     const dataFilter = selectedRowKeys.map((item) => {
       return dataSource.filter((x) => {
         return x.id !== item;
       });
     });
     if (dataFilter.length !== 0) {
-      const dataAfterDel = dataFilter.reduce((origin, item) => {
-        // origin là mảng đầu tiên
-        return origin.filter(
-          (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
-        );
-      }, dataFilter[0].slice());
+
+      // const dataAfterDel = dataFilter.reduce((origin, item) => {
+      //   // origin là mảng đầu tiên
+      //   return origin.filter(
+      //     (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
+      //   );
+      // }, dataFilter[0].slice());
       // giải thích :
       // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
       // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object
       // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
-      setdataSource(dataAfterDel);
+      
+      
+      setSelectedRowKeys([]);
       for (let i = 0; i < selectedRowKeys.length; i++) {
-        deleteProduct(selectedRowKeys[i]);
+        
+        if (dataSource[selectedRowKeys[i] - 1].delete === false) {
+          patchproduct(selectedRowKeys[i], { delete: true });
+        }
+        else {
+           deleteProduct(selectedRowKeys[i]);
+        }
+        setReload(!reload);
       }
     } else {
       Modal.error({
@@ -173,48 +196,46 @@ function Productlist() {
     }
   };
 
-const handleDelete = (id) => {
-     deleteProduct(id);
-}
+  const handleDelete = (id) => { // xóa hẳn
+    deleteProduct(id);
+  };
 
-const handleRestore = (id) => {
-  patchproduct(id, {delete: false});
-  setReload(!reload);
-}
-
-  const handleDelitem = (e) => {
-    // xóa từng item
- 
-    patchproduct(e.id, {delete: true});
+  const handleRestore = (id) => { // khôi phục
+    patchproduct(id, { delete: false });
     setReload(!reload);
   };
 
-  const handleXem = (values) => {
+  const handleDelitem = (e) => {// ẩn từng item
+    patchproduct(e.id, { delete: true });
+    setReload(!reload);
+  };
+
+  const handleXem = (values) => {  // xem chi tiết sản phẩm
     // xem chi tiết từng item
     navigate("/admin/product/" + values.id);
   };
 
-  const handleShow = () => {
-    // thêm sản phẩm
+  const handleShow = () => {  // show modal
     setShow(true);
   };
 
+  // thêm sản phẩm
   const handleAddProduct = (e) => {
     const imageArray = [e.images_1, e.images_2, e.images_3, e.images_4];
     delete e.images_1;
     delete e.images_2;
     delete e.images_3;
     delete e.images_4;
-
     const PostValues = {
       ...e,
       images: imageArray,
-      delete: false
+      delete: false,
     };
     postproduct(PostValues);
     setReload(!reload);
     setShow(false);
   };
+// end thêm sản phẩm
 
   const columns = [
     {
@@ -311,98 +332,109 @@ const handleRestore = (id) => {
       key: "delete",
       render: (text, record) => {
         if (text === true) {
-          return (<><div className="">
-           <Tag color="#B21016">
-             Đã xóa
-           </Tag>
-          </div> </>)
+          return (
+            <>
+              <div className="">
+                <Tag color="#B21016">Đã xóa</Tag>
+              </div>{" "}
+            </>
+          );
+        } else {
+          return (
+            <>
+              <div className="">
+                <Tag color="#138535">Chưa xóa</Tag>
+              </div>
+            </>
+          );
         }
-        else {
-          return (<>
-            <div className="" >
-              <Tag color="#138535" >Chưa xóa</Tag>
-            </div>
-          </>)
-        }
-      }
+      },
     },
     {
       title: "Action",
       key: "action",
       render: (text, record) => {
-        const checkDelete = record.delete
-        return (
-          checkDelete === false ? ( <><Space size="middle">
-          <Tooltip title="Xem chi tiết" color="#085820" key="1">
-            {" "}
-            <Button
-              type="primary"
-              icon={
-                <img
-                  width="20"
-                  height="20"
-                  src="https://img.icons8.com/external-gradak-royyan-wijaya/24/FFFFFF/external-eyes-gradak-interface-solidarity-gradak-royyan-wijaya.png"
-                  alt="external-eyes-gradak-interface-solidarity-gradak-royyan-wijaya"
-                />
-              }
-              className="productlist--delitem"
-              onClick={() => handleXem(record)}
-            ></Button>
-          </Tooltip>
-          <Tooltip title="Xóa" color="#085820" key="2">
-            <Popconfirm
-              title="Xóa"
-    description="Admin có chắc là xóa chứ?"
-    onConfirm={() => handleDelitem(record)}
-    okText="Chắc chắn rồi!"
-    cancelText="Để suy nghĩ lại!"
-            >
-            <Button
-              type="primary"
-              icon={
-                <img
-                  width="19"
-                  height="19"
-                  src="https://img.icons8.com/ios-filled/50/FFFFFF/trash.png"
-                  alt="trash"
-                />
-                
-              }
-              className="productlist--delitem"
-        danger
-            />
-            </Popconfirm>
-          </Tooltip>
-        </Space></>) : (
- <>
- <Space className="productlist--del" size="middle" >
-   <Popconfirm
-     title="Xóa"
-     description="Admin có chắc là xóa vĩnh viễn chứ?"
-     okText="Chắc chắn rồi!"
-     cancelText="Để suy nghĩ lại!"
-     onConfirm={() => handleDelete(record.id)}
-   >
-     <Tooltip title="Xóa vĩnh viễn"><Button icon={<DeleteOutlined />} danger /></Tooltip>
-   </Popconfirm>
-   <Popconfirm
-     title="khôi phục?"
-     description="Bạn có chắc là khôi phục chứ?"
-     okText="Chắc chắn rồi!"
-     cancelText="Để suy nghĩ lại!"
-     onConfirm={() => handleRestore(record.id)}
-   >
-        <Tooltip title="Khôi phục"><Button className="productlist--restore" ><img width="32" height="32" src="https://img.icons8.com/windows/32/settings-backup-restore.png" alt="settings-backup-restore"/></Button></Tooltip>
-
-   </Popconfirm>
- </Space>
-</>
-
-        )
-          
-        )
-      
-    },
+        const checkDelete = record.delete;
+        return checkDelete === false ? (
+          <>
+            <Space size="middle">
+              <Tooltip title="Xem chi tiết" color="#085820" key="1">
+                {" "}
+                <Button
+                  type="primary"
+                  icon={
+                    <img
+                      width="20"
+                      height="20"
+                      src="https://img.icons8.com/external-gradak-royyan-wijaya/24/FFFFFF/external-eyes-gradak-interface-solidarity-gradak-royyan-wijaya.png"
+                      alt="external-eyes-gradak-interface-solidarity-gradak-royyan-wijaya"
+                    />
+                  }
+                  className="productlist--delitem"
+                  onClick={() => handleXem(record)}
+                ></Button>
+              </Tooltip>
+              <Tooltip title="Xóa" color="#085820" key="2">
+                <Popconfirm
+                  title="Xóa"
+                  description="Admin có chắc là xóa chứ?"
+                  onConfirm={() => handleDelitem(record)}
+                  okText="Chắc chắn rồi!"
+                  cancelText="Để suy nghĩ lại!"
+                >
+                  <Button
+                    type="primary"
+                    icon={
+                      <img
+                        width="19"
+                        height="19"
+                        src="https://img.icons8.com/ios-filled/50/FFFFFF/trash.png"
+                        alt="trash"
+                      />
+                    }
+                    className="productlist--delitem"
+                    danger
+                  />
+                </Popconfirm>
+              </Tooltip>
+            </Space>
+          </>
+        ) : (
+          <>
+            <Space className="productlist--del" size="middle">
+              <Popconfirm
+                title="Xóa"
+                description="Admin có chắc là xóa vĩnh viễn chứ?"
+                okText="Chắc chắn rồi!"
+                cancelText="Để suy nghĩ lại!"
+                onConfirm={() => handleDelete(record.id)}
+              >
+                <Tooltip title="Xóa vĩnh viễn">
+                  <Button icon={<DeleteOutlined />} danger />
+                </Tooltip>
+              </Popconfirm>
+              <Popconfirm
+                title="khôi phục?"
+                description="Bạn có chắc là khôi phục chứ?"
+                okText="Chắc chắn rồi!"
+                cancelText="Để suy nghĩ lại!"
+                onConfirm={() => handleRestore(record.id)}
+              >
+                <Tooltip title="Khôi phục">
+                  <Button className="productlist--restore">
+                    <img
+                      width="32"
+                      height="32"
+                      src="https://img.icons8.com/windows/32/settings-backup-restore.png"
+                      alt="settings-backup-restore"
+                    />
+                  </Button>
+                </Tooltip>
+              </Popconfirm>
+            </Space>
+          </>
+        );
+      },
     },
   ];
 
@@ -411,16 +443,24 @@ const handleRestore = (id) => {
       <div className="productlist">
         <h1 className="productlist--top__h1">Danh Sách Sản Phẩm</h1>
         <div className="productlist--top">
-            <Button className="productlist--top__bt1" type="primary" onClick={handleXoa}>
-          Xóa
-        </Button>
-        <Button className="productlist--top__bt2"  type="primary" onClick={handleShow} >
-          Thêm sản phẩm
-        </Button>
+          <Button
+            className="productlist--top__bt1"
+            type="primary"
+            onClick={handleXoa}
+          >
+            Xóa
+          </Button>
+          <Button
+            className="productlist--top__bt2"
+            type="primary"
+            onClick={handleShow}
+          >
+            Thêm sản phẩm
+          </Button>
         </div>
-      
+
         <Table
-        className="productlist--table"
+          className="productlist--table"
           bordered
           columns={columns}
           rowSelection={{

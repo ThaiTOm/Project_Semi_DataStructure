@@ -162,7 +162,7 @@
       "category": "Fruit Juice",
       "Quantity": 42,
       "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/91/c7/0f/91c70fc63bd05d5f01f7a225ae109afe.jpg",
         "https://i.pinimg.com/236x/c6/c3/a9/c6c3a946be26a9aa9d4ef2be346fc3ff.jpg",
@@ -1005,25 +1005,6 @@
         "https://i.pinimg.com/236x/ab/bf/0f/abbf0f9dec925553bfaf6e10cfe0e821.jpg",
         "https://i.pinimg.com/236x/48/0f/2d/480f2d880687c882fc1096e8c11a14e9.jpg"
       ]
-    },
-    {
-      "title": "gưeg",
-      "rating": 4,
-      "price": 10000000,
-      "discountPercentage": 23,
-      "Quantity": 2234,
-      "category": "Fruit Smoothie",
-      "description": "ưefwf23g23gggegegreg4g",
-      "brand": "egewg43g4",
-      "thumbnail": "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
-      "images": [
-        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
-        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
-        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg",
-        "https://i.pinimg.com/236x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg"
-      ],
-      "delete": false,
-      "id": 51
     }
   ],
   "category": [
@@ -1078,7 +1059,77 @@
     },
     {
       "userId": 2,
-      "product": [],
+      "product": [
+        {
+          "id": 3,
+          "infor": {
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 10,
+          "infor": {
+            "id": 10,
+            "title": "Berry Blast Smoothie",
+            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
+            "price": 50000,
+            "discountPercentage": 20,
+            "rating": 4.8,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 38,
+            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
+              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
+              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
+              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 12,
+          "infor": {
+            "id": 12,
+            "title": "Mango Tango Smoothie",
+            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
+            "price": 70000,
+            "discountPercentage": 20,
+            "rating": 4.9,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 78,
+            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
+              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
+              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
+              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
       "id": 2
     },
     {
@@ -1411,7 +1462,7 @@
     },
     {
       "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
+      "orderStep": 3,
       "date": "2023-12-01 08:41:39",
       "userId": 2,
       "thanhtoan": [
@@ -1425,6 +1476,39 @@
         }
       ],
       "id": 11
+    },
+    {
+      "paymentMethod": "Tiền mặt",
+      "orderStep": 0,
+      "date": "2023-12-08 08:07:22",
+      "userId": 2,
+      "thanhtoan": [
+        {
+          "id": 3,
+          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+          "title": "Orange Juice",
+          "dongia": 40500,
+          "soluong": 1,
+          "thanhtien": 40500
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        }
+      ],
+      "id": 12
     }
   ],
   "notification": []

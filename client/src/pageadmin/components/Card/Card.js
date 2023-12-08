@@ -12,7 +12,7 @@ const Card = (props) => {
   }, []);
 
   const asyncFetch = () => {
-    fetch("https://khoa-hoc-front-end.vercel.app/api/basic-area.json")
+    fetch("https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json")
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => {
@@ -28,8 +28,8 @@ const Card = (props) => {
     point: true,
     color: "white",
     data: data,
-    xField: "timePeriod",
-    yField: "value",
+    xField: "Date",
+    yField: "scales",
     slider: {
       start: 0,
       end: 1,

@@ -11,10 +11,11 @@ import {
   Typography,
   Popconfirm,
   Modal,
+  Tag,
 } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined,  DeleteOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { getCategory } from "../../../service/getcategory/getCategory";
+import { getCategoryAdmin } from "../../../service/getcategory/getCategory";
 import { patchCate } from "../../../service/patch/patch";
 import { delCate } from "../../../service/delete/delete";
 import { postCate } from "../../../service/post/post";
@@ -77,6 +78,21 @@ const delcate = async (id) => {    // xóa cate theo id của cate
 const postcate = async (values) => {   // thêm cate
     const result = await postCate(values);
 }
+
+
+const fetchCate = async () => {
+  const result = await getCategoryAdmin();
+  const options = result.map((item) => {
+    return { ...item, key: item.id };
+  });
+  setdataSource(options);
+};
+
+useEffect(() => {
+  fetchCate();
+}, [reload]);
+
+
   const edit = (record) => {   // điều chỉnh trường giá trị của form trong thanh input
     form.setFieldsValue({
       cate: "",
@@ -88,6 +104,9 @@ const postcate = async (values) => {   // thêm cate
   const cancel = () => {   //  hủy khi bấm chỉnh sửa
     setEditingKey("");
   };
+
+
+
   const save = async (key) => {  // lưu những thứ mới chỉnh sửa
     try {
       const row = await form.validateFields();   // đợi lấy giá trị của trường dữ liệu form
@@ -104,7 +123,7 @@ const postcate = async (values) => {   // thêm cate
             return item.id === key;
         })
       if (key === undefined){  // nếu key của save mà un thì post dữ liệu mới lên (kết hợp với nút thêm cate)
-          postcate(newData[index]);  
+          postcate({...newData[index], delete: false});  
           setReload(!reload);  // khi post thì cập nhật dữ liệu
       }
       else {
@@ -122,17 +141,7 @@ const postcate = async (values) => {   // thêm cate
     }
   };
 
-  const fetchCate = async () => {
-    const result = await getCategory();
-    const options = result.map((item) => {
-      return { ...item, key: item.id };
-    });
-    setdataSource(options);
-  };
 
-  useEffect(() => {
-    fetchCate();
-  }, [reload]);
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({   // đây là biến của ant ds
@@ -217,21 +226,29 @@ const postcate = async (values) => {   // thêm cate
     }) 
     if (dataFilter.length !== 0 ){
         // vì sử dụng map nên nó cứ lặp thằng đầu rồi filter rồi lặp thằng sau r filter => tạo ra rất nhiều mảng với dữ liệu không được hợp nhất
-    const dataAfterDel =  dataFilter.reduce ((origin, item) => {   // => hợp nhất (origin là mảng đầu tiên)
-        return origin.filter(obj1 =>
-         item.some(obj2 => obj2.key === obj1.key)  // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
-        );
-       },dataFilter[0].slice())
+    // const dataAfterDel =  dataFilter.reduce ((origin, item) => {   // => hợp nhất (origin là mảng đầu tiên)
+    //     return origin.filter(obj1 =>
+    //      item.some(obj2 => obj2.key === obj1.key)  // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
+    //     );
+    //    },dataFilter[0].slice())
        // giải thích :
        // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
        // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object 
        // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
-       setdataSource(dataAfterDel)
+       
+       setSelectedRowKeys([])
        for (let i = 0 ; i < selectedRowKeys.length ;i++){
-      delcate(selectedRowKeys[i]);
+    
+      if (dataSource[selectedRowKeys[i] - 1].delete === false) {
+        patchcate({id: selectedRowKeys[i], delete: true });
+      }
+      else {
+        delcate(selectedRowKeys[i]);
+      }
+      setReload(!reload);
        }
 
-// setReload(!reload);  //  có thể thay thế cho hàm dataFilter nhma sẽ không được tối ưu
+
     }
     else {
       Modal.error({
@@ -243,16 +260,30 @@ const postcate = async (values) => {   // thêm cate
 
 }
 
+const handleDelete = (id) => {
+  if (id === undefined){
+    setReload(!reload);
+  }
+  else {
+      delcate(id)
+      setReload(!reload);
+  }
+}
+
+const handleRestore = (id) => {
+  patchcate({id: id, delete: false})
+  setReload(!reload);
+}
+
 const handleDelitem = (e) => {
     // xóa từng item
 if (e.id === undefined){
   setReload(!reload);
 }
 else {
-    delcate(e.id)
+    patchcate({id: e.id, delete: true})
     setReload(!reload);
 }
-  
   };
 
 
@@ -296,15 +327,42 @@ else {
         </>)
       } ,
     },
-
+    {
+      title: "Trạng thái Category",
+      dataIndex: "delete",
+      key: "delete",
+    
+      render: (text) => {
+      if (text === true){
+        return (
+          <>
+            <div className="">
+            <Tag color="#f50">Đã xóa</Tag>
+            </div>
+          </>
+        )
+      }
+       else {
+        return (
+          <>
+            <div className="">
+            <Tag color="#2db7f5">Chưa xóa</Tag>
+            </div>
+          </>
+        )
+       }
+      } ,
+    },
     {
       title: "operation",
       dataIndex: "operation",
       render: (_, record) => {
         const editable = isEditing(record);
+        const checkDelete = record.delete;
+        console.log(checkDelete);
         return (
           <>
-            <Space size="middle">
+          {checkDelete === false || checkDelete === undefined ? (<> <Space size="middle">
               <Tooltip title="Xóa" color="#085820" key="2">
               <Popconfirm 
      title="Xóa"
@@ -363,7 +421,30 @@ else {
              
 
               )}
-              </Space>
+              </Space></>) : (<>
+                <Space className="account--del" size="middle" >
+                  <Popconfirm
+                    title="Xóa"
+                    description="Admin có chắc là xóa vĩnh viễn chứ?"
+                    okText="Chắc chắn rồi!"
+                    cancelText="Để suy nghĩ lại!"
+                    onConfirm={() => handleDelete(record.id)}
+                  >
+                    <Tooltip title="Xóa vĩnh viễn"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+                  </Popconfirm>
+                  <Popconfirm
+                    title="khôi phục?"
+                    description="Bạn có chắc là khôi phục chứ?"
+                    okText="Chắc chắn rồi!"
+                    cancelText="Để suy nghĩ lại!"
+                    onConfirm={() => handleRestore(record.id)}
+                  >
+                       <Tooltip title="Khôi phục"><Button className="account--restore" ><img width="32" height="32" src="https://img.icons8.com/windows/32/settings-backup-restore.png" alt="settings-backup-restore"/></Button></Tooltip>
+
+                  </Popconfirm>
+                </Space>
+              </>)}
+           
           </>
         );
       },

@@ -12,6 +12,12 @@ export const getCategory = async () => {
   return result;
 };
 
+export const getCategoryAdmin = async () => {
+  // lấy danh mục sản phẩm
+  const result = await get("category");
+  return result;
+};
+
 export const getUserstk = async (e) => {
   try {
     const result = await get(`users?token=${e}&delete=false`);

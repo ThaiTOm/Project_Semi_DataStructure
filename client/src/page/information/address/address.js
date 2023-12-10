@@ -18,6 +18,8 @@ import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { postShipping } from "../../../service/post/post";
 import { patchBool } from "../../../service/patch/patch";
 import { delShip } from "../../../service/delete/delete";
+import { useNavigate } from "react-router-dom";
+import Error from "../../../components/error/error";
 const Address = () => {
   const [form] = Form.useForm(); // Quản lí form
   const [open, setOpen] = useState(false); // set mở modal
@@ -25,6 +27,7 @@ const Address = () => {
   const [addresses, setAddresses] = useState([]); // địa chỉ mô phỏng
   const [submit, setSubmit] = useState([]); // gias tri sau khi submit
   const [show, setShow] = useState(true); // bấm cập nhật là show
+  const navigate = useNavigate();
   const [shipid, setShipid] = useState({
     id: 0,
   });
@@ -485,7 +488,8 @@ const Address = () => {
 
   return (
     <>
-      <div className="address">
+  
+ <div className="address">
         <div className="address--header">
           <h2>Địa chỉ của tôi</h2>
           <Button
@@ -674,6 +678,9 @@ const Address = () => {
           )}
         </div>
       </div>
+
+    
+     
     </>
   );
 };

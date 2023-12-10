@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
 import { load } from "../../actions/actCart";
+import Error from "../../components/error/error";
 const { TextArea } = Input;
 const { Panel } = Collapse;
 const columns = [
@@ -197,11 +198,11 @@ const handleChuyentrang = () => {
     return total + item.thanhtien;
   }, 0);
 
-  console.log(tong);
+
 
   return (
     <>
-      <div className="thanhtoan">
+    {cookies.length !== 0 ? (<>  <div className="thanhtoan">
         {" "}
         {data_1 && data_1.delivery && data_1.delivery[0] ? (
           <div className="thanhtoan--address">
@@ -322,7 +323,8 @@ const handleChuyentrang = () => {
         >
           <p>Hãy kiểm tra kĩ đơn hàng trước khi bấm nút đặt hàng. Bạn không thể tiếp tục đặt hàng khi sản phảm chưa hoàn tất!</p>
         </Modal>
-      </div>
+      </div></>) : (Error("Thanh Toán", navigate))}
+    
     </>
   );
 };

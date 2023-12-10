@@ -9,6 +9,7 @@ import { patchCart } from "../../service/patch/patch";
 import { Button, Checkbox, Col, Empty, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
+import Error from "../../components/error/error";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -396,7 +397,7 @@ const handleXoahet = () => {
 }
   return (
     <>
-    <Layout>
+    {cookies.length !== 0 ? (<> <Layout>
        <Content className="cart--content  animate__animated animate__zoomIn animate__faster">
         <div className="cart--top">
           <h2>DANH SÁCH GIỎ HÀNG</h2>
@@ -485,7 +486,8 @@ Hiện Tại Giỏ Hàng Trống
 </Footer>
 
 
-    </Layout>
+    </Layout></>) : (Error("Truy Cập Danh Sách Giỏ Hàng", navigate))}
+   
      
     </>
   );

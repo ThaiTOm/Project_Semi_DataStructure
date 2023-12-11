@@ -2,9 +2,6 @@ import { Breadcrumb, Button, Col, Form, Input, Row } from "antd";
 
 import "./contact.scss";
 import { Link } from "react-router-dom";
-import position from "../../image/position.png"
-import email from "../../image/email.png"
-import telephone from "../../image/telephone.png"
 function Contact() {
   const handleSubmit = (values) => {
     console.log(values);
@@ -35,28 +32,19 @@ function Contact() {
             <h1 className="contact--name">3Tstore</h1>
             <div className="contact--qc   animate__animated animate__fadeInLeft animate__faster">
               <div className="contact--address contact--chunginfor">
-                <img
-                  src={position}
-                  alt="diachi"
-                />
+              <img src="https://img.icons8.com/isometric/50/region-code.png" alt="region-code"/>
                 <p>
                   <b>Địa chỉ:</b> 93 Hồ Văn Huê, Phú Nhuận{" "}
                 </p>
               </div>
               <div className="contact--number contact--chunginfor">
-                <img
-                  src={telephone}
-                  alt="sdt"
-                />
+              <img src="https://img.icons8.com/parakeet/48/phone.png" alt="phone"/>
                 <p>
                   <b>Số điện thoại:</b> 0399038165
                 </p>
               </div>
               <div className="contact--email contact--chunginfor">
-                <img
-                  src={email}
-                  alt="email"
-                />
+              <img src="https://img.icons8.com/color/48/apple-mail.png" alt="apple-mail"/>
                 <p>
                   <b>Email:</b> sonthanh@gmail.com
                 </p>

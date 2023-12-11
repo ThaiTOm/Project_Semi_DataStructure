@@ -4,23 +4,20 @@ import { useEffect, useState } from "react";
 import { getProductsp } from "../../service/getcategory/getCategory";
 import {
   AddtoCart,
-  filterByArrange,
   taocate,
   taohsx,
 } from "../../components/filter";
 import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
 
   Layout,
-  Modal,
   Pagination,
 
 } from "antd";
 
 import "animate.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./collections.scss";
 import filterData from "../../components/handleLogic/handlelogic";
 import Contenttop from "../../components/contentTop";

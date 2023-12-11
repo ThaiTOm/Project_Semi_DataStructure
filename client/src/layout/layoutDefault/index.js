@@ -20,13 +20,13 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
-import Logo from "../../image/Logo.png";
-import donhang from "../../image/donhang.png";
-import position from "../../image/position.png";
-import person from "../../image/person.png";
-import cart from "../../image/cart.png";
-import email from "../../image/email.png";
-import telephone from "../../image/telephone.png";
+// import Logo from "../../image/Logo.png";
+// import donhang from "../../image/donhang.png";
+// import position from "../../image/position.png";
+// import person from "../../image/person.png";
+// import cart from "../../image/cart.png";
+// import email from "../../image/email.png";
+// import telephone from "../../image/telephone.png";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
   getCategory,
@@ -206,7 +206,7 @@ function LayoutDefault() {
               </div>
               <div className="header--logo">
                 <Link to="/">
-                  <img src={Logo} alt="logo 3Tstore" />
+                  <img src="https://i.imgur.com/R8I3n02.png" alt="logo 3Tstore" />
                 </Link>
               </div>
 
@@ -489,21 +489,21 @@ function LayoutDefault() {
             {" "}
             <div className="footer--one">
               <div className="footer--qc">
-                <img className="footer--logo" src={Logo} alt="logo" />
+                <img className="footer--logo" src="https://i.imgur.com/R8I3n02.png" alt="logo" />
                 <div className="footer--address footer--chunginfor">
-                  <img src={position} alt="diachi" />
+                  <img src="https://img.icons8.com/color/48/place-marker--v1.png" alt="diachi" />
                   <p>
                     <b>Địa chỉ:</b> 93 Hồ Văn Huê, Phú Nhuận{" "}
                   </p>
                 </div>
                 <div className="footer--number footer--chunginfor">
-                  <img src={telephone} alt="sdt" />
+                <img src="https://img.icons8.com/fluency/48/phone--v1.png" alt="phone--v1"/>
                   <p>
                     <b>Số điện thoại:</b> 0399038165
                   </p>
                 </div>
                 <div className="footer--email footer--chunginfor">
-                  <img src={email} alt="email" />
+                <img src="https://img.icons8.com/emoji/48/e-mail.png" alt="e-mail"/>
                   <p>
                     <b>Email:</b> sonthanh@gmail.com
                   </p>
@@ -589,7 +589,7 @@ function LayoutDefault() {
           {/* Hàng đầu là tài khoản */}
           <div className="drawer--user">
             <NavLink
-              to={cookies.length != 20 ? "/login" : "/infor/thongtinkh"}
+              to={cookies.length === 0 ? "/login" : "/infor/thongtinkh"}
               onClick={onClose}
             >
               <Avatar icon={<UserOutlined />} size={40} />
@@ -611,16 +611,16 @@ function LayoutDefault() {
           </div>
           <div className="drawer--function__donhang drawer--function__c">
             <NavLink
-              to={cookies.length != 20 ? "/login" : "/order"}
+              to={cookies.length === 0 ? "/login" : "/order"}
               onClick={onClose}
             >
-              <img src={donhang} alt="don hang" />
+              <img src="https://img.icons8.com/fluency/48/purchase-order.png" alt="don hang" />
               <p className="drawer--function__chung">Đơn hàng</p>
             </NavLink>
           </div>
           <div className="drawer--function__cuahang drawer--function__c">
             <NavLink to="/dscuahang" onClick={onClose}>
-              <img src={position} alt="cua hang" />
+              <img src="https://img.icons8.com/color/48/place-marker--v1.png" alt="cua hang" />
               <p className="drawer--function__chung">Cửa hàng</p>
             </NavLink>
           </div>

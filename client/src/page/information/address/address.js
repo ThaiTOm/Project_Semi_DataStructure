@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Form,
@@ -12,14 +12,13 @@ import {
   Result,
 } from "antd";
 import "./address.scss";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { getShip, getUserstk } from "../../../service/getcategory/getCategory";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { postShipping } from "../../../service/post/post";
 import { patchBool } from "../../../service/patch/patch";
 import { delShip } from "../../../service/delete/delete";
 import { useNavigate } from "react-router-dom";
-import Error from "../../../components/error/error";
 const Address = () => {
   const [form] = Form.useForm(); // Quản lí form
   const [open, setOpen] = useState(false); // set mở modal
@@ -200,9 +199,9 @@ const Address = () => {
 
   const handleDelete = async (e) => {
     const xoa = ship.find((item) => {
-      return item.id == e;
+      return item.id === e;
     });
-    if (xoa.delivery[0].defaultAddress == false) {
+    if (xoa.delivery[0].defaultAddress === false) {
       await del(e);
     } else {
       message.error({
@@ -220,7 +219,7 @@ const Address = () => {
     setOpen(true);
     setShow(true);
     const search = ship.find((item) => {
-      return item.id == x.id;
+      return item.id === x.id;
     });
 
     form.setFieldsValue({
@@ -238,7 +237,7 @@ const Address = () => {
     try {
       // thử lỗi
       const valuesbool = ship.filter((item) => {
-        return item.delivery[0].defaultAddress == true;
+        return item.delivery[0].defaultAddress === true;
       });
 
       if (valuesbool.length > 0) {
@@ -361,9 +360,9 @@ const Address = () => {
           // kiểm tra dữ liệu đúng hay sai để cho phép tạo mới hay không
 
           return (
-            x.address == { ...submit, ...values }.address &&
-            x.fullName == { ...submit, ...values }.fullName &&
-            x.phoneNumber == { ...submit, ...values }.phoneNumber
+            x.address === { ...submit, ...values }.address &&
+            x.fullName === { ...submit, ...values }.fullName &&
+            x.phoneNumber === { ...submit, ...values }.phoneNumber
           );
           // chỉ cần 1 thằng khác biệt thì sẽ trả về false => được cho phép tạo mới khi không có dữ liệu nào trùng
           // và ngược lại nếu đúng hết toàn bộ thì sẽ trả về là true => không cho phép tạo mới vì đã có địa chỉ giống
@@ -373,25 +372,25 @@ const Address = () => {
       let soluongfalse = 0;
 
       for (let item of checkship) {
-        if (item == false) {
+        if (item === false) {
           soluongfalse++; // kiểm tra số lượng false
         }
       }
       const updatetrung = ship.find((item) => {
         const result = item.delivery.find((x) => {
           return (
-            x.address == { ...submit, ...values }.address &&
-            x.fullName == { ...submit, ...values }.fullName &&
-            x.phoneNumber == { ...submit, ...values }.phoneNumber
+            x.address === { ...submit, ...values }.address &&
+            x.fullName === { ...submit, ...values }.fullName &&
+            x.phoneNumber === { ...submit, ...values }.phoneNumber
           );
         });
         return result;
       });
 
-      if (shipid.id == 0) {
+      if (shipid.id === 0) {
         // vì nếu có true thì sẽ có 1 đứa bị trùng và điều đó là cấm kị
-        if (soluongfalse == checkship.length) {
-          if (ship.length == 0) {
+        if (soluongfalse === checkship.length) {
+          if (ship.length === 0) {
             postship({
               // gửi dữ liệu địa chỉ của người dùng
               userId: data[0].id,
@@ -416,15 +415,15 @@ const Address = () => {
               ],
             });
           }
-        } else if (soluongfalse != checkship.length) {
-          if (updatetrung.delivery[0].defaultAddress == false) {
-            if (values.defaultAddress == true) {
+        } else if (soluongfalse !== checkship.length) {
+          if (updatetrung.delivery[0].defaultAddress === false) {
+            if (values.defaultAddress === true) {
               handleClick(updatetrung.id, updatetrung.delivery[0]);
             } else {
               // thong bao
             }
-          } else if (updatetrung.delivery[0].defaultAddress == true) {
-            if (values.defaultAddress == true) {
+          } else if (updatetrung.delivery[0].defaultAddress === true) {
+            if (values.defaultAddress === true) {
               patchbool({
                 id: updatetrung.id,
                 delivery: [
@@ -442,14 +441,14 @@ const Address = () => {
       } else if (shipid.id !== 0) {
         if (updatetrung) {
           if (
-            updatetrung.id == shipid.id &&
-            updatetrung.delivery[0].defaultAddress == false &&
-            values.defaultAddress == true
+            updatetrung.id === shipid.id &&
+            updatetrung.delivery[0].defaultAddress === false &&
+            values.defaultAddress === true
           ) {
             handleClick(updatetrung.id, updatetrung.delivery[0]);
           }
-        } else if (soluongfalse == checkship.length) {
-          if (shipid.delivery[0].defaultAddress == true) {
+        } else if (soluongfalse === checkship.length) {
+          if (shipid.delivery[0].defaultAddress === true) {
             patchbool({
               id: shipid.id,
               delivery: [
@@ -583,8 +582,8 @@ const Address = () => {
               {(shipid &&
                 shipid.delivery &&
                 shipid.delivery[0] &&
-                shipid.delivery[0].defaultAddress == false) ||
-              shipid.id == 0 ? (
+                shipid.delivery[0].defaultAddress === false) ||
+              shipid.id === 0 ? (
                 <Form.Item name="defaultAddress" valuePropName="checked">
                   <Checkbox defaultChecked={false}>
                     Đặt làm địa chỉ mặc định
@@ -613,7 +612,7 @@ const Address = () => {
                     {/* { item.delivery[0].
 
                       } */}
-                    {item.delivery[0].defaultAddress == true ? (
+                    {item.delivery[0].defaultAddress === true ? (
                       <div className="address--item__macdinh">
                         <img
                           className="address--item__img"

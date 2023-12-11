@@ -1,30 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getProductcate } from "../../service/getcategory/getCategory";
 import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  Breadcrumb,
-  Button,
-  Checkbox,
-  Col,
   Layout,
-  Modal,
   Pagination,
-  Row,
-  Select,
-  Slider,
 } from "antd";
-
-import { PlusOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import "./category.scss";
 import { AddtoCart, filterByArrange, taocate, taohsx } from "../../components/filter";
 import Contenttop from "../../components/contentTop";
 import Siderlane from "../../components/sider";
 import Items from "../../components/Items";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header } = Layout;
 
 function Categorydetail() {
   const params = useParams();

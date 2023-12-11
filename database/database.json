@@ -1155,7 +1155,7 @@
   ],
   "information": [
     {
-      "name": "admindepzaisss",
+      "name": "admindepzai",
       "email": "admin@gmail.com",
       "phone": "0815097908",
       "gender": "male",
@@ -1163,8 +1163,8 @@
       "id": 2
     },
     {
-      "name": "admindepzai",
-      "email": "admin@gmail.com",
+      "name": "Trần Nguyễn Sơn THành",
+      "email": "sonthanh12345678910@gmail.com",
       "phone": "0399038165",
       "gender": "male",
       "userId": 1,
@@ -1179,7 +1179,7 @@
           "address": "93 Hồ Văn Huê, phường 9, phú nhuận",
           "fullName": "jhk",
           "phoneNumber": "0399038165",
-          "defaultAddress": true
+          "defaultAddress": false
         }
       ],
       "id": 2
@@ -1203,7 +1203,7 @@
           "address": "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
           "fullName": "trần nguyễn sơn thành",
           "phoneNumber": "0374444944",
-          "defaultAddress": false
+          "defaultAddress": true
         }
       ],
       "id": 4

@@ -4,7 +4,6 @@ import { Form, Input, Button, message } from "antd";
 import { getUserstk } from "../../../service/getcategory/getCategory";
 import { patchUser } from "../../../service/patch/patch";
 import "./changepass.scss";
-import Error from "../../../components/error/error";
 function Changepass() {
   const cookies = getCookie("token");
   const [form] = Form.useForm();

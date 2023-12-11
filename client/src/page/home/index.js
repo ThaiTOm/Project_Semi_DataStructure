@@ -1,17 +1,16 @@
 import "./home.scss";
-import { Button, Carousel, Col, Layout, Modal, Row } from "antd";
+import { Button, Carousel, Col, Layout, Row } from "antd";
 import Homesider from "../../components/homeSider/index.js";
-import slide1 from "../../image/slide1.png";
-import slide2 from "../../image/slide2.png";
+// import slide1 from "../../image/slide1.png";
+// import slide2 from "../../image/slide2.png";
 import { useEffect, useState } from "react";
 import { getProductsp } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { add, up } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies.js";
 import { PlusOutlined } from "@ant-design/icons";
 import { AddtoCart } from "../../components/filter/index.js";
-const { Header, Content, Footer, Sider } = Layout;
+const {  Content, Sider } = Layout;
 function Home() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -34,31 +33,31 @@ function Home() {
   const cookies = getCookie("token");
 
   const discount = data.filter((item) => {
-    return item.discountPercentage != 0;
+    return item.discountPercentage !== 0;
   });
 
   const fruitjuice = data.filter((item) => {
-    return item.category == "Fruit Juice";
+    return item.category === "Fruit Juice";
   });
 
   const fruitsmoothie = data.filter((item) => {
-    return item.category == "Fruit Smoothie";
+    return item.category === "Fruit Smoothie";
   });
 
   const coffeebeverages = data.filter((item) => {
-    return item.category == "Coffee Beverages";
+    return item.category === "Coffee Beverages";
   });
 
   const milktea = data.filter((item) => {
-    return item.category == "Milk Tea";
+    return item.category === "Milk Tea";
   });
 
   const wine = data.filter((item) => {
-    return item.category == "Wine";
+    return item.category === "Wine";
   });
 
   const softdrink = data.filter((item) => {
-    return item.category == "Soft Drinks";
+    return item.category === "Soft Drinks";
   });
 
   // const handleClick = (id, infor) => {
@@ -122,10 +121,10 @@ function Home() {
           <Content className="home--content  animate__animated animate__fadeInRight animate__faster">
             <Carousel autoplay>
               <div>
-                <img className="home--image" src={slide1} alt="hinhnen" />
+                <img className="home--image" src="https://i.imgur.com/CoIEhGn.png" alt="hinhnen" />
               </div>
               <div>
-                <img className="home--image" src={slide2} alt="hinhnen_2" />
+                <img className="home--image" src="https://i.imgur.com/DbCtOnP.png" alt="hinhnen_2" />
               </div>
             </Carousel>
 

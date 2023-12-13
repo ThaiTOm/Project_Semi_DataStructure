@@ -15,13 +15,18 @@ import { Link, useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import "./product.scss";
 import {
+  getCategory,
+  getProduct_cate,
   getProductadminsp,
   getProductsp,
+  getadminCategory,
 } from "../../../service/getcategory/getCategory";
 import { delProduct } from "../../../service/delete/delete";
 import AddProductModal from "./modalList";
 import { postProduct } from "../../../service/post/post";
-import { patchProduct } from "../../../service/patch/patch";
+import { patchCate, patchProduct } from "../../../service/patch/patch";
+import { useDispatch } from "react-redux";
+import { load } from "../../../actions/actCart";
 
 function Productlist() {
   const navigate = useNavigate();
@@ -32,7 +37,8 @@ function Productlist() {
   const [dataSource, setdataSource] = useState([]);
   const [reload, setReload] = useState(true);
   const [show, setShow] = useState(false);
-
+  const [cate, setCate] = useState("");
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchProduct = async () => {
       const result = await getProductadminsp();
@@ -47,6 +53,40 @@ function Productlist() {
 
     fetchProduct();
   }, [reload]);
+
+  useEffect(() => {
+    getCate();
+  },[])
+  const patchcate = async (values) => {  // cập nhật cate
+    const result = await patchCate(values);
+} 
+
+const getCate = async () => {
+  const result = await getadminCategory();
+  console.log(result);
+  setCate(result);
+}
+
+const getproductCate = async (e, Cate) => {
+  const result = await getProduct_cate(e);
+ const findIdCate = cate.find(item => {
+  return item.cate === Cate;
+})
+
+  if (result.length === 0 ) {
+   if (findIdCate) {
+    patchcate({id: findIdCate.id, delete: true})
+   }
+  }
+  
+  else  {
+   if (findIdCate && findIdCate.delete === true) {
+    patchcate({id: findIdCate.id, delete: false})
+   }
+  }
+}
+  
+
 
   // hàm tạo search của ant ds
   const getColumnSearchProps = (dataIndex) => ({
@@ -198,16 +238,24 @@ function Productlist() {
 
   const handleDelete = (id) => { // xóa hẳn
     deleteProduct(id);
+    setReload(!reload);
+    dispatch(load(reload));
   };
 
-  const handleRestore = (id) => { // khôi phục
-    patchproduct(id, { delete: false });
+  const handleRestore = async (e) => { // khôi phục
+    const cate = e.category;
+   await patchproduct(e.id, { delete: false });
+   getproductCate(e.category, cate);
     setReload(!reload);
+   dispatch(load(reload));
   };
 
-  const handleDelitem = (e) => {// ẩn từng item
-    patchproduct(e.id, { delete: true });
+  const handleDelitem = async (e) => {// ẩn từng item
+  const cate = e.category;
+  await  patchproduct(e.id, { delete: true });
+   getproductCate(e.category, cate);
     setReload(!reload);
+    dispatch(load(reload));
   };
 
   const handleXem = (values) => {  // xem chi tiết sản phẩm
@@ -401,7 +449,7 @@ function Productlist() {
           </>
         ) : (
           <>
-            <Space className="productlist--del" size="middle">
+            <Space className="productlist--del" size="middle" align="center">
               <Popconfirm
                 title="Xóa"
                 description="Admin có chắc là xóa vĩnh viễn chứ?"
@@ -418,7 +466,7 @@ function Productlist() {
                 description="Bạn có chắc là khôi phục chứ?"
                 okText="Chắc chắn rồi!"
                 cancelText="Để suy nghĩ lại!"
-                onConfirm={() => handleRestore(record.id)}
+                onConfirm={() => handleRestore(record)}
               >
                 <Tooltip title="Khôi phục">
                   <Button className="productlist--restore">

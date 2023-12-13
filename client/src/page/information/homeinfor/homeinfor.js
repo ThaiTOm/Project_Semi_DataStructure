@@ -5,7 +5,7 @@ import "./information.scss";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { getUserstk } from "../../../service/getcategory/getCategory";
 import { Breadcrumb, Col, Layout, Row } from "antd";
-import Error from "../../../components/error/error";
+import { Error } from "../../../components/error/error";
 const { Content,  Sider } = Layout;
 function Infor() {
   const cookies = getCookie("token");

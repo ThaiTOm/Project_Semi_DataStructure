@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
 import { load } from "../../actions/actCart";
-import Error from "../../components/error/error";
+import  { Error } from "../../components/error/error";
 const { TextArea } = Input;
 const { Panel } = Collapse;
 const columns = [

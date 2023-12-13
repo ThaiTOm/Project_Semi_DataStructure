@@ -1,7 +1,7 @@
 import { Button, Result } from "antd";
 
 
-const Error = (infor, navigate) => {
+export const Error = (infor, navigate) => {
   
 
   return (
@@ -15,4 +15,18 @@ const Error = (infor, navigate) => {
   </>
   )
 }
-export default Error;
+
+export const Errorempty = (navigate) => {
+  
+
+  return (
+    <> <Result
+    status="404"
+    title="Lỗi"
+    subTitle={`Không Có Dữ Liệu. Vui Lòng Quay Lại Trang Chủ!!`}
+    extra={<Button onClick={() => {navigate("/")}} type="primary">Back Home</Button>}
+  />
+  
+  </>
+  )
+}

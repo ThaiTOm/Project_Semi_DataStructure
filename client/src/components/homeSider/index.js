@@ -3,9 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu } from "antd";
 import { AlignLeftOutlined } from "@ant-design/icons";
 import { getCategory } from "../../service/getcategory/getCategory";
+import { getProduct_cate } from "../../service/getcategory/getCategory";
 import { Await, Link } from "react-router-dom";
 import { get } from "../../tienich/request";
+import { useSelector } from "react-redux";
 function Homesider() {
+  const render = useSelector((state) => state.Reload);
   const [data, setData] = useState([
     {
       id: "",
@@ -24,23 +27,18 @@ function Homesider() {
         console.error("loi");
       } else {
         setData(res);
-       
       }
     };
 
     fetchapi();
-  }, []);
-  
-  const getProduct = async (e) => {
-    const result = await get("beverages/?category=" + e);
-    return result;
-  };
+  }, [render]);
+
 
   useEffect(() => {
     const fetchData2 = async () => {
       const newData2 = [];
       for (const item of data) {
-        const result = await getProduct(item.cate);
+        const result = await getProduct_cate(item.cate);
         newData2.push(result);
       }
       
@@ -48,7 +46,7 @@ function Homesider() {
     };
 
     fetchData2();
-  }, [data]);
+  }, [render, data]);
 
   return (
     <>
@@ -59,7 +57,7 @@ function Homesider() {
         </div>
 
         <div className="homesider--collection">
-          {data.map((item) => (
+          {data.map((item, index) => (
             <div>
             <Link to={'/category/' + item.cate} >
               <div className="homesider--product" key={item.id}>
@@ -77,8 +75,8 @@ function Homesider() {
                       ),
                       label: item.cate,
 
-                      children: Array.isArray(data_1[item.id - 1])
-                        ? data_1[item.id - 1].map((x) => (
+                      children: Array.isArray(data_1[index])
+                        ? data_1[index].map((x) => (
                           {
                             label: <Link to={`/product/${x.id}`} key={x.title}>{x.title}</Link>,
 

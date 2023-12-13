@@ -9,6 +9,5 @@ const Reload = (state = [] , action) => {
                 return state;
     }
    
-    
 }
 export default Reload;

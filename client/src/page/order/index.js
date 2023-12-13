@@ -4,7 +4,7 @@ import { getOrder, getUserstk } from "../../service/getcategory/getCategory";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import "./order.scss";
 import { useNavigate } from "react-router-dom";
-import Error from "../../components/error/error";
+import { Error } from "../../components/error/error";
 
 const { Step } = Steps;
 

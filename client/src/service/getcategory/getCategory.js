@@ -6,6 +6,11 @@ export const getadminCategory = async () => {
   return result;
 };
 
+export const getProduct_cate = async (e) => {
+  const result = await get(`beverages/?category=${e}&delete=false`);
+  return result;
+};
+
 export const getCategory = async () => {
   // lấy danh mục sản phẩm
   const result = await get("category?delete=false");

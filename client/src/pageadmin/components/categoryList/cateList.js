@@ -19,6 +19,8 @@ import { getCategoryAdmin } from "../../../service/getcategory/getCategory";
 import { patchCate } from "../../../service/patch/patch";
 import { delCate } from "../../../service/delete/delete";
 import { postCate } from "../../../service/post/post";
+import { useDispatch } from "react-redux";
+import { load } from "../../../actions/actCart";
 
 const EditableCell = ({    // cập nhật bảng  ( những biến ở đây là của ant ds chứ không phải biến của bài code )
   editing,   // chỉnh sửa
@@ -65,7 +67,7 @@ const CategoryList = () => {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState("");
   const isEditing = (record) => record.key === editingKey;
-
+  const dispatch = useDispatch();
 
 const patchcate = async (values) => {  // cập nhật cate
     const result = await patchCate(values);
@@ -225,6 +227,7 @@ useEffect(() => {
         })
     }) 
     if (dataFilter.length !== 0 ){
+
         // vì sử dụng map nên nó cứ lặp thằng đầu rồi filter rồi lặp thằng sau r filter => tạo ra rất nhiều mảng với dữ liệu không được hợp nhất
     // const dataAfterDel =  dataFilter.reduce ((origin, item) => {   // => hợp nhất (origin là mảng đầu tiên)
     //     return origin.filter(obj1 =>
@@ -267,12 +270,14 @@ const handleDelete = (id) => {
   else {
       delcate(id)
       setReload(!reload);
+      dispatch(load(reload))
   }
 }
 
 const handleRestore = (id) => {
   patchcate({id: id, delete: false})
   setReload(!reload);
+  dispatch(load(reload))
 }
 
 const handleDelitem = (e) => {

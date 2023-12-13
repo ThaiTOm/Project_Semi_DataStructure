@@ -11,6 +11,7 @@ import { getCookie } from "../../components/takeCookies/takeCookies";
 import { useDispatch, useSelector } from "react-redux";
 import { addmt, addtt, upmt } from "../../actions/actCart";
 import { AddtoCart } from "../../components/filter";
+import { Errorempty } from "../../components/error/error";
 const { Header, Content, Footer, Sider } = Layout;
 
 function Productdetail() {
@@ -18,9 +19,7 @@ function Productdetail() {
   const navigate = useNavigate(); // chuyển trang
   const dispatch = useDispatch(); // chuyển dữ liệu
   const [data, setData] = useState([
-    {
-      images: [""],
-    },
+
   ]);
   const [cate, setCate] = useState([]);
   const { pathname } = useLocation();
@@ -122,12 +121,16 @@ useEffect(() => {   // path thay đổi thì biến đếm count quay về 1
         setCate(result);
       }
     };
-    fetchcate(data[0].category);
+
+    if (data.length !== 0) {
+      fetchcate(data[0].category);
+    }
+    
   }, [data]);
 
   return (
     <>
-      <div className="product">
+    {data.length !== 0 ? (<> <div className="product">
         <div className="product--bread">
           <Breadcrumb
             items={[
@@ -393,7 +396,8 @@ useEffect(() => {   // path thay đổi thì biến đếm count quay về 1
             </div>
           </Content>
         </Layout>
-      </div>
+      </div></>) : (Errorempty(navigate))}
+     
     </>
   );
 }

@@ -9,7 +9,7 @@ import { patchCart } from "../../service/patch/patch";
 import { Button, Checkbox, Col, Empty, Image, InputNumber, Layout, Result, Row, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd';
-import Error from "../../components/error/error";
+import { Error } from '../../components/error/error';
 
 
 const { Header, Content, Footer, Sider } = Layout;

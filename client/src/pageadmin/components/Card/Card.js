@@ -66,7 +66,7 @@ const Card = (props) => {
           </div>
           <div className="card--infor">
             {props.png}
-            <span className="card--infor__span1">${props.value}</span>
+            <span className="card--infor__span1">{props.value}{props.type === "money" ? " VND" : " User"}</span>
             <span className="card--infor__span2">Last 24 hours</span>
           </div>
         </div>

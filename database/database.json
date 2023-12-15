@@ -770,7 +770,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/8e/3b/61/8e3b613b99c51127e465edd6f60662c9.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/75/ed/53/75ed5301277e4594a4c5fc448c634497.jpg",
         "https://i.pinimg.com/236x/8e/3b/61/8e3b613b99c51127e465edd6f60662c9.jpg",
@@ -789,7 +789,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/b5/dd/9c/b5dd9ce2a60f11e51a756371aaa4a647.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/46/ef/df/46efdfd9153eff27cca18e96782e65f6.jpg",
         "https://i.pinimg.com/236x/6e/e0/2d/6ee02dfa74f76646b6f0b40755e9390b.jpg",
@@ -808,7 +808,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/564x/40/96/4c/40964c1c0528a09da047cb16d7694b14.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/c2/75/37/c27537d70691b6b6f9d992c63f183556.jpg",
         "https://i.pinimg.com/236x/6a/45/2a/6a452ad8c07e4ecb1dc7f795cde870ba.jpg",
@@ -846,7 +846,7 @@
       "category": "Wine",
       "Quantity": 22,
       "thumbnail": "https://i.pinimg.com/236x/b8/6f/b8/b86fb80f1595ab2c107c0cb97f44172a.jpg",
-      "delete": true,
+      "delete": false,
       "images": [
         "https://i.pinimg.com/236x/06/29/89/062989d8176d04877617980c0f825095.jpg",
         "https://i.pinimg.com/236x/3a/9e/b9/3a9eb91eb85f1aac71786e0a22f13258.jpg",
@@ -1479,7 +1479,7 @@
     },
     {
       "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
+      "orderStep": 3,
       "date": "2023-12-08 08:07:22",
       "userId": 2,
       "thanhtoan": [

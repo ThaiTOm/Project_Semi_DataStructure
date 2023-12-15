@@ -4,14 +4,15 @@ import "../../layout/layoutDefault/responsiveContainer.scss";
 import "sweetalert2/src/sweetalert2.scss";
 import "./register.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postCart, postShipping } from "../../service/post/post";
 import { Button, Form, Input } from "antd";
 import { format } from 'date-fns';
+import { Errorempty } from "../../components/error/error";
 function Register() {
   const inputRef = useRef();
   const cookie = getCookie("token");
-
+  const navigate = useNavigate();
   function isValidPassword(password) {
     // hàm check pass đúng định dạng
     // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
@@ -294,16 +295,7 @@ function Register() {
           </div>
         </Form>
       ) : (
-        <>
-          <body>
-            <div class="error-container">
-              <h1>Đã xảy ra lỗi!</h1>
-              <p>
-                Xin lỗi, trang web không thể hiển thị do lỗi không xác định.
-              </p>
-            </div>
-          </body>
-        </>
+        Errorempty(navigate)
       )}
     </>
   );

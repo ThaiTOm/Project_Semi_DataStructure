@@ -35,6 +35,14 @@ const columns = [
     title: "Đơn giá",
     dataIndex: "price",
     key: "price",
+    render: (text) => (
+      <span>
+      {new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(`${text}`)}
+    </span>
+    )
   },
   {
     title: "Số lượng",
@@ -45,6 +53,14 @@ const columns = [
     title: "Tổng tiền",
     dataIndex: "total",
     key: "total",
+    render: (text) => (
+      <span>
+      {new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(`${text}`)}
+    </span>
+    )
   },
 ];
 

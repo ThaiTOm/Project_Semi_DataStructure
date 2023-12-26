@@ -80,6 +80,9 @@ flex-wrap: nowrap;
         & .price {
           display: flex;
         }
+        & .discount{
+          margin-left: 5px;
+         }
       }
     }
     &__input {

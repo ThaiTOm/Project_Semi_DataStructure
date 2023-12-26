@@ -271,9 +271,9 @@ function LayoutDefault() {
                                             currency: "VND",
                                           }).format(`${option.price}`)}
                                         </p>
-                                        <div>
+                                        <div className="discount">
                                           {option.discountPercentage !== 0
-                                            ? `${option.discountPercentage}%`
+                                            ? `-${option.discountPercentage}%`
                                             : ""}
                                         </div>
                                       </div>

@@ -53,6 +53,14 @@
       "date": "2023-12-06 21:50:26",
       "id": 6,
       "key": 6
+    },
+    {
+      "username": "kimnganxinhdep",
+      "password": "Kimngan@123",
+      "token": "WQnVzJwWhfQkCHCfXmTO",
+      "delete": false,
+      "date": "2023-12-26 23:57:20",
+      "id": 7
     }
   ],
   "beverages": [
@@ -1059,77 +1067,7 @@
     },
     {
       "userId": 2,
-      "product": [
-        {
-          "id": 3,
-          "infor": {
-            "id": 3,
-            "title": "Orange Juice",
-            "description": "Freshly squeezed orange juice, packed with vitamin C.",
-            "price": 45000,
-            "discountPercentage": 10,
-            "rating": 4.8,
-            "brand": "Citrus Delights",
-            "category": "Fruit Juice",
-            "Quantity": 221,
-            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
-              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
-              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
-              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 10,
-          "infor": {
-            "id": 10,
-            "title": "Berry Blast Smoothie",
-            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
-            "price": 50000,
-            "discountPercentage": 20,
-            "rating": 4.8,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 38,
-            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
-              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
-              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
-              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 12,
-          "infor": {
-            "id": 12,
-            "title": "Mango Tango Smoothie",
-            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
-            "price": 70000,
-            "discountPercentage": 20,
-            "rating": 4.9,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 78,
-            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
-              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
-              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
-              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
-            ]
-          },
-          "quanlity": 1
-        }
-      ],
+      "product": [],
       "id": 2
     },
     {
@@ -1151,6 +1089,16 @@
       "userId": 6,
       "product": [],
       "id": 6
+    },
+    {
+      "userId": 7,
+      "product": [],
+      "id": 7
+    },
+    {
+      "userId": 7,
+      "product": [],
+      "id": 8
     }
   ],
   "information": [
@@ -1165,25 +1113,13 @@
     {
       "name": "Trần Nguyễn Sơn THành",
       "email": "sonthanh12345678910@gmail.com",
-      "phone": "0399038165",
+      "phone": "03990381654",
       "gender": "male",
       "userId": 1,
       "id": 3
     }
   ],
   "shipping": [
-    {
-      "userId": 1,
-      "delivery": [
-        {
-          "address": "93 Hồ Văn Huê, phường 9, phú nhuận",
-          "fullName": "jhk",
-          "phoneNumber": "0399038165",
-          "defaultAddress": false
-        }
-      ],
-      "id": 2
-    },
     {
       "userId": 2,
       "delivery": [
@@ -1207,18 +1143,6 @@
         }
       ],
       "id": 4
-    },
-    {
-      "userId": 2,
-      "delivery": [
-        {
-          "fullName": "trần nguyễn sơn thành",
-          "phoneNumber": "0399038165",
-          "address": "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
-          "defaultAddress": false
-        }
-      ],
-      "id": 5
     }
   ],
   "purchase": [

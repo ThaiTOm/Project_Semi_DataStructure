@@ -10,6 +10,7 @@ import {
   Checkbox,
   message,
   Result,
+  Popconfirm,
 } from "antd";
 import "./address.scss";
 import { PlusOutlined } from "@ant-design/icons";
@@ -19,6 +20,10 @@ import { postShipping } from "../../../service/post/post";
 import { patchBool } from "../../../service/patch/patch";
 import { delShip } from "../../../service/delete/delete";
 import { useNavigate } from "react-router-dom";
+import {
+  checkAddress,
+  checkVietnamesePhoneNumber,
+} from "../../../components/checkInformation/checkInformation"; // check số điện thoại vn, địa chỉ
 const Address = () => {
   const [form] = Form.useForm(); // Quản lí form
   const [open, setOpen] = useState(false); // set mở modal
@@ -78,80 +83,11 @@ const Address = () => {
   //   getship(data[0].id);
   // }
 
-  const checkAddress = (value) => {
-    const minLength = 5;
-    const forbiddenCharacters = /[\\"'?\^*%]/;
-
-    if (!value || value.length < minLength) {
-      return "Địa chỉ phải có ít nhất 5 ký tự!";
-    }
-
-    if (!/[a-zA-Z]/.test(value)) {
-      return "Địa chỉ phải chứa ít nhất một ký tự chữ cái!";
-    }
-
-    if (forbiddenCharacters.test(value)) {
-      return "Địa chỉ không được chứa các ký tự \\ ' \" ? ^ * %!";
-    }
-
-    return "block"; // hợp lệ
-  };
-
-  const checkVietnamesePhoneNumber = (phoneNumber) => {
-    // biểu thức chính quy kiểm tra số điện thoại Việt Nam
-    const vietnamesePhoneNumberPattern = /^(0[0-9]{9})$/;
-
-    // danh sách đầu số điện thoại hợp lệ
-    const validAreaCodes = [
-      "096",
-      "097",
-      "098",
-      "032",
-      "033",
-      "034",
-      "035",
-      "036",
-      "037",
-      "038",
-      "039", // Viettel
-      "091",
-      "094",
-      "088",
-      "083",
-      "084",
-      "085",
-      "081",
-      "082", // VinaPhone
-      "090",
-      "093",
-      "089",
-      "070",
-      "079",
-      "077",
-      "076",
-      "078", // MobiFone
-    ];
-
-    // kiểm tra đầu số và độ dài của số điện thoại
-    if (vietnamesePhoneNumberPattern.test(phoneNumber)) {
-      const areaCode = phoneNumber.substring(0, 3);
-
-      if (validAreaCodes.includes(areaCode)) {
-        return "block"; // hợp lệ
-      } else {
-        return "Số điện thoại không hợp lệ!";
-      }
-    } else {
-      return "Số điện thoại không hợp lệ!";
-    }
-  };
-
   useEffect(() => {
     const fetchApick = async (e) => {
       try {
         const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
         setData(result);
-
         getship(result[0].id); // lấy dữ liệu shipping của userId khi mới đăng nhập
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -174,10 +110,10 @@ const Address = () => {
       defaultAddress: "",
     });
   };
+  // bấm nút hủy show
 
   const handleCancel = () => {
-    // bấm nút hủy show
-    console.log("Clicked cancel button");
+    setCheckaddress(checkAddress("", 1));
     setOpen(false);
     setShipid({
       id: 0,
@@ -197,6 +133,8 @@ const Address = () => {
     });
   };
 
+
+  
   const handleDelete = async (e) => {
     const xoa = ship.find((item) => {
       return item.id === e;
@@ -271,42 +209,40 @@ const Address = () => {
   const onAddressSearch = async (value) => {
     // xem thông tin lúc người dùng nhập
 
-    // const YOUR_API_KEY = "EAddPu1fx9SFE8rAE7Ogdp1rheIPEfrhiAB65nif"; // mã api key của goong map
+    const YOUR_API_KEY = "EAddPu1fx9SFE8rAE7Ogdp1rheIPEfrhiAB65nif"; // mã api key của goong map
 
-    // const apiUrl = `https://rsapi.goong.io/Place/AutoComplete?api_key=${YOUR_API_KEY}&input=${value}&more_compound=true`; // api bên ngoài truy cập dữ liệu map
+    const apiUrl = `https://rsapi.goong.io/Place/AutoComplete?api_key=${YOUR_API_KEY}&input=${value}&more_compound=true`; // api bên ngoài truy cập dữ liệu map
 
-    // fetch(apiUrl)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok.");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     // Xử lý dữ liệu trả về từ Goong API ở đây
-    //     const namesArray = data.predictions.map((item) => item.description);
-    //     console.log("Geocoding data:", namesArray);
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Xử lý dữ liệu trả về từ Goong API ở đây
+        const namesArray = data.predictions.map((item) => item.description);
+        console.log("Geocoding data:", namesArray);
+        setAddresses(namesArray); // lưu giá trị address
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      }); // quan trọng vô cùng nên không được xóa // nếu tới khi kiểm tra thì mở cái này ra
+    // const namesArray = [
 
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching data:", error);
-    //   });            // quan trọng vô cùng nên không được xóa // nếu tới khi kiểm tra thì mở cái này ra
-    const namesArray = [
-     
-      // address ví dụ
-      "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
-      " 144 Xuân Thủy, Cầu Giấy, Hà Nội",
-      "112 Nguyễn Huệ, Quận 2, TP. Hải Phòng",
-      "101 Trần Hưng Đạo, TP. Cần Thơ",
-      "789 Phan Đình Phùng, Thành phố Đà Nẵng",
-      "456 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh",
-      "23 Đinh Tiên Hoàng, Quận Hoàn Kiếm, Hà Nội",
-      "93 Hồ Văn Huê, phường 9, phú nhuận",
-      "15 Tiền Giang, Phước Hải, Nha Trang",
-      "1079 đường 23/10, Vĩnh Hiệp, Nha Trang",
-    ];
-
-    setAddresses(namesArray); // lưu giá trị address
+    //   // address ví dụ
+    //   "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
+    //   " 144 Xuân Thủy, Cầu Giấy, Hà Nội",
+    //   "112 Nguyễn Huệ, Quận 2, TP. Hải Phòng",
+    //   "101 Trần Hưng Đạo, TP. Cần Thơ",
+    //   "789 Phan Đình Phùng, Thành phố Đà Nẵng",
+    //   "456 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh",
+    //   "23 Đinh Tiên Hoàng, Quận Hoàn Kiếm, Hà Nội",
+    //   "93 Hồ Văn Huê, phường 9, phú nhuận",
+    //   "15 Tiền Giang, Phước Hải, Nha Trang",
+    //   "1079 đường 23/10, Vĩnh Hiệp, Nha Trang",
+    // ];
 
     setSubmit({
       ...submit, // thêm giá trị address vào submit
@@ -487,8 +423,7 @@ const Address = () => {
 
   return (
     <>
-  
- <div className="address">
+      <div className="address">
         <div className="address--header">
           <h2>Địa chỉ của tôi</h2>
           <Button
@@ -648,13 +583,20 @@ const Address = () => {
                       </Button>
                     </Col>
                     <Col span={12}>
-                      <Button
-                        type="primary"
-                        block
-                        onClick={() => handleDelete(item.id)}
+                      <Popconfirm
+                        title="Xóa Địa Chỉ Này?"
+                        description="Bạn Có Chắc Là Xóa Địa Chỉ Này Chứ?"
+                        okText="Chắc Chắn Rồi"
+                        cancelText="Hong Chắc Lắm"
                       >
-                        Xóa
-                      </Button>
+                        <Button
+                          type="primary"
+                          block
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Xóa
+                        </Button>
+                      </Popconfirm>
                     </Col>
                     <Col span={24}>
                       <Button
@@ -677,9 +619,6 @@ const Address = () => {
           )}
         </div>
       </div>
-
-    
-     
     </>
   );
 };

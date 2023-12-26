@@ -166,7 +166,8 @@ function Register() {
               // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
 
               if (result.isConfirmed) {
-                window.location.href = "/login";
+                document.cookie = "token=" + dataUsers.token;
+                window.location.href = "/";
               }
             });
           }

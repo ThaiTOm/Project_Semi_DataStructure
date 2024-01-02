@@ -98,3 +98,11 @@
 // .gachngang {
 //    text-decoration: line-through;
 // }
+
+.category{
+  
+  &--pagination{
+    text-align: right;
+    margin-top: 10px;
+  }
+}

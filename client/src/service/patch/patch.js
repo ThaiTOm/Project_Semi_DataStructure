@@ -1,4 +1,4 @@
-import { patch } from "../../tienich/request"
+import { patch, patchV1 } from "../../tienich/request"
 
 export const patchCart = async (options) => {
     try {
@@ -64,3 +64,32 @@ export const patchProduct = async (id ,options) => {
     }
   };
 
+// V1
+
+export const patchInforV1 = async (options, token) => {
+  try {
+    const result = await patchV1("api/v1/users/information/myInforPatch", options, token);
+    return result;
+  } catch (error) {
+    throw new Error('Error in patchinfor:', error);
+  }
+};
+
+export const patchUserV1 = async (options, token) => {
+  try {
+    const result = await patchV1("api/v1/users/information/adminUsersPatch", options, token);
+    return result;
+  } catch (error) {
+    throw new Error('Error in patchinfor:', error);
+  }
+};
+
+export const patchChangePass = async (option, token) => {
+  try {
+      const result = await patchV1("api/v1/users/information/changePass", option, token);
+      return result;
+    } catch (error) {
+      console.error("Error in postUserRegister:", error);
+      throw error;
+    }
+} 

@@ -1,68 +1,4 @@
 {
-  "users": [
-    {
-      "username": "sonthanhprocute",
-      "password": "Sonthanh123",
-      "token": "Nr5sikxU83AtdXAHpkdM",
-      "id": 1,
-      "key": 1,
-      "delete": false,
-      "date": "2023-11-22 18:41:27"
-    },
-    {
-      "username": "trannguyensonthanh",
-      "password": "Sonthanh@0305",
-      "token": "admin0305",
-      "id": 2,
-      "key": 2,
-      "delete": false,
-      "date": "2023-11-24 21:40:14"
-    },
-    {
-      "username": "nguyenduythai",
-      "password": "Duythai@123",
-      "token": "admin0305_1",
-      "id": 3,
-      "key": 3,
-      "delete": false,
-      "date": "2023-11-27 14:30:05"
-    },
-    {
-      "username": "caoduythai",
-      "password": "Thaicao@123",
-      "token": "admin0305_2",
-      "id": 4,
-      "key": 4,
-      "delete": false,
-      "date": "2023-11-29 12:04:22"
-    },
-    {
-      "username": "sonthanhdeptrai",
-      "password": "Sonthanh@123",
-      "token": "qVLDV3ZMKjtXmVpxgum3",
-      "id": 5,
-      "key": 5,
-      "delete": false,
-      "date": "2023-11-29 15:31:15"
-    },
-    {
-      "username": "Sonthanhprocute1",
-      "password": "Sonthanh@0305",
-      "token": "enev4RlZv38xtlJ25yCh",
-      "delete": false,
-      "date": "2023-12-06 21:50:26",
-      "id": 6,
-      "key": 6
-    },
-    {
-      "username": "kimnganxinhdep",
-      "password": "Kimngan@123",
-      "token": "WQnVzJwWhfQkCHCfXmTO",
-      "delete": false,
-      "date": "2023-12-26 23:57:20",
-      "id": 7
-    }
-  ],
   "beverages": [
     {
       "id": 1,
@@ -1061,70 +997,201 @@
   ],
   "cart": [
     {
-      "userId": 1,
-      "product": [],
+      "user": "6590e95e8d295d3b8e11d7d5",
+      "product": [
+        {
+          "id": 2,
+          "infor": {
+            "id": 2,
+            "title": "Grape Juice",
+            "description": "Refreshing grape juice, made from the finest grapes.",
+            "price": 22000,
+            "discountPercentage": 0,
+            "rating": 4.7,
+            "brand": "Vineyard Delights",
+            "category": "Fruit Juice",
+            "Quantity": 100,
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+            "images": [
+              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
+              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
+              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
+              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
+            ],
+            "delete": false
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 3,
+          "infor": {
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 4,
+          "infor": {
+            "id": 4,
+            "title": "Mango Juice",
+            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
+            "price": 30000,
+            "discountPercentage": 0,
+            "rating": 4.7,
+            "brand": "Tropical Paradise",
+            "category": "Fruit Juice",
+            "Quantity": 54,
+            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
+              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
+              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
+              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
       "id": 1
     },
     {
-      "userId": 2,
-      "product": [],
+      "user": "6590e95e8d295d3b8e11d7d6",
+      "product": [
+        {
+          "id": 3,
+          "infor": {
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 10,
+          "infor": {
+            "id": 10,
+            "title": "Berry Blast Smoothie",
+            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
+            "price": 50000,
+            "discountPercentage": 20,
+            "rating": 4.8,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 38,
+            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
+              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
+              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
+              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
+            ]
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 12,
+          "infor": {
+            "id": 12,
+            "title": "Mango Tango Smoothie",
+            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
+            "price": 70000,
+            "discountPercentage": 20,
+            "rating": 4.9,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 78,
+            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
+              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
+              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
+              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
       "id": 2
     },
     {
-      "userId": 3,
+      "user": "6590e95e8d295d3b8e11d7d7",
       "product": [],
       "id": 3
     },
     {
-      "userId": 4,
+      "user": "6590e95e8d295d3b8e11d7d8",
       "product": [],
       "id": 4
     },
     {
-      "userId": 5,
+      "user": "65941a142ca31f248bf9c6c5",
       "product": [],
       "id": 5
-    },
-    {
-      "userId": 6,
-      "product": [],
-      "id": 6
-    },
-    {
-      "userId": 7,
-      "product": [],
-      "id": 7
-    },
-    {
-      "userId": 7,
-      "product": [],
-      "id": 8
-    }
-  ],
-  "information": [
-    {
-      "name": "admindepzai",
-      "email": "admin@gmail.com",
-      "phone": "0815097908",
-      "gender": "male",
-      "userId": 2,
-      "id": 2
-    },
-    {
-      "name": "Trần Nguyễn Sơn THành",
-      "email": "sonthanh12345678910@gmail.com",
-      "phone": "03990381654",
-      "gender": "male",
-      "userId": 1,
-      "id": 3
     }
   ],
   "shipping": [
     {
-      "userId": 2,
+      "user": "6590e95e8d295d3b8e11d7d5",
       "delivery": [
         {
-          "address": "112 Nguyễn Huệ, Quận 2, TP. Hải Phòng",
+          "address": "Quận Long Biên, Hà Nội",
+          "fullName": "Sonn Thanh",
+          "phoneNumber": "0399038165",
+          "defaultAddress": false
+        }
+      ],
+      "id": 1
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d5",
+      "delivery": [
+        {
+          "address": "Thị xã Sơn Tây, Hà Nội",
+          "fullName": "ccccc",
+          "phoneNumber": "0399038165",
+          "defaultAddress": true
+        }
+      ],
+      "id": 2
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d6",
+      "delivery": [
+        {
+          "address": "Rơ Kơi, Sa Thầy, Kon Tum",
           "fullName": "trần nguyễn sơn thành",
           "phoneNumber": "0374444944",
           "defaultAddress": true
@@ -1133,13 +1200,13 @@
       "id": 3
     },
     {
-      "userId": 1,
+      "user": "6590e95e8d295d3b8e11d7d6",
       "delivery": [
         {
-          "address": "63/1 Trần Hưng Đạo, Quận 1, TP.HCM",
-          "fullName": "trần nguyễn sơn thành",
-          "phoneNumber": "0374444944",
-          "defaultAddress": true
+          "address": "Rơ Kơi, Sa Thầy, Kon Tum",
+          "fullName": "trần nguyễn sơn thàn",
+          "phoneNumber": "0399038165",
+          "defaultAddress": false
         }
       ],
       "id": 4
@@ -1149,98 +1216,9 @@
     {
       "paymentMethod": "Tiền mặt",
       "orderStep": 3,
-      "date": "2023-11-22 18:41:27",
-      "userId": 2,
+      "date": "2024-01-02 01:03:12",
+      "user": "6590e95e8d295d3b8e11d7d5",
       "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 2,
-          "thanhtien": 74000
-        },
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
-        {
-          "id": 5,
-          "img": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
-          "title": "Pineapple Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        }
-      ],
-      "id": 4
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 0,
-      "date": "2023-11-24 21:40:14",
-      "userId": 1,
-      "thanhtoan": [
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 2,
-          "thanhtien": 44000
-        },
-        {
-          "id": 3,
-          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-          "title": "Orange Juice",
-          "dongia": 40500,
-          "soluong": 2,
-          "thanhtien": 81000
-        },
-        {
-          "id": 4,
-          "img": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
-          "title": "Mango Juice",
-          "dongia": 30000,
-          "soluong": 1,
-          "thanhtien": 30000
-        },
-        {
-          "id": 7,
-          "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-          "title": "Watermelon Juice",
-          "dongia": 27000,
-          "soluong": 1,
-          "thanhtien": 27000
-        },
-        {
-          "id": 8,
-          "img": "https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg",
-          "title": "Mango Tango Juice",
-          "dongia": 36000,
-          "soluong": 1,
-          "thanhtien": 36000
-        },
-        {
-          "id": 6,
-          "img": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
-          "title": "Mango Passion Fruit Juice",
-          "dongia": 40000,
-          "soluong": 1,
-          "thanhtien": 40000
-        },
-        {
-          "id": 5,
-          "img": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
-          "title": "Pineapple Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
         {
           "id": 12,
           "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
@@ -1248,164 +1226,15 @@
           "dongia": 56000,
           "soluong": 1,
           "thanhtien": 56000
-        },
-        {
-          "id": 11,
-          "img": "https://i.pinimg.com/236x/9f/8e/5f/9f8e5f9bdf4f3bca73ce2afe5f2ff90c.jpg",
-          "title": "Tropical Sunrise Smoothie",
-          "dongia": 45000,
-          "soluong": 1,
-          "thanhtien": 45000
-        },
-        {
-          "id": 10,
-          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
-          "title": "Berry Blast Smoothie",
-          "dongia": 40000,
-          "soluong": 1,
-          "thanhtien": 40000
-        },
-        {
-          "id": 9,
-          "img": "https://i.pinimg.com/236x/f9/16/79/f9167999f6b50b8b5faf170a0c5840f3.jpg",
-          "title": "Citrus Burst",
-          "dongia": 47000,
-          "soluong": 1,
-          "thanhtien": 47000
-        },
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 1,
-          "thanhtien": 37000
         }
       ],
-      "id": 5
+      "id": 1
     },
     {
       "paymentMethod": "Tiền mặt",
       "orderStep": 3,
-      "date": "2023-11-27 14:30:05",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 1,
-          "thanhtien": 37000
-        },
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
-        {
-          "id": 3,
-          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-          "title": "Orange Juice",
-          "dongia": 40500,
-          "soluong": 1,
-          "thanhtien": 40500
-        }
-      ],
-      "id": 7
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-11-29 12:04:22",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 22,
-          "thanhtien": 814000
-        }
-      ],
-      "id": 8
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-11-29 15:13:07",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 1,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
-          "title": "Apple Juice",
-          "dongia": 37000,
-          "soluong": 22,
-          "thanhtien": 814000
-        }
-      ],
-      "id": 9
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-11-29 15:31:15",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 7,
-          "img": "https://i.pinimg.com/236x/ab/4d/bf/ab4dbf38511651da712fb3f85d4d11f5.jpg",
-          "title": "Watermelon Juice",
-          "dongia": 27000,
-          "soluong": 5,
-          "thanhtien": 135000
-        },
-        {
-          "id": 2,
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-          "title": "Grape Juice",
-          "dongia": 22000,
-          "soluong": 1,
-          "thanhtien": 22000
-        },
-        {
-          "id": 4,
-          "img": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
-          "title": "Mango Juice",
-          "dongia": 30000,
-          "soluong": 1,
-          "thanhtien": 30000
-        }
-      ],
-      "id": 10
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-12-01 08:41:39",
-      "userId": 2,
-      "thanhtoan": [
-        {
-          "id": 16,
-          "img": "https://i.pinimg.com/236x/61/17/99/6117996402ac81f5f53bd656fd188eb8.jpg",
-          "title": "Strawberry Smoothie",
-          "dongia": 65000,
-          "soluong": 1,
-          "thanhtien": 65000
-        }
-      ],
-      "id": 11
-    },
-    {
-      "paymentMethod": "Tiền mặt",
-      "orderStep": 3,
-      "date": "2023-12-08 08:07:22",
-      "userId": 2,
+      "date": "2024-01-02 01:27:41",
+      "user": "6590e95e8d295d3b8e11d7d6",
       "thanhtoan": [
         {
           "id": 3,
@@ -1432,7 +1261,7 @@
           "thanhtien": 56000
         }
       ],
-      "id": 12
+      "id": 2
     }
   ],
   "notification": []

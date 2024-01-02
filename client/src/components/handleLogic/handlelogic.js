@@ -1,11 +1,7 @@
 import { filterByArrange } from "../filter";
 
       const filterData = (data_3, data_4, data) => {
-        // console.log(data_3);
-        // console.log(data_4)
-        // console.log(data);
         if (data_3.cate.length === 0 && data_3.hsx === "" && data_3.phanloai === ""){
-          console.log("if")
           return data;
         }
         else {

@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import "./thanhtoan.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getShip, getUserstk } from "../../service/getcategory/getCategory";
+import { getMyUser, getShip, getUserstk } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
@@ -81,7 +81,6 @@ const Thanhtoan = () => {
   const [data, setData] = useState([]);
   const [data_1, setdata_1] = useState([]);
   const [data_2, setData_2] = useState([]);
-  const [totals, setTotals] = useState(0);
   const cookies = getCookie("token");
   const thanhtoan = useSelector((state) => state.ttStore);
   sessionStorage.setItem("thanhtoan", JSON.stringify(thanhtoan));
@@ -91,27 +90,23 @@ const Thanhtoan = () => {
  let setFormattedTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
 
-  useEffect(() => {
-    const fetchApick = async (e) => {
-      try {
-        const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
-        setData(result);
-        
-        fetchShip(result[0].id);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+ const fetchApick = async (e) => {
+  try {
+    const result = await getMyUser(e); // lấy dữ liệu tài khoản của người đang đăng nhập
+    setData(result);
+    fetchShip(result.id);
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+  }
+};
 
-    fetchApick(cookies); // lấy thông tin user từ cookie
-  }, []);
 
   const fetchShip = async (e) => {
     try {
       const result = await getShip(e);
 
       const addressmd = result.find((item) => {
-        return item.delivery[0].defaultAddress == true;
+        return item.delivery[0].defaultAddress === true;
       });
       setdata_1(addressmd);
     } catch (error) {
@@ -121,11 +116,16 @@ const Thanhtoan = () => {
 
 const postorder = async (e) => {
   try {
-    const result = await postOrder(e);
+   await postOrder(e);
   } catch (error) {
     console.log("...", error);
   }
 }
+
+useEffect(() => {
+
+  fetchApick(cookies); // lấy thông tin user từ cookie
+}, [cookies]);
 
   const handlePayment = () => {
     if (selectedPaymentMethod === "cash") {
@@ -148,7 +148,6 @@ const postorder = async (e) => {
   };
   const handleConfirm = () => {
     // Thực hiện xác nhận thanh toán bằng tiền mặt ở đây
-   console.log(data_1);
      if (data_1 === undefined){
       showNotification();
      }
@@ -158,7 +157,7 @@ const postorder = async (e) => {
       "paymentMethod": "Tiền mặt",
       "orderStep": 0,
       "date": setFormattedTime,
-      "userId": data[0].id,
+      "user": data.id,
       "thanhtoan": thanhtoan });
     Modal.success({
       onOk: handleChuyentrang, 
@@ -229,9 +228,13 @@ const handleChuyentrang = () => {
           </div>
         ) : (
           <div className="thanhtoan--addressempty">
-            <h2>Địa chỉ nhận hàng</h2>
-            Vui lòng cập nhật địa chỉ <Link to="/infor/address">tại đây</Link>
-          </div>
+                <h2>Địa chỉ nhận hàng</h2>
+                <div className="thanhtoan--addressempty__update">
+                   <p>Vui lòng cập nhật địa chỉ :</p>
+                <Link to="/infor/address">Tại đây</Link>
+                </div>
+               
+              </div>
         )}
         <div className="thanhtoan--page">
           <Table columns={columns} dataSource={data_2} />

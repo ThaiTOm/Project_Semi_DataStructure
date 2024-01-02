@@ -1,5 +1,6 @@
 .infor {
     &--sider {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         max-width: 300px!important;
         width: 300px!important;
         min-width: 300px!important;
@@ -20,6 +21,7 @@
        padding-bottom: 20px;
     }
     &--content {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         background-color: white;
         margin-left: 10px;
     }

@@ -14,7 +14,7 @@ const Adminorder = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState([]);
   const [checkDel, setcheckDel] = useState(false)
-  var  previousData = [{userId : "" , date: ""}] ;
+  var  previousData = [{user : "" , date: ""}] ;
 
 const patchpur = async (id, dulieu) => {
   const result = await patchPur(id, dulieu)
@@ -29,7 +29,7 @@ const delpur = async (id) => {
 }
   const handleOrderStepChange = (record, action) => {
     const updatedData = data.map((item) => {
-      if (item.date === record.date && item.userId === record.userId) {
+      if (item.date === record.date && item.user === record.user) {
         let newOrderStep;
         if (action === "increase") {
           newOrderStep = Math.min(item.orderStep + 1, 3);
@@ -49,7 +49,7 @@ const delpur = async (id) => {
     
     setData(updatedData);
     const timkiem = updatedData.find(item => {
-      return item.date === record.date && item.userId === record.userId
+      return item.date === record.date && item.user === record.user
     })
    
     patchpur(timkiem.purchaseId,  timkiem.orderStep)
@@ -66,8 +66,8 @@ const delpur = async (id) => {
   const columns = [
     {
       title: "UserId",
-      dataIndex: "userId",
-      sorter: (a, b) => a.userId - b.userId,
+      dataIndex: "user",
+      sorter: (a, b) => a.user - b.user,
     },
     {
       title: "Ngày đặt",
@@ -117,11 +117,11 @@ const delpur = async (id) => {
             
    const check = previousData.every(item => {
    
-    return item.userId === record.userId && item.date === record.date
+    return item.user === record.user && item.date === record.date
    })
 
 if (check === false) {
-  previousData = ([{ userId: record.userId , date: record.date}])
+  previousData = ([{ user: record.user , date: record.date}])
 }
 
 
@@ -186,7 +186,7 @@ if (check === false) {
   const fetchPur = async () => {
     const result = await getAllOrder();
     const updatedData = result.map((item) => {
-      const { orderStep, date, userId, thanhtoan, id, paymentMethod } = item;
+      const { orderStep, date, user, thanhtoan, id, paymentMethod } = item;
 
       // Thêm dữ liệu vào mỗi đối tượng trong mảng thanhtoan
       const updatedThanhtoan = thanhtoan.map((product) => {
@@ -194,7 +194,7 @@ if (check === false) {
           ...product,
           orderStep,
           date,
-          userId,
+          user,
           paymentMethod,
           purchaseId: id
         };
@@ -233,7 +233,6 @@ if (check === false) {
   };
 
   const handleClick = () => {
-   console.log(data);
     if(selectedRowKeys != []) {
         const findDel = selectedRowKeys.map(item => {   // map là chạy vào từng object xong xét nên mình phải có cách để hợp nhất nó
           const hi = data.filter(x => {
@@ -272,7 +271,7 @@ if (check === false) {
         paymentMethod:  currentObject.paymentMethod,
         orderStep: currentObject.orderStep,
         date: currentObject.date,
-        userId: currentObject.userId,
+        user: currentObject.user,
         thanhtoan: [
           {
             id: currentObject.id,

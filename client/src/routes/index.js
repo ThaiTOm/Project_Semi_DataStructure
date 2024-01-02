@@ -33,6 +33,9 @@ import Account from "../pageadmin/admincustomer/customerAccount/account";
 import Productlist from "../pageadmin/components/productList/productList";
 import Categorylist from "../pageadmin/components/categoryList/cateList";
 import Adproductdetail from "../pageadmin/components/adproductDetail/adproductDetail";
+import Forgotpassword from "../page/password/forgot/forgot-password";
+import Otppassword from "../page/password/otp/otp-password";
+import Resetpassword from "../page/password/reset/reset-password";
 
 
 
@@ -147,6 +150,23 @@ export const routes = [
                   path: ":name",
                   element: <Searchdetail />
                }
+            ]
+         },
+         {
+            path: "password",
+            children: [
+               {
+                  path: "forgot",
+                  element: <Forgotpassword />
+               },
+               {
+                  path: "otp",
+                  element: <Otppassword />
+               },
+               {
+                  path: "reset",
+                  element: <Resetpassword />
+               },
             ]
          }
         ],

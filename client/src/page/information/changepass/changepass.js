@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
-import { Form, Input, Button, message } from "antd";
-import { getUserstk } from "../../../service/getcategory/getCategory";
-import { patchUser } from "../../../service/patch/patch";
+import { Form, Input, Button, Modal } from "antd";
+import { patchChangePass } from "../../../service/patch/patch";
 import "./changepass.scss";
+import { isValidPassword } from "../../../components/checkInformation/checkInformation";
 function Changepass() {
   const cookies = getCookie("token");
   const [form] = Form.useForm();
-  const [data, setData] = useState([]);
   const [data_2, setData_2] = useState(true);
-  function isValidPassword(password) {
-    // yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
-    const lengthRequirement = password.length >= 8;
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-    const digitRegex = /\d/;
+  const changePass = async (values, token) => {
+    const result = await patchChangePass(values, token);
+    return result;
+  };
 
-    const hasUppercase = uppercaseRegex.test(password);
-    const hasLowercase = lowercaseRegex.test(password);
-    const hasDigit = digitRegex.test(password);
-
-    return lengthRequirement && hasUppercase && hasLowercase && hasDigit;
-  }
   const handleOnblur_2 = (e) => {
-    if (isValidPassword(e.target.value) == false) {
+    if (isValidPassword(e.target.value) === false) {
       setData_2(false);
     } else {
       setData_2(true);
@@ -32,49 +23,41 @@ function Changepass() {
   const handleChange_2 = () => {
     setData_2(true);
   };
-  useEffect(() => {
-    const fetchApick = async (e) => {
-      try {
-        const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
-        setData(result);
-        console.log(result);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
 
-    fetchApick(cookies); // lấy thông tin user từ cookie
-  }, []);
-  const patchPass = async (e) => {
-    const result = await patchUser(e);
-  };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
-    //  if (data.password == )
-    if (
-      values.oldPassword == data[0].password &&
-      isValidPassword(values.newPassword) &&
-      values.newPassword == data[0].confirmNewPassword
-    ) {
-      patchPass({
-        id: data[0].id,
-        password: values.newPassword,
-      });
-    } else {
-      message.error({
-        content: "Đổi mật khẩu không thành công",
-        className: "custom-class",
-        style: {
-          marginTop: "5vh",
-          padding: "5vh",
-        },
-      });
+   
+  if(Object.keys(values).length === 3){
+ const data = await changePass(values, cookies); 
+    if(data.code === 400){
+      Modal.error({
+        title: "Lỗi",
+        content: `${data.message}`,
+        
+      })
+    }else {
+      Modal.success({
+        title: "Thành Công",
+        content: `${data.message}`
+      })
+      form.resetFields();
     }
+  }
+  else {
+    Modal.error({
+      title: "Lỗi",
+      content: "Vui lòng nhập đầy đủ không tin"
+    })
+  }
+
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    Modal.error({
+      title: "Lỗi",
+      content: "Vui lòng kiểm tra lại thông tin"
+    })
   };
 
   return (
@@ -89,6 +72,7 @@ function Changepass() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           layout="vertical"
+          
         >
           <Form.Item
             label="Mật khẩu cũ"
@@ -101,7 +85,13 @@ function Changepass() {
           <Form.Item
             label="Mật khẩu mới"
             name="newPassword"
-            rules={[{ required: true, message: "" }]}
+            rules={[{ required: true}]}
+            validateStatus={!data_2 ? "error" : ""}
+                help={
+                  !data_2
+                    ? "Vui lòng nhập tối thiểu 8 kí tự, một chữ thường, 1 chữ hoa và 1 số"
+                    : ""
+                }
           >
             <Input.Password
               style={{ width: "450px" }}
@@ -109,9 +99,6 @@ function Changepass() {
               onChange={handleChange_2}
             />
           </Form.Item>
-          <span className={data_2 ? "handleNotice" : "span"} id="notice">
-            Vui lòng nhập tối thiểu 8 kí tự, một chữ thường, 1 chữ hoa và 1 số{" "}
-          </span>
           <Form.Item
             label="Xác nhận mật khẩu mới"
             name="confirmNewPassword"

@@ -1,4 +1,4 @@
-import { get } from "../../tienich/request";
+import { get, getV1 } from "../../tienich/request";
 
 export const getadminCategory = async () => {
   // lấy danh mục sản phẩm
@@ -90,7 +90,7 @@ export const getCart = async () => {
 
 export const getInforid = async (e) => {
   // lấy thông tin người dùng kiểm tra dữ liệu có bị trùng không
-  const result = await get(`information?userId=${e}`);
+  const result = await get(`information?user=${e}`);
   return result;
 };
 
@@ -102,12 +102,12 @@ export const getInfor = async (e) => {
 
 export const getShip = async (e) => {
   // lấy dữ liệu địa chỉ có bị trùng không
-  const result = await get(`shipping?userId=${e}`);
+  const result = await get(`shipping?user=${e}`);
   return result;
 };
 
 export const getOrder = async (e) => {
-  const result = await get(`purchase?userId=${e}`);
+  const result = await get(`purchase?user=${e}`);
   return result;
 };
 
@@ -116,7 +116,63 @@ export const getAllOrder = async () => {
   return result;
 };
 
-// export const getProducthsx = async (e) => {
-//    const result = await get(`beverages?_page=${e}&_limit=12`);
-//    return result;
-// };
+
+export const getCartId = async (e) => {
+  // lấy ds giỏ hàng
+  const result = await get(`cart?user=${e}`);
+  return result;
+};
+
+
+// V1
+
+export const getEmail = async (username) => {
+  try {
+    const result = await getV1(`api/v1/users/password/email?username=${username}`);
+    return result;
+  } catch (error) {
+    console.error("Error in getUserV1:", error);
+    throw error;
+  }
+};
+
+export const getMyInfor = async (token) => {
+  try {
+    const result = await getV1(`api/v1/users/information/myInfor`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getUserV1:", error);
+    throw error;
+  }
+};
+
+export const getMyUser = async (token) => {
+  try {
+    const result = await getV1(`api/v1/users/information/myUser`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getUserV1:", error);
+    throw error;
+  }
+};
+
+export const getAllUsers = async (token) => {
+  try {
+    const result = await getV1(`api/v1/users/information/allUsers`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getUserV1:", error);
+    throw error;
+  }
+};
+
+
+export const getQuantityUsers = async (token) => {
+  try {
+    const result = await getV1(`api/v1/users/information/countUsers`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getUserV1:", error);
+    throw error;
+  }
+};

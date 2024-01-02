@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Steps, Button, message, Table, Empty, Result } from "antd";
-import { getOrder, getUserstk } from "../../service/getcategory/getCategory";
+import { getMyUser, getOrder, getUserstk } from "../../service/getcategory/getCategory";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import "./order.scss";
 import { useNavigate } from "react-router-dom";
@@ -89,13 +89,14 @@ const Order = () => {
     orderStep: 0,
   });
   const navigate = useNavigate();
+
+  const fetchApick = async (e) => {
+    const result = await getMyUser(e); // lấy dữ liệu tài khoản của người đang đăng nhập
+    if (result.code === 200  && result.id) {
+      fetchorder(result.id);
+    }
+  };
   useEffect(() => {
-    const fetchApick = async (e) => {
-      const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
-      if (result && result[0] && result[0].id) {
-        fetchorder(result[0].id);
-      }
-    };
     fetchApick(cookies);
   }, []);
 

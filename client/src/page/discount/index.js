@@ -196,6 +196,7 @@ const Discount = () => {
        <Items paginatedData={paginatedData} checkId={checkId} cookies={cookies} dispatch={dispatch} navigate={navigate} id={id} AddtoCart={AddtoCart} />
         </Layout>
         <Pagination
+        className="discount--pagination"
           defaultCurrent={1}
           current={id}
           total={total}

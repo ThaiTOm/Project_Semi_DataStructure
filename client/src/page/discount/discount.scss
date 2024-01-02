@@ -109,3 +109,9 @@
 //     text-decoration: line-through;
 // }
 
+.discount {
+  &--pagination{
+    text-align: right;
+    margin-top: 10px;
+  }
+}

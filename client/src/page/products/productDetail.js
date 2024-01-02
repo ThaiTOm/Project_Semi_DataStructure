@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addmt, addtt, upmt } from "../../actions/actCart";
 import { AddtoCart } from "../../components/filter";
 import { Errorempty } from "../../components/error/error";
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 
 function Productdetail() {
   const checkId = useSelector((state) => state.cartStore);
@@ -180,7 +180,7 @@ useEffect(() => {   // path thay đổi thì biến đếm count quay về 1
                 <h1 className="product--right__title">{data[0].title}</h1>
                 <div className="product--right__rate">
                   <p>{data[0].rating}</p>
-                  {data[0].rating != undefined ? (
+                  {data[0].rating !== undefined ? (
                     <Rate disabled allowHalf defaultValue={data[0].rating} />
                   ) : (
                     ""

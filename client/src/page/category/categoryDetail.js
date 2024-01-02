@@ -70,35 +70,8 @@ function Categorydetail() {
   }, []);
 
   
-  // const taohsx = () => {
-  //   data.map((item) => {
-  //     const check = mang.some((x) => {
-  //       return item.brand == x;
-  //     });
-  //     if (check == false) {
-  //       mang.push(item.brand);
-  //     }
-  //   });
-  // };
-
-  // taohsx();
-
-  // const taocate = () => {
-  //   data.map((item) => {
-  //     const check_1 = cate.some((x) => {
-  //       return item.category == x;
-  //     });
-  //     if (check_1 == false) {
-  //       cate.push(item.category);
-  //     }
-  //   });
-  // };
-
-  // taocate();
-
-  // phân trang
-
   // tạo một dãy hãng sản xuất
+  
   taohsx(data, mang);// tạo một dãy hãng sản xuất
 
   
@@ -123,36 +96,6 @@ function Categorydetail() {
     setId(1);
   };
 
-  // const handleClick = (id, infor) => {
-  //   if (cookies) {
-  //     const check = checkId.some((item) => {
-  //       return item.id === id;
-  //     });
-
-  //     if (check) {
-  //       const productSlg = checkId.find((item) => {
-  //         return item.id === id;
-  //       });
-
-  //       if (infor.Quantity > productSlg.quanlity) {
-  //         dispatch(up(id));
-  //       } else {
-  //         Modal.error({
-  //           title: "Không Thể Thêm Sản Phẩm",
-  //           content:
-  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-  //         });
-  //       }
-  //     } else {
-  //       dispatch(add(id, infor));
-  //     }
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // };
-
-
-
   // check khoảng giá và đưa dữ liệu thao tác vào data_3
   
   
@@ -164,38 +107,6 @@ function Categorydetail() {
     setId(1);
   };
 
-  // const filterByArrange = (ploai) => {
-  //   // tên A -> Z
-  //   if (data_3.phanloai === "tentang") {
-  //     return ploai.sort((a, b) => a.title.localeCompare(b.title));
-  //   }
-  //   // tên từ Z -> A
-  //   else if (data_3.phanloai === "tengiam") {
-  //     return ploai.sort((a, b) => b.title.localeCompare(a.title));
-  //   }
-  //   // giá tăng dần
-  //   else if (data_3.phanloai === "giatang") {
-  //     return ploai.sort(
-  //       (a, b) =>
-  //         a.price * ((100 - Math.floor(a.discountPercentage)) / 100) -
-  //         b.price * ((100 - Math.floor(b.discountPercentage)) / 100)
-  //     );
-  //   }
-  //   // giá giảm dần
-  //   else if (data_3.phanloai === "giagiam") {
-  //     return ploai.sort(
-  //       (a, b) =>
-  //         b.price * ((100 - Math.floor(b.discountPercentage)) / 100) -
-  //         a.price * ((100 - Math.floor(a.discountPercentage)) / 100)
-  //     );
-  //   }
-  //   // trở về trạng thái ban đầu
-  //   else if (data_3.phanloai === "original") {
-  //     return data;
-  //   }
-  //   // không có điều kiện nào thì trả về dữ liệu cũ
-  //   return ploai;
-  // };
 
   const filterData = () => {
     const arrangedData = filterByArrange(data_3, data_4, data);
@@ -251,6 +162,7 @@ function Categorydetail() {
         
         </Layout>
         <Pagination
+        className="category--pagination"
           defaultCurrent={1}
           current={id}
           total={total}

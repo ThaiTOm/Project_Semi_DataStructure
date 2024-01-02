@@ -12,15 +12,21 @@ import {
   Tag,
   Modal,
   Tooltip,
+  AutoComplete,
 } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
-import { getUser } from "../../../service/getcategory/getCategory";
-import { patchUser } from "../../../service/patch/patch";
-import { postCart, postUser } from "../../../service/post/post";
-import { delUser } from "../../../service/delete/delete";
+import { getAllUsers, getUser } from "../../../service/getcategory/getCategory";
+import {
+  patchInforV1,
+  patchUser,
+  patchUserV1,
+} from "../../../service/patch/patch";
+import { postCart, postUser, postUserAdmin } from "../../../service/post/post";
+import { delUser, delUserAdmin } from "../../../service/delete/delete";
 import "./customerAccount.scss";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import { getCookie } from "../../../components/takeCookies/takeCookies";
 const EditableCell = ({
   editing,
   dataIndex,
@@ -56,6 +62,15 @@ const EditableCell = ({
   );
 };
 
+const options = [
+  {
+    value: "user",
+  },
+  {
+    value: "admin",
+  },
+];
+
 const Account = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -65,37 +80,47 @@ const Account = () => {
   const [show, setshow] = useState(false);
   const [reload, setReload] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const isEditing = (record) => record.id === editingKey;
+  const isEditing = (record) => record._id === editingKey;
   const [form] = Form.useForm();
   const [form_1] = Form.useForm();
-
-  const fetchUser = async () => {
-    const result = await getUser();
-
-    const dataWithKeys = result.map((item, index) => ({
-      ...item,
-      key: index + 1,
-    }));
-
-    setData(dataWithKeys);
+  const cookies = getCookie("token");
+  const fetchUser = async (values) => {
+    const result = await getAllUsers(values);
+    if (result.code === 200) {
+      const dataWithKeys = result.user.map((item, index) => ({
+        ...item,
+        key: index + 1,
+      }));
+      setData(dataWithKeys);
+    } else {
+      //
+    }
   };
 
-  const patchCus = async (e) => {
-    const result = await patchUser(e);
+  const patchCus = async (values, token) => {
+    const result = await patchUserV1(values, token);
     setReload(!reload);
   };
 
-  const deleteCus = async (e) => {
-    const result = await delUser(e);
+  const deleteCus = async (e, token) => {
+ const result = await delUserAdmin(e, token);
+ Modal.success({
+  title: "Thành Công",
+  content: "Đã Xóa Thành Công"
+})
   };
 
-  const postCus = async (e) => {
-    const result = await postUser(e);
-    setData([...data, result]);
+  const postCus = async (e, token) => {
+    const result = await postUserAdmin(e, token);
+    Modal.success({
+      title: "Thành Công",
+      content: `${result.message}`
+    })
+    setData([...data, result.dataUser]);
     setReload(!reload);
     const postApi = async (e) => {
       try {
-        const ketqua = await postCart(e); // Gọi hàm patchCart với tham số là data
+        await postCart(e); // Gọi hàm patchCart với tham số là data
       } catch (error) {
         console.error("Error while patching cart:", error);
         // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
@@ -103,24 +128,22 @@ const Account = () => {
     };
 
     postApi({
-      ["userId"]: result.id,
-      ["product"]: [],
+      user: result.dataUser._id,
+      product: [],
     });
   };
 
   useEffect(() => {
-    fetchUser();
-  }, [reload]);
+    fetchUser(cookies);
+  }, [cookies, reload]);
 
   const edit = (record) => {
     form.setFieldsValue({
-      id: "",
+      date: "",
       username: "",
-      password: "",
-      token: "",
       ...record,
     });
-    setEditingKey(record.id);
+    setEditingKey(record._id);
   };
   const cancel = () => {
     setEditingKey("");
@@ -129,11 +152,9 @@ const Account = () => {
     try {
       const row = await form.validateFields();
       const newData = [...data];
-      const index = newData.findIndex((item) => id === item.id);
+      const index = newData.findIndex((item) => id === item._id);
       const isDuplicate = newData.some(
-        (item) =>
-          (item.username === row.username || item.token === row.token) &&
-          item.id !== id
+        (item) => item.username === row.username && item._id !== id
       );
       if (index > -1 && !isDuplicate) {
         const item = newData[index];
@@ -141,8 +162,7 @@ const Account = () => {
           ...item,
           ...row,
         });
-
-        patchCus(newData[index]);
+        patchCus(newData[index], cookies);
         setData(newData);
         setEditingKey("");
       } else if (isDuplicate === true) {
@@ -213,7 +233,7 @@ const Account = () => {
     ),
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: (visible) => {
+    onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.current?.select(), 100);
       }
@@ -247,10 +267,10 @@ const Account = () => {
   const columns = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "_id",
+      key: "_id",
       editable: false,
-      ...getColumnSearchProps("id"),
+      ...getColumnSearchProps("_id"),
     },
     {
       title: "Username",
@@ -260,23 +280,10 @@ const Account = () => {
       ...getColumnSearchProps("username"),
     },
     {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-      editable: true,
-      ...getColumnSearchProps("password"),
-    },
-    {
-      title: "Token",
-      dataIndex: "token",
-      key: "token",
-      editable: true,
-      ...getColumnSearchProps("token"),
-    },
-    {
       title: "Thời gian đăng kí",
       dataIndex: "date",
       key: "date",
+      editable: true,
     },
     {
       title: "Trạng Thái",
@@ -308,17 +315,17 @@ const Account = () => {
       filters: [
         {
           text: "Admin",
-          value: "Admin",
+          value: "admin",
         },
         {
           text: "Users",
-          value: "Users",
+          value: "user",
         },
       ],
 
       onFilter: (value, record) => {
-        const check = record.token.includes("admin0305");
-        if (value === "Users") {
+        const check = record.type === "admin";
+        if (value === "user") {
           return !check;
         } else {
           return check;
@@ -329,7 +336,7 @@ const Account = () => {
         const searchString = "admin0305";
         return (
           <>
-            {record.token.includes(searchString) === true ? (
+            {record.type === "admin" ? (
               <Tag color="#87d068">Admin</Tag>
             ) : (
               <Tag color="#108ee9">Users</Tag>
@@ -343,8 +350,7 @@ const Account = () => {
       key: "action",
       render: (text, record) => {
         const editable = isEditing(record);
-        const checkDelete = record.delete;
-
+        const checkDelete = record.deleted;
         return (
           <>
             {checkDelete === false ? (
@@ -355,15 +361,17 @@ const Account = () => {
                     description="Admin có chắc là xóa chứ?"
                     okText="Chắc chắn rồi!"
                     cancelText="Để suy nghĩ lại!"
-                    onConfirm={() => handleDelete_phu(record.id)}
+                    onConfirm={() => handleDelete_phu(record._id)}
                   >
-                    <Tooltip title="Xóa"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+                    <Tooltip title="Xóa">
+                      <Button icon={<DeleteOutlined />} danger />
+                    </Tooltip>
                   </Popconfirm>
                 </Space>
                 {editable ? (
                   <span>
                     <Typography.Link
-                      onClick={() => save(record.id)}
+                      onClick={() => save(record._id)}
                       style={{
                         marginRight: 8,
                       }}
@@ -385,25 +393,35 @@ const Account = () => {
               </>
             ) : (
               <>
-                <Space className="account--del" size="middle" >
+                <Space className="account--del" size="middle">
                   <Popconfirm
                     title="Xóa"
                     description="Admin có chắc là xóa vĩnh viễn chứ?"
                     okText="Chắc chắn rồi!"
                     cancelText="Để suy nghĩ lại!"
-                    onConfirm={() => handleDelete(record.id)}
+                    onConfirm={() => handleDelete(record._id, record)}
                   >
-                    <Tooltip title="Xóa vĩnh viễn"><Button icon={<DeleteOutlined />} danger /></Tooltip>
+                    <Tooltip title="Xóa vĩnh viễn">
+                      <Button icon={<DeleteOutlined />} danger />
+                    </Tooltip>
                   </Popconfirm>
                   <Popconfirm
                     title="khôi phục?"
                     description="Bạn có chắc là khôi phục chứ?"
                     okText="Chắc chắn rồi!"
                     cancelText="Để suy nghĩ lại!"
-                    onConfirm={() => handleRestore(record.id)}
+                    onConfirm={() => handleRestore(record._id)}
                   >
-                       <Tooltip title="Khôi phục"><Button className="account--restore" ><img width="32" height="32" src="https://img.icons8.com/windows/32/settings-backup-restore.png" alt="settings-backup-restore"/></Button></Tooltip>
-
+                    <Tooltip title="Khôi phục">
+                      <Button className="account--restore">
+                        <img
+                          width="32"
+                          height="32"
+                          src="https://img.icons8.com/windows/32/settings-backup-restore.png"
+                          alt="settings-backup-restore"
+                        />
+                      </Button>
+                    </Tooltip>
                   </Popconfirm>
                 </Space>
               </>
@@ -432,10 +450,13 @@ const Account = () => {
   });
 
   const handleRestore = (id) => {
-    patchCus({
-      id: id,
-      delete: false,
-    });
+    patchCus(
+      {
+        _id: id,
+        deleted: false,
+      },
+      cookies
+    );
   };
   const handleClick = () => {
     setshow(true);
@@ -455,26 +476,30 @@ const Account = () => {
       const isAdd =
         data &&
         Array.isArray(data) &&
-        data.some(
-          (item) => item.username === e.username || item.token === e.token
-        );
+        data.some((item) => item.username === e.username);
       if (isAdd === true) {
-        message.error(
-          "Không thể cập nhật người dùng mới. Vui lòng kiểm tra lại."
-        );
+       Modal.error({
+        title: "Lỗi",
+        content:  "Không thể cập nhật người dùng mới. Vui lòng kiểm tra lại."
+       })
       } else {
-        postCus({...e,
-          delete: false,
-          date: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
-          });
-          
-       setshow(false);
+        postCus({
+          ...e
+        }, cookies);
+
+        setshow(false);
       }
     } else {
       // Xử lý trường hợp data không phải là mảng
       message.error("Dữ liệu không hợp lệ.");
     }
+
+   
   };
+
+  const handleFinishFailed = () => {
+    //
+  }
 
   const onSelectChange = (e) => {
     setSelectedRowKeys(e);
@@ -487,27 +512,25 @@ const Account = () => {
 
   // hàm xóa có thể khôi phục
   const handleDelete_phu = (id) => {
-    const findAdmin = data.find((item) => {
-      return item.id === id;
-    });
-    if (findAdmin.token == "admin0305") {
-      message.error("không thể xóa admin chính");
-    } else {
-      patchCus({
-        id: id,
-        delete: true,
-      });
-    }
+    patchCus({
+      _id: id,
+      deleted: true,
+    }, cookies);
   };
   // end hàm xóa có thể khôi phục
 
   // hàm xóa bình thường
-  const handleDelete = (id) => {
-    const findAdmin = data.find((item) => {
-      return item.id === id;
-    });
-      deleteCus(id);
-      setData((prevData) => prevData.filter((user) => user.id !== id));
+  const handleDelete = (id, values) => {
+    if(values.type !== "admin"){
+       deleteCus(id, cookies);
+    setData((prevData) => prevData.filter((user) => user._id !== id));
+    }else {
+      Modal.error({
+        title: "Lỗi",
+        content: "Không thể xóa vĩnh viễn admin"
+      })
+    }
+   
   };
   // end hàm xóa bình thường
 
@@ -515,46 +538,32 @@ const Account = () => {
   const handleXoa = () => {
     const dataFilter = selectedRowKeys.map((item) => {
       return data.filter((x) => {
-        return x.id !== item;
+        return x.key !== item;
       });
     });
     if (dataFilter.length !== 0) {
-      // const dataAfterDel = dataFilter.reduce((origin, item) => {
-      //   // origin là mảng đầu tiên
-      //   return origin.filter(
-      //     (obj1) => item.some((obj2) => obj2.key === obj1.key) // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
-      //   );
-      // }, dataFilter[0].slice());
-      // // giải thích :
-      // // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
-      // // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object
-      // // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
-      
-      
-      // setData(dataAfterDel);
-      
       setSelectedRowKeys([]);
       for (let i = 0; i < selectedRowKeys.length; i++) {
-        if ( data && data[selectedRowKeys[i] - 1] &&  data[selectedRowKeys[i] - 1].token === "admin0305") {
-          
+        if (data[selectedRowKeys[i] - 1].deleted === false) {
+          patchCus(
+            {
+              _id: data[selectedRowKeys[i] - 1]._id,
+              deleted: true,
+            },
+            cookies
+          );
+        } else if (data[selectedRowKeys[i] - 1].deleted === true) {
+          if(data[selectedRowKeys[i] - 1].type !== "admin"){
+             deleteCus(data[selectedRowKeys[i] - 1]._id, cookies);
+          }
+         else {
           Modal.error({
-            title: "Không Thể Xóa Admin chính",
-            content: "Vui lòng không lựa chọn Admin chính",
-          });
-        }
-        else if (data[selectedRowKeys[i] - 1].delete === false)  {
-          patchCus({
-            id: selectedRowKeys[i],
-            delete: true,
-          });
-          
-        }
-        else if (data[selectedRowKeys[i] - 1].delete === true) {
-          deleteCus(selectedRowKeys[i]);
+            title: "Lỗi",
+            content: "Không thể xóa vĩnh viễn admin"
+          })
+         }
         }
       }
-
-
 
       setReload(!reload);
     } else {
@@ -623,6 +632,7 @@ const Account = () => {
           <Form
             autoComplete="off"
             onFinish={handleFinish}
+            onFinishFailed={handleFinishFailed}
             form={form_1}
             layout="vertical"
             name="userForm"
@@ -652,16 +662,25 @@ const Account = () => {
               <Input.Password />
             </Form.Item>
             <Form.Item
-              name="token"
-              label="Token"
+              name="type"
+              label="Loại"
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập token!",
                 },
               ]}
             >
-              <Input />
+              <AutoComplete
+                style={{
+                  width: 200,
+                }}
+                options={options}
+                filterOption={(inputValue, option) =>
+                  option.value
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
             </Form.Item>
           </Form>
         </Modal>

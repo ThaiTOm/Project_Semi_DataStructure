@@ -1,8 +1,13 @@
-import { post } from "../../tienich/request";
+import { post, postV1 } from "../../tienich/request";
 
 export const postCart = async (option) => {
-    const result = await post("cart", option);
-    return result;
+    try {
+        const result = await post("cart", option);
+        return result;
+      } catch (error) {
+        console.error("Error in postCart:", error);
+        throw error;
+      }
 } 
 
 export const postUser = async (option) => {
@@ -36,4 +41,73 @@ export const postProduct = async (option) => {
     return result;
 }
 
+// V1
+export const ForgotPasswordPost = async (option) => {
+    try {
+        const result = await postV1("api/v1/users/password/forgot", option);
+        return result;
+      } catch (error) {
+        console.error("Error in ForgotPasswordPost:", error);
+        throw error;
+      }
+} 
 
+export const OtpPasswordPost = async (option) => {
+    try {
+        const result = await postV1("api/v1/users/password/otp", option);
+        return result;
+      } catch (error) {
+        console.error("Error in OtpPasswordPost:", error);
+        throw error;
+      }
+} 
+
+export const resetPasswordPost = async (option) => {
+    try {
+        const result = await postV1("api/v1/users/password/reset", option);
+        return result;
+      } catch (error) {
+        console.error("Error in resetPasswordPost:", error);
+        throw error;
+      }
+} 
+
+export const postInforExist = async (option, token) => {
+    try {
+        const result = await postV1("api/v1/users/information/inforExist", option, token);
+        return result;
+      } catch (error) {
+        console.error("Error in postInforExist:", error);
+        throw error;
+      }
+} 
+
+export const postUserLogin = async (option) => {
+    try {
+        const result = await postV1("api/v1/users/login/checkLogin", option);
+        return result;
+      } catch (error) {
+        console.error("Error in postUserLogin:", error);
+        throw error;
+      }
+} 
+
+export const postUserRegister = async (option) => {
+    try {
+        const result = await postV1("api/v1/users/register/checkRegister", option);
+        return result;
+      } catch (error) {
+        console.error("Error in postUserRegister:", error);
+        throw error;
+      }
+} 
+
+export const postUserAdmin = async (option, token) => {
+    try {
+        const result = await postV1("api/v1/users/information/adminUsersPost", option, token);
+        return result;
+      } catch (error) {
+        console.error("Error in postUserRegister:", error);
+        throw error;
+      }
+} 

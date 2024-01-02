@@ -118,3 +118,10 @@
 // .gachngang {
 //     text-decoration: line-through;
 // }
+
+.collections{
+  &--pagination{
+    text-align: right;
+    margin-top: 10px;
+  }
+}

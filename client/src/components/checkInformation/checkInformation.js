@@ -51,7 +51,7 @@
   // hàm check địa chỉ có đúng yêu cầu không
  export const checkAddress = (value, empty = 0) => {
     const minLength = 5;
-    const forbiddenCharacters = /[\\"'?\^*%]/;
+    const forbiddenCharacters = /[\\"?\^*%]/;
     console.log(empty);
     if(empty === 1) {
       return "block";
@@ -65,7 +65,36 @@
     }
 
     if (forbiddenCharacters.test(value)) {
-      return "Địa chỉ không được chứa các ký tự \\ ' \" ? ^ * %!";
+      return "Địa chỉ không được chứa các ký tự \\  \" ? ^ * %!";
     }
     return "block"; // hợp lệ
   };
+
+
+ export function isValidPassword(password) {
+    // hàm check pass đúng định dạng
+    // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
+    const lengthRequirement = password.length >= 8;
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const digitRegex = /\d/;
+
+    const hasUppercase = uppercaseRegex.test(password);
+    const hasLowercase = lowercaseRegex.test(password);
+    const hasDigit = digitRegex.test(password);
+
+    return lengthRequirement && hasUppercase && hasLowercase && hasDigit;
+  }
+
+
+ export function isValidUsername(username) {
+    // hàm check username
+    // Yêu cầu ít nhất 8 ký tự
+    const minLength = 8;
+    const hasValidLength = username.length >= minLength;
+
+    // Yêu cầu ký tự hợp lệ: chữ cái, số, ký tự đặc biệt như gạch dưới
+    const isValidCharacters = /^[A-Za-z0-9_-]*$/.test(username);
+
+    return hasValidLength && isValidCharacters;
+  }

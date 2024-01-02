@@ -3,23 +3,40 @@ import "./admin.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { Link } from "react-router-dom";
 import { Button, Result } from "antd";
+import { getMyUser } from "../../service/getcategory/getCategory";
+import { useEffect, useState } from "react";
 function Admin() {
   const cookies = getCookie("token");
+  const [type, setType] = useState({ type: "" });
+  const getUser = async (values) => {
+    const result = await getMyUser(values);
+    console.log(result);
+    setType(result);
+  };
+
+  useEffect(() => {
+    getUser(cookies);
+  }, [cookies]);
 
   return (
     <>
       <div className="admin">
         <div className="admin--glass">
-          {cookies.includes("admin0305") === true ? (
+          {type.type === "admin" ? (
             <Adminlayout />
-          ) : (
+          ) : type.type === "user" ? (
             <Result
-    status="403"
-    title="403"
-    subTitle="Xin lỗi, Bạn không có quyền truy cập trang này!."
-    extra={ <Link to="/" className="admin--gobackbutton"> Back Home
-  </Link>}
-  />
+              status="403"
+              title="403"
+              subTitle="Xin lỗi, Bạn không có quyền truy cập trang này!."
+              extra={
+                <Link to="/" className="admin--gobackbutton">
+                  Back Home
+                </Link>
+              }
+            />
+          ) : (
+            ""
           )}
         </div>
       </div>

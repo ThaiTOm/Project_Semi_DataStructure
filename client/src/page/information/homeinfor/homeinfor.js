@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import "./information.scss";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
-import { getUserstk } from "../../../service/getcategory/getCategory";
+import { getMyUser } from "../../../service/getcategory/getCategory";
 import { Breadcrumb, Col, Layout, Row } from "antd";
 import { Error } from "../../../components/error/error";
 const { Content,  Sider } = Layout;
@@ -11,14 +11,15 @@ function Infor() {
   const cookies = getCookie("token");
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchApi = async (e) => {
-      const result = await getUserstk(e);
-      setData(result);
-    };
 
-    fetchApi(cookies);
-  }, []);
+  const takeUsername = async (e) => {
+    const result = await getMyUser(e);
+    setData(result);
+  };
+
+  useEffect(() => {
+    takeUsername(cookies);
+  }, [cookies]);
 
   return (
     <>
@@ -45,7 +46,7 @@ function Infor() {
               <h2>TRANG TÀI KHOẢN</h2>
               <p>
                 {" "}
-                Xin chào, <b>{data && data[0] && data[0].username}</b>!{" "}
+                Xin chào, <b>{data.code === 200 ? data.username : ""}</b>!{" "}
               </p>
               <Row gutter={[0, 15]} className="infor--row">
                 <Col span={24}>

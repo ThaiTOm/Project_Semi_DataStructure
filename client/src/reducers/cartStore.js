@@ -15,7 +15,6 @@ const cartStore = (state = initialState.product || [], action) => {
           quanlity: action.quanlity
         }
       ];
-      console.log(newState);
       return newState;
 
 

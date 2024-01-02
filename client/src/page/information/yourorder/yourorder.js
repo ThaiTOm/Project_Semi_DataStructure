@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Table, Input } from "antd";
-import { getOrder, getUserstk } from "../../../service/getcategory/getCategory";
+import { getMyUser, getOrder, getUserstk } from "../../../service/getcategory/getCategory";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 const Yourorder = () => {
   const cookies = getCookie("token");
@@ -23,8 +23,8 @@ const Yourorder = () => {
   };
 
   const fetchUsers = async (e) => {
-    const result = await getUserstk(e);
-   fetchPur(result[0].id)
+    const result = await getMyUser(e);
+   fetchPur(result.id)
   }
 
   useEffect(() => {

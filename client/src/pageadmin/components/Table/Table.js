@@ -35,7 +35,7 @@ const historyOrder = orderRecent.map(item => {
          ...x,
          date: item.date,
          paymentMethod: item.paymentMethod,
-         userId: item.userId,
+         user: item.user,
       }
     })
 })

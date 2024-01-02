@@ -5,6 +5,8 @@ import { addcart, down, up, xoa, xoahet } from "../../actions/actCart";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
   getCart,
+  getCartId,
+  getMyUser,
   getOrder,
   getProductsp,
   getUserstk,
@@ -41,6 +43,7 @@ function Cart() {
   const [checked, setChecked] = useState(false);
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
+  const cookies = getCookie("token");
 
   const fetchPur = async (id) => {
     const result = await getOrder(id);
@@ -52,6 +55,43 @@ function Cart() {
     setProduct(result);
   };
 
+  const patchApi = async (data) => {
+    try {
+    await patchCart(data); // gọi hàm patchCart với tham số là data
+    } catch (error) {
+      console.error("Error while patching cart:", error);
+      // xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
+    }
+  };
+
+  const takeIdCart = async (user) => {
+    try {
+      const result = await getCartId(user); 
+  
+      return result[0].id;
+    } catch (error) {
+      console.error("Error while patching cart:", error);
+    }
+  }
+  
+
+const takeMyId = async (data) => {
+  try {
+    const result = await getMyUser(data); 
+    if (result){
+      const cartId = await takeIdCart(result.id);
+      console.log(cartId);
+    setData({
+      ...result,
+      cartId: cartId
+    });
+    }
+
+  } catch (error) {
+    console.error("Error while patching cart:", error);
+  }
+}
+
   // cũ
   var tong = 0;
   for (let i = 0; i < products.length; i++) {
@@ -62,41 +102,22 @@ function Cart() {
         ((100 - Math.floor(products[i].infor.discountPercentage)) / 100)
       ).toFixed();
   }
-  const cookies = getCookie("token");
   useEffect(() => {
-    const fetchApi = async (e) => {
-      try {
-        const result = await getUserstk(e);
-        // xử lý dữ liệu ở đây sau khi nhận được kết quả từ getUserstk
-        setData(result);
-      } catch (error) {
-        console.error("Error in fetchhApi:", error);
-        throw new Error("Failed to fetch data");
-      }
-    };
-    fetchApi(cookies);
+    takeMyId(cookies);
     fetchsp();
-  }, []);
+  }, [cookies]);
   useEffect(() => {
-    if (data && data.length > 0) {
+    if (data && data.code === 200) {
       setData_2({
-        id: data[0].id,
-        userId: data[0].id,
+        id: data.cartId,
+        user: data.id,
         product: [...products],
       });
     }
   }, [products, data]);
 
   useEffect(() => {
-    if (data_2 && Object.keys(data_2).length > 0) {
-      const patchApi = async (data) => {
-        try {
-          const result = await patchCart(data); // gọi hàm patchCart với tham số là data
-        } catch (error) {
-          console.error("Error while patching cart:", error);
-          // xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
-        }
-      };
+    if (data.cartId && data_2 && Object.keys(data_2).length > 0) {
       patchApi(data_2); // gọi hàm patchApi với tham số là data_2
       localStorage.setItem(cookies, JSON.stringify(data_2));
     }
@@ -240,6 +261,7 @@ function Cart() {
     return array;
   }
   const handleXoa = (e) => {
+    console.log(e);
     const key = selectedRowKeys.some((x) => {
       return x === e.key;
     });
@@ -351,7 +373,7 @@ function Cart() {
   });
 
   const handleClick = async (e) => {
-    const orderData = await fetchPur(data[0].id);
+    const orderData = await fetchPur(data.id);
     const newestOrder = orderData.reduce((maxDateItem, currentItem) => {
       if (!maxDateItem || currentItem.date > maxDateItem.date) {
         return currentItem;

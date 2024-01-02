@@ -5,40 +5,23 @@ import "sweetalert2/src/sweetalert2.scss";
 import "./register.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import { Link, useNavigate } from "react-router-dom";
-import { postCart, postShipping } from "../../service/post/post";
-import { Button, Form, Input } from "antd";
-import { format } from 'date-fns';
+import {
+  postCart,
+  postUserRegister,
+} from "../../service/post/post";
+import { Button, Form, Input, Modal } from "antd";
 import { Errorempty } from "../../components/error/error";
+import {
+  isValidPassword,
+  isValidUsername,
+} from "../../components/checkInformation/checkInformation";
+import { setCookie } from "../../components/setTime/setTime";
 function Register() {
   const inputRef = useRef();
   const cookie = getCookie("token");
   const navigate = useNavigate();
-  function isValidPassword(password) {
-    // hàm check pass đúng định dạng
-    // Yêu cầu tối thiểu 8 ký tự, ít nhất một chữ cái viết hoa, chữ cái viết thường và một chữ số
-    const lengthRequirement = password.length >= 8;
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-    const digitRegex = /\d/;
-
-    const hasUppercase = uppercaseRegex.test(password);
-    const hasLowercase = lowercaseRegex.test(password);
-    const hasDigit = digitRegex.test(password);
-
-    return lengthRequirement && hasUppercase && hasLowercase && hasDigit;
-  }
-
-  function isValidUsername(username) {
-    // hàm check username
-    // Yêu cầu ít nhất 8 ký tự
-    const minLength = 8;
-    const hasValidLength = username.length >= minLength;
-
-    // Yêu cầu ký tự hợp lệ: chữ cái, số, ký tự đặc biệt như gạch dưới
-    const isValidCharacters = /^[A-Za-z0-9_-]*$/.test(username);
-
-    return hasValidLength && isValidCharacters;
-  }
+  const [data_1, setData_1] = useState(true); // check để báo hiệu của username
+  const [data_2, setData_2] = useState(true); // check để báo hiệu của pass
 
   // Sử dụng hàm kiểm tra
 
@@ -48,19 +31,30 @@ function Register() {
     }
   }, []);
 
-  const [data_1, setData_1] = useState(true); // check để báo hiệu của username
-  const [data_2, setData_2] = useState(true); // check để báo hiệu của pass
+  const checkRegister = async (values) => {
+    const result = await postUserRegister(values);
+    return result;
+  };
+
+  const addCart = async (e) => {
+    try {
+      await postCart(e); // Gọi hàm postCart với tham số là data
+    } catch (error) {
+      console.error("Error while posting cart:", error);
+      // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
+    }
+  };
 
   // hàm bấm ra ngoài thì check giá trị đó đúng hay chưa
   const handleOnblur_1 = (e) => {
-    if (isValidUsername(e.target.value) == false) {
+    if (isValidUsername(e.target.value) === false) {
       setData_1(false);
     } else {
       setData_1(true);
     }
   };
   const handleOnblur_2 = (e) => {
-    if (isValidPassword(e.target.value) == false) {
+    if (isValidPassword(e.target.value) === false) {
       setData_2(false);
     } else {
       setData_2(true);
@@ -68,130 +62,38 @@ function Register() {
   };
   // hàm bấm ra ngoài thì giá trị đó hay sai?
 
-  // hàm string ngẫu nhiên
-  function generateRandomString(length) {
-    // hàm tạo số ngẫu nhiên để đưa vào token
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    const charactersLength = characters.length;
-
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charactersLength);
-      result += characters.charAt(randomIndex);
-    }
-
-    return result;
-  }
-
-  const onFinish = (e) => {
+  const onFinish = async (values) => {
     // check và xác nhận sau khi bấm bút
-
-    console.log(e);
-    if (
-      isValidUsername(e.username) == true &&
-      isValidPassword(e.password) == true
-    ) {
-      var dataUsers = [];
-      dataUsers = {
-        ["username"]: e.username,
-        ["password"]: e.password,
-        ["token"]: generateRandomString(20),
-        ["delete"]: false,
-        ["date"]: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
-      };
-      fetch("http://localhost:3000/users")
-        .then((res) => res.json())
-        .then((data) => {
-          let checkTk = data.some((item) => {
-            return (
-              item.username === dataUsers.username &&
-              item.token === dataUsers.token
-            );
-          });
-
-          if (checkTk == true) {
-            new Swal({
-              title: "ĐĂNG KÍ KHÔNG THÀNH CÔNG",
-              text: "Tài khoản đã tồn tại",
-              icon: "error",
-            });
-          } else {
-            fetch("http://localhost:3000/users", {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(dataUsers),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                const postApi = async (e) => {
-                  try {
-                    const result = await postCart(e); // Gọi hàm patchCart với tham số là data
-                    console.log(result);
-                  } catch (error) {
-                    console.error("Error while patching cart:", error);
-                    // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
-                  }
-                };
-                // const postship = async (e) => {   không sử dụng nhma giữ lại để cần thì mở
-                //   try {
-                //     const result = await postShipping(e); // Gọi hàm patchCart với tham số là data
-                //     console.log(result);
-                //   } catch (error) {
-                //     console.error("Error while patching cart:", error);
-                //     // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
-                //   }
-                // };
-
-                postApi({
-                  ["userId"]: data.id,
-                  ["product"]: [],
-                });
-
-                // postship({  không sử dụng nhma giữ lại để cần thì mở
-                //   ["userId"]: data.id,
-                // ["delivery"]: []
-                // });
-                // console.log(data);
-              });
-
-            Swal.fire({
-              icon: "success", // Sử dụng icon "success" cho thông báo thành công
-              title: "Đăng kí thành công",
-              text: "Chào mừng bạn đến với 3Tstore!",
-            }).then((result) => {
-              // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
-
-              if (result.isConfirmed) {
-                document.cookie = "token=" + dataUsers.token;
-                window.location.href = "/";
-              }
-            });
-          }
-        });
+    const result = await checkRegister(values);
+    if (result.code === 400) {
+      Modal.error({
+        title: "Lỗi",
+        content: `${result.message}`,
+      });
     } else {
-      new Swal({
-        title: "ĐĂNG KÍ KHÔNG THÀNH CÔNG",
-        text: "Mời bạn nhập lại thông tin",
-        icon: "error",
+      addCart({
+        user: result.user,
+        product: [],
+      });
+      Swal.fire({
+        icon: "success", // Sử dụng icon "success" cho thông báo thành công
+        title: "Đăng kí thành công",
+        text: "Chào mừng bạn đến với 3Tstore!",
+      }).then((ketqua) => {
+        // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
+        if (ketqua.isConfirmed) {
+          setCookie("token", result.token, 1);
+          window.location.href = "/";
+        }
       });
     }
   };
 
   const onFinishFailed = (e) => {
-    // khi sai điều kiện
-    console.log(e);
-    if (e.values.password !== e.values.confirmPassword) {
-      // Thông báo lỗi nếu mật khẩu và xác nhận mật khẩu không khớp
-      Swal.fire({
-        title: "ĐĂNG KÝ KHÔNG THÀNH CÔNG",
-        text: "Mật khẩu và xác nhận mật khẩu không khớp",
-        icon: "error",
-      });
-    }
+    Modal.warning({
+      title: "Cảnh báo",
+      content: "Vui Lòng Nhập Đầy Đủ Thông Tin",
+    });
   };
 
   // nhập thì không báo lỗi
@@ -205,10 +107,9 @@ function Register() {
 
   // nhập thì không báo lỗi
 
-  console.log(cookie.length);
   return (
     <>
-      {cookie.length == 0 ? (
+      {cookie.length === 0 ? (
         <Form
           layout="vertical"
           name="register"
@@ -228,7 +129,13 @@ function Register() {
               <Form.Item
                 label="Username"
                 name="username"
-                rules={[{ required: true, message: "" }]}
+                validateStatus={!data_1 ? "error" : ""}
+                help={
+                  !data_1
+                    ? "Username phải có ít nhất 8 ký tự và chỉ chứa chữ cái, số, gạch dưới và dấu gạch ngang."
+                    : ""
+                }
+                rules={[{ required: true }]}
               >
                 <Input
                   ref={inputRef}
@@ -236,34 +143,24 @@ function Register() {
                   onChange={handleChange_1}
                 />
               </Form.Item>
-              {!data_1 ? (
-                <div style={{ color: "red", marginTop: "-25px" }}>
-                  Username phải có ít nhất 8 ký tự và chỉ chứa chữ cái, số, gạch
-                  dưới và dấu gạch ngang.
-                </div>
-              ) : (
-                ""
-              )}
               <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: "" }]}
+                rules={[{ required: true }]}
+                validateStatus={!data_2 ? "error" : ""}
+                help={
+                  !data_2
+                    ? "Vui lòng nhập tối thiểu 8 kí tự, một chữ thường, 1 chữ hoa và 1 số"
+                    : ""
+                }
               >
                 <Input.Password
                   onBlur={handleOnblur_2}
                   onChange={handleChange_2}
                 />
               </Form.Item>
-              {!data_2 ? (
-                <div style={{ color: "red", marginTop: "-25px" }}>
-                  Vui lòng nhập tối thiểu 8 kí tự, một chữ thường, 1 chữ hoa và
-                  1 số .
-                </div>
-              ) : (
-                ""
-              )}
               <Form.Item
-                label="Confirm Password"
+                label="Xác nhận mật khẩu"
                 name="confirmPassword"
                 dependencies={["password"]}
                 hasFeedback
@@ -289,7 +186,7 @@ function Register() {
                   className="
         register--submit"
                 >
-                  Register
+                  Đăng Ký
                 </Button>
               </Form.Item>
             </div>

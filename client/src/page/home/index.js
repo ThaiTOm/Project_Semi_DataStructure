@@ -60,33 +60,7 @@ function Home() {
     return item.category === "Soft Drinks";
   });
 
-  // const handleClick = (id, infor) => {
-  //   if (cookies) {
-  //     const check = checkId.some((item) => {
-  //       return item.id === id;
-  //     });
 
-  //     if (check) {
-  //       const productSlg = checkId.find((item) => {
-  //         return item.id === id;
-  //       });
-
-  //       if (infor.Quantity > productSlg.quanlity) {
-  //         dispatch(up(id));
-  //       } else {
-  //         Modal.error({
-  //           title: "Không Thể Thêm Sản Phẩm",
-  //           content:
-  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-  //         });
-  //       }
-  //     } else {
-  //       dispatch(add(id, infor));
-  //     }
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // };
 
   const handleClick_trs = () => {
     navigate(`/category/${milktea[1].category}`);

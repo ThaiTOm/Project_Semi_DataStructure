@@ -49,7 +49,7 @@ while (pageIndex < data.length) {
   }
 
   // tạo tổng số phân trang để phân
-  const total = Math.ceil((((data.length / 12).toFixed(1) * 10) / 10) * 10);
+  const total = Math.ceil((((data.length / 10).toFixed(1) * 10) / 10) * 10);
     return (
         <>
             {

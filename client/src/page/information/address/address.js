@@ -14,7 +14,11 @@ import {
 } from "antd";
 import "./address.scss";
 import { PlusOutlined } from "@ant-design/icons";
-import { getShip, getUserstk } from "../../../service/getcategory/getCategory";
+import {
+  getMyUser,
+  getShip,
+  getUserstk,
+} from "../../../service/getcategory/getCategory";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { postShipping } from "../../../service/post/post";
 import { patchBool } from "../../../service/patch/patch";
@@ -35,18 +39,7 @@ const Address = () => {
   const [shipid, setShipid] = useState({
     id: 0,
   });
-  const [ship, setShip] = useState([
-    {
-      delivery: [
-        {
-          address: "",
-          fullName: "",
-          phoneNumber: "",
-          defaultAddress: false,
-        },
-      ],
-    },
-  ]); // lấy tất cả dữ liệu địa chỉ của userId đang đăng nhập
+  const [ship, setShip] = useState([]); // lấy tất cả dữ liệu địa chỉ của user đang đăng nhập
   const [data, setData] = useState([]); // dữ liệu của người đang đăng nhập
   const cookies = getCookie("token"); // lấy token từ cookie
   const [checkaddress, setCheckaddress] = useState("block");
@@ -54,48 +47,47 @@ const Address = () => {
   const postship = async (e) => {
     // hàm đưa dữ liệu lên data shipping
     const result = await postShipping(e);
-    if (data && data[0]) {
-      getship(data[0].id); // sau khi nhập thì render lại trang với giá trị ship mới
+    if (data && data.code === 200) {
+      getship(data.id); // sau khi nhập thì render lại trang với giá trị ship mới
     }
   };
 
   const getship = async (e) => {
-    // hàm lấy dữ liệu shipping của userId đang sử dụng
+    // hàm lấy dữ liệu shipping của user đang sử dụng
     const result = await getShip(e);
+    console.log(result);
     setShip(result);
   };
 
   const patchbool = async (e) => {
     // cập nhật giá trị mặc định
     const result = await patchBool(e);
-    if (data && data[0]) {
-      getship(data[0].id); // sau khi nhập thì render lại trang với giá trị ship mới
+    if (data && data.code === 200) {
+      getship(data.id); // sau khi nhập thì render lại trang với giá trị ship mới
     }
   };
 
   const del = async (e) => {
+    console.log(e);
     const result = await delShip(e);
-    if (data && data[0]) {
-      getship(data[0].id); // sau khi nhập thì render lại trang với giá trị ship mới
+    if (data && data.code === 200) {
+      getship(data.id); // sau khi nhập thì render lại trang với giá trị ship mới
     }
   };
-  //  if(data && data[0]){
-  //   getship(data[0].id);
-  // }
+
+  const fetchApick = async (e) => {
+    try {
+      const result = await getMyUser(e); // lấy dữ liệu tài khoản của người đang đăng nhập
+      setData(result);
+      getship(result.id); // lấy dữ liệu shipping của user khi mới đăng nhập
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchApick = async (e) => {
-      try {
-        const result = await getUserstk(e); // lấy dữ liệu tài khoản của người đang đăng nhập
-        setData(result);
-        getship(result[0].id); // lấy dữ liệu shipping của userId khi mới đăng nhập
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchApick(cookies); // lấy thông tin user từ cookie
-  }, []);
+  }, [cookies]);
 
   const showModal = () => {
     setShipid({
@@ -133,14 +125,13 @@ const Address = () => {
     });
   };
 
-
-  
   const handleDelete = async (e) => {
     const xoa = ship.find((item) => {
       return item.id === e;
     });
+
     if (xoa.delivery[0].defaultAddress === false) {
-      await del(e);
+     await del(e);
     } else {
       message.error({
         content: "Đây là địa chỉ mặc định. Không thể xóa !",
@@ -200,7 +191,7 @@ const Address = () => {
         ],
       });
 
-      await getship(data[0].id);
+      await getship(data.id);
     } catch (error) {
       // lỗi thì ra đường này
       console.error("Error setting default address:", error);
@@ -291,7 +282,7 @@ const Address = () => {
       });
 
       const checkship = ship.map((item) => {
-        // check qua từng đứa trong dữ liệu userId
+        // check qua từng đứa trong dữ liệu user
         const result = item.delivery.some((x) => {
           // kiểm tra dữ liệu đúng hay sai để cho phép tạo mới hay không
 
@@ -329,7 +320,7 @@ const Address = () => {
           if (ship.length === 0) {
             postship({
               // gửi dữ liệu địa chỉ của người dùng
-              userId: data[0].id,
+              user: data.id,
               delivery: [
                 {
                   ...submit,
@@ -342,11 +333,12 @@ const Address = () => {
             postship({
               // ngược lại thì không cần xét
               // gửi dữ liệu địa chỉ của người dùng
-              userId: data[0].id,
+              user: data.id,
               delivery: [
                 {
                   ...submit,
                   ...values,
+                  defaultAddress: false
                 },
               ],
             });
@@ -588,12 +580,9 @@ const Address = () => {
                         description="Bạn Có Chắc Là Xóa Địa Chỉ Này Chứ?"
                         okText="Chắc Chắn Rồi"
                         cancelText="Hong Chắc Lắm"
+                        onConfirm={() => handleDelete(item.id)}
                       >
-                        <Button
-                          type="primary"
-                          block
-                          onClick={() => handleDelete(item.id)}
-                        >
+                        <Button type="primary" block>
                           Xóa
                         </Button>
                       </Popconfirm>

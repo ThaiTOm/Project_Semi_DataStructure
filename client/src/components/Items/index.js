@@ -7,7 +7,7 @@ function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, AddtoC
   
   return (
     <>
-      <Content>
+      <Content className="Items">
         <Row gutter={[0, 10]}>
           {paginatedData.length > 0 && Array.isArray(paginatedData[id]) ? (
             paginatedData[id].map((item) => (

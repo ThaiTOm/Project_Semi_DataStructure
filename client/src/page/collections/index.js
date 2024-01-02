@@ -12,7 +12,9 @@ import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
 
   Layout,
+  Modal,
   Pagination,
+  message,
 
 } from "antd";
 
@@ -23,7 +25,6 @@ import filterData from "../../components/handleLogic/handlelogic";
 import Contenttop from "../../components/contentTop";
 import Siderlane from "../../components/sider";
 import Items from "../../components/Items";
-const { Header, Content, Footer, Sider } = Layout;
 
 function Collections() {
   const [max, setMax] = useState(0);
@@ -64,7 +65,10 @@ function Collections() {
     const fetchApi = async () => {
       const result = await getProductsp();
       if (!result) {
-        console.log("coconcac");
+        Modal.error({
+          title: "Lỗi",
+          content: "Không có thông tin sản phẩm phù hợp."
+        })
       } else {
         const maxValue = result.reduce(
           (max, obj) => (obj.price > max ? obj.price : max),
@@ -94,33 +98,6 @@ function Collections() {
     setExpanded(!expanded);
   };
 
-  // const handleClick = (id, infor) => {
-  //   if (cookies) {
-  //     const check = checkId.some((item) => {
-  //       return item.id === id;
-  //     });
-
-  //     if (check) {
-  //       const productSlg = checkId.find((item) => {
-  //         return item.id === id;
-  //       });
-
-  //       if (infor.Quantity > productSlg.quanlity) {
-  //         dispatch(up(id));
-  //       } else {
-  //         Modal.error({
-  //           title: "Không Thể Thêm Sản Phẩm",
-  //           content:
-  //             "Số lượng bạn chọn đã đạt mức tối đa số lượng của sản phẩm này ",
-  //         });
-  //       }
-  //     } else {
-  //       dispatch(add(id, infor));
-  //     }
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // };
 
   const handleChange = (e) => {
     // thay đổi phân trang thì set id theo đúng chỗ
@@ -129,7 +106,7 @@ function Collections() {
 
   // lọc theo hãng sản xuất
   const handleChange_hsx = (e) => {
-    console.log(e);
+
     setData_3({
       ...data_3,
       hsx: e,
@@ -144,7 +121,7 @@ function Collections() {
       distance: e,
     });
     setId(1);
-    console.log(e);
+
   };
 
   // lọc loại sản phẩm
@@ -163,29 +140,8 @@ function Collections() {
       phanloai: e,
     });
     setId(1);
-    console.log(e);
   };
 
-  // const filterData = () => {
-  //   const arrangedData = filterByArrange(data_3, data_4, data);
-  //   const filteredData = arrangedData.filter((item) => {
-  //     // Lọc theo hãng sản xuất
-  //     const filterByBrand =
-  //       data_3.hsx.length === 0 || data_3.hsx.includes(item.brand);
-  //     // Lọc theo khoảng giá
-  //     const filterByPrice =
-  //       item.price * ((100 - item.discountPercentage) / 100) >=
-  //         data_3.distance[0] &&
-  //       item.price * ((100 - item.discountPercentage) / 100) <=
-  //         data_3.distance[1];
-  //     // Lọc theo loại sản phẩm
-  //     const filterByCategory =
-  //       data_3.cate.length === 0 || data_3.cate.includes(item.category);
-
-  //     return filterByBrand && filterByPrice && filterByCategory;
-  //   });
-  //   return filteredData;
-  // };
 
   // gán giá trị
 
@@ -203,7 +159,6 @@ function Collections() {
   );
 
 
-  console.log(giatriloc);
   return (
     <>
       <div className="collections animate__animated animate__zoomIn animate__faster">
@@ -234,7 +189,7 @@ function Collections() {
           />
         </Layout>
         <Pagination
-          className=""
+          className="collections--pagination"
           defaultCurrent={1}
           current={id}
           total={total}

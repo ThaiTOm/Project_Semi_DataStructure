@@ -107,7 +107,7 @@ flex-wrap: nowrap;
       margin: 10px 10px 0px 10px;
      
     }
-    &__c img {
+    &__c img .img-chung{
       max-height: 50px;
       width: auto;
       text-align: center;
@@ -224,10 +224,8 @@ body {
     }
   }
    &--user {
-    & a {
-       display: flex;
-       align-items: center;
-    }
+    display: flex;
+    align-items: center;
    &__tk {
     & p {
       margin: 0;

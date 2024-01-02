@@ -15,28 +15,21 @@ import "./layoutDefault.scss";
 import {
   AlignLeftOutlined,
   UserOutlined,
-  BellOutlined,
 } from "@ant-design/icons";
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
-// import Logo from "../../image/Logo.png";
-// import donhang from "../../image/donhang.png";
-// import position from "../../image/position.png";
-// import person from "../../image/person.png";
-// import cart from "../../image/cart.png";
-// import email from "../../image/email.png";
-// import telephone from "../../image/telephone.png";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { getCookie } from "../../components/takeCookies/takeCookies";
 import {
   getCategory,
+  getMyUser,
   getProductsearch,
 } from "../../service/getcategory/getCategory";
 import { get } from "../../tienich/request";
 import { Layout } from "antd";
 import { useSelector } from "react-redux";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer} = Layout;
 const cookies = getCookie("token");
 
 const items =
@@ -82,7 +75,7 @@ function LayoutDefault() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
- 
+  const [url, setUrl] = useState({});
   const [data, setData] = useState([
     {
       id: "",
@@ -94,36 +87,61 @@ function LayoutDefault() {
     },
   ]);
   const soluong = useSelector((state) => state.cartStore);
-  useEffect(() => {
-    const fetchapi = async () => {
-      const res = await getCategory();
-      if (!res) {
-      } else {
-        setData(res);
-      }
-    };
-
-    fetchapi();
-  }, []);
-
+  const reload = useSelector((state) => state.Reload);
   const getProduct = async (e) => {
     const result = await get("beverages/?category=" + e);
     return result;
   };
 
+console.log(reload)
+
+  const fetchapi = async () => {
+    const res = await getCategory();
+    if (!res) {
+    } else {
+      setData(res);
+    }
+  };
+
+  const fetchData2 = async () => {
+    const newData2 = [];
+    for (const item of data) {
+      const result = await getProduct(item.cate);
+      newData2.push(result);
+    }
+    setData_1(newData2);
+  };
+
+  const fetchData = async (searchText) => {
+    const results = await getProductsearch(searchText);
+    setOptions(results);
+  };
+  
+  const getAvatar = async (token) => {
+    const result = await getMyUser(token);
+    if(result && result.code === 200){
+      setUrl(result.avatar);
+    }
+  }
+
   useEffect(() => {
-    const fetchData2 = async () => {
-      const newData2 = [];
-      for (const item of data) {
-        const result = await getProduct(item.cate);
-        newData2.push(result);
-      }
+    fetchapi();
+  }, []);
 
-      setData_1(newData2);
-    };
-
+  useEffect(() => {
     fetchData2();
   }, [data]);
+
+  // sử dụng useEffect để gọi fetchData khi searchText thay đổi
+  useEffect(() => {
+    if (searchText) {
+      fetchData(searchText);
+    }
+  }, [searchText]);
+  
+  useEffect(() => {
+    getAvatar(cookies);
+  }, [cookies, reload])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -157,16 +175,16 @@ function LayoutDefault() {
     setSearchText(value);
     setShowOptions(true);
 
-    if (value.length == 0) {
+    if (value.length === 0) {
       setShowOptions(false);
     }
   };
 
   const handleKeydown = (e) => {
-    if (e.code == "Enter") {
+    if (e.code === "Enter") {
       form.resetFields();
       setRender(!render);
-      if (e.target.value != "") {
+      if (e.target.value !== "") {
         navigate(`/search/${e.target.value}`);
       }
     }
@@ -177,20 +195,12 @@ function LayoutDefault() {
     navigate(`/search/${e["name-product"]}`);
     form.resetFields();
   };
-  const onFinishFailed = (e) => {};
-
-  const fetchData = async (searchText) => {
-    const results = await getProductsearch(searchText);
-  
-    setOptions(results);
+  const handleFinish_1 = (e) => {
+    setRender(!render);
+    navigate(`/search/${e["name-product_1"]}`);
+    form.resetFields();
   };
-
-  // sử dụng useEffect để gọi fetchData khi searchText thay đổi
-  useEffect(() => {
-    if (searchText) {
-      fetchData(searchText);
-    }
-  }, [searchText]);
+  const onFinishFailed = (e) => {};
 
   return (
     <>
@@ -309,8 +319,9 @@ function LayoutDefault() {
               <div className="header--function">
                 <div className="header--function__c header--function__bell">
                   <img
-                    width="100"
-                    height="100"
+                  className="img-chung"
+                    width="50"
+                    height="50"
                     src="https://img.icons8.com/plasticine/100/bell--v1.png"
                     alt="bell--v1"
                   />
@@ -318,6 +329,7 @@ function LayoutDefault() {
                 <div className="header--function__donhang header--function__c">
                   <NavLink to={cookies.length === 0 ? "/login" : "/order"}>
                     <img
+                    className="img-chung"
                       src="https://img.icons8.com/fluency/48/purchase-order.png"
                       alt="purchase-order"
                     />
@@ -327,6 +339,7 @@ function LayoutDefault() {
                 <div className="header--function__cuahang header--function__c">
                   <NavLink to="/dscuahang">
                     <img
+                    className="img-chung"
                       src="https://img.icons8.com/color/48/place-marker--v1.png"
                       alt="place-marker--v1"
                     />
@@ -339,10 +352,7 @@ function LayoutDefault() {
                     <NavLink
                       to={cookies.length === 0 ? "/login" : "/infor/thongtinkh"}
                     >
-                      <img
-                        src="https://img.icons8.com/color/48/person-male.png"
-                        alt="person-male"
-                      />
+                         <Avatar size={49} className="avatar" src={Object.keys(url).length > 0 ? url : "https://img.icons8.com/color/48/person-male.png"} />
                       <p className="header--function__chung">Tài khoản </p>
                     </NavLink>
                   </Dropdown>
@@ -357,6 +367,7 @@ function LayoutDefault() {
                       overflowCount={99}
                     >
                       <img
+                      className="img-chung"
                         src="https://img.icons8.com/fluency/48/shopping-cart.png"
                         alt="shopping-cart"
                       />
@@ -372,11 +383,11 @@ function LayoutDefault() {
                 form={form}
                 className="header--search"
                 layout="inline"
-                onFinish={handleFinish}
+                onFinish={handleFinish_1}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
               >
-                <Form.Item name={"name-product"}>
+                <Form.Item name={"name-product_1"}>
                   <AutoComplete
                     size="large"
                     className="header--search__input"
@@ -519,7 +530,7 @@ function LayoutDefault() {
                   <Link to={cookies ? "/" : "/login"}>Đăng Nhập</Link>
                 </p>
                 <p>
-                  <Link to={cookies ? "/" : "/login"}>Đăng kí</Link>
+                  <Link to={cookies ? "/" : "/register"}>Đăng kí</Link>
                 </p>
                 <p>
                   <Link to={"/cart"}>Giỏ Hàng</Link>
@@ -548,19 +559,19 @@ function LayoutDefault() {
                 </p>
                 <h3 className="h3">Kết nối với chúng tôi</h3>
                 <div className="footer--network">
-                  <a href="https://www.facebook.com" target="_blank">
+                  <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
                     <img
                       src="https://bizweb.dktcdn.net/100/457/224/themes/870030/assets/footer_trustbadge1.jpg?1696210463947"
                       alt="facebook"
                     />
                   </a>
-                  <a href="https://www.instagram.com" target="_blank">
+                  <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
                     <img
                       src="https://bizweb.dktcdn.net/100/457/224/themes/870030/assets/footer_trustbadge2.jpg?1696210463947"
                       alt="insta"
                     />
                   </a>
-                  <a href="https://www.tiktok.com" target="_blank">
+                  <a href="https://www.tiktok.com" target="_blank" rel="noreferrer">
                     <img
                       src="https://bizweb.dktcdn.net/100/457/224/themes/870030/assets/footer_trustbadge5.jpg?1696210463947"
                       alt="tiktok"
@@ -593,9 +604,10 @@ function LayoutDefault() {
               onClick={onClose}
             >
               <Avatar icon={<UserOutlined />} size={40} />
-              <div className="drawer--user__tk">
+            </NavLink>
+            <div className="drawer--user__tk">
                 <p className="tk">Tài khoản</p>
-                {cookies.length == 0 ? (
+                {cookies.length === 0  ? (
                   <Link to="/login">
                     <p>Đăng nhập</p>
                   </Link>
@@ -605,8 +617,6 @@ function LayoutDefault() {
                   </Link>
                 )}
               </div>
-            </NavLink>
-
             {/* Thêm các thông tin tài khoản khác nếu cần */}
           </div>
           <div className="drawer--function__donhang drawer--function__c">
@@ -646,15 +656,11 @@ function LayoutDefault() {
 
                           children: Array.isArray(data_1[item.id - 1])
                             ? data_1[item.id - 1].map((x) => ({
-                                label: (
-                                  <Link
-                                    to={`/product/${x.id}`}
-                                    key={x.title}
-                                    onClick={onClose}
-                                  >
-                                    {x.title}
-                                  </Link>
-                                ),
+                                label: 
+                                 
+                                  x.title
+                                  
+                                
                               }))
                             : null,
                         },

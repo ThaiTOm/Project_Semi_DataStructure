@@ -68,9 +68,9 @@ function Login() {
               />
             </Form.Item>
             <Form.Item className="login--forgot">
-              <a className="login--forgot__a" href="">
+              <Link className="login--forgot__a" to={"/password/forgot"}>
                 Forgot password
-              </a>
+              </Link>
             </Form.Item>
             <Form.Item>
               <Button

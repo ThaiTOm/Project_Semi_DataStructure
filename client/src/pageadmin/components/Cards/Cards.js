@@ -3,24 +3,27 @@ import "./Cards.scss";
 
 import Card from "../Card/Card"
 import { cardsData } from "../../../Data/Data";
-import { getUser } from "../../../service/getcategory/getCategory";
+import { getQuantityUsers } from "../../../service/getcategory/getCategory";
+import { getCookie } from "../../../components/takeCookies/takeCookies";
 
 
 const Cards = () => {
   const [data, setData] = useState([]);
-  const getusers = async () => {
-    const lengthUser = await getUser();
-    
-   setData(lengthUser);
+  const cookies = getCookie("token");
+  const getusers = async (token) => {
+    const lengthUser = await getQuantityUsers(token);
+    if(lengthUser.code === 200){
+      setData(lengthUser.quantity);
+    }
   }
 
   useEffect(() => {
-       getusers();
-  },[])
+       getusers(cookies);
+  },[cookies])
 
   return (
     <div className="Cards">
-      {Array.isArray(cardsData(data.length)) && cardsData(data.length).map((card, id) => {
+      {Array.isArray(cardsData(data)) && cardsData(data).map((card, id) => {
         return (
           <div className="parentContainer" key={id}>
             <Card

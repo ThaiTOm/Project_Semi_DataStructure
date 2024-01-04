@@ -2,27 +2,16 @@ import React, { useEffect, useState } from "react";
 import {
   Modal,
   Form,
-  Input,
-  InputNumber,
-  Button,
-  Select,
-  AutoComplete,
-  Space,
-  Row,
-  Col,
 } from "antd";
 import { getCategory } from "../../../service/getcategory/getCategory";
 import ModalProduct from "../../helper/modalProduct";
 
-const { Option } = Select;
-const { Option: AutoCompleteOption } = AutoComplete;
 
 const AddProductModal = ({
   reload,
   show,
   setShow,
   onAddProduct,
-  setReload,
 }) => {
   const [form] = Form.useForm();
   const [categories, setCategories] = useState([]);

@@ -93,8 +93,6 @@ function LayoutDefault() {
     return result;
   };
 
-console.log(reload)
-
   const fetchapi = async () => {
     const res = await getCategory();
     if (!res) {
@@ -317,15 +315,6 @@ console.log(reload)
               {/* header-search */}
 
               <div className="header--function">
-                <div className="header--function__c header--function__bell">
-                  <img
-                  className="img-chung"
-                    width="50"
-                    height="50"
-                    src="https://img.icons8.com/plasticine/100/bell--v1.png"
-                    alt="bell--v1"
-                  />
-                </div>
                 <div className="header--function__donhang header--function__c">
                   <NavLink to={cookies.length === 0 ? "/login" : "/order"}>
                     <img
@@ -485,6 +474,9 @@ console.log(reload)
               </div>
               <div className="header--main1__contact header--main1__chung">
                 <NavLink to={"/contact"}>Liên hệ</NavLink>
+              </div>
+              <div className="header--main1__blog header--main1__chung">
+                <NavLink to={"/blog"}>Tin tức</NavLink>
               </div>
             </div>
           </div>

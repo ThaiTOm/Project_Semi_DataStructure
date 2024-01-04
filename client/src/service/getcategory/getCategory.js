@@ -131,7 +131,7 @@ export const getEmail = async (username) => {
     const result = await getV1(`api/v1/users/password/email?username=${username}`);
     return result;
   } catch (error) {
-    console.error("Error in getUserV1:", error);
+    console.error("Error in getEmail:", error);
     throw error;
   }
 };
@@ -141,7 +141,7 @@ export const getMyInfor = async (token) => {
     const result = await getV1(`api/v1/users/information/myInfor`, token);
     return result;
   } catch (error) {
-    console.error("Error in getUserV1:", error);
+    console.error("Error in getMyInfor:", error);
     throw error;
   }
 };
@@ -151,7 +151,7 @@ export const getMyUser = async (token) => {
     const result = await getV1(`api/v1/users/information/myUser`, token);
     return result;
   } catch (error) {
-    console.error("Error in getUserV1:", error);
+    console.error("Error in getMyUser:", error);
     throw error;
   }
 };
@@ -161,7 +161,7 @@ export const getAllUsers = async (token) => {
     const result = await getV1(`api/v1/users/information/allUsers`, token);
     return result;
   } catch (error) {
-    console.error("Error in getUserV1:", error);
+    console.error("Error in getAllUsers:", error);
     throw error;
   }
 };
@@ -172,7 +172,28 @@ export const getQuantityUsers = async (token) => {
     const result = await getV1(`api/v1/users/information/countUsers`, token);
     return result;
   } catch (error) {
-    console.error("Error in getUserV1:", error);
+    console.error("Error in getQuantityUsers:", error);
     throw error;
   }
 };
+
+export const getBlogs = async (token) => {
+  try {
+    const result = await getV1(`api/v1/blogs/getBlogs`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getQuantityUsers:", error);
+    throw error;
+  }
+};
+
+export const getBlogId = async (token, id) => {
+  try {
+    const result = await getV1(`api/v1/blogs/getBlogId/${id}`, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getQuantityUsers:", error);
+    throw error;
+  }
+};
+

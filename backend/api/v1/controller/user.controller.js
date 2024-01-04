@@ -347,6 +347,7 @@ module.exports.myUser = async (req, res) => {
     id: user._id,
     type: user.type,
     avatar: avatar,
+    email: user.email,
   });
 };
 
@@ -483,7 +484,6 @@ module.exports.changePass = async (req, res) => {
   const newPassword = req.body.newPassword;
   const oldPassword = req.body.oldPassword;
   const confirmNewPassword = req.body.confirmNewPassword;
-  console.log(data);
   if (data) {
     if (
       checkInformationHelper.checkPassword(newPassword) === true &&
@@ -492,7 +492,6 @@ module.exports.changePass = async (req, res) => {
       checkInformationHelper.checkPassword(confirmNewPassword) === true
     ) {
       if (oldPassword === newPassword) {
-        console.log(data);
         res.json({
           code: 400,
           message: "Không được nhập mật khẩu cũ trùng với mật khẩu mới",

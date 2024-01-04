@@ -84,7 +84,7 @@ export const postInforExist = async (option, token) => {
 
 export const postUserLogin = async (option) => {
     try {
-        const result = await postV1("api/v1/users/login/checkLogin", option);
+        const result = await postV1("api/v1/users/login/checkLogin", option, " ");
         return result;
       } catch (error) {
         console.error("Error in postUserLogin:", error);
@@ -94,7 +94,7 @@ export const postUserLogin = async (option) => {
 
 export const postUserRegister = async (option) => {
     try {
-        const result = await postV1("api/v1/users/register/checkRegister", option);
+        const result = await postV1("api/v1/users/register/checkRegister", option, "");
         return result;
       } catch (error) {
         console.error("Error in postUserRegister:", error);
@@ -111,3 +111,34 @@ export const postUserAdmin = async (option, token) => {
         throw error;
       }
 } 
+
+export const postSameProducts = async (productId) => {
+  try {
+    const result = await postV1(`api/v1/products/sameProducts`, productId, "");
+    return result;
+  } catch (error) {
+    console.error("Error in getSameProducts:", error);
+    throw error;
+  }
+};
+
+export const postBlogs = async (option, token) => {
+  try {
+    const result = await postV1(`api/v1/blogs/postBlogs`, option, token);
+    return result;
+  } catch (error) {
+    console.error("Error in postBlogs:", error);
+    throw error;
+  }
+};
+
+
+export const postBlogCate = async (token, cate) => {
+  try {
+    const result = await postV1(`api/v1/blogs/getBlogs/category`, cate, token);
+    return result;
+  } catch (error) {
+    console.error("Error in getQuantityUsers:", error);
+    throw error;
+  }
+};

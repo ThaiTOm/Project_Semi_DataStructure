@@ -66,7 +66,7 @@
       "rating": 4.7,
       "brand": "Tropical Paradise",
       "category": "Fruit Juice",
-      "Quantity": 54,
+      "Quantity": 51,
       "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
       "delete": false,
       "images": [
@@ -104,7 +104,7 @@
       "rating": 4.8,
       "brand": "Tropical Oasis",
       "category": "Fruit Juice",
-      "Quantity": 42,
+      "Quantity": 39,
       "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
       "delete": false,
       "images": [
@@ -949,6 +949,44 @@
         "https://i.pinimg.com/236x/ab/bf/0f/abbf0f9dec925553bfaf6e10cfe0e821.jpg",
         "https://i.pinimg.com/236x/48/0f/2d/480f2d880687c882fc1096e8c11a14e9.jpg"
       ]
+    },
+    {
+      "title": "Raspberry drink",
+      "rating": 4.4,
+      "price": 120000,
+      "discountPercentage": 0,
+      "Quantity": 22,
+      "category": "Fruit Smoothie",
+      "description": "Refreshing raspberry drink bursts with fruity sweetness, offering a delightful blend of tartness and succulence in every sip, perfect for summer.",
+      "brand": "DuyThai's Company",
+      "thumbnail": "https://bing.com/th?id=OSK.05a31a2c79655a604e0f1487b1d7d894",
+      "images": [
+        "https://bing.com/th?id=OSK.74772dba1baf30e56f702d5de1dfc74b",
+        "https://bing.com/th?id=OSK.3150a779095198fd0eb16e64e9802953",
+        "https://bing.com/th?id=OSK.b1017f2a510b8310edc8af7442ae7e09",
+        "https://bing.com/th?id=OSK.f8983fd605fb1ccc2e7c592733c7bf3e"
+      ],
+      "delete": false,
+      "id": 51
+    },
+    {
+      "title": "Rượu Nho VREDE",
+      "rating": 4,
+      "price": 3800000,
+      "discountPercentage": 10,
+      "Quantity": 12,
+      "category": "Wine",
+      "description": "Aloe vera grass jelly from the VINUT brand is undoubtedly the perfect choice for you and your family. Made from natural ingredients such as grass jelly, aloe vera, and brown sugar, the product helps cool, relieve pain, soothe the skin, provide antioxidant benefits, and improve digestion.",
+      "brand": "VREDE",
+      "thumbnail": "https://www.vdcinternational.co.za/wp-content/uploads/2022/02/Vrede-Vineyard-Selection-Cabernet-Sauvignon-NV-600x600.jpg",
+      "images": [
+        "https://www.vdcinternational.co.za/wp-content/uploads/2022/02/Charme-Vrede-Cabernet-Sauvignon-NV-New-Capsule-LR-box-300x300.jpg",
+        "https://www.vdcinternational.co.za/wp-content/uploads/2022/02/Charme-White-Sparkling-Grape-Bottle-Box-300x300.jpg",
+        "https://www.vdcinternational.co.za/wp-content/uploads/2022/02/Bon-Voyage-Cape-Red-Bottle-Box-Shadow-300x300.jpg",
+        "https://www.vdcinternational.co.za/wp-content/uploads/2023/09/WhatsApp-Image-2023-12-06-at-15.47.59-600x600.jpeg"
+      ],
+      "delete": false,
+      "id": 52
     }
   ],
   "category": [
@@ -1000,104 +1038,6 @@
       "user": "6590e95e8d295d3b8e11d7d5",
       "product": [
         {
-          "id": 2,
-          "infor": {
-            "id": 2,
-            "title": "Grape Juice",
-            "description": "Refreshing grape juice, made from the finest grapes.",
-            "price": 22000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Vineyard Delights",
-            "category": "Fruit Juice",
-            "Quantity": 100,
-            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
-            "images": [
-              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
-              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
-              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
-              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
-            ],
-            "delete": false
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 3,
-          "infor": {
-            "id": 3,
-            "title": "Orange Juice",
-            "description": "Freshly squeezed orange juice, packed with vitamin C.",
-            "price": 45000,
-            "discountPercentage": 10,
-            "rating": 4.8,
-            "brand": "Citrus Delights",
-            "category": "Fruit Juice",
-            "Quantity": 221,
-            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
-              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
-              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
-              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 4,
-          "infor": {
-            "id": 4,
-            "title": "Mango Juice",
-            "description": "Sweet and tangy mango juice, perfect for a tropical treat.",
-            "price": 30000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Tropical Paradise",
-            "category": "Fruit Juice",
-            "Quantity": 54,
-            "thumbnail": "https://i.pinimg.com/236x/e9/11/c7/e911c732a62e9bf7f7f1d20b1c2a65ee.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/7b/b3/3f/7bb33f4149df29b815250928ccd6b549.jpg",
-              "https://i.pinimg.com/236x/52/5d/0b/525d0b62ea336101d4abb424690eeb94.jpg",
-              "https://i.pinimg.com/236x/36/43/2f/36432f59e7b0c761283d1b6f1eaa9a95.jpg",
-              "https://i.pinimg.com/236x/ba/f4/15/baf4152ab2b514f1aeee3025b9ce3a8e.jpg"
-            ]
-          },
-          "quanlity": 1
-        }
-      ],
-      "id": 1
-    },
-    {
-      "user": "6590e95e8d295d3b8e11d7d6",
-      "product": [
-        {
-          "id": 3,
-          "infor": {
-            "id": 3,
-            "title": "Orange Juice",
-            "description": "Freshly squeezed orange juice, packed with vitamin C.",
-            "price": 45000,
-            "discountPercentage": 10,
-            "rating": 4.8,
-            "brand": "Citrus Delights",
-            "category": "Fruit Juice",
-            "Quantity": 221,
-            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
-              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
-              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
-              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
           "id": 10,
           "infor": {
             "id": 10,
@@ -1116,6 +1056,29 @@
               "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
               "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
               "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
+            ]
+          },
+          "quanlity": 16
+        },
+        {
+          "id": 15,
+          "infor": {
+            "id": 15,
+            "title": "Tropical Delight Smoothie",
+            "description": "A tropical paradise in a cup, featuring pineapple, mango, and coconut.",
+            "price": 110000,
+            "discountPercentage": 10,
+            "rating": 4.7,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 32,
+            "thumbnail": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/9f/03/41/9f034105c17e75fe0dd3617ce33dd264.jpg",
+              "https://i.pinimg.com/236x/27/2f/81/272f8132b54f8cd406897df4498825a5.jpg",
+              "https://i.pinimg.com/236x/8a/15/a9/8a15a96d918d5aea2e58325e635de9ef.jpg",
+              "https://i.pinimg.com/236x/80/cc/73/80cc732f00bd85e6842271850bd9ef78.jpg"
             ]
           },
           "quanlity": 1
@@ -1142,6 +1105,35 @@
             ]
           },
           "quanlity": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d6",
+      "product": [
+        {
+          "id": 12,
+          "infor": {
+            "id": 12,
+            "title": "Mango Tango Smoothie",
+            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
+            "price": 70000,
+            "discountPercentage": 20,
+            "rating": 4.9,
+            "brand": "Smoothie Sensations",
+            "category": "Fruit Smoothie",
+            "Quantity": 78,
+            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
+              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
+              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
+              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
+            ]
+          },
+          "quanlity": 12
         }
       ],
       "id": 2
@@ -1262,6 +1254,268 @@
         }
       ],
       "id": 2
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 13:35:42",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        }
+      ],
+      "id": 3
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:26:27",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 4
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:29:30",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 5
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:32:03",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 6
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:33:01",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 7
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:39:44",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 8
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-04 14:40:39",
+      "userId": "6590e95e8d295d3b8e11d7d5",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 2,
+          "thanhtien": 44000
+        },
+        {
+          "id": 10,
+          "img": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+          "title": "Berry Blast Smoothie",
+          "dongia": 40000,
+          "soluong": 1,
+          "thanhtien": 40000
+        },
+        {
+          "id": 12,
+          "img": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
+          "title": "Mango Tango Smoothie",
+          "dongia": 56000,
+          "soluong": 1,
+          "thanhtien": 56000
+        },
+        {
+          "id": 15,
+          "img": "https://i.pinimg.com/236x/91/a7/6b/91a76be47f8952398547c8652ab7fd30.jpg",
+          "title": "Tropical Delight Smoothie",
+          "dongia": 99000,
+          "soluong": 2,
+          "thanhtien": 198000
+        }
+      ],
+      "id": 9
     }
   ],
   "notification": []

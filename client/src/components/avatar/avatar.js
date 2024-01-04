@@ -35,7 +35,7 @@ const HinhAnh = () => {
           uid: '-1',
           name: 'Hình Ảnh Chi Tiết',
           status: 'done',
-          url: result.avatar,
+          url: result.avatar ? result.avatar : "https://img.icons8.com/color/96/person-male.png",
         },
       ])
     }

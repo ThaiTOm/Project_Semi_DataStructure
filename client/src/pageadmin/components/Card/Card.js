@@ -12,7 +12,9 @@ const Card = (props) => {
   }, []);
 
   const asyncFetch = () => {
-    fetch("https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json")
+    fetch(
+      "https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json"
+    )
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => {
@@ -54,7 +56,7 @@ const Card = (props) => {
         >
           <div className="card--radialBar">
             <Progress
-            status="active"
+              status="active"
               type="circle"
               percent={props.barValue}
               style={{ color: "white" }}
@@ -66,7 +68,13 @@ const Card = (props) => {
           </div>
           <div className="card--infor">
             {props.png}
-            <span className="card--infor__span1">{props.value}{props.type === "money" ? " VND" : " User"}</span>
+            <div className="card--infor__vlsp">
+              <p className="cart--infor__value">{props.value}</p>
+              <span className="card--infor__span1">
+                {props.type === "money" ? " VND" : props.type === "person" ? " User" : "Order"}
+              </span>
+            </div>
+
             <span className="card--infor__span2">Last 24 hours</span>
           </div>
         </div>

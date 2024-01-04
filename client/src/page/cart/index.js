@@ -44,6 +44,7 @@ function Cart() {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const cookies = getCookie("token");
+  const [selectedProductsCount, setSelectedProductsCount] = useState(0);
 
   const fetchPur = async (id) => {
     const result = await getOrder(id);
@@ -124,7 +125,7 @@ const takeMyId = async (data) => {
   }, [data_2]);
   // cũ
 
-  const [selectedProductsCount, setSelectedProductsCount] = useState(0);
+
   useEffect(() => {
     // sử dụng dữ liệu trong selectedRowKeys để tính toán tổng thanh toán
     // và số lượng sản phẩm được chọn
@@ -381,8 +382,9 @@ const takeMyId = async (data) => {
         return maxDateItem;
       }
     }, null);
+    console.log(newestOrder);
     if (selectedRowKeys.length > 0) {
-      if (newestOrder && newestOrder.orderStep !== 3) {
+      if (newestOrder && newestOrder.orderStep === 3) {
         Modal.error({
           title: "Không thể mua hàng",
           content: "Đơn hàng của bạn vẫn chưa hoàn thành!",

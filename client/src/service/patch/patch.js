@@ -93,3 +93,13 @@ export const patchChangePass = async (option, token) => {
       throw error;
     }
 } 
+
+export const patchBlogId = async (option, token, id) => {
+  try {
+      const result = await patchV1(`api/v1/blogs/patchBlogId/${id}`, option, token);
+      return result;
+    } catch (error) {
+      console.error("Error in postUserRegister:", error);
+      throw error;
+    }
+} 

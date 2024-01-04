@@ -12,13 +12,14 @@ import {
 import React, { useEffect, useState } from "react";
 import "./thanhtoan.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getMyUser, getShip, getUserstk } from "../../service/getcategory/getCategory";
+import { getMyUser, getProductdt, getShip, getUserstk } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
 import { load } from "../../actions/actCart";
 import  { Error } from "../../components/error/error";
+import { patchProduct } from "../../service/patch/patch";
 const { TextArea } = Input;
 const { Panel } = Collapse;
 const columns = [
@@ -95,11 +96,11 @@ const Thanhtoan = () => {
     const result = await getMyUser(e); // lấy dữ liệu tài khoản của người đang đăng nhập
     setData(result);
     fetchShip(result.id);
+    console.log(thanhtoan);
   } catch (error) {
     console.error("Error fetching user data:", error);
   }
 };
-
 
   const fetchShip = async (e) => {
     try {
@@ -122,8 +123,20 @@ const postorder = async (e) => {
   }
 }
 
-useEffect(() => {
+const getQuantity = async (id) => {
+  const result = await getProductdt(id);
+  return result;
+}
 
+const updateQuantity = async (id, values) => {
+  try {
+    await patchProduct(id ,values);
+  } catch (error){
+    console.log("Lỗi", error)
+  }
+}
+
+useEffect(() => {
   fetchApick(cookies); // lấy thông tin user từ cookie
 }, [cookies]);
 
@@ -146,12 +159,20 @@ useEffect(() => {
       },
     });
   };
-  const handleConfirm = () => {
+
+  const handleConfirm = async () => {
     // Thực hiện xác nhận thanh toán bằng tiền mặt ở đây
      if (data_1 === undefined){
       showNotification();
      }
      else {
+      for(const items of thanhtoan){
+        const productId = await getQuantity(items.id);
+       await updateQuantity(productId[0].id, {
+          Quantity: productId[0].Quantity - items.soluong
+        });
+      }
+
       dispatch(load(!reload));
         postorder({
       "paymentMethod": "Tiền mặt",
@@ -164,17 +185,21 @@ useEffect(() => {
       title: "Thanh toán tiền mặt thành công",
       content: "Cảm ơn bạn đã thanh toán bằng tiền mặt!",
     });
-    
-   
      }
-  
-  
      setShowConfirmation(false);
-
-  
-    
   
   };
+
+  const handleConfirmBank = () => {
+    if (data_1 === undefined) {
+      showNotification();
+    }
+    else {
+      navigate("/bank")
+    }
+    setShowConfirmation(false);
+  }
+
 
 const handleChuyentrang = () => {
   navigate("/order");
@@ -297,25 +322,18 @@ const handleChuyentrang = () => {
             Thanh toán
           </Button>
         </div>
+       
         <Modal
-          title="Thông tin thanh toán"
-          open={showPaymentDetails}
-          onCancel={() => setShowPaymentDetails(false)}
-          footer={[
-            <Button key="cancel" onClick={() => setShowPaymentDetails(false)}>
-              Đóng
-            </Button>,
-          ]}
-        >
-          <div>
-            <h3>Thông tin ngân hàng: </h3>
-            <p>tên tài khoản: Trần Nguyễn Sơn Thành</p>
-            <p>số tài khoản: 0399038165</p>
-            <p>Momo</p>
-            <h3>Mã QR: </h3>
-           
-          </div>
-        </Modal>
+            title="Thông tin thanh toán"
+            open={showPaymentDetails}
+            onOk={handleConfirmBank}
+            onCancel={() => setShowPaymentDetails(false)}
+            okText="Đặt hàng"
+            cancelText="Hủy"
+          >
+            <p>Hãy kiểm tra kĩ đơn hàng trước khi bấm nút đặt hàng. Bạn không thể tiếp tục đặt hàng khi sản phảm chưa hoàn tất!</p>
+          </Modal>
+
         <Modal
           title="Xác nhận thanh toán bằng tiền mặt?"
           open={showConfirmation}

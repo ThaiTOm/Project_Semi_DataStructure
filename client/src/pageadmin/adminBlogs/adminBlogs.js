@@ -1,94 +1,63 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Table,
-  Input,
-  Button,
-  Space,
-  Checkbox,
-  Tooltip,
-  Modal,
-  Popconfirm,
-  Tag,
-} from "antd";
-import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Table, Input, Space, Button, Tag, Tooltip, Popconfirm, Modal } from "antd";
 import Highlighter from "react-highlight-words";
-import "./product.scss";
-import {
-  getCategory,
-  getProduct_cate,
-  getProductadminsp,
-  getProductsp,
-  getadminCategory,
-} from "../../../service/getcategory/getCategory";
-import { delProduct } from "../../../service/delete/delete";
-import AddProductModal from "./modalList";
-import { postProduct } from "../../../service/post/post";
-import { patchCate, patchProduct } from "../../../service/patch/patch";
-import { useDispatch } from "react-redux";
-import { load } from "../../../actions/actCart";
+import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
+import Modalblogs from "./modalBlogs";
+import { getCookie } from "../../components/takeCookies/takeCookies";
+import { postBlogs } from "../../service/post/post";
+import { getBlogs } from "../../service/getcategory/getCategory";
+import { useNavigate } from "react-router-dom";
+import { patchBlogId } from "../../service/patch/patch";
+import { delBlogV1 } from "../../service/delete/delete";
+const { Search } = Input;
 
-function Productlist() {
-  const navigate = useNavigate();
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const searchInput = useRef(null);
+
+
+function Adminblogs() {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const [dataSource, setdataSource] = useState([]);
-  const [reload, setReload] = useState(true);
+  const searchInput = useRef(null);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [show, setShow] = useState(false);
-  const [cate, setCate] = useState("");
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const result = await getProductadminsp();
-      const resultAddkey = result.map((item) => {
-        return [{ ...item, key: item.id }];
-      });
-      const hopnhat = resultAddkey.reduce((origin, item) => {
-        return origin.concat(item);
-      }, []);
-      setdataSource(hopnhat);
-    };
-
-    fetchProduct();
-  }, [reload]);
-
-  useEffect(() => {
-    getCate();
-  },[])
-  const patchcate = async (values) => {  // cập nhật cate
-    const result = await patchCate(values);
-} 
-
-const getCate = async () => {
-  const result = await getadminCategory();
-  console.log(result);
-  setCate(result);
-}
-
-const getproductCate = async (e, Cate) => {
-  const result = await getProduct_cate(e);
- const findIdCate = cate.find(item => {
-  return item.cate === Cate;
-})
-
-  if (result.length === 0 ) {
-   if (findIdCate) {
-    patchcate({id: findIdCate.id, delete: true})
+  const [reload, setReload] = useState(true);
+  const [dataSource, setDataSource] = useState([]);
+ const cookies = getCookie("token")
+ const navigate = useNavigate();
+const takeBlogs = async (token) => {
+  const result = await getBlogs(token);
+  if(result && result.code === 200){
+    for (let i = 0 ; i < result.blogs.length; i++){
+      result.blogs[i].key = i;
    }
-  }
-  
-  else  {
-   if (findIdCate && findIdCate.delete === true) {
-    patchcate({id: findIdCate.id, delete: false})
-   }
+    setDataSource(result.blogs);
   }
 }
-  
 
+const deleteBlog = async (id) => {
+  await delBlogV1(cookies, id);
+  setReload(!reload);
+};
 
-  // hàm tạo search của ant ds
+const updateBlogId = async (option, token, id) => {
+  const result = await patchBlogId(option, token, id)
+  setReload(!reload);
+}
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  // hàm reset chữ
+  const handleReset = (clearFilters, selectedKeys, confirm, dataIndex) => {
+    clearFilters();
+    setSearchText("");
+    confirm();
+    setSearchedColumn(dataIndex);
+  };
+  // hàm reset chữ
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -155,38 +124,10 @@ const getproductCate = async (e, Cate) => {
         text
       ),
   });
-  // hàm tạo search của ant ds
 
-  const deleteProduct = async (e) => {
-     await delProduct(e);
-    setReload(!reload);
-  };
-
-  const postproduct = async (values) => {
-    await postProduct(values);
-  };
-
-  const patchproduct = async (id, values) => {
-     await patchProduct(id, values);
-  };
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  // hàm reset chữ
-  const handleReset = (clearFilters, selectedKeys, confirm, dataIndex) => {
-    clearFilters();
-    setSearchText("");
-    confirm();
-    setSearchedColumn(dataIndex);
-  };
-  // hàm reset chữ
   const onSelectChange = (newSelectedRowKeys) => {
     // lưu key trả về khi select thay đổi
-
+   console.log(newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -196,11 +137,28 @@ const getproductCate = async (e, Cate) => {
     onChange: onSelectChange,
   };
 
+  const handleShow = () => {  // show modal
+    setShow(true);
+  };
+
+  const handleDelete = (id) => { // xóa hẳn
+    deleteBlog(id);
+  
+  };
+
+  const handleRestore = async (e) => { // khôi phục
+   updateBlogId({ deleted: false }, cookies, e._id);
+  };
+
+  const handleDelitem = async (e) => {// ẩn từng item
+ updateBlogId({ deleted: true }, cookies, e._id);
+  };
+
   const handleXoa = () => { // chức năng xóa khi select
    
     const dataFilter = selectedRowKeys.map((item) => {
       return dataSource.filter((x) => {
-        return x.id !== item;
+        return x.key !== item;
       });
     });
     if (dataFilter.length !== 0) {
@@ -208,14 +166,12 @@ const getproductCate = async (e, Cate) => {
    
       setSelectedRowKeys([]);
       for (let i = 0; i < selectedRowKeys.length; i++) {
-        
-        if (dataSource[selectedRowKeys[i] - 1].delete === false) {
-          patchproduct(selectedRowKeys[i], { delete: true });
+        if (dataSource[selectedRowKeys[i]].deleted === false) {
+          updateBlogId({ deleted: true }, cookies, dataSource[selectedRowKeys[i]]._id);
         }
         else {
-           deleteProduct(selectedRowKeys[i]);
+          deleteBlog(dataSource[selectedRowKeys[i]]._id);
         }
-        setReload(!reload);
       }
     } else {
       Modal.error({
@@ -225,73 +181,32 @@ const getproductCate = async (e, Cate) => {
     }
   };
 
-  const handleDelete = (id) => { // xóa hẳn
-    deleteProduct(id);
-    setReload(!reload);
-    dispatch(load(reload));
-  };
+const handleAddBlogs = async (values) => {
+ const result = await postBlogs(values, cookies);
+ if (Array.isArray(result.blogs)) {
+  // Nếu là mảng, thực hiện gán
+  setDataSource([
+    ...dataSource,
+    ...(result.blogs),
+  ]);
+} else {
+  // Xử lý khi result.blogs không phải là mảng
+  console.error("result.blogs is not an array");
+}
+ setReload(!reload);
+}
 
-  const handleRestore = async (e) => { // khôi phục
-    const cate = e.category;
-   await patchproduct(e.id, { delete: false });
-   getproductCate(e.category, cate);
-    setReload(!reload);
-   dispatch(load(reload));
-  };
 
-  const handleDelitem = async (e) => {// ẩn từng item
-  const cate = e.category;
-  await  patchproduct(e.id, { delete: true });
-   getproductCate(e.category, cate);
-    setReload(!reload);
-    dispatch(load(reload));
-  };
-
-  const handleXem = (values) => {  // xem chi tiết sản phẩm
-    // xem chi tiết từng item
-    navigate("/admin/product/" + values.id);
-  };
-
-  const handleShow = () => {  // show modal
-    setShow(true);
-  };
-
-  // thêm sản phẩm
-  const handleAddProduct = (e) => {
-    const imageArray = [e.images_1, e.images_2, e.images_3, e.images_4];
-    delete e.images_1;
-    delete e.images_2;
-    delete e.images_3;
-    delete e.images_4;
-    const PostValues = {
-      ...e,
-      images: imageArray,
-      delete: false,
-    };
-    postproduct(PostValues);
-    setReload(!reload);
-    setShow(false);
-  };
-// end thêm sản phẩm
-
+const handleXem = (values) => {  // xem chi tiết sản phẩm
+  // xem chi tiết từng item
+  navigate("/admin/blogs/" + values._id);
+};
   const columns = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "_id",
+      key: "_id",
       sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "Thumbnail",
-      dataIndex: "thumbnail",
-      key: "thumbnail",
-      render: (thumbnail) => (
-        <img
-          src={thumbnail}
-          alt="Thumbnail"
-          style={{ width: "50px", height: "50px" }}
-        />
-      ),
     },
     {
       title: "Title",
@@ -300,73 +215,33 @@ const getproductCate = async (e, Cate) => {
       ...getColumnSearchProps("title"),
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-      sorter: (a, b) => {
-        let priceA = a.price * (1 - a.discountPercentage / 100);
-        let priceB = b.price * (1 - b.discountPercentage / 100);
-        return priceA - priceB;
-      },
-      render: (price, record) => (
-        <span>
-          {new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format(
-            `${
-              record.discountPercentage > 0
-                ? price * (1 - record.discountPercentage / 100)
-                : price
-            }`
-          )}
-        </span>
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => (
+        <img
+          src={image}
+          alt="image"
+          style={{ width: "50px", height: "50px" }}
+        />
       ),
     },
     {
-      title: "Discount",
-      dataIndex: "discount",
-      key: "discount",
-      sorter: (a, b) => a.discountPercentage - b.discountPercentage,
-      render: (_, record) => (
-        <>
-          <span>{record.discountPercentage}</span>%
-        </>
-      ),
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+      ...getColumnSearchProps("category"),
     },
     {
-      title: "Quantity",
-      dataIndex: "Quantity",
-      key: "Quantity",
-
-      sorter: (a, b) => a.Quantity - b.Quantity,
-    },
-    {
-      title: "Total",
-      dataIndex: "total",
-      key: "total",
-
-      render: (text, record) => (
-        <span>
-          {new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format(
-            `${
-              record.discountPercentage > 0
-                ? record.price *
-                  (1 - record.discountPercentage / 100) *
-                  record.Quantity
-                : record.price * record.Quantity
-            }`
-          )}
-        </span>
-      ),
+      title: "Content",
+      dataIndex: "content",
+      key: "content",
+      ...getColumnSearchProps("content"),
     },
     {
       title: "Trạng thái sản phẩm",
-      dataIndex: "delete",
-      key: "delete",
+      dataIndex: "deleted",
+      key: "deleted",
       render: (text, record) => {
         if (text === true) {
           return (
@@ -391,7 +266,7 @@ const getproductCate = async (e, Cate) => {
       title: "Action",
       key: "action",
       render: (text, record) => {
-        const checkDelete = record.delete;
+        const checkDelete = record.deleted;
         return checkDelete === false ? (
           <>
             <Space size="middle">
@@ -444,7 +319,7 @@ const getproductCate = async (e, Cate) => {
                 description="Admin có chắc là xóa vĩnh viễn chứ?"
                 okText="Chắc chắn rồi!"
                 cancelText="Để suy nghĩ lại!"
-                onConfirm={() => handleDelete(record.id)}
+                onConfirm={() => handleDelete(record._id)}
               >
                 <Tooltip title="Xóa vĩnh viễn">
                   <Button icon={<DeleteOutlined />} danger />
@@ -469,16 +344,22 @@ const getproductCate = async (e, Cate) => {
                 </Tooltip>
               </Popconfirm>
             </Space>
+         
           </>
         );
       },
     },
   ];
+  
+useEffect(() => {
+  takeBlogs(cookies);
+}, [cookies, reload])
+
 
   return (
     <>
-      <div className="productlist">
-        <h1 className="productlist--top__h1">Danh Sách Sản Phẩm</h1>
+      <div className="adminBlogs">
+      <h1 className="productlist--top__h1">Danh Sách Blogs</h1>
         <div className="productlist--top">
           <Button
             className="productlist--top__bt1"
@@ -495,26 +376,18 @@ const getproductCate = async (e, Cate) => {
             Thêm sản phẩm
           </Button>
         </div>
-
         <Table
-          className="productlist--table"
-          bordered
+          dataSource={dataSource}
           columns={columns}
+          pagination={{ pageSize: 5 }}
+          bordered
           rowSelection={{
             ...rowSelection,
           }}
-          dataSource={dataSource}
         />
       </div>
-      <AddProductModal
-        reload={reload}
-        show={show}
-        setShow={setShow}
-        onAddProduct={handleAddProduct}
-        setReload={setReload}
-      />
+      <Modalblogs show={show} setShow={setShow} reload={reload} handleAddBlogs = {handleAddBlogs} />
     </>
   );
 }
-
-export default Productlist;
+export default Adminblogs;

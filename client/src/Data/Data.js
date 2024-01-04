@@ -32,6 +32,17 @@ export const SidebarData = [
    }
   },
   {
+    key: 'blogs',
+    icon: <Link to="/admin/blogs/news"><img className="siderbar--icon" src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/external-blogs-digital-content-wanicon-lineal-color-wanicon.png" alt="oexternal-blogs-digital-content-wanicon-lineal-color-wanicon"/></Link>,
+    label: "Blogs",
+    style: {
+      marginTop: '20px',
+      marginBottom: '20px',
+     
+      fontSize: '17px'
+   }
+  },
+  {
     key: 'customers',
     icon: <img className="siderbar--icon" src="https://img.icons8.com/windows/32/gender-neutral-user.png" alt="gender-neutral-user" />,
     label: "Customers",
@@ -47,12 +58,6 @@ export const SidebarData = [
       icon: <Link  to="/admin/customer/account"><img className="siderbar--icon" src="https://img.icons8.com/fluency/48/guest-male--v1.png" alt="guest-male--v1"/></Link>  // Replace with the appropriate icon
       
     },
-    // {
-    //   key: 'userInformation',
-    //   label: 'Information',
-    //   icon:  <Link to="/admin/customer/information"><img className="siderbar--icon" src="https://img.icons8.com/windows/32/information.png" alt="information"/></Link>, // Replace with the appropriate icon
-    
-    // },
   ],
   },
   {
@@ -80,18 +85,18 @@ export const SidebarData = [
 ];
 
   
-export const cardsData = (length) => 
+export const cardsData = (length, totalOrder, totalExpenses, totalRevenue) => 
 
  [
     {
-      title: "Sales",
+      title: "Revenue",
       color: {
         backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
         boxShadow: "0px 10px 20px 0px #e0c6f5",
       },
       type: "money",
       barValue: 70,
-      value: "25,970",
+      value: totalRevenue.toLocaleString(),
       png: <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/banknotes.png" alt="banknotes"/>,
      
     },
@@ -116,7 +121,7 @@ export const cardsData = (length) =>
       },
       type: "money",
       barValue: 60,
-      value: "4,270",
+      value: totalExpenses.toLocaleString(),
       png: <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/purchase-order.png" alt="purchase-order"/>,
    
     },
@@ -127,66 +132,14 @@ export const cardsData = (length) =>
         boxShadow: "0px 10px 20px 0px #98FB98",
         
       },
-      type: "money",
+      type: "order",
       barValue: 40,
-      value: "43,270",
+      value: totalOrder.toLocaleString(),
       png: <img width="30" height="30" src="https://img.icons8.com/ios/50/coins--v1.png" alt="coins--v1"/>,
    
     },
   ];
  
-     
-
-
-// [
-//   {
-//     title: "Sales",
-//     color: {
-//       backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
-//       boxShadow: "0px 10px 20px 0px #e0c6f5",
-//     },
-//     barValue: 70,
-//     value: "25,970",
-//     png: <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/banknotes.png" alt="banknotes"/>,
-   
-//   },
-//   {
-//     title: "Total Users",
-//     color: {
-//       backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
-//       boxShadow: "0px 10px 20px 0px #FDC0C7",
-//     },
-//     barValue: 80,
-//     value: getusers().length,
-//     png: <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/48/money-bag--v1.png" alt="money-bag--v1"/>,
-   
-//   },
-//   {
-//     title: "Expenses",
-//     color: {
-//       backGround:
-//         "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
-//       boxShadow: "0px 10px 20px 0px #F9D59B",
-//     },
-//     barValue: 60,
-//     value: "4,270",
-//     png: <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/purchase-order.png" alt="purchase-order"/>,
- 
-//   },
-//   {
-//     title: "Total Order",
-//     color: {
-//       backGround: "linear-gradient(rgb(173, 216, 230), rgb(152, 251, 152))",
-//       boxShadow: "0px 10px 20px 0px #98FB98",
-      
-//     },
-//     barValue: 40,
-//     value: "43,270",
-//     png: <img width="30" height="30" src="https://img.icons8.com/ios/50/coins--v1.png" alt="coins--v1"/>,
- 
-//   },
-// ];
-
 
 export const UpdatesData = [
   {

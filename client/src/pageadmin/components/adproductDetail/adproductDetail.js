@@ -67,7 +67,7 @@ const handleClick = () => {
 const handleBack = () => {
      navigate("/admin/product/productlist");
 }
-console.log(data);
+
 
     return (
         <>

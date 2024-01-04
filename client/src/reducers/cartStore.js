@@ -50,7 +50,7 @@ const cartStore = (state = initialState.product || [], action) => {
       return newState_1;
 
     case "DeleteAll":
-     const newState_2 = state.filter(item => item.id == action.id);
+     const newState_2 = state.filter(item => item.id === action.id);
       return newState_2;
 
     default:

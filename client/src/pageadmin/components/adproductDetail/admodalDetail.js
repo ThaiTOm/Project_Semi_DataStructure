@@ -81,7 +81,7 @@ const onCancel = () => {
     }
   }, [data]);
 
-console.log(data);
+
 
   return (
     <>

@@ -137,6 +137,7 @@
        height: 100%;
         background-color: white;
         width: 30%;
+
 cursor: pointer;
     }
     &__s1 {
@@ -168,6 +169,7 @@ cursor: pointer;
     &__s1 {
         background-color: white;
         border-color: greenyellow;
+        margin-right: 20px;
     }
     &__s1:hover {
         background-color: #F2FCE7;
@@ -177,6 +179,7 @@ cursor: pointer;
         border: greenyellow;
         background-color: rgb(97, 173, 188);
         color: white;
+        margin-left: 20px;
     }
     &__s2:hover {
         

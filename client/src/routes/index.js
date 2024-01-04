@@ -36,6 +36,12 @@ import Adproductdetail from "../pageadmin/components/adproductDetail/adproductDe
 import Forgotpassword from "../page/password/forgot/forgot-password";
 import Otppassword from "../page/password/otp/otp-password";
 import Resetpassword from "../page/password/reset/reset-password";
+import Blog from "../page/blogs/blogs";
+import Blogdetail from "../page/blogs/blogDetail";
+import Adminblogs from "../pageadmin/adminBlogs/adminBlogs";
+import Adblogdetail from "../pageadmin/components/adBlogsDetail/adBlogsDetail";
+import Blogoutlet from "../page/blogs/blogOutlet";
+import BankPayment from "../page/bankpayment/bankpayment";
 
 
 
@@ -76,6 +82,10 @@ export const routes = [
             element: <Contact />
          },
          {
+            path: "blog",
+            element: <Blog />,
+         },
+         {
             path: "dscuahang",
             element: <Dscuahang />
          },
@@ -86,6 +96,16 @@ export const routes = [
                {
                    path: ":id",
                    element: <Productdetail />
+               }
+            ]
+         },
+         {
+            path: "blogoutlet",
+            element: <Blogoutlet />,
+            children: [
+               {
+                   path: ":id",
+                   element: <Blogdetail />
                }
             ]
          },
@@ -102,6 +122,10 @@ export const routes = [
          {
             path: "order",
             element: <Order />
+         },
+         {
+            path: "bank",
+            element: <BankPayment />
          },
          {
             path: "infor",
@@ -196,6 +220,20 @@ export const routes = [
          {
             path: "orders",
             element: <Adminorder />
+         },
+         {
+            path: "blogs",
+            element: <Adminproduct />,
+            children: [
+               {
+                  path: "news",
+                  element: <Adminblogs />
+               },
+               {
+                  path: ":id",
+                  element: <Adblogdetail />
+               },
+            ]
          },
          {
             path: "product",

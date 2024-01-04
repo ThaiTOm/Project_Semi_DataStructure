@@ -10,7 +10,6 @@ function Admin() {
   const [type, setType] = useState({ type: "" });
   const getUser = async (values) => {
     const result = await getMyUser(values);
-    console.log(result);
     setType(result);
   };
 

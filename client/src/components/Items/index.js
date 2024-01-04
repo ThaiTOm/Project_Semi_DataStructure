@@ -2,9 +2,16 @@ import { Button, Col, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
-import "./Items.scss"
-function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, AddtoCart }) {
-  
+import "./Items.scss";
+function Items({
+  paginatedData,
+  checkId,
+  cookies,
+  dispatch,
+  navigate,
+  id,
+  AddtoCart,
+}) {
   return (
     <>
       <Content className="Items">
@@ -18,11 +25,7 @@ function Items({ paginatedData, checkId, cookies, dispatch, navigate, id, AddtoC
                       <img src={item.thumbnail} />
                     </div>
                     <div className="Items--item__under">
-                      <h3>
-                        <Link to="/" key={item.title}>
-                          {item.title}
-                        </Link>
-                      </h3>
+                      <h3>{item.title}</h3>
                       {item.discountPercentage !== 0 ? (
                         <p className="Items--item__p1">
                           {new Intl.NumberFormat("vi-VN", {

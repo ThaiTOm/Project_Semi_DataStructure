@@ -10,7 +10,6 @@ const port = process.env.PORT; // cách để lấy biến ở env
 
 app.use(cors());
 database.connect(); // kết nối với database ở file config
-
 app.use(cookieParser());
 
 

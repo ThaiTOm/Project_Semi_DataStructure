@@ -54,3 +54,14 @@ export const delAvatarV1 = async (token) => {
 
 }
 
+export const delBlogV1 = async (token, id) => {
+    try {
+        const result = await delV1(`api/v1/blogs/delBlogId/${id}`, token)
+        return result;
+      } catch (error) {
+        console.error("Error in delUserAdmin:", error);
+        throw error;
+      }
+
+}
+

@@ -23,9 +23,6 @@ const Adminlayout = () => {
     <Admincontent />
       </Content>
     </Layout>
-     
-    
-        
     </>
    
   );

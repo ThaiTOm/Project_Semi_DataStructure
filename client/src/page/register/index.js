@@ -82,7 +82,7 @@ function Register() {
       }).then((ketqua) => {
         // Đoạn mã được thực thi khi người dùng ấn nút OK trong thông báo
         if (ketqua.isConfirmed) {
-          setCookie("token", result.token, 1);
+          setCookie("token", result.token, 15);
           window.location.href = "/";
         }
       });

@@ -21,7 +21,7 @@ function BankPayment() {
     }, 0)
 
     const cookies = getCookie("token");
-    const totalusd = ((totals) / usdrate).toFixed(2)
+    const totalusd = ((totals + 15000) / usdrate).toFixed(2)
     return (
         <>
         {currentCart && currentCart.length > 0 ? (<>{ cookies && cookies.length !== 0 ? (<>  {success && <Congratulation />}

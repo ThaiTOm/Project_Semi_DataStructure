@@ -13,7 +13,7 @@ function Resetpassword() {
   const [checkPass, setCheckPass] = useState(true); // check để báo hiệu của pass
  const token_1 = getCookie("token_1");
   if(!token_1){
-    window.history.back("/");
+    window.location.href = "/";
     return;
   }
 

@@ -1,4 +1,12 @@
 .blogItems {
+  &--sider {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    max-width: 300px!important;
+    width: 300px!important;
+    min-width: 300px!important;
+    padding: 10px 20px;
+    min-height: 800px!important;
+  }
   &--message {
       font-size: 25px;
       text-align: center;

@@ -367,7 +367,7 @@ function LayoutDefault() {
                 </div>
               </div>
             </div>
-            <div className="header--main0">
+            {/* <div className="header--main0">
               <Form
                 form={form}
                 className="header--search"
@@ -458,7 +458,7 @@ function LayoutDefault() {
                   />
                 </Form.Item>
               </Form>
-            </div>
+            </div> */}
             <div className="header--main1">
               <div className="header--main1__home header--main1__chung">
                 <NavLink to={"/"}>Trang chủ</NavLink>

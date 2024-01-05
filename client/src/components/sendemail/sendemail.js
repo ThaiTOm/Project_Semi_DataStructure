@@ -17,7 +17,7 @@ export const sendEmail = (invoiceData, email) => {
     };
 
     // Gửi email sử dụng emailjs
-    emailjs.send('service_aoguodp', 'template_r6na0v8', data, 'DQsO4ICGRjWzL26Ro')
+    emailjs.send('service_k5w984i', 'template_4aj8m5r', data, '5uWFV7-nhrSrADXQW')
         .then((result) => {
             console.log(result.text);
         }, (error) => {

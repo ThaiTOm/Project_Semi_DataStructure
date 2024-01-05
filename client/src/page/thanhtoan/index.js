@@ -268,7 +268,7 @@ const handleChuyentrang = () => {
 
   return (
     <>
-    {cookies.length !== 0 && ( check === 3 || thanhtoanData.length !== 0 ) ?  (<>  <div className="thanhtoan">
+    {cookies.length !== 0 && ( thanhtoanData.length !== 0 ) ?  (<>  <div className="thanhtoan">
         {" "}
         {data_1 && data_1.delivery && data_1.delivery[0] ? (
           <div className="thanhtoan--address">

@@ -30,8 +30,6 @@ module.exports.adminPemission = async(req, res, next) => {
   if(req.headers.authorization){
     const token = req.headers.authorization.split(" ")[1];
 const user = await User.findOne({
-  deleted: false,
-  status: "active",
   token: token
 }).select("-password");
 if(user){

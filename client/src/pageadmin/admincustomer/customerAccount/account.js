@@ -13,6 +13,9 @@ import {
   Modal,
   Tooltip,
   AutoComplete,
+  Radio,
+  Col,
+  Row,
 } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -27,63 +30,21 @@ import { delUser, delUserAdmin } from "../../../service/delete/delete";
 import "./customerAccount.scss";
 import { format } from "date-fns";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
-const EditableCell = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{
-            margin: 0,
-          }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
-
-const options = [
-  {
-    value: "user",
-  },
-  {
-    value: "admin",
-  },
-];
 
 const Account = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-  const [editingKey, setEditingKey] = useState("");
   const [show, setshow] = useState(false);
+  const [show_1, setshow_1] = useState(false);
   const [reload, setReload] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const isEditing = (record) => record._id === editingKey;
   const [form] = Form.useForm();
   const [form_1] = Form.useForm();
+  const [editing, setEditing] = useState([]);
   const cookies = getCookie("token");
+
   const fetchUser = async (values) => {
     const result = await getAllUsers(values);
     if (result.code === 200) {
@@ -99,38 +60,69 @@ const Account = () => {
 
   const patchCus = async (values, token) => {
     const result = await patchUserV1(values, token);
-    setReload(!reload);
+    if(result.code === 400) {
+      Modal.error({
+        title: "Lỗi",
+        content: `${result.message}`,
+      });
+    }
+    else {
+      Modal.success({
+        title: "Thành Công",
+        content: `${result.message}`,
+      });
+      setReload(!reload);
+      setData(result.dataUser);
+    }
   };
 
   const deleteCus = async (e, token) => {
- const result = await delUserAdmin(e, token);
- Modal.success({
-  title: "Thành Công",
-  content: "Đã Xóa Thành Công"
-})
+    const result = await delUserAdmin(e, token);
+    if(result.code === 400){
+      Modal.error({
+        title: "Lỗi",
+        content: `${result.message}`,
+      });
+    }
+    else {
+      Modal.success({
+      title: "Thành Công",
+      content: `${result.message}`,
+    });
+    }
+    
   };
-
+  const postApi = async (e) => {
+    try {
+      await postCart(e); // Gọi hàm patchCart với tham số là data
+    } catch (error) {
+      console.error("Error while patching cart:", error);
+      // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
+    }
+  };
   const postCus = async (e, token) => {
     const result = await postUserAdmin(e, token);
-    Modal.success({
+    if(result.code === 400) {
+      Modal.error({
+        title: "Lỗi",
+        content: `${result.message}`,
+      });
+    }
+    else {
+      Modal.success({
       title: "Thành Công",
-      content: `${result.message}`
-    })
-    setData([...data, result.dataUser]);
-    setReload(!reload);
-    const postApi = async (e) => {
-      try {
-        await postCart(e); // Gọi hàm patchCart với tham số là data
-      } catch (error) {
-        console.error("Error while patching cart:", error);
-        // Xử lý lỗi nếu có, có thể log ra console hoặc thực hiện các hành động khác
-      }
-    };
+      content: `${result.message}`,
+    });
 
+    setData([...data, result.dataUser]);
     postApi({
       user: result.dataUser._id,
       product: [],
     });
+    }
+   
+    setReload(!reload);
+
   };
 
   useEffect(() => {
@@ -139,43 +131,17 @@ const Account = () => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      date: "",
-      username: "",
-      ...record,
+      date: record.date,
+      username: record.username,
+      deleted: record.deleted,
+      email: record.email,
+      fullName: record.fullName,
+      gender: record.gender,
+      phoneNumber: record.phoneNumber,
+      type: record.type,
     });
-    setEditingKey(record._id);
-  };
-  const cancel = () => {
-    setEditingKey("");
-  };
-  const save = async (id) => {
-    try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => id === item._id);
-      const isDuplicate = newData.some(
-        (item) => item.username === row.username && item._id !== id
-      );
-      if (index > -1 && !isDuplicate) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        patchCus(newData[index], cookies);
-        setData(newData);
-        setEditingKey("");
-      } else if (isDuplicate === true) {
-        message.error("Dữ liệu bạn nhập đã bị trùng");
-      } else {
-        message.error("Không thể lưu dữ liệu. Vui lòng kiểm tra lại.");
-      }
-    } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
-      message.error(
-        "Không thể lưu dữ liệu. Vui lòng kiểm tra lại thông tin nhập."
-      );
-    }
+  setshow_1(true);
+  setEditing(record);
   };
 
   const getColumnSearchProps = (dataIndex) => ({
@@ -269,26 +235,124 @@ const Account = () => {
       title: "ID",
       dataIndex: "_id",
       key: "_id",
-      editable: false,
       ...getColumnSearchProps("_id"),
+      width: 100,
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
+
     },
     {
       title: "Username",
       dataIndex: "username",
       key: "username",
-      editable: true,
       ...getColumnSearchProps("username"),
+      width: 150,
+    },
+    {
+      title: "Tên Đầy Đủ",
+      dataIndex: "fullName",
+      key: "fullName",
+      ...getColumnSearchProps("fullName"),
+      width: 150,
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Số Điện Thoại",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+      ...getColumnSearchProps("phoneNumber"),
+      width: 110,
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Giới Tính",
+      dataIndex: "gender",
+      key: "gender",
+      width: 70,
+      filters: [
+        {
+          text: "Nam",
+          value: "male",
+        },
+        {
+          text: "Nữ",
+          value: "female",
+        },
+        {
+          text: "Khác",
+          value: "other",
+        },
+      ],
+      onFilter: (value, record) => {
+        if (value === "other") {
+          return record.gender !== "male" && record.gender !== "female";
+        } else {
+          return record.gender === value;
+        }
+      },
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      ...getColumnSearchProps("email"),
+      width: 180,
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Thời gian đăng kí",
       dataIndex: "date",
       key: "date",
-      editable: true,
+      width: 110,
+      render: (text, record) => (
+        <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Trạng Thái",
       dataIndex: "delete",
       key: "delete",
+      filters: [
+        {
+          text: "Chưa xóa",
+          value: "false",
+        },
+        {
+          text: "Đã xóa",
+          value: "true",
+        },
+      ],
+
+      onFilter: (value, record) => {
+        const check = record.deleted === "true";
+        if (value === "false") {
+          return !check;
+        } else {
+          return check;
+        }
+      },
       render: (text, record) => {
         if (text === true) {
           return (
@@ -333,7 +397,6 @@ const Account = () => {
       },
 
       render: (_, record) => {
-        const searchString = "admin0305";
         return (
           <>
             {record.type === "admin" ? (
@@ -349,7 +412,6 @@ const Account = () => {
       title: "Action",
       key: "action",
       render: (text, record) => {
-        const editable = isEditing(record);
         const checkDelete = record.deleted;
         return (
           <>
@@ -368,28 +430,9 @@ const Account = () => {
                     </Tooltip>
                   </Popconfirm>
                 </Space>
-                {editable ? (
-                  <span>
-                    <Typography.Link
-                      onClick={() => save(record._id)}
-                      style={{
-                        marginRight: 8,
-                      }}
-                    >
-                      Save
-                    </Typography.Link>
-                    <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                      <a>Cancel</a>
-                    </Popconfirm>
-                  </span>
-                ) : (
-                  <Typography.Link
-                    disabled={editingKey !== ""}
-                    onClick={() => edit(record)}
-                  >
-                    Edit
-                  </Typography.Link>
-                )}
+                <Typography.Link onClick={() => edit(record)}>
+                  Edit
+                </Typography.Link>
               </>
             ) : (
               <>
@@ -432,23 +475,6 @@ const Account = () => {
     },
   ];
 
-  const mergedColumns = columns.map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record) => ({
-        record,
-        inputType: col.dataIndex === "id" ? "number" : "text",
-        dataIndex: col.dataIndex,
-        title: col.title,
-        key: col.key,
-        editing: isEditing(record),
-      }),
-    };
-  });
-
   const handleRestore = (id) => {
     patchCus(
       {
@@ -466,40 +492,48 @@ const Account = () => {
     form_1.resetFields();
     setshow(false);
   };
+  const handleCancel_1 = () => {
+    form.resetFields();
+    setshow_1(false);
+  };
 
   const handleOk = () => {
     form_1.submit();
   };
+  const handleOk_1 = () => {
+    form.submit();
+  };
 
   const handleFinish = (e) => {
-    if (Array.isArray(data)) {
-      const isAdd =
-        data &&
-        Array.isArray(data) &&
-        data.some((item) => item.username === e.username);
-      if (isAdd === true) {
-       Modal.error({
-        title: "Lỗi",
-        content:  "Không thể cập nhật người dùng mới. Vui lòng kiểm tra lại."
-       })
-      } else {
-        postCus({
-          ...e
-        }, cookies);
-
+    postCus(
+      {
+        ...e,
+      },
+      cookies
+    );
         setshow(false);
-      }
-    } else {
-      // Xử lý trường hợp data không phải là mảng
-      message.error("Dữ liệu không hợp lệ.");
-    }
-
-   
+        form_1.resetFields();
+  };
+  const handleFinish_1 = (e) => {
+    const username_phu = editing.username;
+if(e.password === undefined){
+  delete e.password
+}
+patchCus(
+  {
+    username_phu: username_phu,
+    ...e,
+  },
+  cookies
+);
+    
+  
+        setshow_1(false);
   };
 
   const handleFinishFailed = () => {
     //
-  }
+  };
 
   const onSelectChange = (e) => {
     setSelectedRowKeys(e);
@@ -512,25 +546,27 @@ const Account = () => {
 
   // hàm xóa có thể khôi phục
   const handleDelete_phu = (id) => {
-    patchCus({
-      _id: id,
-      deleted: true,
-    }, cookies);
+    patchCus(
+      {
+        _id: id,
+        deleted: true,
+      },
+      cookies
+    );
   };
   // end hàm xóa có thể khôi phục
 
   // hàm xóa bình thường
   const handleDelete = (id, values) => {
-    if(values.type !== "admin"){
-       deleteCus(id, cookies);
-    setData((prevData) => prevData.filter((user) => user._id !== id));
-    }else {
+    if (values.type !== "admin") {
+      deleteCus(id, cookies);
+      setData((prevData) => prevData.filter((user) => user._id !== id));
+    } else {
       Modal.error({
         title: "Lỗi",
-        content: "Không thể xóa vĩnh viễn admin"
-      })
+        content: "Không thể xóa vĩnh viễn admin",
+      });
     }
-   
   };
   // end hàm xóa bình thường
 
@@ -553,15 +589,14 @@ const Account = () => {
             cookies
           );
         } else if (data[selectedRowKeys[i] - 1].deleted === true) {
-          if(data[selectedRowKeys[i] - 1].type !== "admin"){
-             deleteCus(data[selectedRowKeys[i] - 1]._id, cookies);
+          if (data[selectedRowKeys[i] - 1].type !== "admin") {
+            deleteCus(data[selectedRowKeys[i] - 1]._id, cookies);
+          } else {
+            Modal.error({
+              title: "Lỗi",
+              content: "Không thể xóa vĩnh viễn admin",
+            });
           }
-         else {
-          Modal.error({
-            title: "Lỗi",
-            content: "Không thể xóa vĩnh viễn admin"
-          })
-         }
         }
       }
 
@@ -597,24 +632,17 @@ const Account = () => {
           </Button>
         </div>
 
-        <Form form={form} component={false}>
-          <Table
-            className="account--table"
-            rowSelection={rowSelection}
-            components={{
-              body: {
-                cell: EditableCell,
-              },
-            }}
-            bordered
-            dataSource={data}
-            columns={mergedColumns}
-            rowClassName="editable-row"
-            pagination={{
-              pageSize: 50,
-            }}
-          />
-        </Form>
+        <Table
+          className="account--table"
+          rowSelection={rowSelection}
+          bordered
+          dataSource={data}
+          columns={columns}
+          rowClassName="editable-row"
+          pagination={{
+            pageSize: 50,
+          }}
+        />
         <Modal
           onOk={handleOk}
           open={show}
@@ -662,26 +690,185 @@ const Account = () => {
               <Input.Password />
             </Form.Item>
             <Form.Item
+              name="fullName"
+              label="Tên Đầy Đủ"
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="phoneNumber"
+              label="Số Điện Thoại"
+            >
+              <Input />
+            </Form.Item>
+           <Form.Item
+              name="email"
+              label="Email"
+            >
+              <Input />
+            </Form.Item>
+            <Row>
+              <Col>
+              <Form.Item
               name="type"
               label="Loại"
+              initialValue="user"
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <AutoComplete
-                style={{
-                  width: 200,
-                }}
-                options={options}
-                filterOption={(inputValue, option) =>
-                  option.value
-                    .toUpperCase()
-                    .indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="user">User</Radio.Button>
+                <Radio.Button value="admin">Admin</Radio.Button>
+              </Radio.Group>
             </Form.Item>
+              </Col>
+              <Col offset={5}>
+              <Form.Item
+              name="deleted"
+              label="Trạng thái"
+              initialValue={false}
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value={false}>False</Radio.Button>
+                <Radio.Button value={true}>True</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+              </Col>
+            </Row>
+           <Row>
+           <Col>
+              <Form.Item
+              name="gender"
+              label="Giới Tính"
+              initialValue="male"
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="male">Nam</Radio.Button>
+                <Radio.Button value="female">Nữ</Radio.Button>
+                <Radio.Button value="other">Khác</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+              </Col>
+           </Row>
+          </Form>
+        </Modal>
+        <Modal
+          onOk={handleOk_1}
+          open={show_1}
+          title="User Form"
+          onCancel={handleCancel_1}
+          footer={[
+            <Button key="cancel" onClick={handleCancel_1}>
+              Hủy bỏ
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleOk_1}>
+              Thêm
+            </Button>,
+          ]}
+        >
+          <Form
+            autoComplete="off"
+            onFinish={handleFinish_1}
+            onFinishFailed={handleFinishFailed}
+            form={form}
+            layout="vertical"
+            name="userForm"
+          >
+            <Form.Item
+              name="username"
+              label="Username"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập username!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="Password"
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item
+              name="fullName"
+              label="Tên Đầy Đủ"
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="phoneNumber"
+              label="Số Điện Thoại"
+            >
+              <Input />
+            </Form.Item>
+           <Form.Item
+              name="email"
+              label="Email"
+            >
+              <Input />
+            </Form.Item>
+            <Row>
+              <Col>
+              <Form.Item
+              name="type"
+              label="Loại"
+              initialValue="user"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="user">User</Radio.Button>
+                <Radio.Button value="admin">Admin</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+              </Col>
+              <Col offset={5}>
+              <Form.Item
+              name="deleted"
+              label="Trạng thái"
+              initialValue={false}
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value={false}>False</Radio.Button>
+                <Radio.Button value={true}>True</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+              </Col>
+            </Row>
+           <Row>
+           <Col>
+              <Form.Item
+              name="gender"
+              label="Giới Tính"
+              initialValue="male"
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="male">Nam</Radio.Button>
+                <Radio.Button value="female">Nữ</Radio.Button>
+                <Radio.Button value="other">Khác</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+              </Col>
+           </Row>
           </Form>
         </Modal>
       </div>

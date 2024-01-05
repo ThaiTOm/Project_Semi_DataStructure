@@ -80,7 +80,7 @@ export const patchUserV1 = async (options, token) => {
     const result = await patchV1("api/v1/users/information/adminUsersPatch", options, token);
     return result;
   } catch (error) {
-    throw new Error('Error in patchinfor:', error);
+    throw new Error('Error in patchUserV1:', error);
   }
 };
 

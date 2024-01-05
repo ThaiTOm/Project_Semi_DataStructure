@@ -64,8 +64,8 @@ function Blog() {
 
 return<>
 <Layout>
-<Sider theme="light" className="siderLane--sider">
-<div className="siderLane--sider__cate">
+<Sider theme="light" className="blogItems--sider">
+<div className="blogItems--sider__cate">
             <h2>LOẠI BLOGS</h2>
 
             <Checkbox.Group

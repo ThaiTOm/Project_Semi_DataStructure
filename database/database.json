@@ -987,6 +987,25 @@
       ],
       "delete": false,
       "id": 52
+    },
+    {
+      "title": "Strawberry Wine",
+      "rating": 5,
+      "price": 3600000,
+      "discountPercentage": 10,
+      "Quantity": 12,
+      "category": "Wine",
+      "description": "\"Strawberry wine\" là một loại rượu được làm từ quả dâu (strawberries). Quá trình sản xuất thường bắt đầu bằng việc chọn lựa và nghiền nhuyễn quả dâu để lấy nước trái cây. Nước trái cây này sau đó được sử dụng để lên men, nghĩa là để đường trong nước trái cây chuyển thành cồn và carbon dioxide dưới tác động của men men vi sinh.\n\nSau giai đoạn lên men, rượu được lọc để loại bỏ tế bào men và bất kỳ chất rắn nào khác. Quá trình lên men và lọc có thể tạo ra một rượu trái cây nhẹ, tinh tế, với hương thơm và hương vị đặc trưng của quả dâu.\n\nNó có thể được sản xuất ở nhiều dạng khác nhau, bao gồm rượu vang ngon, rượu vang trái cây có cồn, hoặc cả rượu vang sủi. Một số người thích nó để thưởng thức như một loại rượu vang trái cây nhẹ, tươi mới và thơm ngon. Rượu dâu thường là lựa chọn phổ biến trong mùa hè và có thể được uống riêng hoặc kết hợp với các món ăn nhẹ hoặc tráng miệng.",
+      "brand": "VREDE",
+      "thumbnail": "https://i.pinimg.com/736x/52/9f/af/529faf7d2000e8438866f581f73fd4c9.jpg",
+      "images": [
+        "https://i.pinimg.com/236x/78/2e/10/782e10aca99cf5bf9f783937e7e8bac9.jpg",
+        "https://i.pinimg.com/236x/18/ab/49/18ab495404bf7b5a0cea85bbf94731d5.jpg",
+        "https://i.pinimg.com/236x/15/99/82/15998261baf0425cb05666839c54828e.jpg",
+        "https://i.pinimg.com/236x/27/72/53/277253484e65923293256b9aa38f37f4.jpg"
+      ],
+      "delete": false,
+      "id": 53
     }
   ],
   "category": [
@@ -1090,6 +1109,63 @@
       "user": "6590e95e8d295d3b8e11d7d6",
       "product": [
         {
+          "id": 2,
+          "infor": {
+            "id": 2,
+            "title": "Grape Juice",
+            "description": "Refreshing grape juice, made from the finest grapes.",
+            "price": 22000,
+            "discountPercentage": 0,
+            "rating": 4.7,
+            "brand": "Vineyard Delights",
+            "category": "Fruit Juice",
+            "Quantity": 99,
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+            "images": [
+              "https://i.pinimg.com/236x/77/68/25/77682536eb8c1dbb5f09888ad8a27691.jpg",
+              "https://i.pinimg.com/236x/38/d7/4a/38d74a46dceb1678d95fa96a6e6906db.jpg",
+              "https://i.pinimg.com/236x/db/9c/92/db9c9235f5afffacad11e861fc071d62.jpg",
+              "https://i.pinimg.com/236x/74/1b/ad/741badbb035c07ac2af1315130fa2bbb.jpg"
+            ],
+            "delete": false
+          },
+          "quanlity": 1
+        },
+        {
+          "id": 3,
+          "infor": {
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
+            "price": 45000,
+            "discountPercentage": 10,
+            "rating": 4.8,
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+            "delete": false,
+            "images": [
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
+            ]
+          },
+          "quanlity": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d7",
+      "product": [],
+      "id": 3
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d8",
+      "product": [
+        {
           "id": 1,
           "infor": {
             "id": 1,
@@ -1136,154 +1212,29 @@
           "quanlity": 1
         },
         {
-          "id": 5,
+          "id": 3,
           "infor": {
-            "id": 5,
-            "title": "Pineapple Juice",
-            "description": "Tropical pineapple juice with a burst of tropical flavor.",
-            "price": 22000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Tropical Delights",
-            "category": "Fruit Juice",
-            "Quantity": 90,
-            "thumbnail": "https://i.pinimg.com/236x/2b/2a/bc/2b2abc91fb2135822d295b172edc7847.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/d2/f5/0e/d2f50e5c76c2449ab0d4b4ee4c6cc2b4.jpg",
-              "https://i.pinimg.com/236x/b4/53/81/b4538182ae4ebbd10948437a48ae4e5d.jpg",
-              "https://i.pinimg.com/236x/3a/73/73/3a737303356c480d591c0fb27856511b.jpg",
-              "https://i.pinimg.com/236x/86/48/d7/8648d72e3dd343876913204abc95ef3d.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 6,
-          "infor": {
-            "id": 6,
-            "title": "Mango Passion Fruit Juice",
-            "description": "A delightful blend of mango and passion fruit for a tropical taste.",
-            "price": 40000,
-            "discountPercentage": 0,
-            "rating": 4.8,
-            "brand": "Tropical Oasis",
-            "category": "Fruit Juice",
-            "Quantity": 39,
-            "thumbnail": "https://i.pinimg.com/236x/f3/e1/c6/f3e1c61fed47f0da88f17b62d36d82b7.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/91/c7/0f/91c70fc63bd05d5f01f7a225ae109afe.jpg",
-              "https://i.pinimg.com/236x/c6/c3/a9/c6c3a946be26a9aa9d4ef2be346fc3ff.jpg",
-              "https://i.pinimg.com/236x/af/58/3e/af583ee2d087172398cebf93937e58cf.jpg",
-              "https://i.pinimg.com/236x/09/e6/14/09e6142e9858253f81c2deebc96ec0f2.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 8,
-          "infor": {
-            "id": 8,
-            "title": "Mango Tango Juice",
-            "description": "Exotic mango juice with a tropical twist, a burst of flavor in every sip.",
-            "price": 36000,
-            "discountPercentage": 0,
-            "rating": 4.8,
-            "brand": "Tropical Delights",
-            "category": "Fruit Juice",
-            "Quantity": 289,
-            "thumbnail": "https://i.pinimg.com/236x/9b/a4/06/9ba4062b81fabae428597348b63dc7e3.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/14/64/b0/1464b0443b8f40acb7228fc535d423a1.jpg",
-              "https://i.pinimg.com/236x/9a/3c/cb/9a3ccb8f6b01ba52d9af4e1e3f9f8dd6.jpg",
-              "https://i.pinimg.com/236x/a0/c0/c7/a0c0c77efa3e8fabdfa1c2af6503adae.jpg",
-              "https://i.pinimg.com/236x/ba/c3/96/bac396c4b1eda38f84afadb86556a2fe.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 12,
-          "infor": {
-            "id": 12,
-            "title": "Mango Tango Smoothie",
-            "description": "A refreshing smoothie made from ripe mangoes and a hint of lime.",
-            "price": 70000,
-            "discountPercentage": 20,
-            "rating": 4.9,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 72,
-            "thumbnail": "https://i.pinimg.com/236x/d3/e3/b5/d3e3b5559f4c237bb6e2a186b59a2f27.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/df/58/ce/df58ce68095e28dfd2b23547377a0e13.jpg",
-              "https://i.pinimg.com/236x/46/20/12/4620121dbc3ed8fdba7d5f3bd6010855.jpg",
-              "https://i.pinimg.com/236x/8e/5a/a5/8e5aa5850510b26d4cb4d7ba5ed51756.jpg",
-              "https://i.pinimg.com/236x/51/a2/d3/51a2d331b8d51aa73125e943a82dd197.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 11,
-          "infor": {
-            "id": 11,
-            "title": "Tropical Sunrise Smoothie",
-            "description": "Start your day with this tropical smoothie that combines fresh fruits and coconut milk.",
+            "id": 3,
+            "title": "Orange Juice",
+            "description": "Freshly squeezed orange juice, packed with vitamin C.",
             "price": 45000,
-            "discountPercentage": 0,
-            "rating": 4.7,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 124,
-            "thumbnail": "https://i.pinimg.com/236x/9f/8e/5f/9f8e5f9bdf4f3bca73ce2afe5f2ff90c.jpg",
-            "delete": false,
-            "images": [
-              "https://i.pinimg.com/236x/aa/1e/c9/aa1ec9ba25292ce39876a237f78dbc69.jpg",
-              "https://i.pinimg.com/236x/6f/26/7b/6f267bc33ac635534e278ab4845c3e55.jpg",
-              "https://i.pinimg.com/236x/53/79/90/537990f68b5939275fa16b17f021601e.jpg",
-              "https://i.pinimg.com/236x/cc/64/02/cc640233570d180b7279d8d902abfedd.jpg"
-            ]
-          },
-          "quanlity": 1
-        },
-        {
-          "id": 10,
-          "infor": {
-            "id": 10,
-            "title": "Berry Blast Smoothie",
-            "description": "A delicious smoothie packed with a variety of mixed berries and yogurt.",
-            "price": 50000,
-            "discountPercentage": 20,
+            "discountPercentage": 10,
             "rating": 4.8,
-            "brand": "Smoothie Sensations",
-            "category": "Fruit Smoothie",
-            "Quantity": 38,
-            "thumbnail": "https://i.pinimg.com/236x/e9/5f/6f/e95f6fae67e1b67c72a34a703273bff4.jpg",
+            "brand": "Citrus Delights",
+            "category": "Fruit Juice",
+            "Quantity": 221,
+            "thumbnail": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
             "delete": false,
             "images": [
-              "https://i.pinimg.com/236x/10/92/8c/10928cf9956de354517c30aef5c8f058.jpg",
-              "https://i.pinimg.com/236x/a2/2d/34/a22d34d7c340536367db0e9555442d28.jpg",
-              "https://i.pinimg.com/236x/46/62/d7/4662d7c888ce63b65f9eb1622ada9100.jpg",
-              "https://i.pinimg.com/236x/4f/12/b1/4f12b144d8723669cb2933f7b2727f83.jpg"
+              "https://i.pinimg.com/236x/e7/fd/41/e7fd413f9eb0f1425c39aafb25843068.jpg",
+              "https://i.pinimg.com/236x/d1/74/9b/d1749b142061654ad2d205efdd609be8.jpg",
+              "https://i.pinimg.com/236x/2d/77/4e/2d774e414042779b486e607e91cdf52e.jpg",
+              "https://i.pinimg.com/236x/75/c9/77/75c977652567f7a4764bc2573ee552fd.jpg"
             ]
           },
           "quanlity": 1
         }
       ],
-      "id": 2
-    },
-    {
-      "user": "6590e95e8d295d3b8e11d7d7",
-      "product": [],
-      "id": 3
-    },
-    {
-      "user": "6590e95e8d295d3b8e11d7d8",
-      "product": [],
       "id": 4
     },
     {
@@ -1337,6 +1288,16 @@
         }
       ],
       "id": 5
+    },
+    {
+      "user": "6597eae51bc80aa515dda8f5",
+      "product": [],
+      "id": 6
+    },
+    {
+      "user": "659844ac7aeb53c86442a35e",
+      "product": [],
+      "id": 7
     }
   ],
   "shipping": [
@@ -1375,6 +1336,18 @@
         }
       ],
       "id": 3
+    },
+    {
+      "user": "6590e95e8d295d3b8e11d7d8",
+      "delivery": [
+        {
+          "address": "F2, Đan Phượng, Hà Nội",
+          "fullName": "Sonn Thanh",
+          "phoneNumber": "0399038165",
+          "defaultAddress": true
+        }
+      ],
+      "id": 4
     }
   ],
   "purchase": [
@@ -1616,6 +1589,64 @@
         }
       ],
       "id": 7
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-05 21:42:32",
+      "user": "6590e95e8d295d3b8e11d7d6",
+      "thanhtoan": [
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 1,
+          "thanhtien": 22000
+        },
+        {
+          "id": 3,
+          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+          "title": "Orange Juice",
+          "dongia": 40500,
+          "soluong": 1,
+          "thanhtien": 40500
+        }
+      ],
+      "id": 8
+    },
+    {
+      "paymentMethod": "Ngân hàng",
+      "orderStep": 0,
+      "date": "2024-01-06 01:15:56",
+      "user": "6590e95e8d295d3b8e11d7d8",
+      "thanhtoan": [
+        {
+          "id": 1,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPSqNcc6Su-WBmQKQi7ZmNQzLZcfwh9O05Q&usqp=CAU",
+          "title": "Apple Juice",
+          "dongia": 37000,
+          "soluong": 1,
+          "thanhtien": 37000
+        },
+        {
+          "id": 2,
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOgemRvwqOqnq_wY8xY0grHFvbZdGMSIJ_w&usqp=CAU",
+          "title": "Grape Juice",
+          "dongia": 22000,
+          "soluong": 1,
+          "thanhtien": 22000
+        },
+        {
+          "id": 3,
+          "img": "https://i.pinimg.com/236x/e8/83/11/e883111f192dfbd651413b7cde8f4114.jpg",
+          "title": "Orange Juice",
+          "dongia": 40500,
+          "soluong": 1,
+          "thanhtien": 40500
+        }
+      ],
+      "id": 9
     }
   ],
   "notification": []

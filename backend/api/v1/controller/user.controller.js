@@ -372,16 +372,116 @@ module.exports.allUsers = async (req, res) => {
 // [patch] /information/adminUsersPatch
 module.exports.adminUsersPatch = async (req, res) => {
   const user = req.body;
-  await User.updateOne(
-    {
-      _id: user._id,
-    },
-    user
-  );
+  const username = req.body.username;
+  const username_phu = req.body.username_phu;
+  const email = req.body.email;
+  const phoneNumber = req.body.phoneNumber;
+  const password = req.body.password;
+  const id = req.body._id;
+  const deleted = req.body.deleted;
+  const fullName = req.body.fullName;
+if(id){
+  const result = await User.updateOne({
+    _id: id
+  }, {
+    deleted: deleted
+  })
+  const dataUser = await User.find({
+  }).select("-password -token");
+
   res.json({
     code: 200,
-    user: user,
-  });
+    message: "Đã Cập Nhật Thành Công",
+    dataUser: dataUser
+  })
+return;
+}
+
+  if(checkInformationHelper.checkEmail(email) === false && email){
+    res.json({
+      code: 400,
+      message: "Email Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkVietnamesePhoneNumber(phoneNumber) === false && phoneNumber){
+    res.json({
+      code: 400,
+      message: "Số Điện Thoại Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkPassword(password) === false && password){
+    res.json({
+      code: 400,
+      message: "Mật Khẩu Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkName(fullName) === false && fullName){
+    res.json({
+      code: 400,
+      message: "Tên Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkUsername(username) === false){
+    res.json({
+      code: 400,
+      message: "UserName Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(!username){
+    res.json({
+      code: 400,
+      message: "UserName Không Được Để Trống"
+    })
+    return;
+  }
+
+  if (user) {
+    
+      const token = generateHelper.generateRandomString(20);
+      const userExist = await User.findOne({
+        username: {$ne: username_phu},
+        $or: [
+          { username: username },
+        ]
+      });
+      if (!userExist) {
+        await User.updateOne(
+          {
+            username: username_phu
+          },
+          user
+        );
+
+        const dataUser = await User.find({
+        }).select("-password -token");
+
+        res.json({
+          code: 200,
+          message: "Đã Cập Nhật Người Dùng Thành Công",
+          dataUser: dataUser,
+        });
+      } else {
+        res.json({
+          code: 400,
+          message: "Tài Khoản Đã Được Sử Dụng. Vui Lòng Thử Lại!",
+        });
+      }
+  } else {
+    res.json({
+      code: 400,
+      message: "Chưa Điền Thông Tin",
+    });
+  }
 };
 
 // [post] /information/adminUsersPost
@@ -389,11 +489,38 @@ module.exports.adminUsersPost = async (req, res) => {
   const data = req.body;
   const password = req.body.password;
   const username = req.body.username;
-  const type = req.body.type;
-  if (Object.keys(data).length === 3) {
+const fullName = req.body.fullName;
+  const email = req.body.email;
+  const phoneNumber = req.body.phoneNumber;
+
+  if(checkInformationHelper.checkEmail(email) === false && email){
+    res.json({
+      code: 400,
+      message: "Email Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkVietnamesePhoneNumber(phoneNumber) === false && phoneNumber){
+    res.json({
+      code: 400,
+      message: "Số Điện Thoại Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if(checkInformationHelper.checkName(fullName) === false && fullName){
+    res.json({
+      code: 400,
+      message: "Tên Không Đúng Định Dạng"
+    })
+    return;
+  }
+
+  if (data) {
     if (
       checkInformationHelper.checkPassword(password) === true &&
-      checkInformationHelper.checkUsername(username) === true
+      checkInformationHelper.checkUsername(username) === true 
     ) {
       const token = generateHelper.generateRandomString(20);
       const userExist = await User.findOne({
@@ -401,17 +528,12 @@ module.exports.adminUsersPost = async (req, res) => {
           {
             username: username,
           },
-          {
-            token: token,
-          },
         ],
       });
       if (!userExist) {
         const user = new User({
-          username: username,
-          password: password,
+         ...data,
           token: token,
-          type: type,
           deleted: false,
           status: "active",
           date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
@@ -419,9 +541,6 @@ module.exports.adminUsersPost = async (req, res) => {
         await user.save();
         const dataUser = await User.findOne({
           username: username,
-          type: type,
-          deleted: false,
-          status: "active",
         }).select("-password -token");
         res.json({
           code: 200,
@@ -429,9 +548,10 @@ module.exports.adminUsersPost = async (req, res) => {
           dataUser: dataUser,
         });
       } else {
+        console.log(userExist);
         res.json({
           code: 400,
-          message: "Username Đã Được Sử Dụng. Vui Lòng Thử Lại!",
+          message: "Tài Khoản Đã Được Sử Dụng. Vui Lòng Thử Lại!",
         });
       }
     } else {
@@ -443,7 +563,7 @@ module.exports.adminUsersPost = async (req, res) => {
   } else {
     res.json({
       code: 400,
-      message: "Chưa Điền Thông Tin Đăng Kí",
+      message: "Chưa Điền Thông Tin",
     });
   }
 };

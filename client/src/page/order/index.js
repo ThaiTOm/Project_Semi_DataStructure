@@ -199,7 +199,7 @@ const Order = () => {
             </Button>
           </Empty>
         </div>
-      )} </>) : (Error("Theo Dõi Đơn Hàng"))}
+      )} </>) : (Error("Theo Dõi Đơn Hàng", navigate))}
      
     </>
   );

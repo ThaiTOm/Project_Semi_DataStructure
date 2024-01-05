@@ -63,7 +63,6 @@ function Productlist() {
 
 const getCate = async () => {
   const result = await getadminCategory();
-  console.log(result);
   setCate(result);
 }
 
@@ -512,6 +511,7 @@ const getproductCate = async (e, Cate) => {
         setShow={setShow}
         onAddProduct={handleAddProduct}
         setReload={setReload}
+        dataSource={dataSource}
       />
     </>
   );

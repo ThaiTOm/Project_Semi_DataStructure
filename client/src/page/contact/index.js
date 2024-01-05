@@ -46,7 +46,7 @@ function Contact() {
               <div className="contact--email contact--chunginfor">
               <img src="https://img.icons8.com/color/48/apple-mail.png" alt="apple-mail"/>
                 <p>
-                  <b>Email:</b> sonthanh@gmail.com
+                  <b>Email:</b> 3Tstore@gmail.com
                 </p>
               </div>
               <hr className="contact--hr" />

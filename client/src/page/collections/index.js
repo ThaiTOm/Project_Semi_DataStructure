@@ -121,7 +121,6 @@ function Collections() {
       distance: e,
     });
     setId(1);
-
   };
 
   // lọc loại sản phẩm

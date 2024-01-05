@@ -4,23 +4,27 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import PaypalBtn from '../../components/Paypal/Paypal';
 import Congratulation from '../../components/congratulation/congratulation';
+import { getCookie } from '../../components/takeCookies/takeCookies';
+import { Error, Errorempty } from '../../components/error/error';
+import { useNavigate } from 'react-router-dom';
 
 
 function BankPayment() {
 
     const [success, setSuccess] = useState(false);
-    const currentCart = useSelector(state => state.ttStore)
-    const usdrate = 24.260;
-    const totals = currentCart.reduce((total, item) => {
+    const currentCart = JSON.parse(sessionStorage.getItem('thanhtoan'));
+    const usdrate = 24260;
+    const navigate = useNavigate();
+    
+    const totals = currentCart && currentCart.length > 0 && currentCart.reduce((total, item) => {
         return total + item.thanhtien;
-
     }, 0)
 
-
-    const totalusd = ((new Intl.NumberFormat("vi-VN").format(totals)) / usdrate).toFixed(2)
+    const cookies = getCookie("token");
+    const totalusd = ((totals) / usdrate).toFixed(2)
     return (
         <>
-            {success && <Congratulation />}
+        {currentCart && currentCart.length > 0 ? (<>{ cookies && cookies.length !== 0 ? (<>  {success && <Congratulation />}
             <div className='payment'>
                 <div className='payment--left'>
                     <img src={payment} alt='payment' />
@@ -73,7 +77,9 @@ function BankPayment() {
                     </div>
                     <div className='payment-info'><PaypalBtn infoproduct = {{product : currentCart}} setSuccess={setSuccess} amount={totalusd}  /></div>
                 </div>
-            </div>
+            </div></>) : (Error("Thanh Toán Ngân Hàng", navigate))}</>) : (Errorempty(navigate))}
+        
+          
         </>
     )
 }

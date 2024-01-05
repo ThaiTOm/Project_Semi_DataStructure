@@ -1,8 +1,7 @@
 import { Button } from "antd";
-import { deleteCookie, setCookie } from "../../../components/setTime/setTime";
+import { deleteCookie } from "../../../components/setTime/setTime";
 import Swal from "sweetalert2";
-import { getCookie } from "../../../components/takeCookies/takeCookies";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import "./logout.scss"
 function Logout() {
 const navigate = useNavigate();
@@ -23,8 +22,9 @@ const navigate = useNavigate();
               if (result.isConfirmed){
                 // const removeCookie = getCookie("token");
                 // setCookie("token", removeCookie, -10);
-
+  
                 deleteCookie("token");
+                deleteCookie("checkHD");
                    navigate("/")    
               window.location.reload();
             

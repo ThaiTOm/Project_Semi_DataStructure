@@ -68,7 +68,7 @@ const CategoryList = () => {
   const [editingKey, setEditingKey] = useState("");
   const isEditing = (record) => record.key === editingKey;
   const dispatch = useDispatch();
-
+  const [isDis, setIsDis] = useState(false);
 const patchcate = async (values) => {  // cập nhật cate
     const result = await patchCate(values);
 } 
@@ -104,14 +104,21 @@ useEffect(() => {
     setEditingKey(record.key);
   };
   const cancel = () => {   //  hủy khi bấm chỉnh sửa
+    setIsDis(false);  
     setEditingKey("");
+    setReload(!reload); 
   };
 
 
 
-  const save = async (key) => {  // lưu những thứ mới chỉnh sửa
+  const save = async (key, input) => {  // lưu những thứ mới chỉnh sửa
+ 
     try {
       const row = await form.validateFields();   // đợi lấy giá trị của trường dữ liệu form
+      const checkTrungRow = dataSource.find(item => {
+        return item.cate === row.cate;
+      })
+      console.log(checkTrungRow);
       const newData = [...dataSource];   // cập nhật giá trị của bảng và phân rã để không gây ảnh hưởng đến dữ liệu
       const index = newData.findIndex((item) => key === item.key);   //tìm index của dữ liệu bằng cách so key 
       if (index > -1) {   // nếu tìm ra index thì chỉnh sửa
@@ -124,17 +131,45 @@ useEffect(() => {
         const dataPatch = newData.find (item => {      // tìm dữ liệu cần cập nhật
             return item.id === key;
         })
-      if (key === undefined){  // nếu key của save mà un thì post dữ liệu mới lên (kết hợp với nút thêm cate)
-          postcate({...newData[index], delete: false});  
-          setReload(!reload);  // khi post thì cập nhật dữ liệu
+      if (key === undefined || dataPatch === undefined){  // nếu key của save mà un thì post dữ liệu mới lên (kết hợp với nút thêm cate)
+        setIsDis(false);  
+        if(checkTrungRow === undefined){
+          postcate({...newData[index], delete: false}); 
+          setReload(!reload);    // nếu không phải thì cập nhật
+        }
+        else {
+          Modal.error({
+            title : "Lỗi",
+            content: "Đã Bị Trùng Dữ Liệu",
+            onOk: () => {
+              setReload(!reload)
+            }
+          })
+        }
       }
       else {
-         patchcate(dataPatch);    // nếu không phải thì cập nhật
+        if(checkTrungRow.id === input.id || checkTrungRow === undefined){
+          patchcate(dataPatch);    // nếu không phải thì cập nhật
+        }
+        else {
+          Modal.error({
+            title : "Lỗi",
+            content: "Đã Bị Trùng Dữ Liệu",
+            onOk: () => {
+              setReload(!reload)
+            }
+          })
+        }
+       
       }
        
         setEditingKey(""); // set edit về dạng rỗng để đóng save
       } else { 
-        newData.push(row);    // nếu index không được tìm ra thì thêm hàng  (kết hợp với thêm cate)
+        setIsDis(true);
+        newData.push({
+          ...row,
+          key: newData.length + 1
+        });    // nếu index không được tìm ra thì thêm hàng  (kết hợp với thêm cate)
         setdataSource(newData);  // cập nhật dữ liệu
         setEditingKey("");
       }
@@ -227,17 +262,6 @@ useEffect(() => {
         })
     }) 
     if (dataFilter.length !== 0 ){
-
-        // vì sử dụng map nên nó cứ lặp thằng đầu rồi filter rồi lặp thằng sau r filter => tạo ra rất nhiều mảng với dữ liệu không được hợp nhất
-    // const dataAfterDel =  dataFilter.reduce ((origin, item) => {   // => hợp nhất (origin là mảng đầu tiên)
-    //     return origin.filter(obj1 =>
-    //      item.some(obj2 => obj2.key === obj1.key)  // không dùng find vì nếu có cùng key thì nó sẽ lấy thằng đầu ( hi hữu )
-    //     );
-    //    },dataFilter[0].slice())
-       // giải thích :
-       // - origin giữ vị trị đầu tiền của mảng findDel (findDel là một mảng chứa nhiều mảng có object)
-       // - origin sử dụng filter để check những object trong mảng đầu tiên và check với item đầu tiên là mảng đầu tiên luôn (giống origin hiện tại) và check xong nó sẽ trả về mảng đầu tiên cho object 
-       // - từ đó item sẽ bám vào mảng thứ 2 và origin là mảng mới được check nó sẽ check típ với item đó và trả về origin chung của mảng 1 và 2 và từ orgin chung đó nếu còn mảng tiếp theo thì cũng sẽ tiếp tục check cho đến khi có origin chung cuối cùng thì return về kết quả
        
        setSelectedRowKeys([])
        for (let i = 0 ; i < selectedRowKeys.length ;i++){
@@ -364,7 +388,6 @@ else {
       render: (_, record) => {
         const editable = isEditing(record);
         const checkDelete = record.delete;
-        console.log(checkDelete);
         return (
           <>
           {checkDelete === false || checkDelete === undefined ? (<> <Space size="middle">
@@ -397,7 +420,7 @@ else {
               {editable ? (  // nếu bấm vô edit thì hiện ra
               <span>
                 <Typography.Link
-                  onClick={() => save(record.key)}
+                  onClick={() => save(record.key, record)}
                   style={{
                     marginRight: 8,
                     marginLeft: 18,
@@ -480,7 +503,7 @@ else {
           <Button className="categorylist--top__bt1" type="primary" onClick={handleXoa}>
             Xóa
         </Button>
-        <Button className="categorylist--top__bt2" type="primary" onClick={() => save(-1)}>
+        <Button disabled={isDis} className="categorylist--top__bt2" type="primary" onClick={() => save(-1)}>
        Thêm Category
     </Button>
         </div>

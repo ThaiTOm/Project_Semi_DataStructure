@@ -87,6 +87,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, setSuccess, infoproduct 
       }
       if (datatk.email){
         sendEmail(invoiceData, datatk.email)
+        sessionStorage.removeItem('thanhtoan');
       }
       else {
         sendEmail(invoiceData, 'email@example.com')
@@ -105,7 +106,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, setSuccess, infoproduct 
                   purchase_units: [
                       {
 
-                          description: infoproduct.product.map((iteam) => { return iteam.title }).join(' + '),
+                        //   description: infoproduct.product.map((iteam) => { return iteam.title }).join(' + '),
                           amount: {
                               currency_code: currency,
                               value: amount,
@@ -124,7 +125,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, setSuccess, infoproduct 
                           "paymentMethod": "Ngân hàng",
                           "orderStep": 0,
                           "date": setFormattedTime,
-                          "userId": datatk.id,
+                          "user": datatk.id,
                           "thanhtoan": infoPayment
                       });
                       setSuccess(true)

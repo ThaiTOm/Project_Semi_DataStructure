@@ -161,28 +161,27 @@ const onCancel = () => {
                label="Description"
                required
               >
-          <Editor
-          
-                  apiKey="v4f1smp37kpt1gjhf7y7pncfv3rkvlfy3tks2kcu3p3xtm0h"
-                  onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue={blog.description}
-                  init={{
-                    height: 500,
-                    menubar: false,
-                    plugins:
-                      "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
-                    toolbar:
-                      "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
-                    file_picker_callback: handleFilePicker,
-                    setup: (editor) => {
-              // Lắng nghe sự kiện thay đổi nội dung của Editor
-              editor.on('Change', () => {
-                // Cập nhật giá trị của biến state editorContent khi có sự kiện thay đổi
-                setEditorContent(editor.getContent());
-              });
-            },
-                  }}
-                />
+         <Editor
+          apiKey="v4f1smp37kpt1gjhf7y7pncfv3rkvlfy3tks2kcu3p3xtm0h"
+          onInit={(evt, editor) => (editorRef.current = editor)}
+          initialValue={blog.description}
+          init={{
+            height: 500,
+            menubar: false,
+            plugins:
+              "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
+            toolbar:
+              "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+            file_picker_callback: handleFilePicker,
+            setup: (editor) => {
+      // Lắng nghe sự kiện thay đổi nội dung của Editor
+      editor.on('Change', () => {
+        // Cập nhật giá trị của biến state editorContent khi có sự kiện thay đổi
+        setEditorContent(editor.getContent());
+      });
+    },
+          }}
+        />
               </Form.Item>
             </Col>
           </Row>

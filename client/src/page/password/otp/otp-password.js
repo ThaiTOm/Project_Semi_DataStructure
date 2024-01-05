@@ -3,19 +3,24 @@ import { useEffect, useState } from "react";
 import { getEmail } from "../../../service/getcategory/getCategory";
 import "../otp/otp-password.scss";
 import { useNavigate } from "react-router-dom";
-import { OtpPasswordPost } from "../../../service/post/post";
+import { ForgotPasswordPost, OtpPasswordPost } from "../../../service/post/post";
 import { setCookie } from "../../../components/setTime/setTime"
 import { getCookie } from "../../../components/takeCookies/takeCookies";
+import { Errorempty } from "../../../components/error/error";
 function Otppassword() {
   const [email, setEmail] = useState([]);
   const username = window.location.search.split("=")[1];
   const navigate = useNavigate();
   const token = getCookie("token");
-
-
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
   if(token){
     navigate("/");
   }
+  
+const ForgotPost = async (data) => {
+  const result = await ForgotPasswordPost(data);
+  return result;
+}
 
 const otpPost = async(data) => {
   const result = await OtpPasswordPost(data);
@@ -27,10 +32,13 @@ const otpPost = async(data) => {
     if (result.code === 400) {
       Modal.error({
         title: "Lỗi",
-        content: result.email.message,
+        content: result.message,
+        onOk: () => {
+           navigate("/");
+        }
       });
     } else {
-      setEmail(result.email.email);
+      setEmail(result.email);
     }
   };
 
@@ -40,7 +48,7 @@ const otpPost = async(data) => {
 
 
   const handleFinish = async (values) => {
-  const result = await  otpPost({
+  const result = await otpPost({
       otp: values.otp,
       username: username,
       email: email
@@ -52,7 +60,7 @@ const otpPost = async(data) => {
       })
     }
     else {
-      setCookie("token_1", result.token, 1);
+      setCookie("token_1", result.token, 15);
       navigate(`/password/reset`);
     }
   };
@@ -68,9 +76,33 @@ const otpPost = async(data) => {
     navigate("/login");
   };
 
+const handleSend = async () => {
+  const data = {
+    username: username,
+    sendAgain: true,
+  }
+ const result = await ForgotPost(data);
+ if(result.code === 400){
+  Modal.error({
+    title: "Lỗi",
+    content: `${result.message}`
+  })
+ }
+ else {
+  Modal.success({
+    title: "Thành công",
+    content: "Đã gửi lại mã qua OTP"
+  })
+  setButtonDisabled(true);
+  setTimeout(() => {
+    setButtonDisabled(false);
+  }, 10000);
+ }
+}
+
   return (
     <>
-      <div className="otpPassword">
+    {username && token.length === 0 ? (<> <div className="otpPassword">
         <h1 className="otpPassword--top">Nhập Mã OTP!</h1>
         <hr />
         <p className="otpPassword--content">
@@ -100,8 +132,20 @@ const otpPost = async(data) => {
           </Form.Item>
 
           <Form.Item>
+          <p style={{ marginTop: "0", color: "blue" }}>
+                Chưa nhận được mã OTP?
+              </p>
             <Row>
-              <Col offset={15} span={4}>
+            <Col offset={2} span={4}>
+              <Button
+                  className="otpPassword--sendAgain"
+                  onClick={handleSend}
+                  disabled={isButtonDisabled}
+                >
+                  Gửi lại
+                </Button>
+            </Col>
+              <Col offset={8} span={4}>
                 <Button
                   className="otpPassword--buttonCancel"
                   onClick={handleCancel}
@@ -121,7 +165,8 @@ const otpPost = async(data) => {
             </Row>
           </Form.Item>
         </Form>
-      </div>
+      </div></>) : (Errorempty(navigate))}
+     
     </>
   );
 }

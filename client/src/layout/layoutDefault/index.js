@@ -508,7 +508,7 @@ function LayoutDefault() {
                 <div className="footer--email footer--chunginfor">
                 <img src="https://img.icons8.com/emoji/48/e-mail.png" alt="e-mail"/>
                   <p>
-                    <b>Email:</b> sonthanh@gmail.com
+                    <b>Email:</b> 3Tstore@gmail.com
                   </p>
                 </div>
               </div>

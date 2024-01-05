@@ -6,8 +6,6 @@ import { getCookie } from "../../../components/takeCookies/takeCookies";
 function Forgotpassword() {
   const navigate = useNavigate();
   const token = getCookie("token");
-
-
   if(token){
     navigate("/");
   }

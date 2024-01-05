@@ -1,10 +1,10 @@
 import "./home.scss";
-import { Button, Carousel, Col, Layout, Row } from "antd";
+import { Button, Carousel, Col, Layout, Modal, Row, Tour, notification } from "antd";
 import Homesider from "../../components/homeSider/index.js";
 // import slide1 from "../../image/slide1.png";
 // import slide2 from "../../image/slide2.png";
-import { useEffect, useState } from "react";
-import { getProductsp } from "../../service/getcategory/getCategory";
+import { useEffect, useRef, useState } from "react";
+import { getMyUser, getProductsp } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../components/takeCookies/takeCookies.js";
@@ -16,21 +16,40 @@ function Home() {
   const navigate = useNavigate();
   const checkId = useSelector((state) => state.cartStore);
   const dispatch = useDispatch();
+  const [api, contextHolder] = notification.useNotification();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const cookies = getCookie("token");
+  const ref1 = useRef(null);
+  const takeMyUser = async (token) => {
+    const result = await getMyUser(token);
+    if(result.code === 200){
+      const check = getCookie("checkHD");
+      if(!(result.email) && check.length === 0 ){
+        setIsModalOpen(true);
+      }
+    }
+  else {
+    //
+  }
+  }
+
+  const fetchApi = async () => {
+    const result = await getProductsp();
+
+    if (!result) {
+    } else {
+      setData(result);
+    }
+  };
 
   useEffect(() => {  // lấy hết dữ liệu sản phẩm
-    const fetchApi = async () => {
-      const result = await getProductsp();
-
-      if (!result) {
-      } else {
-        setData(result);
-      }
-    };
-
     fetchApi();
   }, []);
 
-  const cookies = getCookie("token");
+  useEffect(() => {
+    takeMyUser(cookies);
+  }, [cookies])
 
   const discount = data.filter((item) => {
     return item.discountPercentage !== 0;
@@ -81,8 +100,46 @@ function Home() {
     navigate(`/category/${softdrink[1].category}`);
   };
 
+const handleAddCart = (itemId, item) => {
+  AddtoCart(itemId, item, checkId, cookies, dispatch, navigate);
+  api.success({
+    message: 'Thêm vào giỏ hàng thành công',
+    duration: 0.5    
+  });
+}
+
+
+const handleCancel = () => {
+  setIsModalOpen(false);
+  document.cookie = 'checkHD=true';
+};
+
+const handleOk = () => {
+  setIsModalOpen(false);
+  setOpen(true)
+  document.cookie = 'checkHD=true';
+  // Thực hiện hướng dẫn hoặc điều hướng đến trang hướng dẫn tùy thuộc vào yêu cầu của bạn
+};
+
+const steps = [
+  {
+    title: 'Tài khoản',
+    description: 'Nhập thông tin tài khoản ở đây.',
+    cover: (
+      <img
+        alt="taikhoan.png"
+        src="http://res.cloudinary.com/dkuqtn6bp/image/upload/v1704433734/t0vgff7kfksxffugwe7n.png"
+      />
+    ),
+    target: () => ref1.current,
+  },
+ 
+];
+
+
   return (
     <>
+          {contextHolder}
       <div className="home">
         {" "}
         <Layout>
@@ -167,7 +224,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -244,7 +301,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -327,7 +384,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -410,7 +467,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -490,7 +547,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -573,7 +630,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -660,7 +717,7 @@ function Home() {
                           shape="circle"
                           type="primary"
                           icon={<PlusOutlined />}
-                          onClick={() => AddtoCart(item.id, item, checkId, cookies, dispatch, navigate)}
+                          onClick={() => handleAddCart(item.id, item)}
                         ></Button>
                       </div>
                     </Col>
@@ -679,6 +736,20 @@ function Home() {
           </Content>
         </Layout>
       </div>
+      <Modal
+        title="Thông báo"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Hướng dẫn"
+        cancelText="Tôi hiểu rồi"
+      >
+        <p>Vui lòng thêm thông tin cá nhân để sử dụng các chức năng như quên mật khẩu và thanh toán ngân hàng vv.</p>
+      </Modal>
+      <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
+    <div ref={ref1} className="home--huongdan">
+      .sfsafsefeg
+    </div>
     </>
   );
 }

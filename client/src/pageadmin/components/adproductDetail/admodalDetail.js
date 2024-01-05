@@ -17,7 +17,7 @@ import ModalProduct from "../../helper/modalProduct";
 // const { Option } = Select;
 // const { Option: AutoCompleteOption } = AutoComplete;
 
-const Admodaldetail = ({ reload, show, setShow, onPatchProduct , data}) => {
+const Admodaldetail = ({ reload, show, setShow, onPatchProduct , data, dataSource, param}) => {
   const [form] = Form.useForm();
   const [categories, setCategories] = useState([]);
 
@@ -56,8 +56,18 @@ const onCancel = () => {
 
   const handleFinish = () => {
     form.validateFields().then((values) => {
-     
-      onPatchProduct(values);
+      const checkTitle = dataSource.find(item => {
+        return item.title === values.title;
+       })
+       if(checkTitle === undefined || checkTitle.id === param ){
+        onPatchProduct(values);
+       }
+       else {
+        Modal.error({
+         title: "Lỗi",
+         content: "Đã bị trùng tên sản phẩm. Vui lòng thử lại!"
+        })
+       }
       form.resetFields();
       onCancel();
     });

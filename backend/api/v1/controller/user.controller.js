@@ -8,6 +8,7 @@ const checkInformationHelper = require("../../../helpers/checkInformation");
 // [post] /api/v1/password/forgot
 module.exports.forgotPassword = async (req, res) => {
   const username = req.body.username;
+  const sendAgain = req.body.sendAgain;
   const user = await User.findOne({
     username: username,
     deleted: false,
@@ -40,8 +41,18 @@ module.exports.forgotPassword = async (req, res) => {
     expireAt: Date.now() + timeExpire * (1000 * 60),
   };
 
-  const forgotPassword = new ForgotPassword(objectForgotPassword);
+  if(sendAgain){
+   await ForgotPassword.updateOne({
+      username: username
+    }, {
+      otp: otp
+    })
+  }
+  else {
+    const forgotPassword = new ForgotPassword(objectForgotPassword);
   await forgotPassword.save();
+  }
+  
 
   // gửi email
   const subject = `Mã OTP ĐỂ XÁC MINH LẤY LẠI MẬT KHẨU`;
@@ -152,7 +163,7 @@ module.exports.resetPassword = async (req, res) => {
  
 
 };
-// [get] /password/email
+// [get] /password/email?username=
 module.exports.emailPassword = async (req, res) => {
   const username = req.query.username;
   const email = await User.findOne({
@@ -160,18 +171,17 @@ module.exports.emailPassword = async (req, res) => {
     deleted: false,
     status: "active",
   }).select("email");
-
   if (!email) {
     res.json({
       code: 400,
-      message: "Không tìm thấy thông tin người dùng",
+      message: "Không tìm thấy thông tin người dùng.",
     });
     return;
   }
 
   res.json({
     code: 200,
-    email: email,
+    email: email.email,
   });
 };
 
@@ -249,7 +259,6 @@ module.exports.checkLogin = async (req, res) => {
     });
   } else {
     if (userExist.deleted === false) {
-      await res.cookie("token", userExist.token);
       if (userExist.type === "admin") {
         res.json({
           code: 200,
@@ -309,7 +318,6 @@ module.exports.checkRegister = async (req, res) => {
         });
         await user.save();
         const userToken = user.token;
-        res.cookie("token", userToken);
         res.json({
           code: 200,
           message: "Đã Đăng Kí Thành Công",

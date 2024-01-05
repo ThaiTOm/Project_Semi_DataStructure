@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Row, Slider } from "antd";
 import Sider from "antd/es/layout/Sider";
 import "./sider.scss"
 function Siderlane({mang, itemsToShow, data, toggleExpanded, expanded, data_3, max, handleChange_final, handleChange_cate, handleChange_hsx, cate, showcate}){
-
+  
 
     return (
         <>

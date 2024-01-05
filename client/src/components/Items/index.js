@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, notification } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
@@ -12,8 +12,18 @@ function Items({
   id,
   AddtoCart,
 }) {
+  const [api, contextHolder] = notification.useNotification();
+  const handleAddCart = (itemId, item) => {
+    AddtoCart(itemId, item, checkId, cookies, dispatch, navigate);
+    api.success({
+      message: "Thêm vào giỏ hàng thành công",
+      duration: 0.5,
+    });
+  };
+
   return (
     <>
+     {contextHolder}
       <Content className="Items">
         <Row gutter={[0, 10]}>
           {paginatedData.length > 0 && Array.isArray(paginatedData[id]) ? (
@@ -70,14 +80,7 @@ function Items({
                     type="primary"
                     icon={<PlusOutlined />}
                     onClick={() =>
-                      AddtoCart(
-                        item.id,
-                        item,
-                        checkId,
-                        cookies,
-                        dispatch,
-                        navigate
-                      )
+                      handleAddCart(item.id, item)
                     }
                   ></Button>
                 </div>

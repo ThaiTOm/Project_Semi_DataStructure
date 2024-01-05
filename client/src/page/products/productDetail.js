@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Col, Image, Layout, Modal, Rate, Row } from "antd";
+import { Breadcrumb, Button, Col, Image, Layout, Modal, Rate, Row, notification } from "antd";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   getMyUser,
@@ -34,6 +34,7 @@ function Productdetail() {
   const cookies = getCookie("token");
   const [count, setCount] = useState(1);
   const [randomNumber, setrandomNumber] = useState(0);
+  const [api, contextHolder] = notification.useNotification();
 
   const takeSameProducts = async (productId) => {
     const result = await postSameProducts({
@@ -125,6 +126,10 @@ function Productdetail() {
       if (check !== undefined) {
         if (check.quanlity + count <= data[0].Quantity) {
           dispatch(upmt(id, count));
+          api.success({
+            message: 'Thêm vào giỏ hàng thành công',
+            duration: 0.5    
+          });
         } else {
           Modal.error({
             title: "Không Thể Thêm Sản Phẩm",
@@ -134,6 +139,10 @@ function Productdetail() {
         }
       } else {
         dispatch(addmt(id, infor, count));
+        api.success({
+          message: 'Thêm vào giỏ hàng thành công',
+          duration: 0.5    
+        });
       }
     } else {
       navigate("/login");
@@ -160,7 +169,7 @@ function Productdetail() {
           return maxDateItem;
         }
       }, null);
-      if (newestOrder && newestOrder.orderStep === 3) {
+      if (newestOrder && newestOrder.orderStep !== 3) {
         Modal.error({
           title: "Không thể mua hàng",
           content: "Đơn hàng của bạn vẫn chưa hoàn thành!",
@@ -174,8 +183,17 @@ function Productdetail() {
     }
   };
 
+  const handleAddCart = (itemId, item) => {
+    AddtoCart(itemId, item, checkId, cookies, dispatch, navigate);
+    api.success({
+      message: 'Thêm vào giỏ hàng thành công',
+      duration: 0.5    
+    });
+  }
+
   return (
     <>
+     {contextHolder}
       {data.length !== 0 ? (
         <>
           {" "}
@@ -436,14 +454,7 @@ function Productdetail() {
                                   <Button
                                     icon={<PlusOutlined />}
                                     onClick={() =>
-                                      AddtoCart(
-                                        item.id,
-                                        item,
-                                        checkId,
-                                        cookies,
-                                        dispatch,
-                                        navigate
-                                      )
+                                      handleAddCart(item.id, item)
                                     }
                                   ></Button>
                                 </div>

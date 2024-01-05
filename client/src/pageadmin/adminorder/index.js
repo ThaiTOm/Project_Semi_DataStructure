@@ -13,15 +13,14 @@ import { delPur } from "../../service/delete/delete";
 const Adminorder = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState([]);
-  const [checkDel, setcheckDel] = useState(false)
   var  previousData = [{user : "" , date: ""}] ;
 
 const patchpur = async (id, dulieu) => {
   const result = await patchPur(id, dulieu)
 }
 
-const putpur = async (dulieu) => {
-  const result = await putPur(dulieu);
+const putpur = async (id, dulieu) => {
+  const result = await putPur(id, dulieu);
 }
 
 const delpur = async (id) => {
@@ -99,15 +98,11 @@ const delpur = async (id) => {
       title: "Trạng Thái Thanh Toán",
       dataIndex: "paymentStatus",
       render: (_, record) => {
-        if (record.paymentMethod === "Tiền mặt") {
           if (record.orderStep !== 3) {
             return <Tag color="#f50">Chưa trả tiền</Tag>;
           } else {
             return <Tag color="#2db7f5">Đã trả tiền</Tag>;
           }
-        } else {
-          return <Tag color="#2db7f5">Đã trả tiền</Tag>;
-        }
       },
     },
     {

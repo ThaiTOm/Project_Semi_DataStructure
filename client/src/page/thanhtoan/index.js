@@ -9,16 +9,16 @@ import {
   Image,
 
 } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./thanhtoan.scss";
 import { getCookie } from "../../components/takeCookies/takeCookies";
-import { getMyUser, getProductdt, getShip, getUserstk } from "../../service/getcategory/getCategory";
+import { getMyUser, getOrder, getProductdt, getShip, getUserstk } from "../../service/getcategory/getCategory";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../service/post/post";
 import { format, parse } from 'date-fns';
 import { load } from "../../actions/actCart";
-import  { Error } from "../../components/error/error";
+import  { Error, Errorempty } from "../../components/error/error";
 import { patchProduct } from "../../service/patch/patch";
 const { TextArea } = Input;
 const { Panel } = Collapse;
@@ -88,7 +88,10 @@ const Thanhtoan = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [reload, setReload] = useState(true);
+  const [check, setcheck] = useState([]);
  let setFormattedTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+ var thanhtoanData = JSON.parse(sessionStorage.getItem("thanhtoan"));
+ // Kiểm tra xem dữ liệu có tồn tại không
 
 
  const fetchApick = async (e) => {
@@ -96,7 +99,7 @@ const Thanhtoan = () => {
     const result = await getMyUser(e); // lấy dữ liệu tài khoản của người đang đăng nhập
     setData(result);
     fetchShip(result.id);
-    console.log(thanhtoan);
+    getorder(result.id)
   } catch (error) {
     console.error("Error fetching user data:", error);
   }
@@ -122,6 +125,33 @@ const postorder = async (e) => {
     console.log("...", error);
   }
 }
+
+
+
+
+const getorder = async (e) => {
+  const result = await getOrder(e);
+  const newestOrder = result.reduce((maxDateItem, currentItem) => {
+    if (!maxDateItem || currentItem.date > maxDateItem.date) {
+      return currentItem;
+    } else {
+      return maxDateItem;
+    }
+  }, null);
+  if(newestOrder && newestOrder.orderStep){
+     setcheck(newestOrder.orderStep)
+  if (newestOrder.orderStep !== 3){
+    Modal.error({
+      title: "Lỗi",
+     content: "Đơn Hàng Của Bạn Vẫn Chưa Hoàn Tất"
+    })
+    navigate("/");
+  }
+  }
+ 
+}
+
+
 
 const getQuantity = async (id) => {
   const result = await getProductdt(id);
@@ -195,13 +225,27 @@ useEffect(() => {
       showNotification();
     }
     else {
-      navigate("/bank")
+      if(data.email === undefined){
+        Modal.warning({
+          title: "Thông báo",
+          content: "Bạn chưa có thông tin cá nhân. Vui lòng thêm thông tin cá nhân để thanh toán bằng ngân hàng.",
+          okText: "Thêm thông tin cá nhân",
+          onOk: () => {
+            navigate("/infor/thongtinkh")
+          },
+        });
+      }
+      else {
+             navigate("/bank")
+      }
+ 
     }
-    setShowConfirmation(false);
+    setShowPaymentDetails(false);
   }
 
 
 const handleChuyentrang = () => {
+  sessionStorage.removeItem('thanhtoan');
   navigate("/order");
 }
 
@@ -222,11 +266,9 @@ const handleChuyentrang = () => {
     return total + item.thanhtien;
   }, 0);
 
-
-
   return (
     <>
-    {cookies.length !== 0 ? (<>  <div className="thanhtoan">
+    {cookies.length !== 0 && ( check === 3 || thanhtoanData.length !== 0 ) ?  (<>  <div className="thanhtoan">
         {" "}
         {data_1 && data_1.delivery && data_1.delivery[0] ? (
           <div className="thanhtoan--address">
@@ -344,7 +386,7 @@ const handleChuyentrang = () => {
         >
           <p>Hãy kiểm tra kĩ đơn hàng trước khi bấm nút đặt hàng. Bạn không thể tiếp tục đặt hàng khi sản phảm chưa hoàn tất!</p>
         </Modal>
-      </div></>) : (Error("Thanh Toán", navigate))}
+      </div></>) : (Errorempty(navigate))}
     
     </>
   );

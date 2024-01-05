@@ -3,7 +3,6 @@ import { Button, Result } from "antd";
 
 export const Error = (infor, navigate) => {
   
-
   return (
     <> <Result
     status="404"

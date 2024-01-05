@@ -23,7 +23,7 @@ function Admin() {
         <div className="admin--glass">
           {type.type === "admin" ? (
             <Adminlayout />
-          ) : type.type === "user" ? (
+          ) : (
             <Result
               status="403"
               title="403"
@@ -34,8 +34,6 @@ function Admin() {
                 </Link>
               }
             />
-          ) : (
-            ""
           )}
         </div>
       </div>

@@ -133,9 +133,9 @@ export const postBlogs = async (option, token) => {
 };
 
 
-export const postBlogCate = async (token, cate) => {
+export const postBlogCate = async (cate) => {
   try {
-    const result = await postV1(`api/v1/blogs/getBlogs/category`, cate, token);
+    const result = await postV1(`api/v1/blogs/getBlogs/category`, cate, "");
     return result;
   } catch (error) {
     console.error("Error in getQuantityUsers:", error);

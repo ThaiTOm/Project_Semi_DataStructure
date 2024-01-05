@@ -1,10 +1,10 @@
 import { filterByArrange } from "../filter";
 
       const filterData = (data_3, data_4, data) => {
-        if (data_3.cate.length === 0 && data_3.hsx === "" && data_3.phanloai === ""){
-          return data;
-        }
-        else {
+        // if (data_3.cate.length === 0 && data_3.hsx === "" && data_3.phanloai === "" && data_3.distance[0] === ){
+        //   return data; 
+        // }
+        // else {
            const arrangedData = filterByArrange(data_3, data_4, data);
        
             const filteredData = arrangedData.filter((item) => {
@@ -28,6 +28,6 @@ import { filterByArrange } from "../filter";
           return filteredData;
         }
         
-      };
+      // };
       
       export default filterData;  // xử lí tổng hợp tất cả

@@ -1,9 +1,8 @@
 import Sider from "antd/es/layout/Sider";
 import Layout, { Content } from "antd/es/layout/layout";
-import { getBlogCate, getCategory } from "../../service/getcategory/getCategory";
+import { getCategory } from "../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
 import { Checkbox, Col, Pagination, Row } from "antd";
-import { getCookie } from "../../components/takeCookies/takeCookies";
 import { postBlogCate } from "../../service/post/post";
 import { Link } from "react-router-dom";
 import "./blogs.scss"
@@ -13,7 +12,6 @@ function Blog() {
  const [paginatedData, setPaginatedData] = useState(0);
  const itemsPerPage = 8; // Số lượng phần tử trên mỗi trang
  let pageIndex = 0; // xác định mỗi phân trang có thể ít hơn 12 trang mặc định
-const cookies = getCookie("token")
 
   const getAllCate = async () => {
     let cate = [];
@@ -22,12 +20,12 @@ const cookies = getCookie("token")
       cate.push(item.cate);
     }
     setAllCate(cate);
-    takeBLogsCate(cookies, cate);
+    takeBLogsCate(cate);
   }
 
-  const takeBLogsCate = async (token, cate) => {
+  const takeBLogsCate = async (cate) => {
   let pageId = [""];
-    const result = await postBlogCate(token, cate);
+    const result = await postBlogCate(cate);
     while(pageIndex <= result.blog.length){
       pageId.push(result.blog.slice(pageIndex, pageIndex + itemsPerPage));
       pageIndex += itemsPerPage;
@@ -48,7 +46,7 @@ const cookies = getCookie("token")
     getAllCate();
   }
   else {
-    takeBLogsCate(cookies, values);
+    takeBLogsCate(values);
   }
   
   setId(1);
@@ -108,10 +106,7 @@ return<>
             </Col>
           ))
         ) : (
-          <div class="blogItems--message">
-            <h2>blogs không được tìm thấy!</h2>
-            <p>Xin lỗi, không có sản phẩm phù hợp với yêu cầu của bạn.</p>
-          </div>
+          ""
         )}
       </Row>
   </Content>

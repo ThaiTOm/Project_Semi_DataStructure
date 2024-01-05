@@ -12,6 +12,7 @@ const AddProductModal = ({
   show,
   setShow,
   onAddProduct,
+  dataSource,
 }) => {
   const [form] = Form.useForm();
   const [categories, setCategories] = useState([]);
@@ -38,7 +39,18 @@ const AddProductModal = ({
 
   const handleFinish = () => {
     form.validateFields().then((values) => {
+     const checkTitle = dataSource.find(item => {
+      return item.title === values.title;
+     })
+     if(checkTitle === undefined){
       onAddProduct(values);
+     }
+     else {
+      Modal.error({
+       title: "Lỗi",
+       content: "Đã bị trùng tên sản phẩm. Vui lòng thử lại!"
+      })
+     }
       form.resetFields();
       onCancel();
     });

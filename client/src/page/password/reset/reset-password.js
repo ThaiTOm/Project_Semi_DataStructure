@@ -4,14 +4,16 @@ import { useState } from "react";
 import { getCookie } from "../../../components/takeCookies/takeCookies";
 import { deleteCookie, setCookie } from "../../../components/setTime/setTime";
 import { resetPasswordPost } from "../../../service/post/post";
-import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { isValidPassword } from "../../../components/checkInformation/checkInformation";
+import { Errorempty } from "../../../components/error/error";
+import { useNavigate } from "react-router-dom";
 function Resetpassword() {
+  const navigate = useNavigate();
   const [checkPass, setCheckPass] = useState(true); // check để báo hiệu của pass
- const token = getCookie("token_1");
-  if(!token){
-    window.history.back();
+ const token_1 = getCookie("token_1");
+  if(!token_1){
+    window.history.back("/");
     return;
   }
 
@@ -42,7 +44,7 @@ const resetPassword = async (data) => {
     }
     else {
       const valuesReset = {
-        token: token,
+        token: token_1,
         password: values.password,
         confirmPassword: values.confirmPassword
       }
@@ -58,7 +60,7 @@ const resetPassword = async (data) => {
           title: 'Chào mừng bạn đã đăng nhập!',
           content: `${result.message}`,
           onOk() {
-            setCookie("token", token, 1);
+            setCookie("token", token_1, 15);
             deleteCookie("token_1");
             window.location.href = "/";
           },
@@ -78,7 +80,7 @@ const resetPassword = async (data) => {
 
   return (
     <>
-      <div className="resetPassword">
+    {token_1 && token_1.length !== 0 ? (<> <div className="resetPassword">
         <h1 className="resetPassword--top">Đặt lại mật khẩu!</h1>
         <hr />
         <Form
@@ -137,7 +139,8 @@ const resetPassword = async (data) => {
             </Row>
           </Form.Item>
         </Form>
-      </div>
+      </div></>) : (Errorempty(navigate)) }
+     
     </>
   );
 }

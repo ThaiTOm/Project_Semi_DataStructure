@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./adproductDetail.scss"
-import { getProductdt } from "../../../service/getcategory/getCategory";
+import { getProductadminsp, getProductdt } from "../../../service/getcategory/getCategory";
 import { useEffect, useState } from "react";
 import { Button, Image, Layout, Rate } from "antd";
 import { Content } from "antd/es/layout/layout";
@@ -18,6 +18,22 @@ function Adproductdetail () {
     const selectImage = (index) => {
       setCurrentImage(index);
     };
+    const [dataSource, setdataSource] = useState([]);
+    useEffect(() => {
+      const fetchProduct = async () => {
+        const result = await getProductadminsp();
+        const resultAddkey = result.map((item) => {
+          return [{ ...item, key: item.id }];
+        });
+        const hopnhat = resultAddkey.reduce((origin, item) => {
+          return origin.concat(item);
+        }, []);
+        setdataSource(hopnhat);
+      };
+  
+      fetchProduct();
+    }, [reload]);
+  
 
 const patchsp = async (id, values) => {
   const result = patchProduct(id, values);
@@ -212,9 +228,9 @@ const handleBack = () => {
             </div>
           </Content>) : ("")
             }
-        
+      
         </Layout>
-        <Admodaldetail reload={reload} show={show} setShow={setShow} onPatchProduct={handlePatch} data={data} />
+        <Admodaldetail reload={reload} show={show} setShow={setShow} onPatchProduct={handlePatch} data={data} dataSource={dataSource} param={param} />
             </div>
         </>
     )

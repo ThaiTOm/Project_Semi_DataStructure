@@ -8,13 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Errorempty } from "../../components/error/error";
-// import { check } from "../../actions/Tracnghiem";
-// import { useEffect, useState } from "react";
 function Login() {
-  // const dispatch = useDispatch();
-  // const [data, setData] = useState("concac");
-  // var chuyendoi = true;
-  // const Check = useSelector((state) => state.inforReducer);
   const [form] = Form.useForm();
   const cookie = getCookie("token");
   const navigate = useNavigate();

@@ -9,7 +9,7 @@ export const sendEmail = (invoiceData, email) => {
     const data = {
         user_name: invoiceData.userName, // Thay thế bằng tên khách hàng
         user_email: email, // Thay thế bằng email khách hàng
-        amountPaid: invoiceData.amountPaid,
+        amountPaid: amountPaid,
         message: `Chúc mừng bạn đã thực hiện thanh toán thành công trên hệ thống thanh toán của chúng tôi
         Chúng tôi xác nhận rằng bạn đã thanh toán thành công một khoản tiền là  ${amountPaid}$ thông qua dịch vụ thanh toán Paypal.
         Để xem được thông tin hàng hóa vui lòng truy cập đường link : https://developer.paypal.com/dashboard/notifications để

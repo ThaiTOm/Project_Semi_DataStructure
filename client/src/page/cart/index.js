@@ -384,7 +384,7 @@ const takeMyId = async (data) => {
     }, null);
     console.log(newestOrder);
     if (selectedRowKeys.length > 0) {
-      if (newestOrder && newestOrder.orderStep === 3) {
+      if (newestOrder && newestOrder.orderStep !== 3) {
         Modal.error({
           title: "Không thể mua hàng",
           content: "Đơn hàng của bạn vẫn chưa hoàn thành!",
